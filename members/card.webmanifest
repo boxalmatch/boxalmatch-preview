@@ -1,0 +1,12 @@
+{
+  "name": "Boxalmatch — Tessera",
+  "short_name": "Boxalmatch",
+  "start_url": "./card.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#071409",
+  "theme_color": "#071409",
+  "icons": [
+    { "src": "../img/icons/favicon.png", "sizes": "64x64", "type": "image/png" }
+  ]
+}

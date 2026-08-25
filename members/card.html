@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tessera — BOXALMATCH</title>
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Home Screen / standalone behaviour -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Boxalmatch">
+<meta name="theme-color" content="#071409">
+<link rel="apple-touch-icon" href="../img/icons/favicon.png">
+<link rel="manifest" href="card.webmanifest">
+
+<link rel="icon" type="image/png" href="../img/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/members.css" rel="stylesheet">
+</head>
+<body>
+
+<main class="card-page">
+
+  <div class="mcard">
+    <div class="mcard-top">
+      <img src="../img/icons/wordmark-white.png" alt="BOXALMATCH">
+      <span class="mcard-role" data-card-role>Member</span>
+    </div>
+    <div class="mcard-bottom">
+      <div>
+        <div class="mcard-name" data-card-name>—</div>
+        <div class="mcard-meta" data-card-meta>—</div>
+      </div>
+      <div class="mcard-qr" data-card-qr></div>
+    </div>
+  </div>
+
+  <p class="hint" lang="it">
+    Inquadra il QR per aprire il sito. Aggiungi questa pagina alla schermata Home
+    per tenere la tessera sempre a portata di mano.
+  </p>
+  <p class="hint" lang="en">
+    Scan the QR to open the site. Add this page to your Home Screen to keep the
+    card within easy reach.
+  </p>
+
+  <a href="index.html" class="lnk">
+    <span lang="it">Torna all'area membri</span><span lang="en">Back to the member area</span>
+  </a>
+
+  <!-- hidden containers keep members.js happy -->
+  <div id="m-loading" hidden></div>
+  <div id="m-denied" hidden></div>
+  <div id="m-content" hidden></div>
+</main>
+
+<script src="../js/main.js"></script>
+<script src="../js/qr.js"></script>
+<script src="../js/members.js"></script>
+</body>
+</html>

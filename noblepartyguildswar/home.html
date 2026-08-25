@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guilds War</title>
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="img/icons/logo-tab.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/icons/logo-tab.png" sizes="16x16">
+	
+    <!-- main css -->
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header id="main-header" class="container-fluid">
+    <div class="mobile-nav ">
+        <img src="img/icons/logo.png" alt="rick and morty logo">
+        <p class="toggle-nav">&#10094;</p>
+    </div>
+    <nav>
+        <ul>
+            <li class="brand"><img src="img/icons/logo.png" alt="logo_npgw"></li>
+            <li class="active"><a href="#home">Benvenuti</a></li>
+            <li><a href="#notizie">In Evidenza</a></li>
+            <li><a href="#campionato">Campionato</a></li>
+			<li><a href="#character-profile">Game On</a></li> <!-- leave as "character-profile" still need to be worked on CSS -->
+        </ul>
+    </nav>
+
+</header>
+<main>
+
+	<!-- home section with a single image -->
+	<section id="home" class="container-fluid slider">
+		<figure>
+			<img src="img/slider/guilds_world.png" alt="world">
+		</figure>
+		<article class="slide-caption center-left">
+			<h1>Guilds War</h1>
+			<p><i>Noble Party Guilds War</i>, un Evento ideato da NobleBrassMan e organizzato da BOXALMATCH. [Torna alla <i><a href="../index.html" title="tornaHP">Home</a></i>]</p>
+		</article>
+	</section>
+
+    <!-- season info -->
+	<section id="notizie" class="container">
+		<h1 class="highlight">In Evidenza</h1>
+
+		<article class="season">
+
+			<h2>Notizie Recenti</h2>
+				<p>			
+					Scontri conclusi, azioni mozzafiato e tanto altro! Guarda i nostri contenuti sul nostro canale <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a>. 
+					Inoltre Leggi le <a href="https://boxalmatch.github.io/noblepartyguildswar/chronicles.html">Chronicles</a> per capire questa sequenza di immagini relative alle notizie recenti. 
+				</p>
+
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/MAIL_tigro_pino.jpg" alt="Mail">				
+				</figure>				
+				
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/TERZO_karmic_copter.png" alt="Terzo">				
+				</figure>
+				
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/IMPATTO_campioni.png" alt="impatto_4campioni">				
+				</figure>
+				
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/VASELLINA_bottega.jpg" alt="vasellina">
+				</figure>
+				
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/NATALE_regali.png" alt="regali_natale">
+				</figure>
+				
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/NOTTE_aquila_1.jpeg" alt="aquila_massacro">
+				</figure>
+				
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/FOND_valore_sandtrap.png" alt="fondatori">
+				</figure>
+				
+				<!-- Episode 2 -->
+				<figure class="episode">
+					<img src="img/HP/TGL_2_pericolo.jpg" alt="pericolo">
+				</figure>
+				
+				<!-- Episode 3 -->
+				<figure class="episode">
+					<img src="img/HP/TGL_2_cobra.jpg" alt="cobra">
+				</figure>		
+				
+				<!-- Episode 4 -->
+				<figure class="episode">
+					<img src="img/HP/SIDE_GLIMPSE_Sootz.jpg" alt="news_1">
+				</figure>
+				
+				<!-- Episode 5 -->
+				<figure class="episode">
+					<img src="img/HP/TGL_1_tigrozzo.jpg" alt="news_2">
+				</figure>
+
+				<!-- Episode 6 -->
+				<figure class="episode">
+					<img src="img/HP/TGL_1.png" alt="news_3">
+<!-- 					<figcaption> -->
+<!-- 						Guerra Conclusa!! -->
+<!-- 					</figcaption> -->
+				</figure>
+
+				<!-- Episode 7 -->
+				<figure class="episode">
+					<img src="img/HP/LAN.png" alt="news_4">
+				</figure>
+
+				<!-- Episode 8 -->
+				<figure class="episode">
+					<img src="img/HP/LAN_1.png" alt="news_5">
+				</figure>
+				
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>
+			
+		</article>			
+	</section>
+
+	<section id="campionato" class="container">
+		<h1 class="highlight">Campionato</h1>
+		
+		<article class="season">
+
+			<h2>Introduzione</h2>
+				<p class="description">
+					<i>Noble Party Guilds War</i>,
+					un Campionato su Halo Infinite per rivivere la storia
+					delle Guerre di Otto Gilde appartenenti alla stessa Famiglia.
+					&#129309;SCEGLI la tua Gilda
+					&#129338;FORGIA una nuova leggenda 
+					&#127942;conquista la VITTORIA!	
+				</p>
+
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="../img/eventi/guildswar.png" alt="NPGW">
+				</figure>
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>			
+
+			<h2>Info</h2>
+				<p>
+					Sei pronto per questa avventura? <i>Noble Party Guilds War</i>, un Evento ideato da NobleBrassMan e organizzato da BOXALMATCH.
+					Un Campionato su <i>Halo Infinite</i> (Xbox Series X e PC) che riscrive una storia fantasy di una famiglia nel Multiverso (della Forgia).
+					Infinite possibilit&agrave di scontro dove vecchi e nuovi giocatori si uniscono in squadre e combattono fra loro.
+					Immergiti in un gioco che permette qualsiasi sfida immaginaibile per divertirsi insieme e aggiungere un pizzico di competitivit&agrave.
+					Ad ogni Guerra, unisciti a una delle 8 Squadre, ottieni punti e vinci! Questo Campionato raccoglie +80 mappe, +20 modalit&agrave, +10 giochi sketch e molto altro.
+					
+					<br><br>
+					
+					La variabile tempo per questo campionato non esiste: l'evento evolve sulla sola volont&agrave dei partecipanti stessi. L'evento inizia quando una prima Guerra viene conclusa: 
+					potrebbe cominciare come potrebbe non cominciare mai. Le Guerre non hanno un ordine cronologico.
+					L'evento si conclude quando tutte le Guerre della Campagna Ufficiale sono concluse: potrebbe finire un giorno, oppure lasciato a met&agrave per sempre con Guerre ancora da concludersi.
+				</p>
+		
+			<h2>Partecipanti</h2>
+			<p>
+				Questi sono i partecipanti di <i>Noble Party Guilds War</i>.
+				Non ci sono scadenze per unirsi a questo Campionato: invita nuovi giocatori che saranno classificati come Leaders o Mercenari.
+			</p>
+
+			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 100%; text-align: left; font-family: Arial, sans-serif; font-weight: bold; border: 2px solid black;">
+			  <thead style="background-color: #228B22; color: black;">
+			    <tr>
+			      <th style="border: 2px solid black;">Qnt</th>
+			      <th style="border: 2px solid black;">Classe</th>
+			      <th style="border: 2px solid black;">Giocatore</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr>
+			      <td style="background-color: white; color: black; border: 2px solid black;">8</td>
+			      <td style="background-color: white; color: black; border: 2px solid black;">Leaders Principali (contano come Leaders)</td>
+			      <td style="background-color: #FF8C00; color: white; border: 2px solid black;">
+					  NobleBrassMan, 
+					  KarmicScroll, 
+					  SensibleSwine, 
+					  Rambaudo, 
+					  Hernicopter, 
+					  Drius, 
+					  SlickColt, 
+					  PuffoKiller.</td>
+			    </tr>
+			    <tr>
+			      <td style="background-color: white; color: black; border: 2px solid black;">2</td>					
+			      <td style="background-color: white; color: black; border: 2px solid black;">Leaders</td>
+			      <td style="background-color: #FF8C00; color: white; border: 2px solid black;">
+					  TrimRex, DeadRick.</td>
+			    </tr>
+			    <tr>
+			      <td style="background-color: white; color: black; border: 2px solid black;">19</td>					
+			      <td style="background-color: white; color: black; border: 2px solid black;">Mercenari</td>
+			      <td style="background-color: #FF8C00; color: white; border: 2px solid black;">
+					  Pino’s Carrot, 
+					  Sootz, 
+					  Tigrozzo, 
+					  Ifrid, 
+					  Flying WC, 
+					  Glimpse of Nature, 
+					  Pennywise, 
+					  Joe Moo, 
+					  Bibobio, 
+					  Clavuss, 
+					  Apocal, 
+					  Aerostokes, 
+					  Deferent Skate, 
+					  SoCrem, 
+					  Sandyokhan, 
+					  Spartan93, 
+					  Patrifu, 
+					  GigatzuMuiri, 
+					  Svezio91. 
+				  </td>
+			    </tr>
+			  </tbody>
+			</table>
+			
+			
+			<h2>Campagna Ufficiale</h2>
+			<p>
+				Il Campionato si conclude quando tutte le Guerre di questa Campagna Ufficiale sono concluse.
+				Una Guerra si conclude esponendo il punteggio finale.
+                Una Guerra corrisponde a 4 partite. Conclusa una partita: il punteggio &egrave 1 per la Gilda o Armata che vince (quindi fino ad un massimo di 4 punti per Guerra) e 0 per quella che perde.
+				Il Capitolo 5 ha due partite obbligatorie (Dinastia e Il Giorno Maledetto) per questa ultima Guerra dove tutte le Gilde parteciperanno.
+			</p>			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_1.jpg" alt="tabellone 1">
+				</figure>
+
+				<!-- Episode 2 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_2.JPG" alt="tabellone 2">
+				</figure>
+
+				<!-- Episode 3 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_3.JPG" alt="tabellone 3">
+				</figure>
+				
+				<!-- Episode 4 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_4.jpg" alt="tabellone 4">
+				</figure>
+
+				<!-- Episode 5 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_5.JPG" alt="tabellone 5">
+				</figure>	
+
+				<!-- Episode 6 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_6.JPG" alt="tabellone 6">
+				</figure>						
+
+				<!-- Episode 7 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_7.JPG" alt="tabellone 7">
+				</figure>		
+
+				<!-- Episode 8 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_8.JPG" alt="tabellone 8">
+				</figure>		
+
+				<!-- Episode 9 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_9.JPG" alt="tabellone 9">
+				</figure>
+
+				<!-- Episode 10 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_10.JPG" alt="tabellone 10">
+				</figure>				
+
+				<!-- Episode 11 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_11.JPG" alt="tabellone 11">
+				</figure>
+				
+				<!-- Episode 12 -->
+				<figure class="episode">
+					<img src="img/HP/tot_camp_12.JPG" alt="tabellone 12">
+				</figure>				
+				
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>			
+
+			<p>
+				La Roadmap del Campionato. Sguardo alle milestones della Campagna Ufficiale.
+			</p>				
+			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/roadmap.jpg" alt="guerre">
+				</figure>
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>	
+
+			<p>
+				La Roadmap della Side Quest di Ciascuna Gilda. 
+				Sguardo agli Slots della Campagna Side Quests intrapresa da ciascuna Gilda.
+				A differenza della Campagna Ufficiale dove un Capitolo pu&ograve includere pi&ugrave Guerre, qui: 1 Capitolo = 1 Guerra = 1 Slot. 
+				Quindi Slots nome intercambiabile con Guerre o Capitoli.
+			</p>
+			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/side_quest.jpg" alt="SQ_1">
+				</figure>
+				
+				<!-- Episode 2 -->
+				<figure class="episode">
+					<img src="img/HP/side_quests_2.jpg" alt="SQ_2">
+				</figure>
+				
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>			
+			
+			
+			<h2>Guerre Irripetibili</h2>
+	
+			<p>
+				Guerre dalla Campagna Ufficiale. Non esiste un ordine temporale delle Guerre, tranne per la Guerra a Otto Gilde che viene svolta come ultima e chiude il Campionato.
+			</p>			
+			<table style="border-collapse: collapse; width: 100%; font-weight: bold;">
+			
+			  <!-- Header -->
+			  <tr style="background-color: #107C10; color: black;">
+			    <th style="border: 1px solid #000; padding: 8px; text-align: right;">Gilda (o Armata) 1</th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: center;">Risultato</th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Gilda (o Armata) 2</th>
+			  </tr>
+			
+			  <!-- Row 1 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right; color: blue;">Aquila</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+			      <span style="color:black;">1-3</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left; color: darkcyan;">Valchiria</td>
+			  </tr>
+			
+			  <!-- Row 2 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right; color: purple;">Ade</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+			      <span style="color:black;">3-1</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left; color: orange;">Sciabola</td>
+			  </tr>
+			
+			  <!-- Row 3 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right; color: forestgreen;">Cobra</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+			      <span style="color:black;">2-2</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left; color: red;">Pericolo</td>
+			  </tr>
+			
+			  <!-- Row 4 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right; color: brown;">Bastione</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+			      <span style="color:black;">1-3</span>
+			    </td>
+				<td style="border: 1px solid #000; padding: 8px; text-align: left; color: #b8860b;">Valore</td>
+			  </tr>
+			
+			  <!-- Row 5 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: orange;">Sciabola</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: purple;">Ade</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"></span>
+				</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: darkcyan;">Valchiria</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: red;">Pericolo</span>
+			    </td>
+			  </tr>
+			
+			  <!-- Row 6 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: blue;">Aquila</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: forestgreen;">Cobra</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"></span>
+				</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: brown;">Bastione</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: #b8860b;">Valore</span>
+			    </td>
+			  </tr>
+			
+			  <!-- Row 7 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: blue;">Aquila</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: darkcyan;">Valchiria</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"></span>
+				</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: orange;">Sciabola</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: purple;">Ade</span>
+			    </td>
+			  </tr>
+			
+			  <!-- Row 8 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: brown;">Bastione</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: #b8860b;">Valore</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"></span>
+				</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: forestgreen;">Cobra</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: red;">Pericolo</span>
+			    </td>
+			  </tr>
+			
+			  <!-- Row 9 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: #b8860b;">Valore</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: orange;">Sciabola</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"></span>
+				</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: forestgreen;">Cobra</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: darkcyan;">Valchiria</span>
+			    </td>
+			  </tr>
+
+			  <!-- Row 10 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: purple;">Ade</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: brown;">Bastione</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"></span>
+				</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: red;">Pericolo</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: blue;">Aquila</span>
+			    </td>
+			  </tr>				
+			
+			  <!-- Row 11 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: blue;">Aquila</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: forestgreen;">Cobra</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: brown;">Bastione</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: darkcyan;">Valchiria</span>
+			    </td>
+			
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"></span>
+				</td>			
+				  
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: orange;">Sciabola</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: red;">Pericolo</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: purple;">Ade</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: #b8860b;">Valore</span>
+			    </td>
+			  </tr>
+			
+			</table>
+
+			<p>
+				Guerre dalla Campagna Side Quests. I partecipanti possono usare o programmare i loro Slots/Guerre: La programmazione di una o pi&ugrave Slots/Guerre non obbliga nessun ordine temporale.
+			</p>			
+			
+			<table style="border-collapse: collapse; width: 100%; font-weight: bold;">
+			
+			  <!-- Header -->
+			  <tr style="background-color: #107C10; color: black;">
+			    <th style="border: 1px solid #000; padding: 8px; text-align: right;">Gilda (o Armata) 1</th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: center;">Risultato</th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Gilda (o Armata) 2</th>
+			  </tr>
+			
+			  <!-- Row 1 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right; color: purple;">Ade</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+			      <span style="color:black;">1-3</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left; color: #b8860b;">Valore</td>
+			  </tr>
+			
+			  <!-- Row 2 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: red;">Pericolo</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;">3-1</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color:black;"><span style="color: blue;">Aquila</span></span>
+			    </td>
+			  </tr>
+
+			  <!-- Row 3 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right; color: purple;">Ade</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;">3-1</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: forestgreen;">Cobra</span>
+			    </td>
+			  </tr>				
+				
+			  <!-- Row 4 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+				  <span style="color: red;">Pericolo</span>
+			      <span style="color:black;"> &amp; </span>
+			      <span style="color: darkcyan;">Valchiria</span>
+				</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;">2-2</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: blue;">Aquila</span>
+			      <span style="color:black;"> &amp; </span>
+				  <span style="color: #b8860b;">Valore</span>	
+			    </td>
+			  </tr>		
+				
+
+			  <!-- Row 5 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color: orange;">Sciabola</span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"> 0-4 </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: brown;">Bastione</span>
+			    </td>
+			  </tr>
+				
+			  <!-- Row 5 -->
+			  <tr style="background-color: #f2f2f2;">
+				<td style="border: 1px solid #000; padding: 8px; text-align: right; color: #b8860b;">Valore</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;"> 3-1 </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color: forestgreen;">Cobra</span>
+			    </td>
+			  </tr>				
+
+			  <!-- Row 5 -->
+			  <tr style="background-color: #f2f2f2;">
+			    <td style="border: 1px solid #000; padding: 8px; text-align: right;">
+			      <span style="color:black;"> - </span>
+			    </td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: center;">
+					<span style="color:black;">X - X</td>
+			    <td style="border: 1px solid #000; padding: 8px; text-align: left;">
+			      <span style="color:black;"> - </span>
+			    </td>
+			  </tr>								
+			
+			</table>
+
+			<p class="description">
+				&#128073; Definizione di Irripetibilità: quando una qualsiasi Gilda 
+				propone una nuova Guerra per la sua Campagna Side Quests,
+				deve controllare che non &egrave avvenuta precedentemente o gi&agrave programmata
+				(inclusa la Campagna Ufficiale).
+				&#128073; Per principio di irripetibilità, ogni Guerra può essere 
+				narrata una sola volta nella Campagna Side Quests della Gilda che la propone: 
+				nei Capitoli 1–2 per scontri 1v1, nei Capitoli 3–4 per scontri 2v2 e 
+				nel Capitolo 5 per scontri 3v3. La stessa Guerra appare pure nella
+				Side Quest di ogni Gilda partecipante.
+				Nuove Guerre non possono avere le stesse combinazioni di Gilde o Armate 
+				ripetute in altri Capitoli; tuttavia, una o più Gilde che devono completare 
+				gli Slot 1-2-3-4-5, possono coinvolgere anche Gilde che hanno 
+				già esaurito i propri Slot, pubblicando la Guerra solo nelle Campagne Side Quest delle 
+				Gilde che hanno ancora Capitoli disponibili.
+                &#128073; Qualsiasi Capitolo di qualsiasi Campagna Side Quest concluso dopo
+				la fine del Campionato non viene considerato per gli Awards.
+				(Completa la tua Campagna Side Quest prima che il Campionato finisca!)
+			</p>	
+			
+
+
+
+			<h2>Progresso Complessivo del Campionato</h2>
+
+			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 60%; text-align: center; font-family: Arial, sans-serif; font-weight: bold;">
+			  <thead style="background-color: #228B22; color: white;">
+			    <tr>
+			      <th>Voce</th>
+			      <th>Campagna e Side Quests</th>
+			      <th>Campagna</th>
+			      <th>Side Quests</th>
+			    </tr>
+			  </thead>
+			
+			  <tbody>
+			    <tr style="background-color: white; color: black;">
+			      <td>Totale Partite Giocate</td><td>40</td><td>16</td><td>24</td>
+			    </tr>
+			    <tr style="background-color: white; color: black;">
+			      <td>Totale Guerre Giocate</td><td>10</td><td>4</td><td>6</td>
+			    </tr>
+			    <tr style="background-color: white; color: black;">
+			      <td>Tutte le Guerre NPGW</td><td>51</td><td>11</td><td>40</td>
+			    </tr>
+			    <tr style="background-color: white; color: black;">
+			      <td>Tradotto in Partite NPGW</td><td>204</td><td>44</td><td>160</td>
+			    </tr>
+			    <tr style="background-color: white; color: black;">
+			      <td>Evento Completato al</td><td>19,61%</td><td>36,36%</td><td>15,00%</td>
+			    </tr>
+			  </tbody>
+			</table>
+	
+
+			<!-- MathJax (LaTeX rendering) -->
+			<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+			<!-- ( opzionale ) KaTeX example could be added similarly -->
+			
+			<h2>Combinazioni di Scontri Possibili</h2>
+
+			<p>Il numero di scontri possibili segue la formula:</p>
+			<p class="formula">\(\mathrm{Numero\ Scontri}(N,G) = \dfrac{\binom{N}{G}\,\binom{N-G}{G}}{2}\)</p>
+			<p>
+				Nel Nostro Campionato, N sono le Gilde quindi 8, e questa formula rappresenta il 
+				numero di modi per estrarre due squadre da G Gilde ciascuna (quindi G pu&ograve essere 2,4,6,8), senza ordine tra le due squadre
+				e creando scontri unici (grazie alla divisione per 2).
+				La Campagna e le Side Quests non permettono tutte le combinazioni possibili ma limitano il Campionato a soli 51 scontri (invece di 553).
+			</p>
+		
+			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 70%; text-align: center; font-family: Arial, sans-serif; font-weight: bold;">
+			  <thead style="background-color: #228B22; color: white;">
+				<tr>
+				  <th>Numero di Gilde per Guerra (G)</th>
+				  <th>Totale Guerre Possibili</th>
+				  <th>NPGW Campagna</th>
+				  <th>NPGW Side Quest</th>
+				  <th>NPGW TOTAL</th>
+				</tr>
+			  </thead>
+
+			  <tbody>
+				<tr style="background-color: white; color: black;">
+				  <td>2</td><td>28</td><td>4</td><td>16</td><td>20</td>
+				</tr>
+				<tr style="background-color: white; color: black;">
+				  <td>4</td><td>210</td><td>6</td><td>16</td><td>22</td>
+				</tr>
+				<tr style="background-color: white; color: black;">
+				  <td>6</td><td>280</td><td>0</td><td>8</td><td>8</td>
+				</tr>
+				<tr style="background-color: white; color: black;">
+				  <td>8</td><td>35</td><td>1</td><td>0</td><td>1</td>
+				</tr>
+				<tr style="background-color: white; color: black;">
+				  <td>(2,4,6,8)</td><td>553</td><td>11</td><td>40</td><td>51</td>
+				</tr>
+			  </tbody>
+			</table>			
+			
+		</article>
+	</section>
+
+    <!-- characters -->
+    <section id="character-profile" class="container">
+        <h1 class="highlight">Game On</h1>
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/regolamento.png" alt="regolamento">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Rules!</h1>
+                <p>Prima di giocare ricordati di leggere il <i><a href="regolamento.html" title="Rules">Regolamento</a></i>.
+            </section>
+
+        </article>
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/gilde.PNG" alt="gilde">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Scegli la tua Gilda</h1>
+                <p>
+				Gilda <i><a href="ade.html" title="Ade">Ade</a></i>, Gilda <i><a href="aquila.html" title="Aquila">Aquila</a></i>, 
+				Gilda <i><a href="bastione.html" title="Bastione">Bastione</a></i>, 
+				Gilda <i><a href="cobra.html" title="Cobra">Cobra</a></i>, 
+				Gilda <i><a href="pericolo.html" title="Pericolo">Pericolo</a></i>, 
+				Gilda <i><a href="sciabola.html" title="Sciabola">Sciabola</a></i>, 
+				Gilda <i><a href="valchiria.html" title="Valchiria">Valchiria</a></i>, 
+				Gilda <i><a href="valore.html" title="Valore">Valore</a></i>.
+				</p>
+            </section>
+
+        </article>
+
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/agora.png" alt="gilde">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Agor&agrave</h1>
+                <p>
+				In questo luogo, i Mercenari attendono. Qui nascono alleanze, 
+				si stringono patti e i Leader scelgono chi marcerà con loro verso la prossima Guerra.
+				Scopri i Mercenari su <i><a href="agora.html" title="Agora">Agor&agrave</a></i>.
+				</p>
+            </section>
+
+        </article>	
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/chronicles.png" alt="chronicles">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Chronicles</h1>
+                <p>I Racconti di chi ha vissuto questo Campionato su <i><a href="chronicles.html" title="Chronicles">Chronicles</a></i>.
+            </section>
+
+        </article>		
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/backlog.png" alt="awards">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Backlog</h1>
+                <p>Ogni Gilda accede alla <i><a href="backlog.html" title="Rules">Backlog</a></i> a piacere.
+				</p>
+            </section>
+
+        </article>	
+		
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/awards.png" alt="awards">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Awards</h1>
+                <p>I vincitori di questo Campionato e informazioni sul punteggio sono su <i><a href="awards.html" title="awards">Awards</a></i>.
+				</p>
+            </section>
+
+        </article>		
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/scores.png" alt="scores">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Scores</h1>
+                <p>Ispeziona i Punteggi del Campionato <i><a href="scores.html" title="Scores">Scores</a></i>.
+            </section>
+
+        </article>		
+		
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/storia.PNG" alt="storia">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Storia</h1>
+                <p>La storia dietro a questo Campionato la trovi su <i><a href="storia.html" title="Aetherium">Aetherium Lore</a></i>.
+				</p>
+            </section>
+
+        </article>	
+		
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2026 BOXALMATCH. Tutti i diritti riservati.<br>
+    Un gruppo di amici con la passione per l’intrattenimento collettivo.<br>
+    Seguici su <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a><br><br>
+    
+    Evento <strong>Noble Party Guilds War</strong> ideato da <span style="font-weight:bold;">NobleBrassMan</span> 
+    insieme a BOXALMATCH.<br><br>
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

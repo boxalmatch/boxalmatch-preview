@@ -1,0 +1,6 @@
+/* BOXALMATCH — Gilda Aquila: imports the shared legacy theme, then overrides the accent. */
+@import url("main.css");
+:root {
+    --primary-color: #3276AC;
+    --primary-shade-color: #d41c32;
+}

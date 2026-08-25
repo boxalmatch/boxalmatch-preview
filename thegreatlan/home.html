@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Great LAN</title>
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="img/icons/TGL-tab.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/icons/TGL-tab.png" sizes="16x16">
+	
+    <!-- main css -->
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header id="main-header" class="container-fluid">
+    <div class="mobile-nav ">
+        <img src="img/icons/TGL_b.png" alt="rick and morty logo">
+        <p class="toggle-nav">&#10094;</p>
+    </div>
+    <nav>
+        <ul>
+            <li class="brand"><img src="img/icons/TGL_b.png" alt="logo_tgl"></li>
+            <li class="active"><a href="#home">Benvenuti</a></li>
+            <li><a href="#notizie">In Evidenza</a></li>
+            <li><a href="#character-profile">Game On</a></li> <!-- leave as "character-profile" still need to be worked on CSS -->
+        </ul>
+    </nav>
+
+</header>
+<main>
+
+	<!-- home section with a single image -->
+	<section id="home" class="container-fluid slider">
+		<figure>
+			<img src="img/slider/lan_party_fantasy.png" alt="world">
+		</figure>
+		<article class="slide-caption center-left">
+			<h1>The Great LAN</h1>
+			<p>Dicembre 2024, Halo Infinite LAN Party, un Evento ideato e organizzato da BOXALMATCH. [Torna alla <i><a href="../index.html" title="tornaHP">Home</a></i>]</p>
+		</article>
+	</section>
+
+    <!-- season info -->
+	<section id="notizie" class="container">
+		<h1 class="highlight">In Evidenza</h1>
+
+		<article class="season">
+			<h2>Introduzione</h2>
+			<p class="description">
+				<i>The Great LAN</i>,
+				un LAN Party con +24 giocatori e 12 Xbox per giocare insieme ad Halo Infinite.
+				Vecchi e Nuovi Giocatori si scontrano in battaglie epiche per vincere prestigiosi Awards.
+				SCEGLI la tua Squadra, Combatti nel Multiverso della Forgia e &#127942;conquista la VITTORIA!	
+			</p>
+
+			<h2>Info Pratiche</h2>
+			<p>
+				Questo evento &egrave stato organizzato da BOXALMATCH come Evento Privato fra amici (vecchi e nuovi giocatori).
+				Ringraziamo 
+				<i><a href="https://www.facebook.com/virtualplayvaldarno/?locale=it_IT" title="emozione">Virtual Play Valdarno</a></i>
+				per averci messo a disposizione una stanza e la Fibra Ottica
+				per una velocissima connessione a Internet.
+				Abbiamo giocato e cenato insieme con prodotti della 
+				<i><a href="https://www.instagram.com/lapizzadipanda/" title="emozione">Pizzeria Panda</a></i>.
+				Abbiamo preparato un video che spiega le  
+				"<i><a href="https://www.youtube.com/watch?v=s4w2ag2S-aQ" title="emozione">Info Pratiche</a></i>".
+			</p>
+			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="../img/eventi/thegreatlan_thumbnail.png" alt="TGL_thmb">
+				</figure>
+								
+				<!-- Episode 2 -->
+				<figure class="episode">
+					<img src="img/HP/Slide1.JPG" alt="poster_front">
+				</figure>
+				
+				<!-- Episode 3 -->
+				<figure class="episode">
+					<img src="img/HP/Slide2.JPG" alt="poster_retro">
+				</figure>
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>			
+
+			<h2>Regole (Il Buon Senso)</h2>
+			<p>
+				Abbiamo raggiunto 36 giocatori ma il gioco di Halo Infinite permette soltanto 24
+				giocatori, quindi abbiamo fatto squadre a rotazione.
+				Non abbiamo permesso alle persone in gioco di mangiare o 
+				bere durante le partite 
+				(perch&egrave le Xbox non mangiano ne pizza ne birra). 
+				Abbiamo informato i partecipanti delle loro postazioni ai tavoli e rotazioni precise.
+				Essendo Hardware condiviso fra i partecipanti, abbiamo chiesto completo rispetto per utilizzare il materiale condiviso.
+				Violenza verbale durante le partite &egrave sempre consentita fra amici !!
+				...E rispetto per i risultati calcolati a fine serata e l'assegnazione degli Awards.
+			</p>
+
+
+			<h2>Un Successo!</h2>
+			<p>
+				Risate, Nuove Amicizie e Momenti Epici in Battaglie Indimenticabili.
+				Questo ci ricorderemo dell'Evento <i>The Great LAN</i>.
+			</p>
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="../img/eventi/thegreatlan.JPG" alt="TGL">
+				</figure>
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>		
+
+			<h2>Qualche Ricordo</h2>
+			<p class="description">
+				Scorri fra i ricordi e rivivi le emozioni sul nostro canale YouTube con:
+				"<i><a href="https://www.youtube.com/watch?v=-JgQcQY_yG0" title="emozione">Dieci anni dopo</a></i>",
+				"<i><a href="https://www.youtube.com/watch?v=bfyb2aDt3_k" title="emozione">Trailer</a></i>", 
+				"<i><a href="https://www.youtube.com/watch?v=LtKjeQaW844" title="emozione">Total Madness</a></i>", 
+				"<i><a href="https://www.youtube.com/watch?v=qv8G1DMZMRQ" title="interviste">Interviste</a></i>".
+				
+			</p>			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/HP/foto_1.JPG" alt="foto_1">
+				</figure>
+				
+				<!-- Episode 2 -->
+				<figure class="episode">
+					<img src="img/HP/foto_2.JPG" alt="foto_2">
+				</figure>
+
+				<!-- Episode 3 -->
+				<figure class="episode">
+					<img src="img/HP/foto_3.JPG" alt="foto_3">
+				</figure>
+
+				<!-- Episode 4 -->
+				<figure class="episode">
+					<img src="img/HP/foto_4.jpeg" alt="foto_4">
+				</figure>
+
+				<!-- Episode 5 -->
+				<figure class="episode">
+					<img src="img/HP/foto_5.JPG" alt="foto_5">
+				</figure>
+
+				<!-- Episode 6 -->
+				<figure class="episode">
+					<img src="img/HP/foto_6.PNG" alt="foto_6">
+				</figure>
+
+				<!-- Episode 7 -->
+				<figure class="episode">
+					<img src="img/HP/foto_7.JPG" alt="foto_7">
+				</figure>
+
+				<!-- Episode 8 -->
+				<figure class="episode">
+					<img src="img/HP/foto_8.JPG" alt="foto_8">
+				</figure>				
+
+				<!-- Episode 9 -->
+				<figure class="episode">
+					<img src="img/HP/foto_9.JPG" alt="foto_9">
+				</figure>
+
+				<!-- Episode 10 -->
+				<figure class="episode">
+					<img src="img/HP/foto_10.JPG" alt="foto_10">
+				</figure>
+
+				<!-- Episode 11 -->
+				<figure class="episode">
+					<img src="img/HP/foto_11.JPG" alt="foto_11">
+				</figure>
+
+				<!-- Episode 12 -->
+				<figure class="episode">
+					<img src="img/HP/foto_12.jpg" alt="foto_12">
+				</figure>				
+
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>
+			
+		</article>
+
+	</section>
+
+    <!-- characters -->
+    <section id="character-profile" class="container">
+        <h1 class="highlight">Game On</h1>
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/setup.png" alt="setup">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Setup</h1>
+                <p>Il Setup di questo Evento lo trovi su
+				<i><a href="setup.html" title="Rules">Setup</a></i>.
+            </section>
+
+        </article>
+
+        <article class="character">
+            <figure>
+                <img src="img/game_on/backlog.png" alt="backlog">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Backlog</h1>
+                <p>
+				Le Mappe di questo Evento le trovi su
+				<i><a href="backlog.html" title="Backlog">Backlog</a></i>.
+				</p>
+			</section>
+        </article>
+		
+        <article class="character">
+            <figure>
+                <img src="img/game_on/awards.png" alt="awards">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Awards</h1>
+                <p>
+				Gli Awards di questo Evento li trovi su
+				<i><a href="awards.html" title="Awards">Awards</a></i>.
+				</p>
+            </section>
+        </article>		
+		
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2026 BOXALMATCH. Tutti i diritti riservati.<br>
+    Un gruppo di amici con la passione per l’intrattenimento collettivo.<br>
+    Seguici su <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a><br><br>
+    
+    Evento <strong>The Great LAN</strong> ideato e organizzato da BOXALMATCH.<br><br>
+</footer>
+
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
+

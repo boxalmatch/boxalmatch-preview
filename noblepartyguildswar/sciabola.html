@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gilda Sciabola</title><!-- Nome Gilde -->
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="img/icons/logo-tab-sciabola.jpg" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/icons/logo-tab-sciabola.jpg" sizes="16x16">
+	
+    <!-- main css -->
+    <link href="css/main_sciabola.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header id="main-header" class="container-fluid">
+    <div class="mobile-nav ">
+        <img src="img/icons/logo.png" alt="rick and morty logo">
+        <p class="toggle-nav">&#10094;</p>
+    </div>
+    <nav>
+        <ul>
+            <li class="brand"><img src="img/icons/logo.png" alt="rick and morty logo"></li>
+            <li class="active"><a href="#home">Sciabola</a></li>
+            <li><a href="#scheda">Scheda</a></li>
+            <li><a href="#campagne">Guerre</a></li>
+            <li><a href="#character-profile">Personaggi</a></li>
+            <li><a href="#character-profile">Game On</a></li>
+        </ul>
+    </nav>
+
+</header>
+<main>
+
+	<!-- home section with a single image -->
+	<section id="home" class="container-fluid slider">
+		<figure>
+			<img src="img/slider/bucinor.png" alt="rick and morty main image">
+		</figure>
+		<article class="slide-caption center-left">
+			<h1>Gilda Sciabola</h1> <!-- Nome Gilde -->
+			<p>
+			La Gilda Sciabola risiede a Bucinor, enormi vulcani attivi popolano questo luogo e fiumi di lava ostacolano molti sentieri. [Torna alla <i><a href="home.html" title="tornaHP">Home</a></i>]
+			</p>
+		</article>
+	</section>
+
+    <!-- season info -->
+	<section id="scheda" class="container">
+		<h1 class="highlight">Scheda Sciabola (Cutlass)</h1> <!-- Nome Gilde -->
+
+		<article class="season">
+			<h2>Utilizzo Gilda</h2>
+			<p class="description">
+				Per giocare una partita su Halo Infinite devi scegliere un Mode e una Mappa.
+				In questo evento i Modes di una partita hanno una categoria (Standard,Social,Sketch,Cahmpions) con un tipo (TS,MTS,FFA) e la partita viene modificata con opzioni (Sayans,Arsenale Gilda).
+				Qui trovi tutti i Modes, Mappe e Opzioni quando questa Gilda ha il potere decisionale.
+				&#128073;Quando questa Gilda ha il potere decisionale di una Armata, attinge a tutti i Modes, Mappe e Opzioni di tutte le Gilde che compongono l'Armata.
+				&#128073;Tutto quello elencato ha nomi ufficiali su Halo Infinite quindi puoi usare "Ricerca" per parola sul gioco.
+				&#128073;Ricordati di leggere il <i><a href="regolamento.html" title="Regolamento">Regolamento</a></i>
+			</p>
+
+			<h2>Modes: Standard, e Champions</h2>
+			<p class="description">
+				Questi sono i Modes che generano partite Standard, e la Categoria Champions.
+				Usa uno di questi obbiettivi per vincere la partita.
+			</p>
+			<div role="group" class="episodes">
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/modes.PNG" alt="Modes">
+				</figure>
+		
+				<!-- Episode controls NULLI -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>
+			<p class="description">
+				&#128073;Personalizza gratuitamente il colore della armatura del tuo personaggio con il colore della Gilda.
+				&#128073;Per Champions, puoi pure usare <i>Fortnite</i> (Battle Royale) in <i><a href="backlog.html" title="backlog">Backlog</a></i> (in questo caso senza applicare L'Arsenale della Gilda).
+			</p>			
+			
+			<h2>Modes: WARCRAFT (Social)</h2>
+			<p class="description">
+				Social sono i Modes con obbiettivi precisi. Hanno sempre bisogno di una Mappa dove utilizzarli.
+			</p>			
+			<div role="group" class="episodes">
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/social.PNG" alt="Social">
+				</figure>
+		
+				<!-- Episode controls NULLI -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>
+
+			<h2>Mappe</h2>
+			<p class="description">
+				Una volta scelto il Modes, o Champions non Fortnite, scegli la Mappa dove giocare.
+				Fai attenzione al numero di Gilde in gioco e al numero di Giocatori PP totali.
+			</p>			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1v1 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/map_1.PNG" alt="1v1">
+				</figure>
+
+				<!-- Episode 2v2 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/map_2.jpg" alt="2v2">
+				</figure>
+
+				<!-- Episode 4v4 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/map_3.PNG" alt="4v4">
+				</figure>
+
+				<!-- Episode 8v8 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/map_4.PNG" alt="8v8">
+				</figure>				
+
+				<!-- Episode 12v12 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/map_5.PNG" alt="12v12">
+				</figure>
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>		
+			<p class="description">
+				&#128073;Quando ci sono soltanto 2 Gilde: TS=MTS e potrai accedere a Mappe piccole.
+				&#128073;Quando fai parte di una Armata: TS sono scontri fra le Armate, oppure
+				decomporre l'Armata in Gilde per MTS ed hai comunque accesso a Mappe grandi.
+				&#128073;Puoi scegliere la Mappa 12v12 con la parola "Heavies" alla fine includendo veicoli pesanti.
+				&#128073;Ricordati di leggere il <i><a href="regolamento.html" title="rules">Regolamento</a></i>				
+			</p>					
+			
+			<h2>Mode+Mappa: RUZZO (Sketch)</h2>
+			<p class="description">
+				Sketch sono combo di Mappa e Modes. Scegli una Sketch dalla <i><a href="backlog.html" title="sketch">Backlog</a></i>.
+			</p>
+			
+			<h2>Opzione: Arsenale della Gilda (AG)</h2> <!-- Nome Gilde -->
+			<p class="description">
+				Decidi se iniziare la partita impostando queste Armi ed Equipaggiamento per tutti
+				i giocatori: quindi a questa Gilda e a tutte le altre Gilde in gioco.
+			</p>			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/arsenal.PNG" alt="Sciabola Arsenale">
+				</figure>
+
+				<!-- Episode controls NULLI -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>
+			<p class="description">
+				&#128073;Non applicabile a: Social, Sketch, e Champions quando Fortnite (Battle Royale).
+				&#128073;Altrimenti, lascia le armi di Default del Modes selezionato.
+				&#128073;Arsenale applicabile secondo il <i><a href="regolamento.html" title="rules">Regolamento</a></i>
+			</p>
+
+			<h2>Opzione: Nella & Franco (Sayans)</h2> <!-- Nome Gilde -->
+			<p class="description">
+				Decidi che ogni Gilda giochi con 2 Giocatori soltanto.
+				&#128073;Non applicabile a Sketch.
+				&#128073;Leggi Sayans sul <i><a href="regolamento.html" title="rules">Regolamento</a></i>
+			</p>				
+			
+		</article>
+	</section>
+	
+
+    <!-- season info -->
+	<section id="campagne" class="container">
+		<h1 class="highlight">Le Guerre di Sciabola</h1> <!-- Nome Gilde -->
+
+		<article class="season">
+			<h2>Informazioni</h2>
+			<p class="description">
+				Queste sono le Guerre (= 4 Partite) per ottenere punti.
+				Esse sono raggruppate in Capitoli di due Campagne.
+				Questa Gilda fa parte di una Armata quando ai lati del simbolo "VS" ci sono +1 Gilda.
+				In caso di Armata, il Leader principale di questa Gilda potrebbe non essere il Leader dell'Armata.
+				Se il Leader dell'Armata seglie un Tipo: TS, le Armate sono imposte ai lati del simbolo "VS".
+				La prima Campagna ufficiale con Capitoli ufficiali
+				[Guarda l'intera Campagna Ufficiale sul <i><a href="index.html" title="tabellone">Home</a></i>].
+				La seconda Campagna (Side Quest) creata dalla Gilda stessa.<br>
+			</p>
+
+			<h2>Campagna Ufficiale: Ira e Lealt&agrave</h2> <!-- Nome Gilde -->			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/camp_1.png" alt="TGL">
+				</figure>
+
+				<!-- Episode 2 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/camp_2.PNG" alt="Fuoco">
+				</figure>	
+
+				<!-- Episode 3 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/camp_3.PNG" alt="Veleno">
+				</figure>	
+
+				<!-- Episode 4 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/camp_4.PNG" alt="Vecchio Potere">
+				</figure>	
+				
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>
+			<p class="description">
+				&#128073;Conclusa una Guerra, il risultato viene esposto per tutte le Gilde che hanno partecipato alla Guerra.
+			</p>			
+			
+			<h2>Side Quest: Incenerimento</h2> <!-- Nome Gilde -->
+			<p class="description">
+				Personalizza il nome di ogni Capitolo e scegli chi affrontare per ottenere punti.
+				Sono Quattro Capitoli, in due Capitoli affronti una Gilda, in due Capitoli scegli una Armata ed affronti una altra Armata.
+			</p>			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/camp_a.jpg" alt="TBD1">
+				</figure>
+
+				<!-- Episode 2 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/camp_b.PNG" alt="TBD2">
+				</figure>	
+
+				<!-- Episode 3 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/camp_c.PNG" alt="TBD3">
+				</figure>	
+
+				<!-- Episode 4 -->
+				<figure class="episode">
+					<img src="img/gilde/sciabola/camp_d.PNG" alt="TBD4">
+				</figure>	
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>	
+			<p class="description">
+				&#128073;Conclusa una Guerra, il risultato viene esposto per tutte le Gilde che hanno partecipato alla Guerra.
+				&#128073;Lasciata la possibilita di aggiungere 1 Capitolo con scontro di 6 Gilde.
+				&#128073;Ogni Guerra Personalizzata deve essere unica
+				(non puoi ripetere una Guerra con le stesse Gilde o Armate precedentemente conclusa in una Campagna Ufficiale o Side Quest).
+				&#128073;Ad ogni Guerra aiuti a completare la tua Campagna Secondaria e quella di tutte le altre Gilde nella Guerra scelta.
+				&#128073;I nomi dei Capitoli per questa Gilda possono essere diversi dai nomi dei Capitoli delle altre Gilde.
+			</p>				
+			
+		</article>
+	</section>	
+
+    <!-- characters -->
+    <section id="character-profile" class="container">
+        <h1 class="highlight">Personaggi</h1> <!-- Nome Gilde -->
+
+        <article class="character">
+
+            <figure>
+                <img src="img/gilde/sciabola/kaelos.jpg" alt="perso gilda">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Kaelos</h1> <!-- Nome Gilde -->
+                <p><i>"Fra le fiamme eterne di Bucinor, i vulcani non dormono:
+				eruttano ogni volta che qualcuno osa sfidare Kaelos.
+				E ogni sfida accende un inferno"</i>.
+				[Scopri tutta la <i><a href="storia.html" title="HP">Storia</a></i>]</p>
+            </section>
+
+        </article>
+
+        <article class="character">
+
+            <figure>
+                <img src="img/gilde/sciabola/karmic.png" alt="leader principale">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">KarmicScroll</h1> <!-- Nome Gilde -->
+                <p>Leader Principale assegnato alla Gilda Sciabola. <i>"Se esulti troppo, significa che non sei abituato a vincere"</i>.</p>
+            </section>
+
+        </article>
+
+    </section>
+
+    <!-- characters -->
+    <section id="character-profile" class="container">
+        <h1 class="highlight">Game On</h1>
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/regolamento.png" alt="regolamento">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Rules!</h1>
+                <p>Prima di giocare ricordati di leggere il <i><a href="regolamento.html" title="Rules">Regolamento</a></i>.
+            </section>
+
+        </article>
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/backlog.png" alt="awards">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Backlog</h1>
+                <p>Ogni Gilda accede alla <i><a href="backlog.html" title="Rules">Backlog</a></i> a piacere.
+				</p>
+            </section>
+
+        </article>	
+				
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2026 BOXALMATCH. Tutti i diritti riservati.<br>
+    Un gruppo di amici con la passione per l’intrattenimento collettivo.<br>
+    Seguici su <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a><br><br>
+    
+    Evento <strong>Noble Party Guilds War</strong> ideato da <span style="font-weight:bold;">NobleBrassMan</span> 
+    insieme a BOXALMATCH.<br><br>
+</footer>
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

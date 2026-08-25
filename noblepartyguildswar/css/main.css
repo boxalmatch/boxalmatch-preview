@@ -1,0 +1,678 @@
+/* ============================================================
+   BOXALMATCH — legacy subpage theme
+   ------------------------------------------------------------
+   Drop-in replacement for the old css/main.css. Same selector
+   contract as the original (so js/main.js and every existing
+   page keeps working untouched) — only the visual design
+   tokens change, to match the new brand: dark ground, brand
+   green accent, Inter typeface, calmer motion.
+
+   Per-page accent: this file reads --primary-color and
+   --primary-shade-color from :root. The base value below is
+   the default brand green; guild-specific files (main_*.css)
+   override those two variables and then @import this file.
+   ============================================================ */
+
+:root {
+    --main-bg-color: #000000;
+    --main-bg-color-fade-5: rgba(0, 0, 0, 0.6);
+    --primary-color: #2fd94f;
+    --primary-shade-color: #1ea83a;
+    --secundary-color: #6e6e73;
+
+    --ink: #f5f5f7;
+    --ink-muted: #a1a1a6;
+    --surface: #1d1d1f;
+    --surface-2: #161617;
+    --hair: #38383c;
+    --font: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display",
+            "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+* { box-sizing: border-box; }
+
+.mobile-nav {
+    display: none;
+}
+
+.mb-1 {
+    margin: 0;
+    margin-bottom: 0.9em;
+}
+
+body, html {
+    font-family: var(--font);
+    background-color: var(--main-bg-color);
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.01em;
+    -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--ink);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+}
+
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+}
+a:hover { text-decoration: underline; }
+
+h1 { font-size: 2.8em; }
+h2 { font-size: 2.1em; }
+h3 { font-size: 1.7em; }
+h4 { font-size: 1.4em; }
+h5 { font-size: 1.2em; }
+h6 { font-size: 1.05em; }
+
+button {
+    background-color: var(--primary-color);
+    border: 1px solid transparent;
+    border-radius: 999px;
+    color: #06210c;
+    padding: 12px;
+    width: 100%;
+    font-weight: 600;
+    font-family: var(--font);
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color .2s;
+}
+button:hover { background-color: var(--primary-shade-color); }
+
+.margin-2 { margin: 0.4em 0; }
+.margin-3 { margin: 0.8em 0; }
+
+.container {
+    width: 100%;
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
+.container-fluid {
+    width: 100%;
+    min-width: 100%;
+}
+
+.hidden {
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+}
+
+/* ---------- navigation ---------- */
+#main-header, #main-header * {
+    transition: all 0.2s;
+}
+
+#main-header {
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 3;
+}
+
+#main-header.scrolled {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.86);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+}
+
+header > nav > ul {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    align-items: center;
+}
+
+header > nav > ul > li {
+    margin: 0 2%;
+    position: relative;
+}
+
+header > nav > ul > li.brand {
+    max-width: 9%;
+    margin: 0 3% 0 0;
+}
+
+header > nav > ul > li.brand > img {
+    width: 100%;
+    filter: brightness(0) invert(1);
+}
+
+header > nav > ul > li.brand > a { padding: 0; }
+
+header > nav > ul > li > a {
+    position: relative;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: 500;
+    color: var(--ink);
+    display: block;
+    padding: 20px;
+}
+
+header > nav > ul > li > a:before {
+    content: '';
+    height: 2px;
+    width: 100%;
+    position: absolute;
+    background-color: var(--primary-color);
+    bottom: 10px;
+    left: 0;
+    transform: scale3d(0, 1, 1);
+    transition: transform 0.15s;
+}
+
+header > nav > ul > li:hover > a {
+    color: var(--primary-color);
+}
+
+header > nav .active > a::before {
+    transform: scale3d(1, 1, 1);
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.3s;
+}
+
+/* ---------- slider / hero ---------- */
+.slider > figure { margin: 0; }
+
+.slider > figure > img {
+    width: 100%;
+    max-height: 100vh;
+    object-fit: cover;
+}
+
+.slider > .slide-caption {
+    background-color: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-left: 3px solid var(--primary-color);
+    border-radius: 0 18px 18px 0;
+    color: var(--ink);
+    position: absolute;
+    top: 15%;
+    left: 4%;
+    width: 25%;
+    padding: 28px;
+}
+
+.slider > .slide-caption h1,
+.slider > .slide > .slide-caption h1 {
+    color: var(--ink);
+    font-size: 2.6em;
+    margin: 0 0 .3em;
+    letter-spacing: -0.03em;
+}
+
+.slider > .slide-caption p { color: var(--ink-muted); }
+
+/* ---------- episode carousel ---------- */
+.episodes {
+    position: relative;
+    width: 100%;
+    height: 60vh;
+    max-height: 500px;
+    min-height: 250px;
+    background-color: var(--surface-2);
+    border-radius: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.episode {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.episode.active { opacity: 1; z-index: 2; }
+
+.episode > img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+    background-color: transparent;
+}
+
+.episode > figcaption {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0.65);
+    color: var(--ink);
+    text-align: center;
+    font-size: 1em;
+}
+
+/* ---------- season / content blocks ---------- */
+.season > h2, .season p { margin: 0.8em 0; }
+
+.season > h2, .season > h1 { font-size: 1.7em; }
+
+.season > .episodes {
+    position: relative;
+    height: 450px;
+    border-radius: 18px;
+    overflow: hidden;
+}
+
+#episode-number {
+    position: absolute;
+    right: 0;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 10px 14px;
+    z-index: 2;
+    font-family: var(--font);
+    font-size: 0.8em;
+}
+
+.episode-number {
+    position: absolute;
+    right: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.55);
+    padding: 8px 14px;
+    z-index: 3;
+    font-family: var(--font);
+    font-size: 0.78em;
+    color: var(--ink-muted);
+    border-radius: 0 18px 0 12px;
+}
+
+.season > .episodes,
+.season > .episodes > .episode {
+    transition: opacity 0.2s;
+    margin: 0;
+    width: 100%;
+}
+
+.season > .episodes > .episode {
+    position: absolute;
+    height: 450px;
+    z-index: 0;
+}
+
+.season > .episodes > .episode > img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: transparent;
+    transition: transform 0.4s;
+}
+
+.season > .episodes > .episode > img:hover {
+    transform: scale(1.05);
+}
+
+.season > .episodes > .episode figcaption {
+    position: absolute;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.72);
+    width: 100%;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.controls {
+    position: absolute;
+    width: 100%;
+    bottom: 50%;
+    padding: 0 12px;
+}
+
+.controls > button {
+    background: rgba(255, 255, 255, 0.92);
+    padding: 0.7em;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color 0.15s, transform .15s;
+    font-weight: 700;
+    font-size: 15px;
+    width: 36px;
+    height: 36px;
+    color: #06210c;
+    margin: 0;
+}
+
+.controls > button:hover {
+    background: var(--primary-color);
+    color: #06210c;
+    transform: scale(1.06);
+}
+
+.controls .next { position: absolute; right: 12px; }
+.controls .prev { position: absolute; left: 12px; }
+
+#episodes-group > .controls { z-index: 3; }
+
+#episodes-group > .episode {
+    position: absolute;
+    top: 0;
+    opacity: 0;
+    transition: opacity 0.5s;
+}
+
+#episodes-group > .episode:first-of-type {
+    z-index: 2;
+    opacity: 1;
+}
+
+/* ---------- character / feature cards ---------- */
+#character-profile > .character {
+    position: relative;
+    margin-bottom: 220px;
+}
+
+#character-profile > .character > figure {
+    overflow: hidden;
+    height: 420px;
+    margin: 0;
+    border-radius: 22px;
+}
+
+#character-profile > .character > figure > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+}
+
+#character-profile > .character > figure > img:hover {
+    transform: scale(1.08);
+}
+
+#character-profile > .character > .character-bio {
+    position: absolute;
+    right: -30px;
+    top: 45%;
+    height: auto;
+    min-height: 200px;
+    background-color: var(--surface);
+    border: 1px solid var(--hair);
+    padding: 26px;
+    width: 26%;
+    border-radius: 18px;
+    border-top: 3px solid var(--primary-color);
+    box-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.6);
+}
+
+#character-profile > .character > .character-bio > h1 {
+    font-size: 1.35em;
+}
+
+/* ---------- tables (standings / stats) ---------- */
+table {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+table thead tr,
+table tr[style*="background-color: #228B22"],
+table tr[style*="background-color: #107C10"] {
+    background-color: var(--surface-2) !important;
+    color: var(--ink) !important;
+}
+
+table td, table th {
+    border-color: var(--hair) !important;
+}
+
+table tr[style*="background-color: white"],
+table td[style*="background-color: white"] {
+    background-color: var(--surface) !important;
+    color: var(--ink) !important;
+}
+
+table tr[style*="background-color: #f2f2f2"] {
+    background-color: var(--surface) !important;
+}
+
+/* Giocato Con / Giocato Contro matrices (scores.html) */
+#giocatoTable, #giocatoCONTROTable {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+
+#giocatoTable th, #giocatoTable td,
+#giocatoCONTROTable th, #giocatoCONTROTable td {
+    border: 1px solid var(--hair);
+    padding: 5px;
+    background-color: var(--surface);
+}
+
+#giocatoTable .header-special { background-color: #06210c; color: var(--ink); }
+#giocatoTable .header-normal { background-color: var(--surface-2); color: var(--ink); }
+
+#giocatoTable .value-x { background-color: var(--surface); }
+#giocatoTable .value-0 { background-color: #17324a; }
+#giocatoTable .value-1-9 { background-color: #17381f; }
+#giocatoTable .value-5-10 { background-color: #4a3717; }
+#giocatoTable .value-11plus { background-color: #4a1717; }
+#giocatoTable .value-21plus { background-color: #7a1111; color: #fff; }
+
+#giocatoTable th {
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    padding: 5px;
+    white-space: nowrap;
+}
+
+#giocatoTable .vertical-text {
+    writing-mode: vertical-rl;
+    transform: rotate(0deg);
+    white-space: nowrap;
+}
+
+#giocatoCONTROTable {
+    border-collapse: collapse;
+    width: 100%;
+    text-align: center;
+}
+
+/* ---------- shop (legacy, present in CSS contract even if unused) ---------- */
+#webshop > .shop { display: flex; flex-wrap: wrap; }
+
+.shop > .shop-item {
+    position: relative;
+    width: 27%;
+    background-color: var(--surface);
+    border-radius: 14px;
+    margin: 2% 1%;
+    padding: 2%;
+}
+
+.shop > .shop-item > .price-tag {
+    background-color: var(--secundary-color);
+    position: absolute;
+    right: 10px;
+    top: -40px;
+    z-index: 2;
+    height: 60px;
+    width: 48px;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.shop > .shop-item > .price-tag > .amount { position: absolute; bottom: 10px; }
+
+.shop > .shop-item figure {
+    max-width: 250px;
+    margin: 0 auto;
+    transition: transform 0.2s;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.shop > .shop-item figure:hover { transform: scale(1.15); }
+
+.shop > .shop-item > figure > img { width: 100%; }
+
+.shop > .shop-item > .description {
+    position: relative;
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+    min-height: 75px;
+    z-index: 2;
+    color: var(--ink-muted);
+}
+
+.shop > .selected-shop-item {
+    width: 100%; height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    position: fixed; top: 0; left: 0;
+    z-index: 4;
+    transition: all 0.2s;
+}
+
+.shop > .selected-shop-item > .content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 75%;
+    max-height: 60vh;
+    margin: 20vh auto;
+    background-color: var(--surface);
+    border-radius: 18px;
+    padding: 24px;
+    box-sizing: border-box;
+    color: var(--ink);
+    position: relative;
+}
+
+.shop > .selected-shop-item > .content > .exit-button {
+    position: absolute;
+    right: 0px; top: 0;
+    cursor: pointer;
+    background-color: var(--surface-2);
+    text-align: center;
+    padding: 10px;
+    width: 40px;
+    margin: 0;
+    border: none;
+    border-radius: 0 18px 0 12px;
+}
+
+.shop > .selected-shop-item > .content > figure { margin: 0 auto; }
+.shop > .selected-shop-item > .content > figure > img { width: 350px; }
+
+.shop > .selected-shop-item > .content > .details {
+    display: grid;
+    grid-template-rows: 1.4fr 1fr;
+}
+
+.shop > .selected-shop-item > .content > .details .item-name { margin: 0.2em 0; }
+
+.shop > .selected-shop-item > .content > .details input {
+    padding: 2%;
+    width: 100%;
+    border: 1px solid var(--hair);
+    background: var(--surface-2);
+    color: var(--ink);
+    font-size: 1.2em;
+    display: block;
+    margin-top: 10%;
+    box-sizing: border-box;
+    margin-bottom: 2em;
+    border-radius: 8px;
+}
+
+.order-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 50px;
+}
+
+.order-form article ul { list-style: none; margin: 0; padding: 0; }
+
+.order-form article ul li:before {
+    content: '\2714';
+    color: var(--primary-color);
+    margin-right: 1em;
+}
+
+.order-form > form .field { display: block; margin: 10px 0; }
+.order-form > form label { display: block; margin: 0.8em 0; }
+
+.order-form > form input {
+    width: 100%;
+    padding: 16px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--hair);
+    background: var(--surface);
+    color: var(--ink);
+    box-sizing: border-box;
+}
+
+footer {
+    text-align: center;
+    margin: 60px 0 24px;
+    font-size: 0.85em;
+    color: var(--ink-muted);
+    padding: 0 20px;
+}
+
+footer a { color: var(--primary-color); }
+
+/* ---------- responsive base kept from original ---------- */
+@media (max-width: 1024px) {
+    .episodes { height: 50vh; }
+}
+
+@media (max-width: 600px) {
+    .episodes { height: 40vh; }
+    .episode > img { max-height: 100%; }
+}
+
+@media (max-width: 1024px) {
+    .episode > figcaption { font-size: 0.9em; padding: 8px; }
+}
+
+@media (max-width: 600px) {
+    .episode > figcaption { font-size: 0.8em; padding: 6px; }
+}
+
+@media (min-width: 761px) {
+    #main-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background-color: rgba(0, 0, 0, 0.72);
+        backdrop-filter: saturate(180%) blur(20px);
+        -webkit-backdrop-filter: saturate(180%) blur(20px);
+        transition: background-color 0.2s;
+    }
+    #main-header.scrolled {
+        background-color: rgba(0, 0, 0, 0.9);
+    }
+}
+
+@media (hover: hover) {
+    .season > .episodes > .episode > img:hover,
+    #character-profile > .character > figure > img:hover,
+    .shop > .shop-item figure:hover {
+        transform: none !important;
+        transition: none !important;
+    }
+}

@@ -1,0 +1,6 @@
+/* BOXALMATCH — Gilda Cobra: imports the shared legacy theme, then overrides the accent. */
+@import url("main.css");
+:root {
+    --primary-color: #566D38;
+    --primary-shade-color: #d41c32;
+}

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awards</title>
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="img/icons/awards-tab.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/icons/awards-tab.png" sizes="16x16">
+	
+    <!-- main css -->
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header id="main-header" class="container-fluid">
+    <div class="mobile-nav ">
+        <img src="img/icons/TGL_b.png" alt="rick and morty logo">
+        <p class="toggle-nav">&#10094;</p>
+    </div>
+    <nav>
+        <ul>
+            <li class="brand"><img src="img/icons/TGL_b.png" alt="rick and morty logo"></li>
+            <li class="active"><a href="#home">Awards</a></li>
+            <li><a href="#vincitori">Vincitori</a></li>
+			<li><a href="#results">Risultati</a></li>
+            <li><a href="#character-profile">Game On</a></li> 			
+        </ul>
+    </nav>
+
+</header>
+<main>
+
+	<!-- home section with a single image -->
+	<section id="home" class="container-fluid slider">
+		<figure>
+			<img src="img/game_on/awards.png" alt="awards">
+		</figure>
+		<article class="slide-caption center-left">
+			<h1>Awards</h1>
+			<p>
+			Qui troverete tutti i risultati
+			dell'Evento <i>The Great LAN</i>. [Torna alla <i><a href="home.html" title="Bastione1">Home</a></i>]</p>
+		</article>
+	</section>
+
+    <!-- season info -->
+	<section id="vincitori" class="container">
+		<h1 class="lists">Vincitori</h1>
+
+		<article class="season">
+			<p class="description">
+				L'Evento &eacute stato firmato con degli Awards. 
+				Premi simbolici come ricordo di questa fantastica serata.
+			</p>
+
+			<h2>Best Spartan</h2>		
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/awards/Slide2.JPG" alt="best_spartan">
+				</figure>
+
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>
+
+			<h2>Best Talo</h2>	
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/awards/Slide3.JPG" alt="best_talo">
+				</figure>
+
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>	
+
+			<h2>Best Marine</h2>		
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/awards/Slide4.JPG" alt="best_marine">
+				</figure>
+
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>	
+
+			<h2>Best Team</h2>		
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/awards/Slide5.JPG" alt="best_team">
+				</figure>
+
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>		
+
+			<h2>Collezionabili</h2>	
+			<p class="description">
+				A fine serata, abbiamo regalato Carte uniche firmate BOXALMATCH! 
+				Ogni Carta pu&ograve raffigurare un partecipante di questo evento. 
+				..Le hai collezionate tutte?
+			</p>			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/awards/collezione.jpg" alt="collezionabili">
+				</figure>
+
+
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev">&#9746;</button>
+					<button class="next">&#9746;</button>
+				</div>
+			</div>		
+			
+		</article>
+	</section>
+	
+    <!-- season info -->
+	<section id="results" class="container">
+		<h1 class="lists">Risultati</h1>
+
+		<article class="season">
+			<p class="description">
+				Mostriamo tutti i fattori che hanno portato ai punteggi finali. E la tabella con tutti
+				i risultati di ogni giocatore applicando questi fattori.
+			</p>
+
+			<h2>Lista Fattori</h2>
+			<p class="description">
+			
+				<table border="1">
+				  <thead>
+					<tr>
+					  <th>Match Type</th>
+					  <th>K-factor</th>
+					  <th>D-factor</th>
+					  <th>A-factor</th>
+					  <th>B-factor</th>
+					  <th>Description B-Factor</th>
+					</tr>
+				  </thead>
+				  <tbody>
+					<tr>
+					  <td>Slayer</td>
+					  <td>1</td>
+					  <td>-0.5</td>
+					  <td>0.5</td>
+					  <td>3</td>
+					  <td>Squadra vincente</td>
+					</tr>
+					<tr>
+					  <td>CTF (Capture the Flag)</td>
+					  <td>0.5</td>
+					  <td>-0.25</td>
+					  <td>0.25</td>
+					  <td>5</td>
+					  <td>Bandiera conquistata (flag captured)</td>
+					</tr>
+					<tr>
+					  <td>Strongholds</td>
+					  <td>0.5</td>
+					  <td>-0.25</td>
+					  <td>0.25</td>
+					  <td>2</td>
+					  <td>Zone occupate total control (zones occupied total control)</td>
+					</tr>
+					<tr>
+					  <td>Sentinella</td>
+					  <td>1</td>
+					  <td>-0.5</td>
+					  <td>0.25</td>
+					  <td>3</td>
+					  <td>Più danni a sentinella (more damage to sentinel)</td>
+					</tr>
+					<tr>
+					  <td>TuttiVSTutti</td>
+					  <td>1</td>
+					  <td>-0.5</td>
+					  <td>-0.25</td>
+					  <td>3</td>
+					  <td>Chi vince (who wins)</td>
+					</tr>
+					<tr>
+					  <td>Sketch (Mini-Gioco)</td>
+					  <td>0</td>
+					  <td>0</td>
+					  <td>0</td>
+					  <td>2</td>
+					  <td>Chi vince (who wins)</td>
+					</tr>
+					<tr>
+					  <td>VIP</td>
+					  <td>0.5</td>
+					  <td>-0.25</td>
+					  <td>0.25</td>
+					  <td>5</td>
+					  <td>Numero VIP uccisi</td>
+					</tr>	
+				  </tbody>
+				</table>
+				
+			</p>			
+
+
+			<h2>Tabelle</h2>
+			
+			<p class="description">
+				Tabella Giocatori.
+			</p>			
+			
+			<table border="1" cellspacing="0" cellpadding="6" style="border-collapse: collapse; text-align: center;">
+			  <thead style="background-color: #2ecc71; color: black;">
+			    <tr>
+			      <th>Player</th>
+			      <th>Class</th>
+			      <th>Team</th>
+			      <th>TOTAL</th>
+			      <th>Match</th>
+			      <th>KDA</th>
+			      <th>W-KDA</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			    <tr style="background-color: black; color: white;"><td>SlickColt</td><td>Spartan</td><td>Ur-Didact</td><td>20.78</td><td>10</td><td>3.56</td><td>0.36</td></tr>
+			    <tr style="background-color: black; color: white;"><td>Trimrex</td><td>Spartan</td><td>Gravemind</td><td>16.90</td><td>12</td><td>2.67</td><td>0.22</td></tr>
+			    <tr style="background-color: black; color: white;"><td>xVcRx DriuS</td><td>Spartan</td><td>Locke</td><td>16.10</td><td>10</td><td>2.24</td><td>0.22</td></tr>
+			    <tr style="background-color: black; color: white;"><td>SensibleSwine</td><td>Spartan</td><td>Arbiter</td><td>15.03</td><td>9</td><td>2.37</td><td>0.26</td></tr>
+			    <tr style="background-color: black; color: white;"><td>Rambaudo</td><td>Spartan</td><td>Master Chief</td><td>14.72</td><td>9</td><td>2.19</td><td>0.24</td></tr>
+			    <tr style="background-color: black; color: white;"><td>KarmicScroll</td><td>Spartan</td><td>Bornstellar</td><td>13.94</td><td>8</td><td>1.95</td><td>0.24</td></tr>
+			    <tr style="background-color: black; color: white;"><td>Hernicopter</td><td>Spartan</td><td>Atriox</td><td>13.58</td><td>9</td><td>1.91</td><td>0.21</td></tr>
+			    <tr style="background-color: black; color: white;"><td>Clavuss</td><td>Spartan</td><td>343 Guilty Spark</td><td>12.55</td><td>11</td><td>2.15</td><td>0.20</td></tr>
+			    <tr style="background-color: grey; color: black;"><td>AeroStokes</td><td>Talo</td><td>ODST</td><td>10.75</td><td>12</td><td>1.92</td><td>0.16</td></tr>
+			    <tr style="background-color: black; color: white;"><td>NobleBrassMan</td><td>Spartan</td><td>Noble Six</td><td>10.45</td><td>10</td><td>1.67</td><td>0.17</td></tr>
+			    <tr style="background-color: grey; color: black;"><td>GlimpseOfNature</td><td>Talo</td><td>Covenant</td><td>10.33</td><td>12</td><td>2.00</td><td>0.17</td></tr>
+			    <tr style="background-color: grey; color: black;"><td>Ifrid</td><td>Talo</td><td>ODST</td><td>10.13</td><td>12</td><td>1.55</td><td>0.13</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Vaalinor</td><td>Marine</td><td>Bornstellar</td><td>9.89</td><td>7</td><td>1.27</td><td>0.18</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Gigliuz</td><td>Marine</td><td>Ur-Didact</td><td>8.88</td><td>8</td><td>2.11</td><td>0.26</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Sootz</td><td>Marine</td><td>Noble Six</td><td>8.13</td><td>6</td><td>1.20</td><td>0.20</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Step 90</td><td>Marine</td><td>Offensive-Bias</td><td>7.86</td><td>7</td><td>1.30</td><td>0.19</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Ascravascazzi</td><td>Marine</td><td>Locke</td><td>7.65</td><td>5</td><td>1.35</td><td>0.27</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Deferent Skate</td><td>Marine</td><td>Arbiter</td><td>7.47</td><td>9</td><td>1.66</td><td>0.18</td></tr>
+			    <tr style="background-color: grey; color: black;"><td>Pino's Carrot</td><td>Talo</td><td>Offensive-Bias</td><td>6.73</td><td>11</td><td>1.05</td><td>0.10</td></tr>
+			    <tr style="background-color: grey; color: black;"><td>Difesa99</td><td>Talo</td><td>Covenant</td><td>5.69</td><td>12</td><td>1.06</td><td>0.09</td></tr>
+			    <tr style="background-color: grey; color: black;"><td>Spappola</td><td>Talo</td><td>Atriox</td><td>5.50</td><td>8</td><td>1.22</td><td>0.15</td></tr>
+			    <tr style="background-color: grey; color: black;"><td>Flying WC</td><td>Talo</td><td>Offensive-Bias</td><td>5.00</td><td>6</td><td>0.94</td><td>0.16</td></tr>
+			    <tr style="background-color: white; color: black;"><td>The Duke</td><td>Marine</td><td>Atriox</td><td>4.32</td><td>7</td><td>1.04</td><td>0.15</td></tr>
+			    <tr style="background-color: white; color: black;"><td>MekDonald</td><td>Marine</td><td>Ur-Didact</td><td>3.21</td><td>6</td><td>0.96</td><td>0.16</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Sixbarsjail</td><td>Marine</td><td>Master Chief</td><td>3.17</td><td>9</td><td>0.76</td><td>0.08</td></tr>
+			    <tr style="background-color: white; color: black;"><td>simors</td><td>Marine</td><td>Gravemind</td><td>2.30</td><td>10</td><td>0.50</td><td>0.05</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Mangacci</td><td>Marine</td><td>Locke</td><td>1.94</td><td>8</td><td>0.35</td><td>0.04</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Potito the killer</td><td>Marine</td><td>Bornstellar</td><td>1.56</td><td>8</td><td>0.71</td><td>0.09</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Bibobio</td><td>Marine</td><td>Gravemind</td><td>0.50</td><td>2</td><td>0.55</td><td>0.28</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Pepper</td><td>Marine</td><td>Noble Six</td><td>0.19</td><td>8</td><td>0.56</td><td>0.07</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Rongis</td><td>Marine</td><td>345 Guilty Spark</td><td>0.14</td><td>7</td><td>0.62</td><td>0.09</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Brigate1984</td><td>Marine</td><td>ODST</td><td>0.00</td><td>0</td><td>0.00</td><td>0.00</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Touched SuperSet</td><td>Marine</td><td>Covenant</td><td>0.00</td><td>0</td><td>0.00</td><td>0.00</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Apocal</td><td>Marine</td><td>Master Chief</td><td>-0.29</td><td>7</td><td>0.48</td><td>0.07</td></tr>
+			    <tr style="background-color: white; color: black;"><td>Joe Moo</td><td>Marine</td><td>344 Guilty Spark</td><td>-0.29</td><td>6</td><td>0.29</td><td>0.05</td></tr>
+			    <tr style="background-color: grey; color: black;"><td>Tigrozzo</td><td>Talo</td><td>Arbiter</td><td>-0.63</td><td>6</td><td>0.58</td><td>0.10</td></tr>
+			  </tbody>
+			</table>
+			
+			<p class="description">
+				Tabella Teams.
+			</p>			
+			
+			<table style="border-collapse: collapse; width: 50%; text-align: center; font-family: Arial, sans-serif; color: black;">
+			  <tr style="background-color: #32CD32; color: black; border: 1px solid black;">
+			    <th style="border: 1px solid black; padding: 6px;">Team</th>
+			    <th style="border: 1px solid black; padding: 6px;">KDA</th>
+			    <th style="border: 1px solid black; padding: 6px;">TOTAL</th>
+			  </tr>
+			  <tr style="background-color: #e6ccff; border: 1px solid black;">
+			    <td style="border: 1px solid black; padding: 6px;">Ur-Didact</td>
+			    <td style="border: 1px solid black; padding: 6px;">2,45</td>
+			    <td style="border: 1px solid black; padding: 6px;">298,00</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">ODST</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,71</td>
+			    <td style="border: 1px solid black; padding: 6px;">250,50</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Gravemind</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,62</td>
+			    <td style="border: 1px solid black; padding: 6px;">226,75</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Locke</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,45</td>
+			    <td style="border: 1px solid black; padding: 6px;">214,75</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Arbiter</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,60</td>
+			    <td style="border: 1px solid black; padding: 6px;">198,75</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Atriox</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,48</td>
+			    <td style="border: 1px solid black; padding: 6px;">196,50</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Bornstellar</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,39</td>
+			    <td style="border: 1px solid black; padding: 6px;">193,25</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Covenant</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,48</td>
+			    <td style="border: 1px solid black; padding: 6px;">192,25</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Master Chief</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,22</td>
+			    <td style="border: 1px solid black; padding: 6px;">159,00</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Offensive-Bias</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,06</td>
+			    <td style="border: 1px solid black; padding: 6px;">159,00</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">Noble Six</td>
+			    <td style="border: 1px solid black; padding: 6px;">1,15</td>
+			    <td style="border: 1px solid black; padding: 6px;">154,75</td>
+			  </tr>
+			  <tr style="background-color: #e6ccff;">
+			    <td style="border: 1px solid black; padding: 6px;">343 Guilty Spark</td>
+			    <td style="border: 1px solid black; padding: 6px;">2,15</td>
+			    <td style="border: 1px solid black; padding: 6px;">138,00</td>
+			  </tr>
+			</table>
+					
+		</article>
+	</section>	
+
+    <!-- characters -->
+    <section id="character-profile" class="container">
+        <h1 class="highlight">Game On</h1>
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/setup.png" alt="setup">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Setup</h1>
+                <p>Il Setup di questo Evento lo trovi su
+				<i><a href="setup.html" title="Rules">Setup</a></i>.
+            </section>
+
+        </article>
+
+        <article class="character">
+            <figure>
+                <img src="img/game_on/backlog.png" alt="backlog">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Backlog</h1>
+                <p>
+				Le Mappe di questo Evento le trovi su
+				<i><a href="backlog.html" title="Backlog">Backlog</a></i>.
+				</p>
+			</section>
+        </article>
+		
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2026 BOXALMATCH. Tutti i diritti riservati.<br>
+    Un gruppo di amici con la passione per l’intrattenimento collettivo.<br>
+    Seguici su <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a><br><br>
+    
+    Evento <strong>The Great LAN</strong> ideato e organizzato da BOXALMATCH.<br><br>
+</footer>
+
+
+<script src="js/main.js"></script>
+
+</body>
+</html>

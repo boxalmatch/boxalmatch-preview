@@ -1,0 +1,6 @@
+/* BOXALMATCH — Gilda Bastione: imports the shared legacy theme, then overrides the accent. */
+@import url("main.css");
+:root {
+    --primary-color: #72583A;
+    --primary-shade-color: #d41c32;
+}

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mappa Gran Paradiso</title>
+
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="img/icons/NPGP-tab.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="img/icons/NPGP-tab.png" sizes="16x16">
+	
+    <!-- main css -->
+    <link href="css/main.css" rel="stylesheet" type="text/css">
+    <link href="css/responsive.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<header id="main-header" class="container-fluid">
+    <div class="mobile-nav ">
+        <img src="img/icons/NPGP_b.png" alt="rick and morty logo">
+        <p class="toggle-nav">&#10094;</p>
+    </div>
+    <nav>
+        <ul>
+            <li class="brand"><img src="img/icons/NPGP_b.png" alt="logo_tgl"></li>
+            <li class="active"><a href="#home">Mappa</a></li>
+            <li><a href="#character-profile">Game On</a></li> <!-- leave as "character-profile" still need to be worked on CSS -->			
+        </ul>
+    </nav>
+
+</header>
+<main>
+
+	<!-- home section with a single image -->
+	<section id="home" class="container-fluid slider">
+		<figure>
+			<img src="img/slider/gran_paradiso.png" alt="world">
+		</figure>
+		<article class="slide-caption center-left">
+			<h1>Mappa</h1>
+			<p>
+			Qui troverete la Mappa usasta per l'evento <i>Noble Party Gran Paradiso</i>.
+			[Torna alla <i><a href="home.html" title="Bastione1">Home</a></i>]</p>
+		</article>
+	</section>
+
+	
+    <!-- season info -->
+	<section id="teams" class="container">
+		<h1 class="lists">Mappa</h1>
+
+		<article class="season">
+
+			<h2>Introduzione</h2>
+			<p class="description">
+				Questa &egrave la mappa forgiata da Rambaudo su Halo Infinite in collaborazione con
+				<i><a href="https://discord.com/invite/halofuntime" title="HFT">Halo Fun Time</a></i>.
+				Ogni partita di questo evento si &egrave svolto su questa mappa. Guardala sul nostro canale youtube 
+				<i><a href="https://www.youtube.com/watch?v=3KR08FgyqVU" title="mappaYT">qui</a></i>.
+			</p>	
+			
+			<div role="group" class="episodes">
+				<!-- Episode counter -->
+				<div class="episode-number">No. #1</div>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/mappa/front.JPG" alt="front">
+				</figure>
+
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/mappa/top.JPG" alt="top">
+				</figure>
+				
+				<!-- Episode 1 -->
+				<figure class="episode">
+					<img src="img/mappa/pergamene.JPG" alt="pergamene">
+				</figure>
+								
+				<!-- Episode controls -->
+				<div class="controls">
+					<button class="prev" onclick="prevEp(this)">&#10094;</button>
+					<button class="next" onclick="nextEp(this)">&#10095;</button>
+				</div>
+			</div>			
+
+			<h2>Informazioni</h2>
+			<p class="description">
+				Quando ancora i Multi-Teams non erano ufficiali su Halo Infinite, su questa mappa, con un sistema di Terminali, permetteva una volta entrati in partita di cambiare team fino a 8 teams. Ad oggi, scegliere uno degli 8 teams
+				&egrave possibile farlo prima di iniziare una partita. La mappa presenta ogni tipo di arma standard e potenziata
+				e ogni tipo di veicolo. Cerca "Gran Paradiso" su <i><a href="https://www.halowaypoint.com/halo-infinite/ugc/browse" title="HWP">Halowaypoint</a></i>.
+			</p>	
+		
+			
+		</article>
+	</section>	
+
+    <!-- characters -->
+    <section id="character-profile" class="container">
+        <h1 class="highlight">Game On</h1>
+
+        <article class="character">
+
+            <figure>
+                <img src="img/game_on/teams.png" alt="teams">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Teams</h1>
+                <p>I Teams di questo Evento li trovi su
+				<i><a href="teams.html" title="Teams">Teams</a></i>.
+            </section>
+
+        </article>
+		
+        <article class="character">
+            <figure>
+                <img src="img/game_on/viaggiatore.png" alt="storia_gran_paradiso">
+            </figure>
+
+            <section class="character-bio">
+                <h1 class="mb-1">Viaggiatore</h1>
+                <p>
+				La storia dietro a questo Evento la trovi su
+				<i><a href="viaggiatore.html" title="Storia">Storia</a></i>.
+				</p>
+            </section>
+        </article>		
+		
+    </section>
+
+</main>
+
+<footer>
+    &copy; 2026 BOXALMATCH. Tutti i diritti riservati.<br>
+    Un gruppo di amici con la passione per l’intrattenimento collettivo.<br>
+    Seguici su <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a><br><br>
+    
+    Evento <strong>Noble Party Gran Paradiso</strong> ideato da NobleBrassMan e Rambaudo, e organizzato da BOXALMATCH.<br><br>
+</footer>
+
+
+<script src="js/main.js"></script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

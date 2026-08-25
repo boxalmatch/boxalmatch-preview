@@ -1,0 +1,6 @@
+/* BOXALMATCH — Agorà: imports the shared legacy theme, then overrides the accent. */
+@import url("main.css");
+:root {
+    --primary-color: #9A948C;
+    --primary-shade-color: #d41c32;
+}

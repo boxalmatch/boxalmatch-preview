@@ -1,0 +1,6 @@
+/* BOXALMATCH — Gilda Ade: imports the shared legacy theme, then overrides the accent. */
+@import url("main.css");
+:root {
+    --primary-color: #534682;
+    --primary-shade-color: #d41c32;
+}

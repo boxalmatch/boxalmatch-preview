@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BOXALMATCH</title>
+<meta name="description" content="BOXALMATCH — tornei, eventi e storie da un gruppo di amici con la passione per l'intrattenimento collettivo.">
+
+<link rel="icon" type="image/png" href="img/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════ -->
+<header class="nav">
+  <div class="nav-in">
+    <a href="#top" class="nav-logo" aria-label="BOXALMATCH">
+      <img src="img/icons/wordmark.png" alt="BOXALMATCH">
+    </a>
+
+    <nav class="nav-links" id="navlinks">
+      <a href="#chi-siamo"><span lang="it">Chi siamo</span><span lang="en">About</span></a>
+      <a href="#contenuti"><span lang="it">Contenuti</span><span lang="en">Content</span></a>
+      <a href="#eventi"><span lang="it">Eventi</span><span lang="en">Events</span></a>
+      <a href="#canali"><span lang="it">Canali</span><span lang="en">Channels</span></a>
+      <a href="#unisciti"><span lang="it">Unisciti</span><span lang="en">Join</span></a>
+      <a href="members/"><span lang="it">Area Membri</span><span lang="en">Members</span></a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="lang">
+        <button type="button" data-set="it">IT</button>
+        <button type="button" data-set="en">EN</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══════════ HERO ══════════ -->
+<section class="hero">
+  <h1 lang="it">Giochiamo. Raccontiamo.</h1>
+  <h1 lang="en">We play. We tell stories.</h1>
+
+  <p class="sub" lang="it">Un gruppo di amici con la passione per l'intrattenimento collettivo. Dal 2019.</p>
+  <p class="sub" lang="en">A group of friends with a passion for collective entertainment. Since 2019.</p>
+
+  <div class="hero-cta">
+    <a href="#contenuti" class="btn btn-fill">
+      <span lang="it">Guarda i contenuti</span><span lang="en">Watch our content</span>
+    </a>
+    <a href="#eventi" class="lnk">
+      <span lang="it">Scopri gli eventi</span><span lang="en">Explore the events</span>
+    </a>
+  </div>
+
+  <img src="img/group.jpg" alt="" class="hero-shot" loading="lazy">
+</section>
+
+<!-- ══════════ CHI SIAMO ══════════ -->
+<section class="sec statement" id="chi-siamo">
+  <div class="wrap">
+    <p class="big rv" lang="it">
+      Vogliamo unire persone di ogni background in una community accogliente,
+      dove ognuno può raccontare la propria storia — <em>divertendosi, competendo e crescendo insieme.</em>
+    </p>
+    <p class="big rv" lang="en">
+      We want to bring people from every background into one welcoming community,
+      where anyone can tell their own story — <em>having fun, competing and growing together.</em>
+    </p>
+
+    <div class="vals">
+      <div class="val rv">
+        <h3 lang="it">Inclusione</h3><h3 lang="en">Inclusion</h3>
+        <p lang="it">Un ambiente aperto e sicuro per tutti, senza distinzione di età, genere, provenienza o abilità.</p>
+        <p lang="en">An open, safe environment for everyone — regardless of age, gender, background or ability.</p>
+      </div>
+      <div class="val rv">
+        <h3 lang="it">Divertimento</h3><h3 lang="en">Fun</h3>
+        <p lang="it">Divertirsi insieme viene prima di tutto, con spirito di squadra ed esperienze condivise.</p>
+        <p lang="en">Having fun together comes first, built on teamwork and shared experience.</p>
+      </div>
+      <div class="val rv">
+        <h3 lang="it">Passione</h3><h3 lang="en">Passion</h3>
+        <p lang="it">L'amore per videogiochi, film e cultura geek è ciò che ci unisce e alimenta le nostre idee.</p>
+        <p lang="en">A love of games, film and geek culture is what unites us and fuels our ideas.</p>
+      </div>
+      <div class="val rv">
+        <h3 lang="it">Crescita</h3><h3 lang="en">Growth</h3>
+        <p lang="it">Nuovi modi di connetterci, una community che si allarga, sempre al passo con i tempi.</p>
+        <p lang="en">New ways to connect, a growing community, always keeping pace with the times.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTENUTI ══════════ -->
+<section class="sec" id="contenuti">
+  <div class="wrap sec-head rv">
+    <span class="eyebrow" lang="it">Cosa facciamo</span>
+    <span class="eyebrow" lang="en">What we do</span>
+    <h2 lang="it">Le nostre produzioni</h2>
+    <h2 lang="en">Our productions</h2>
+    <p lang="it">Tornei, serie e serate a tema. Premi play e guarda direttamente da qui.</p>
+    <p lang="en">Tournaments, series and themed nights. Hit play and watch right here.</p>
+  </div>
+
+  <div class="wrap-wide carousel rv">
+    <div class="rail" id="rail-yt">
+
+      <article class="vcard">
+        <div class="vframe" data-yt="videoseries?list=PLdgO8GMmKWRx3n13MuinFDrSxu2ZNg_2V" role="button" tabindex="0" aria-label="Play BoxCraft Party">
+          <img src="img/events/boxcraft.jpg" alt="BoxCraft Party" loading="lazy">
+          <span class="play"></span>
+        </div>
+        <div class="vmeta">
+          <div class="yr">2026</div>
+          <h3>BoxCraft Party</h3>
+          <p lang="it">La nostra serata su WarCraft 3 con partite personalizzate.</p>
+          <p lang="en">Our WarCraft 3 night, built around custom games.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRx3n13MuinFDrSxu2ZNg_2V" class="lnk" target="_blank" rel="noopener">
+              <span lang="it">Playlist</span><span lang="en">Playlist</span>
+            </a>
+          </div>
+        </div>
+      </article>
+
+      <article class="vcard">
+        <div class="vframe" data-yt="videoseries?list=PLdgO8GMmKWRzpI8MPxVDpJRooBrtqt51t" role="button" tabindex="0" aria-label="Play SpongeBob Party">
+          <img src="img/events/spongebob.jpg" alt="SpongeBob Party" loading="lazy">
+          <span class="play"></span>
+        </div>
+        <div class="vmeta">
+          <div class="yr">2026</div>
+          <h3>SpongeBob Party</h3>
+          <p lang="it">Minigiochi assurdi creati nella forgia di Halo Infinite.</p>
+          <p lang="en">Absurd minigames forged inside Halo Infinite.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRzpI8MPxVDpJRooBrtqt51t" class="lnk" target="_blank" rel="noopener">Playlist</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="vcard">
+        <div class="vframe" data-yt="videoseries?list=PLdgO8GMmKWRxh4cNcENQlydBLc8fjvtJF" role="button" tabindex="0" aria-label="Play il Caso Boxal">
+          <img src="img/events/casoboxal.jpg" alt="il Caso Boxal" loading="lazy">
+          <span class="play"></span>
+        </div>
+        <div class="vmeta">
+          <div class="yr">2026</div>
+          <h3>il Caso Boxal</h3>
+          <p lang="it">La nostra prima serie crime, con la serata su Among Us.</p>
+          <p lang="en">Our first crime series, alongside the Among Us night.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRxh4cNcENQlydBLc8fjvtJF" class="lnk" target="_blank" rel="noopener">Playlist</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="vcard">
+        <div class="vframe" data-yt="videoseries?list=PLdgO8GMmKWRzURoOE2f6WV-WEXc7Tl5hO" role="button" tabindex="0" aria-label="Play Noble Party Guilds War">
+          <img src="img/events/guildswar.jpg" alt="Noble Party Guilds War" loading="lazy">
+          <span class="play"></span>
+        </div>
+        <div class="vmeta">
+          <div class="yr">2025</div>
+          <h3>Noble Party Guilds War</h3>
+          <p lang="it">Il nostro campionato su Halo Infinite.</p>
+          <p lang="en">Our Halo Infinite championship.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRzURoOE2f6WV-WEXc7Tl5hO" class="lnk" target="_blank" rel="noopener">Playlist</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="vcard">
+        <div class="vframe" data-yt="videoseries?list=PLdgO8GMmKWRwl_BNwdJTFTaffhC9KoUc4" role="button" tabindex="0" aria-label="Play The Great LAN">
+          <img src="img/events/thegreatlan.jpg" alt="The Great LAN" loading="lazy">
+          <span class="play"></span>
+        </div>
+        <div class="vmeta">
+          <div class="yr">2024</div>
+          <h3>The Great LAN</h3>
+          <p lang="it">Dopo 10 anni, di nuovo insieme per un'epica LAN su Halo Infinite.</p>
+          <p lang="en">After 10 years, back together for an epic Halo Infinite LAN.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRwl_BNwdJTFTaffhC9KoUc4" class="lnk" target="_blank" rel="noopener">Playlist</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="arrows">
+      <button class="arrow" data-rail="rail-yt" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="arrow" data-rail="rail-yt" data-dir="1" aria-label="Next">›</button>
+    </div>
+  </div>
+
+  <!-- Instagram -->
+  <div class="wrap sec-head rv" style="margin-top:80px;">
+    <h2 style="font-size:clamp(26px,3.4vw,38px);" lang="it">Dal nostro Instagram</h2>
+    <h2 style="font-size:clamp(26px,3.4vw,38px);" lang="en">From our Instagram</h2>
+  </div>
+
+  <div class="wrap-wide carousel rv">
+    <div class="rail" id="rail-ig">
+      <!-- Replace each .igcard with a real Instagram embed blockquote (see README) -->
+      <div class="igcard">
+        <div class="ig-ph">
+          <div class="glyph">◎</div>
+          <span lang="it">Incolla qui il primo post</span>
+          <span lang="en">Paste the first post here</span>
+        </div>
+      </div>
+      <div class="igcard">
+        <div class="ig-ph">
+          <div class="glyph">◎</div>
+          <span lang="it">Incolla qui il secondo post</span>
+          <span lang="en">Paste the second post here</span>
+        </div>
+      </div>
+      <div class="igcard">
+        <div class="ig-ph">
+          <div class="glyph">◎</div>
+          <span lang="it">Incolla qui il terzo post</span>
+          <span lang="en">Paste the third post here</span>
+        </div>
+      </div>
+      <div class="igcard">
+        <div class="ig-ph">
+          <div class="glyph">◎</div>
+          <span lang="it">Incolla qui il quarto post</span>
+          <span lang="en">Paste the fourth post here</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="arrows">
+      <button class="arrow" data-rail="rail-ig" data-dir="-1" aria-label="Previous">‹</button>
+      <button class="arrow" data-rail="rail-ig" data-dir="1" aria-label="Next">›</button>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ EVENTI ══════════ -->
+<section class="sec statement" id="eventi">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" lang="it">Archivio</span>
+      <span class="eyebrow" lang="en">Archive</span>
+      <h2 lang="it">Eventi</h2>
+      <h2 lang="en">Events</h2>
+      <p lang="it">Tutto quello che abbiamo organizzato finora, dal 2024 a oggi.</p>
+      <p lang="en">Everything we've put together so far, from 2024 to today.</p>
+    </div>
+
+    <div class="egrid">
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/boxcraft.jpg" alt="BoxCraft Party" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2026</div>
+          <h3>BoxCraft Party</h3>
+          <p lang="it">La nostra serata su WarCraft 3 con partite personalizzate, con playlist dedicata per ricordi memorabili e tutorial di gioco.</p>
+          <p lang="en">Our WarCraft 3 night with custom games, plus a dedicated playlist of memorable moments and gameplay tutorials.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRx3n13MuinFDrSxu2ZNg_2V" class="lnk" target="_blank" rel="noopener">Playlist</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/spongebob.jpg" alt="SpongeBob Party" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2026</div>
+          <h3>SpongeBob Party</h3>
+          <p lang="it">L'evento SpongeBob Party esplora minigiochi assurdi creati nella forgia di Halo Infinite.</p>
+          <p lang="en">The SpongeBob Party event explores absurd minigames built in the Halo Infinite forge.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRzpI8MPxVDpJRooBrtqt51t" class="lnk" target="_blank" rel="noopener">Playlist</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/casoboxal.jpg" alt="il Caso Boxal" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2026</div>
+          <h3>il Caso Boxal</h3>
+          <p lang="it">La nostra prima serie crime. Playlist dedicata per guardare tutti gli episodi e la serata su Among Us.</p>
+          <p lang="en">Our first crime series. A dedicated playlist with every episode and the Among Us night.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRxh4cNcENQlydBLc8fjvtJF" class="lnk" target="_blank" rel="noopener">Playlist</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/boxstone.jpg" alt="BoxStone" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2025</div>
+          <h3>BoxStone</h3>
+          <p lang="it">Il nostro gioco di carte, giocato con Hearthstone, con playlist dedicata per ricordi memorabili.</p>
+          <p lang="en">Our own card game, played through Hearthstone, with a dedicated playlist of memorable moments.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRzdIG3QJ6XesU5M1AkMRkvc" class="lnk" target="_blank" rel="noopener">Playlist</a>
+            <a href="boxstone/home.html" class="lnk"><span lang="it">Scopri (WIP)</span><span lang="en">Explore (WIP)</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/guildswar.jpg" alt="Noble Party Guilds War" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2025</div>
+          <h3>Noble Party Guilds War</h3>
+          <p lang="it">Il nostro campionato su Halo Infinite, con playlist dedicata per ricordi memorabili.</p>
+          <p lang="en">Our Halo Infinite championship, with a dedicated playlist of memorable moments.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRzURoOE2f6WV-WEXc7Tl5hO" class="lnk" target="_blank" rel="noopener">Playlist</a>
+            <a href="noblepartyguildswar/home.html" class="lnk"><span lang="it">Scopri</span><span lang="en">Explore</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/granparadiso.jpg" alt="Noble Party Gran Paradiso" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2025</div>
+          <h3>Noble Party Gran Paradiso</h3>
+          <p lang="it">La nostra mappa su Halo Infinite e l'evento che ha riscritto le sorti di una storia fantasy.</p>
+          <p lang="en">Our Halo Infinite map and the event that rewrote the course of a fantasy story.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/watch?v=3KR08FgyqVU" class="lnk" target="_blank" rel="noopener"><span lang="it">Mappa</span><span lang="en">Map</span></a>
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRyriT3pZJs8CikCCcLkJP7o" class="lnk" target="_blank" rel="noopener">Playlist</a>
+            <a href="noblepartygranparadiso/home.html" class="lnk"><span lang="it">Scopri</span><span lang="en">Explore</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/scatola.jpg" alt="Dr. Scatola Memorial Day" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2025</div>
+          <h3>Dr. Scatola Memorial Day</h3>
+          <p lang="it">La nostra serata su Among Us, con playlist dedicata per ricordi memorabili e tutorial di gioco.</p>
+          <p lang="en">Our Among Us night, with a dedicated playlist of memorable moments and gameplay tutorials.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRyJyhIDKWeWCjzU5MVfjDpt" class="lnk" target="_blank" rel="noopener">Playlist</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/boxalempires.jpg" alt="BoxAlEmpires" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2025</div>
+          <h3>BoxAlEmpires</h3>
+          <p lang="it">La nostra mappa su Age of Empires 2.</p>
+          <p lang="en">Our custom Age of Empires 2 map.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/watch?v=apmx89eezeA" class="lnk" target="_blank" rel="noopener"><span lang="it">Mappa</span><span lang="en">Map</span></a>
+          </div>
+        </div>
+      </article>
+
+      <article class="ecard rv">
+        <div class="shot"><img src="img/events/thegreatlan.jpg" alt="The Great LAN" loading="lazy"></div>
+        <div class="body">
+          <div class="yr">2024</div>
+          <h3>The Great LAN</h3>
+          <p lang="it">Dopo 10 anni, di nuovo insieme per un'epica LAN su Halo Infinite.</p>
+          <p lang="en">After 10 years, back together for an epic Halo Infinite LAN.</p>
+          <div class="links">
+            <a href="https://www.youtube.com/playlist?list=PLdgO8GMmKWRwl_BNwdJTFTaffhC9KoUc4" class="lnk" target="_blank" rel="noopener">Playlist</a>
+            <a href="thegreatlan/home.html" class="lnk"><span lang="it">Scopri</span><span lang="en">Explore</span></a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CANALI ══════════ -->
+<section class="sec" id="canali">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <span class="eyebrow" lang="it">Seguici</span>
+      <span class="eyebrow" lang="en">Follow us</span>
+      <h2 lang="it">I nostri canali</h2>
+      <h2 lang="en">Our channels</h2>
+    </div>
+
+    <div class="channels">
+      <a href="https://www.youtube.com/@BOXALMATCH" class="ch ch-yt rv" target="_blank" rel="noopener">
+        <div class="glyph">▶</div>
+        <h3>YouTube</h3>
+        <span>@BOXALMATCH</span>
+      </a>
+      <a href="https://www.instagram.com/boxalmatch/" class="ch ch-ig rv" target="_blank" rel="noopener">
+        <div class="glyph">◎</div>
+        <h3>Instagram</h3>
+        <span>@boxalmatch</span>
+      </a>
+      <a href="https://www.twitch.tv/boxalmatch" class="ch ch-tw rv" target="_blank" rel="noopener">
+        <div class="glyph">◈</div>
+        <h3>Twitch</h3>
+        <span>/boxalmatch</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ UNISCITI ══════════ -->
+<section class="sec join" id="unisciti">
+  <div class="wrap join-box rv">
+    <h2 lang="it">Unisciti a noi</h2>
+    <h2 lang="en">Join us</h2>
+    <p lang="it">Lascia la tua email per restare aggiornato su eventi, tornei e nuovi contenuti.</p>
+    <p lang="en">Leave your email to stay up to date on events, tournaments and new content.</p>
+
+    <form class="jform" data-ready="false" action="#" method="POST">
+      <input type="email" name="email" required
+             placeholder="you@email.com" aria-label="Email">
+      <button type="submit" class="btn btn-fill">
+        <span lang="it">Iscriviti</span><span lang="en">Sign up</span>
+      </button>
+    </form>
+    <p class="jnote" id="jnote"></p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-cols">
+      <div>
+        <h4 lang="it">Naviga</h4><h4 lang="en">Navigate</h4>
+        <ul>
+          <li><a href="#chi-siamo"><span lang="it">Chi siamo</span><span lang="en">About</span></a></li>
+          <li><a href="#contenuti"><span lang="it">Contenuti</span><span lang="en">Content</span></a></li>
+          <li><a href="#eventi"><span lang="it">Eventi</span><span lang="en">Events</span></a></li>
+          <li><a href="#unisciti"><span lang="it">Unisciti</span><span lang="en">Join</span></a></li>
+          <li><a href="members/"><span lang="it">Area Membri</span><span lang="en">Member area</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 lang="it">Canali</h4><h4 lang="en">Channels</h4>
+        <ul>
+          <li><a href="https://www.youtube.com/@BOXALMATCH" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.twitch.tv/boxalmatch" target="_blank" rel="noopener">Twitch</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 lang="it">Contatti</h4><h4 lang="en">Contact</h4>
+        <ul>
+          <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener"><span lang="it">Scrivici su Instagram</span><span lang="en">Message us on Instagram</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <span>&copy; 2026 BOXALMATCH</span>
+      <span lang="it">Un gruppo di amici con la passione per l'intrattenimento collettivo.</span>
+      <span lang="en">A group of friends with a passion for collective entertainment.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

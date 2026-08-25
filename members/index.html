@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Area Membri — BOXALMATCH</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Area riservata ai membri Boxalmatch.">
+
+<link rel="icon" type="image/png" href="../img/icons/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/members.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a href="../index.html" class="nav-logo" aria-label="BOXALMATCH">
+      <img src="../img/icons/wordmark.png" alt="BOXALMATCH">
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a href="../index.html#eventi"><span lang="it">Eventi</span><span lang="en">Events</span></a>
+      <a href="../index.html#canali"><span lang="it">Canali</span><span lang="en">Channels</span></a>
+      <a href="card.html"><span lang="it">La mia tessera</span><span lang="en">My card</span></a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang">
+        <button type="button" data-set="it">IT</button>
+        <button type="button" data-set="en">EN</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="m-main">
+  <div class="wrap">
+
+    <!-- ---------- loading ---------- -->
+    <div class="m-state" id="m-loading">
+      <div class="spinner"></div>
+      <p lang="it">Verifica dell'accesso…</p>
+      <p lang="en">Checking your access…</p>
+    </div>
+
+    <!-- ---------- not on the list ---------- -->
+    <div class="m-state" id="m-denied" hidden>
+      <h2 lang="it">Non sei ancora nella lista</h2>
+      <h2 lang="en">You're not on the list yet</h2>
+      <p class="mail" id="denied-email"></p>
+      <p lang="it">
+        Hai effettuato l'accesso, ma questo indirizzo non risulta tra i membri approvati.
+        Scrivici su Instagram e ti aggiungiamo.
+      </p>
+      <p lang="en">
+        You're signed in, but this address isn't on the approved member list yet.
+        Message us on Instagram and we'll add you.
+      </p>
+      <a href="https://www.instagram.com/boxalmatch/" class="btn btn-fill" target="_blank" rel="noopener">
+        <span lang="it">Scrivici su Instagram</span><span lang="en">Message us on Instagram</span>
+      </a>
+    </div>
+
+    <!-- ---------- member content ---------- -->
+    <div id="m-content" hidden>
+
+      <div id="m-demo" hidden style="margin-bottom:28px;">
+        <span class="pill soon" lang="it">Modalità anteprima — nessun login attivo</span>
+        <span class="pill soon" lang="en">Preview mode — no login active</span>
+      </div>
+
+      <div class="m-head">
+        <div class="hi" data-greet>Ciao.</div>
+        <p class="sub" lang="it">Benvenuto nella tua area riservata.</p>
+        <p class="sub" lang="en">Welcome to your member area.</p>
+      </div>
+
+      <!-- membership card -->
+      <div class="card-wrap">
+        <div class="mcard">
+          <div class="mcard-top">
+            <img src="../img/icons/wordmark-white.png" alt="BOXALMATCH">
+            <span class="mcard-role" data-card-role>Member</span>
+          </div>
+          <div class="mcard-bottom">
+            <div>
+              <div class="mcard-name" data-card-name>—</div>
+              <div class="mcard-meta" data-card-meta>—</div>
+            </div>
+            <div class="mcard-qr" data-card-qr></div>
+          </div>
+        </div>
+
+        <div class="card-actions">
+          <a href="card.html" class="btn btn-fill">
+            <span lang="it">Apri a schermo intero</span><span lang="en">Open full screen</span>
+          </a>
+          <span class="m-note" lang="it">Aggiungila alla schermata Home per averla sempre a portata di mano.</span>
+          <span class="m-note" lang="en">Add it to your Home Screen to keep it handy.</span>
+        </div>
+      </div>
+
+      <!-- member-only content -->
+      <section class="m-sec">
+        <h2 lang="it">Contenuti riservati</h2>
+        <h2 lang="en">Member-only content</h2>
+        <div class="m-grid">
+          <a class="m-tile" href="#" data-todo>
+            <div class="glyph">📁</div>
+            <h3 lang="it">Archivio Drive</h3><h3 lang="en">Drive archive</h3>
+            <p lang="it">Foto e video originali degli eventi, in alta risoluzione.</p>
+            <p lang="en">Original event photos and video, full resolution.</p>
+            <span class="go" lang="it">Da collegare ›</span><span class="go" lang="en">To be linked ›</span>
+          </a>
+          <a class="m-tile" href="#" data-todo>
+            <div class="glyph">🎬</div>
+            <h3 lang="it">Dietro le quinte</h3><h3 lang="en">Behind the scenes</h3>
+            <p lang="it">Riprese non pubblicate, scarti e materiale di lavorazione.</p>
+            <p lang="en">Unreleased footage, outtakes and work-in-progress material.</p>
+            <span class="go" lang="it">Da collegare ›</span><span class="go" lang="en">To be linked ›</span>
+          </a>
+          <a class="m-tile" href="#" data-todo>
+            <div class="glyph">📄</div>
+            <h3 lang="it">Documenti community</h3><h3 lang="en">Community documents</h3>
+            <p lang="it">Regolamenti dei tornei, statuto e materiali dell'associazione.</p>
+            <p lang="en">Tournament rules, statutes and association paperwork.</p>
+            <span class="go" lang="it">Da collegare ›</span><span class="go" lang="en">To be linked ›</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- events -->
+      <section class="m-sec">
+        <h2 lang="it">Prossimi eventi</h2>
+        <h2 lang="en">Upcoming events</h2>
+        <div class="m-events">
+          <div class="m-event">
+            <div class="when"><div class="d">—</div><div class="mo" lang="it">TBD</div><div class="mo" lang="en">TBD</div></div>
+            <div class="info">
+              <h3 lang="it">Prossimo torneo</h3><h3 lang="en">Next tournament</h3>
+              <p lang="it">Data e gioco ancora da annunciare.</p>
+              <p lang="en">Date and game still to be announced.</p>
+            </div>
+            <div class="act">
+              <span class="pill soon" lang="it">In arrivo</span><span class="pill soon" lang="en">Coming</span>
+            </div>
+          </div>
+          <div class="m-event">
+            <div class="when"><div class="d">—</div><div class="mo" lang="it">TBD</div><div class="mo" lang="en">TBD</div></div>
+            <div class="info">
+              <h3 lang="it">Serata LAN</h3><h3 lang="en">LAN night</h3>
+              <p lang="it">Posti limitati: gli iscritti avranno la precedenza.</p>
+              <p lang="en">Limited places — members get priority.</p>
+            </div>
+            <div class="act">
+              <span class="pill" lang="it">Non aperto</span><span class="pill" lang="en">Not open</span>
+            </div>
+          </div>
+        </div>
+        <p class="m-note" lang="it">Gli eventi si aggiungono a mano in <code>members/index.html</code>.</p>
+        <p class="m-note" lang="en">Events are added by hand in <code>members/index.html</code>.</p>
+      </section>
+
+      <!-- community -->
+      <section class="m-sec">
+        <h2 lang="it">Community</h2>
+        <h2 lang="en">Community</h2>
+        <div class="m-grid">
+          <a class="m-tile" href="#" data-todo>
+            <div class="glyph">💬</div>
+            <h3>Discord</h3>
+            <p lang="it">Il canale privato dove organizziamo tutto.</p>
+            <p lang="en">The private channel where everything gets organised.</p>
+            <span class="go" lang="it">Invito da inserire ›</span><span class="go" lang="en">Invite to add ›</span>
+          </a>
+          <a class="m-tile" href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener">
+            <div class="glyph">◎</div>
+            <h3>Instagram</h3>
+            <p lang="it">Scrivici in DM per qualsiasi cosa.</p>
+            <p lang="en">DM us about anything.</p>
+            <span class="go" lang="it">Apri ›</span><span class="go" lang="en">Open ›</span>
+          </a>
+          <a class="m-tile" href="https://www.twitch.tv/boxalmatch" target="_blank" rel="noopener">
+            <div class="glyph">◈</div>
+            <h3>Twitch</h3>
+            <p lang="it">Le dirette, quando siamo live.</p>
+            <p lang="en">Streams, when we're live.</p>
+            <span class="go" lang="it">Apri ›</span><span class="go" lang="en">Open ›</span>
+          </a>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-bot">
+      <span>&copy; 2026 BOXALMATCH</span>
+      <span lang="it">Area riservata ai membri.</span>
+      <span lang="en">Members only area.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/qr.js"></script>
+<script src="../js/members.js"></script>
+</body>
+</html>

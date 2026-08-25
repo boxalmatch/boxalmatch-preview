@@ -1,0 +1,19 @@
+{
+  "_comment": "Approved members. The email must match the one they log in with via Cloudflare Access. Add or remove people here, then commit and push.",
+  "members": [
+    {
+      "email": "alberto.noferi@gmail.com",
+      "name": "Alberto Noferi",
+      "number": "0001",
+      "since": "2019",
+      "role": "Founder"
+    },
+    {
+      "email": "example@boxalmatch.it",
+      "name": "Nome Cognome",
+      "number": "0002",
+      "since": "2026",
+      "role": "Member"
+    }
+  ]
+}

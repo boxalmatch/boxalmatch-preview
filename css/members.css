@@ -1,0 +1,198 @@
+/* ============================================================
+   BOXALMATCH — member area
+   ============================================================ */
+
+/* Author styles beat the UA's [hidden] rule, so state screens using
+   display:flex would stay visible. Re-assert it once, globally. */
+[hidden]{ display:none !important; }
+
+.m-main{ padding:56px 0 100px; }
+
+.m-head{ margin-bottom:44px; }
+.m-head .hi{
+  font-size:clamp(30px,4.4vw,46px);
+  font-weight:600; letter-spacing:-0.028em; line-height:1.08;
+}
+.m-head .sub{
+  margin-top:10px; font-size:18px; color:var(--ink-2);
+}
+
+/* ---------- state screens ---------- */
+.m-state{
+  min-height:60vh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  text-align:center; gap:14px;
+  padding:40px 0;
+}
+.m-state h2{ font-size:clamp(24px,3.2vw,34px); }
+.m-state p{ color:var(--ink-2); max-width:44ch; font-size:17px; }
+.m-state .mail{
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:15px; color:var(--ink);
+  background:var(--surface-2); border:1px solid var(--hair);
+  padding:6px 12px; border-radius:8px;
+}
+.spinner{
+  width:26px; height:26px; border-radius:50%;
+  border:2px solid var(--hair); border-top-color:var(--accent);
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+/* ---------- membership card ---------- */
+.card-wrap{
+  perspective:1400px;
+  margin-bottom:52px;
+}
+.mcard{
+  position:relative;
+  width:100%; max-width:420px;
+  aspect-ratio:1.586;               /* ISO/IEC 7810 ID-1, like a bank card */
+  border-radius:22px;
+  padding:26px 28px;
+  color:#fff;
+  display:flex; flex-direction:column; justify-content:space-between;
+  background:
+    radial-gradient(120% 140% at 12% 8%, #14361d 0%, transparent 55%),
+    radial-gradient(100% 120% at 92% 96%, #0c2a14 0%, transparent 52%),
+    linear-gradient(145deg, #0b1f10 0%, #071409 100%);
+  box-shadow:0 18px 44px -16px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.07);
+  overflow:hidden;
+  transition:transform .5s cubic-bezier(.2,.7,.3,1);
+}
+.mcard::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(115deg,transparent 38%,rgba(47,217,79,.10) 50%,transparent 62%);
+  pointer-events:none;
+}
+.mcard-top{
+  display:flex; align-items:flex-start; justify-content:space-between; gap:16px;
+}
+.mcard-top img{ height:16px; width:auto; }
+.mcard-role{
+  font-size:10px; font-weight:600; letter-spacing:.12em; text-transform:uppercase;
+  color:#2fd94f;
+  border:1px solid rgba(47,217,79,.45);
+  padding:3px 9px; border-radius:980px;
+  white-space:nowrap;
+}
+.mcard-bottom{
+  display:flex; align-items:flex-end; justify-content:space-between; gap:18px;
+}
+.mcard-name{
+  font-size:19px; font-weight:600; letter-spacing:-0.015em;
+  line-height:1.2;
+}
+.mcard-meta{
+  margin-top:5px;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  font-size:13px; letter-spacing:.06em;
+  color:rgba(255,255,255,.62);
+  font-variant-numeric:tabular-nums;
+}
+.mcard-qr{
+  width:74px; height:74px; flex:0 0 auto;
+  background:#fff; border-radius:10px; padding:6px;
+}
+
+/* actions under the card */
+.card-actions{
+  display:flex; gap:16px; flex-wrap:wrap; align-items:center;
+  margin-top:20px;
+}
+
+/* ---------- sections ---------- */
+.m-sec{ margin-top:56px; }
+.m-sec > h2{
+  font-size:13px; font-weight:600; letter-spacing:.02em;
+  color:var(--accent); margin-bottom:16px;
+}
+
+.m-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(268px,1fr));
+  gap:16px;
+}
+.m-tile{
+  background:var(--surface);
+  border:1px solid var(--hair);
+  border-radius:var(--r);
+  padding:22px 24px;
+  display:flex; flex-direction:column;
+  transition:border-color .25s, transform .25s;
+}
+a.m-tile:hover{
+  text-decoration:none; transform:translateY(-3px);
+  border-color:var(--accent);
+}
+.m-tile .glyph{ font-size:20px; margin-bottom:12px; }
+.m-tile h3{ font-size:18px; letter-spacing:-0.02em; margin-bottom:6px; color:var(--ink); }
+.m-tile p{ font-size:14px; color:var(--ink-2); line-height:1.45; }
+.m-tile .go{ margin-top:14px; font-size:14px; color:var(--accent); }
+
+/* events list */
+.m-events{
+  border:1px solid var(--hair);
+  border-radius:var(--r);
+  overflow:hidden;
+  background:var(--surface);
+}
+.m-event{
+  display:flex; align-items:center; gap:20px;
+  padding:18px 22px;
+  border-bottom:1px solid var(--hair);
+}
+.m-event:last-child{ border-bottom:0; }
+.m-event .when{
+  flex:0 0 62px; text-align:center;
+  font-variant-numeric:tabular-nums;
+}
+.m-event .when .d{ font-size:21px; font-weight:600; letter-spacing:-0.02em; line-height:1; }
+.m-event .when .mo{
+  font-size:11px; text-transform:uppercase; letter-spacing:.07em;
+  color:var(--ink-3); margin-top:3px;
+}
+.m-event .info{ flex:1; min-width:0; }
+.m-event .info h3{ font-size:17px; letter-spacing:-0.018em; }
+.m-event .info p{ font-size:14px; color:var(--ink-2); margin-top:2px; }
+.m-event .act{ flex:0 0 auto; }
+
+.pill{
+  display:inline-block;
+  font-size:11px; font-weight:600; letter-spacing:.05em; text-transform:uppercase;
+  padding:4px 11px; border-radius:980px;
+  border:1px solid var(--hair); color:var(--ink-2);
+}
+.pill.soon{ border-color:rgba(47,217,79,.5); color:var(--accent); }
+
+.m-note{
+  margin-top:14px; font-size:13px; color:var(--ink-3);
+}
+
+/* ---------- standalone card page ---------- */
+.card-page{
+  min-height:100svh;
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  gap:26px; padding:40px 22px;
+  background:var(--ground);
+}
+.card-page .mcard{ max-width:min(440px,92vw); }
+.card-page .hint{
+  font-size:14px; color:var(--ink-3); text-align:center; max-width:36ch;
+}
+
+@media (max-width:520px){
+  .m-main{ padding:40px 0 72px; }
+  .mcard{ padding:22px 22px; border-radius:18px; }
+  .mcard-qr{ width:62px; height:62px; }
+  .m-event{ flex-wrap:wrap; gap:12px; }
+  .m-event .act{ width:100%; }
+}
+
+@media print{
+  .nav,.foot,.card-actions,.m-sec{ display:none !important; }
+  .mcard{ box-shadow:none; }
+}

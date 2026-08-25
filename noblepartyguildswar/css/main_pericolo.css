@@ -1,0 +1,6 @@
+/* BOXALMATCH — Gilda Pericolo: imports the shared legacy theme, then overrides the accent. */
+@import url("main.css");
+:root {
+    --primary-color: #B64F4F;
+    --primary-shade-color: #d41c32;
+}

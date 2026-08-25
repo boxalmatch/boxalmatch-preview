@@ -1,0 +1,6 @@
+/* BOXALMATCH — Gilda Valchiria: imports the shared legacy theme, then overrides the accent. */
+@import url("main.css");
+:root {
+    --primary-color: #94DDDF;
+    --primary-shade-color: #d41c32;
+}
