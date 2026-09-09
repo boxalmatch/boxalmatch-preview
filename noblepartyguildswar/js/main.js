@@ -29,60 +29,93 @@ function setupLangToggle() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", function() {
-    const seasons = document.querySelectorAll(".episodes");
+/* ============================================================
+   Episode carousel — horizontal peek rail
+   ------------------------------------------------------------
+   The markup puts .episode-number and .controls inside .episodes.
+   .episodes is now a scroll-snap flex rail, so those two would be
+   laid out as rail items; on init we lift them out into a wrapper
+   that sits around the rail instead. No HTML changes needed.
+   ============================================================ */
+function railOf(el) {
+    const wrap = el.closest(".episodes-wrap");
+    if (wrap) return wrap.querySelector(".episodes");
+    return el.closest(".episodes");
+}
 
-    seasons.forEach(season => {
-        const episodes = season.querySelectorAll(".episode");
-        let current = 0;
+function railItems(rail) {
+    return rail ? rail.querySelectorAll(".episode") : [];
+}
 
-        // show first episode
-        episodes[current].classList.add("active");
+function updateRailCounter(rail) {
+    const wrap = rail.closest(".episodes-wrap");
+    if (!wrap) return;
+    const counter = wrap.querySelector(".episode-number");
+    const items = railItems(rail);
+    if (!counter || !items.length) return;
 
-        const updateEpisodeNumber = () => {
-            const episodeNumber = season.querySelector(".episode-number");
-            if (episodeNumber) episodeNumber.innerHTML = "No. #" + (current + 1);
-        };
-        updateEpisodeNumber();
-
-        // next button
-        season.querySelector(".next").addEventListener("click", () => {
-            episodes[current].classList.remove("active");
-            current = (current + 1) % episodes.length;
-            episodes[current].classList.add("active");
-            updateEpisodeNumber();
-        });
-
-        // prev button
-        season.querySelector(".prev").addEventListener("click", () => {
-            episodes[current].classList.remove("active");
-            current = (current - 1 + episodes.length) % episodes.length;
-            episodes[current].classList.add("active");
-            updateEpisodeNumber();
-        });
+    // the item whose centre is nearest the rail's centre is the current one
+    const mid = rail.scrollLeft + rail.clientWidth / 2;
+    let best = 0, bestDist = Infinity;
+    items.forEach((item, i) => {
+        const c = item.offsetLeft + item.offsetWidth / 2;
+        const d = Math.abs(c - mid);
+        if (d < bestDist) { bestDist = d; best = i; }
     });
-});
+    counter.innerHTML = "No. #" + (best + 1);
 
+    const prev = wrap.querySelector(".controls .prev");
+    const next = wrap.querySelector(".controls .next");
+    if (prev) prev.disabled = rail.scrollLeft <= 2;
+    if (next) next.disabled = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 2;
+}
+
+function scrollRail(rail, dir) {
+    const items = railItems(rail);
+    if (!rail || !items.length) return;
+    const step = items[0].offsetWidth + 20; // item + gap
+    rail.scrollBy({ left: dir * step, behavior: "smooth" });
+}
+
+function initEpisodeRails() {
+    document.querySelectorAll(".episodes").forEach(rail => {
+        if (rail.parentElement && rail.parentElement.classList.contains("episodes-wrap")) return;
+
+        const wrap = document.createElement("div");
+        wrap.className = "episodes-wrap";
+        rail.parentNode.insertBefore(wrap, rail);
+        wrap.appendChild(rail);
+
+        // lift the counter and the arrows out of the scrolling rail
+        const counter = rail.querySelector(".episode-number");
+        const controls = rail.querySelector(".controls");
+        if (controls) wrap.appendChild(controls);
+        if (counter && controls) controls.appendChild(counter);
+        else if (counter) wrap.appendChild(counter);
+
+        // clear any inline opacity left over from the old cross-fade
+        railItems(rail).forEach(ep => {
+            ep.style.opacity = "";
+            ep.style.zIndex = "";
+            ep.classList.remove("active");
+        });
+
+        // a single-image rail doesn't need arrows, and centres instead
+        if (railItems(rail).length < 2) {
+            rail.classList.add("is-single");
+            if (controls) controls.style.display = "none";
+        }
+
+        rail.addEventListener("scroll", () => updateRailCounter(rail), { passive: true });
+        updateRailCounter(rail);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", initEpisodeRails);
 
 function initEpisodeSlider() {
-    document.querySelectorAll("div.episodes").forEach(season => {
-        const episodes = season.querySelectorAll("figure.episode");
-        episodes.forEach(ep => {
-            ep.style.opacity = 0;
-            ep.classList.remove("active");
-            ep.style.zIndex = 1;
-        });
-
-        if (episodes.length > 0) {
-            episodes[0].style.opacity = 1;
-            episodes[0].classList.add("active");
-            episodes[0].style.zIndex = 2;
-            season.dataset.current = 1;
-
-            const episodeNumber = season.querySelector(".episode-number");
-            if (episodeNumber) episodeNumber.innerHTML = "No. #1";
-        }
-    });
+    // kept for the inline callers; the rail setup is idempotent
+    initEpisodeRails();
 }
 
 function setUpWebShopPrices() {
@@ -145,9 +178,16 @@ function setupWebshopClickListener() {
     });
 
     //stop propagation input
-    document.querySelector('.shop .selected-shop-item .content').addEventListener('click', (e) => {
-        e.stopPropagation();
-    })
+    // Pages without a webshop have no .selected-shop-item, and the unguarded
+    // lookup used to throw here - which aborted initPage() before
+    // registerNavigationEvents(), losing the nav scroll handling on every
+    // subpage. Guard it instead.
+    const shopContent = document.querySelector('.shop .selected-shop-item .content');
+    if (shopContent) {
+        shopContent.addEventListener('click', (e) => {
+            e.stopPropagation();
+        })
+    }
 }
 
 
@@ -337,45 +377,11 @@ let MAX_EPISODES = document.querySelectorAll('div.episode').length;
 
 
 function nextEp(button) {
-    const season = button.closest("div.episodes"); 
-    const episodes = season.querySelectorAll("figure.episode");
-    let current = parseInt(season.dataset.current);
-
-    let next = current + 1;
-    if (next > episodes.length) next = 1;
-
-    episodes[current - 1].style.opacity = 0;
-    episodes[current - 1].classList.remove("active");
-    episodes[current - 1].style.zIndex = 1;
-
-    episodes[next - 1].style.opacity = 1;
-    episodes[next - 1].classList.add("active");
-    episodes[next - 1].style.zIndex = 2;
-
-    const episodeNumber = season.querySelector(".episode-number");
-    if (episodeNumber) episodeNumber.innerHTML = "No. #" + next;
-    season.dataset.current = next;
+    scrollRail(railOf(button), 1);
 }
 
 function prevEp(button) {
-    const season = button.closest("div.episodes"); 
-    const episodes = season.querySelectorAll("figure.episode");
-    let current = parseInt(season.dataset.current);
-
-    let prev = current - 1;
-    if (prev <= 0) prev = episodes.length;
-
-    episodes[current - 1].style.opacity = 0;
-    episodes[current - 1].classList.remove("active");
-    episodes[current - 1].style.zIndex = 1;
-
-    episodes[prev - 1].style.opacity = 1;
-    episodes[prev - 1].classList.add("active");
-    episodes[prev - 1].style.zIndex = 2;
-
-    const episodeNumber = season.querySelector(".episode-number");
-    if (episodeNumber) episodeNumber.innerHTML = "No. #" + prev;
-    season.dataset.current = prev;
+    scrollRail(railOf(button), -1);
 }
 
 MIN_SlIDES = 1;

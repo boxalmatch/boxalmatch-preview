@@ -16,17 +16,25 @@
    ============================================================ */
 
 :root {
-    --main-bg-color: #000000;
-    --main-bg-color-fade-5: rgba(0, 0, 0, 0.6);
+    --main-bg-color: #0a0a0c;
+    --main-bg-color-fade-5: rgba(10, 10, 12, 0.6);
     --primary-color: #2fd94f;
     --primary-shade-color: #1ea83a;
     --secundary-color: #6e6e73;
 
     --ink: #f5f5f7;
     --ink-muted: #a1a1a6;
-    --surface: #1d1d1f;
-    --surface-2: #161617;
-    --hair: #38383c;
+    --surface: #17171a;
+    --surface-2: #121215;
+    --hair: #2c2c31;
+    --glass: rgba(255, 255, 255, 0.055);
+    --glass-strong: rgba(255, 255, 255, 0.09);
+    --glass-hair: rgba(255, 255, 255, 0.12);
+    --r: 18px;
+    --r-lg: 26px;
+    --shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+    --shadow-lg: 0 18px 56px rgba(0, 0, 0, 0.6);
+    --rail-bleed: clamp(16px, 6vw, 90px);
     --font: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display",
             "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -47,6 +55,16 @@ html { scroll-behavior: smooth; }
 .mb-1 {
     margin: 0;
     margin-bottom: 0.9em;
+}
+
+body {
+    background-color: var(--main-bg-color);
+    background-image:
+        radial-gradient(1100px 620px at 78% -8%, rgba(47, 217, 79, 0.055), transparent 62%),
+        radial-gradient(900px 520px at 8% 6%, rgba(120, 140, 255, 0.045), transparent 60%),
+        linear-gradient(180deg, #101014 0%, #0a0a0c 34%, #0a0a0c 100%);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 body, html {
@@ -331,38 +349,62 @@ header > nav .active > a::before {
     margin-right: auto;
 }
 
-/* ---------- episode carousel ---------- */
+/* ---------- episode carousel (peek rail, scroll-snap) ---------- */
 .episodes {
     position: relative;
     width: 100%;
-    height: 60vh;
-    max-height: 500px;
-    min-height: 250px;
-    background-color: var(--surface-2);
-    border-radius: 18px;
+    background-color: transparent;
+    border-radius: 0;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    gap: 20px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scroll-padding-left: 0;
+    padding: 4px 0 8px;
+    /* peek: the rail bleeds past the container so neighbours show at the edges */
+    margin-left: calc(var(--rail-bleed) * -1);
+    margin-right: calc(var(--rail-bleed) * -1);
+    padding-left: var(--rail-bleed);
+    padding-right: var(--rail-bleed);
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
+
+.episodes::-webkit-scrollbar { display: none; }
+
+/* a rail with a single item is centred rather than left-aligned */
+.episodes.is-single { justify-content: center; }
 
 .episode {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    opacity: 0;
-    z-index: 1;
-    transition: opacity 0.5s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    position: relative;
+    flex: 0 0 auto;
+    width: min(76%, 780px);
+    aspect-ratio: 16 / 10;
+    margin: 0;
+    opacity: 1;
+    z-index: auto;
+    scroll-snap-align: center;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background-color: var(--surface-2);
+    border: 1px solid var(--hair);
+    box-shadow: var(--shadow-lg);
+    transition: transform .4s cubic-bezier(.2,.7,.3,1), border-color .3s;
 }
 
-.episode.active { opacity: 1; z-index: 2; }
+.episode:hover { border-color: rgba(255, 255, 255, 0.18); }
 
 .episode > img {
-    max-width: 100%;
-    max-height: 100%;
+    width: 100%;
+    height: 100%;
+    max-width: none;
+    max-height: none;
+    /* contain, not cover: the rails mix posters, score tables and photos and
+       cropping would cut information out of the frame */
     object-fit: contain;
     display: block;
     background-color: transparent;
@@ -371,13 +413,14 @@ header > nav .active > a::before {
 .episode > figcaption {
     position: absolute;
     bottom: 0;
+    left: 0;
     width: 100%;
-    padding: 12px;
+    padding: 28px 20px 16px;
     box-sizing: border-box;
-    background: rgba(0, 0, 0, 0.65);
-    color: var(--ink);
-    text-align: center;
-    font-size: 1em;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
+    color: #ffffff;
+    text-align: left;
+    font-size: 0.95em;
 }
 
 /* ---------- season / content blocks ---------- */
@@ -385,11 +428,13 @@ header > nav .active > a::before {
 
 .season > h2, .season > h1 { font-size: 1.7em; }
 
+/* the rail inside a .season block keeps the same peek behaviour */
 .season > .episodes {
     position: relative;
-    height: 450px;
-    border-radius: 18px;
-    overflow: hidden;
+    height: auto;
+    border-radius: 0;
+    overflow-x: auto;
+    overflow-y: hidden;
 }
 
 #episode-number {
@@ -402,30 +447,32 @@ header > nav .active > a::before {
     font-size: 0.8em;
 }
 
+/* counter now sits with the controls, under the rail */
 .episode-number {
-    position: absolute;
-    right: 0;
-    top: 0;
-    background: rgba(0, 0, 0, 0.55);
-    padding: 8px 14px;
-    z-index: 3;
+    position: static;
+    order: 2;
+    align-self: center;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--hair);
+    padding: 5px 13px;
     font-family: var(--font);
-    font-size: 0.78em;
+    font-size: 0.72em;
+    letter-spacing: 0.03em;
     color: var(--ink-muted);
-    border-radius: 0 18px 0 12px;
+    border-radius: 980px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
 }
 
 .season > .episodes,
 .season > .episodes > .episode {
-    transition: opacity 0.2s;
     margin: 0;
-    width: 100%;
 }
 
 .season > .episodes > .episode {
-    position: absolute;
-    height: 450px;
-    z-index: 0;
+    position: relative;
+    height: auto;
+    z-index: auto;
 }
 
 .season > .episodes > .episode > img {
@@ -433,64 +480,81 @@ header > nav .active > a::before {
     height: 100%;
     object-fit: contain;
     background-color: transparent;
-    transition: transform 0.4s;
+    transition: transform 0.6s cubic-bezier(.2,.7,.3,1);
 }
 
 .season > .episodes > .episode > img:hover {
-    transform: scale(1.05);
+    transform: scale(1.04);
 }
 
 .season > .episodes > .episode figcaption {
     position: absolute;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.72);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0));
     width: 100%;
-    padding: 12px;
+    padding: 28px 20px 16px;
     box-sizing: border-box;
 }
 
+/* ---------- carousel controls (centred beneath the rail) ---------- */
 .controls {
-    position: absolute;
+    position: static;
     width: 100%;
-    bottom: 50%;
-    padding: 0 12px;
+    padding: 0;
+    margin-top: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
 }
 
 .controls > button {
-    background: rgba(255, 255, 255, 0.92);
-    padding: 0.7em;
-    border: none;
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid var(--hair);
     border-radius: 999px;
     cursor: pointer;
-    transition: background-color 0.15s, transform .15s;
-    font-weight: 700;
+    transition: background-color .2s, border-color .2s, transform .2s, opacity .2s;
+    font-weight: 500;
     font-size: 15px;
-    width: 36px;
-    height: 36px;
-    color: #06210c;
+    line-height: 1;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    color: var(--ink);
     margin: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
 }
 
 .controls > button:hover {
-    background: var(--primary-color);
-    color: #06210c;
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.28);
+    color: var(--ink);
     transform: scale(1.06);
 }
 
-.controls .next { position: absolute; right: 12px; }
-.controls .prev { position: absolute; left: 12px; }
+.controls > button:disabled {
+    opacity: 0.32;
+    cursor: default;
+    transform: none;
+}
+
+.controls .next, .controls .prev { position: static; right: auto; left: auto; }
+
+/* a rail plus its controls stack vertically */
+.episodes-wrap {
+    display: flex;
+    flex-direction: column;
+}
 
 #episodes-group > .controls { z-index: 3; }
 
 #episodes-group > .episode {
-    position: absolute;
-    top: 0;
-    opacity: 0;
-    transition: opacity 0.5s;
-}
-
-#episodes-group > .episode:first-of-type {
-    z-index: 2;
+    position: relative;
+    top: auto;
     opacity: 1;
 }
 
@@ -562,56 +626,466 @@ header > nav .active > a::before {
     letter-spacing: -0.02em;
 }
 
-/* ---------- tables (standings / stats) ---------- */
+/* ---------- tables (standings / stats) — glass ---------- */
 table {
-    border-radius: 12px;
+    border-radius: var(--r);
     overflow: hidden;
+    border-collapse: separate !important;
+    border-spacing: 0;
+    background: var(--glass);
+    backdrop-filter: blur(22px) saturate(150%);
+    -webkit-backdrop-filter: blur(22px) saturate(150%);
+    border: 1px solid var(--glass-hair) !important;
+    box-shadow: var(--shadow);
+    color: var(--ink);
+    margin: 18px 0;
 }
 
+/* The legacy HTML hard-codes its table colours inline — they were picked for a
+   white page, so on the dark theme they range from ugly to unreadable (black on
+   black at 1.2:1, white-on-orange chips at 2.1:1). Inline styles beat stylesheet
+   rules, so each value is re-mapped here with !important: flat fills become
+   transparent glass, and the hues that carry meaning (headers, player chips,
+   guild names, medals) survive as a translucent tint with legible ink.
+   The `color:` selectors anchor on `^color:` / `;color:` so they can never
+   collide with a `background-color:` declaration of the same value. */
+
+/* header fills — green, wherever they sit (thead / tr / th / td) */
 table thead tr,
-table tr[style*="background-color: #228B22"],
-table tr[style*="background-color: #107C10"] {
-    background-color: var(--surface-2) !important;
+table thead th,
+[style*="background-color: #228B22"],
+[style*="background-color:#228B22"],
+[style*="background: #228B22"],
+[style*="background:#228B22"],
+[style*="background-color: #107C10"],
+[style*="background-color:#107C10"],
+[style*="background: #107C10"],
+[style*="background:#107C10"],
+[style*="background-color: #32CD32"],
+[style*="background-color:#32CD32"],
+[style*="background: #32CD32"],
+[style*="background:#32CD32"],
+[style*="background-color: #2ecc71"],
+[style*="background-color:#2ecc71"],
+[style*="background: #2ecc71"],
+[style*="background:#2ecc71"] {
+    background-color: var(--glass-strong) !important;
+    background-image: none !important;
     color: var(--ink) !important;
 }
 
+/* light fills -> transparent, so the glass behind them shows through */
+[style*="background-color: white"],
+[style*="background-color:white"],
+[style*="background: white"],
+[style*="background:white"],
+[style*="background-color: #fff"],
+[style*="background-color:#fff"],
+[style*="background: #fff"],
+[style*="background:#fff"],
+[style*="background-color: #f2f2f2"],
+[style*="background-color:#f2f2f2"],
+[style*="background: #f2f2f2"],
+[style*="background:#f2f2f2"],
+[style*="background-color: #d3d3d3"],
+[style*="background-color:#d3d3d3"],
+[style*="background: #d3d3d3"],
+[style*="background:#d3d3d3"],
+[style*="background-color: #e6ccff"],
+[style*="background-color:#e6ccff"],
+[style*="background: #e6ccff"],
+[style*="background:#e6ccff"],
+[style*="background-color: grey"],
+[style*="background-color:grey"],
+[style*="background: grey"],
+[style*="background:grey"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    color: var(--ink) !important;
+}
+
+/* dark fills -> a faint glass tint rather than flat black slabs */
+[style*="background-color: black"],
+[style*="background-color:black"],
+[style*="background: black"],
+[style*="background:black"],
+[style*="background-color: #000"],
+[style*="background-color:#000"],
+[style*="background: #000"],
+[style*="background:#000"],
+[style*="background-color: #555555"],
+[style*="background-color:#555555"],
+[style*="background: #555555"],
+[style*="background:#555555"],
+[style*="background-color: #555"],
+[style*="background-color:#555"],
+[style*="background: #555"],
+[style*="background:#555"] {
+    background-color: rgba(255, 255, 255, 0.045) !important;
+    background-image: none !important;
+    color: var(--ink) !important;
+}
+
+/* player chips: solid #FF8C00 under white text was 2.1:1 */
+[style*="background-color: #FF8C00"],
+[style*="background-color:#FF8C00"],
+[style*="background: #FF8C00"],
+[style*="background:#FF8C00"],
+[style*="background-color: #ff8c00"],
+[style*="background-color:#ff8c00"],
+[style*="background: #ff8c00"],
+[style*="background:#ff8c00"] {
+    background-color: rgba(224, 132, 38, 0.16) !important;
+    background-image: none !important;
+    color: #FFC78A !important;
+}
+
+[style*="background-color: #FF8C00"] *,
+[style*="background-color:#FF8C00"] *,
+[style*="background: #FF8C00"] *,
+[style*="background:#FF8C00"] *,
+[style*="background-color: #ff8c00"] *,
+[style*="background-color:#ff8c00"] *,
+[style*="background: #ff8c00"] *,
+[style*="background:#ff8c00"] * {
+    color: #FFC78A !important;
+}
+
+/* medal fills keep their metal as a tint — gold */
+[style*="background-color: #d4af37"],
+[style*="background-color:#d4af37"],
+[style*="background: #d4af37"],
+[style*="background:#d4af37"],
+[style*="background-color: #D4AF37"],
+[style*="background-color:#D4AF37"],
+[style*="background: #D4AF37"],
+[style*="background:#D4AF37"] {
+    background-color: rgba(212, 175, 55, 0.18) !important;
+    background-image: none !important;
+    color: #F2D777 !important;
+}
+
+/* medal fills keep their metal as a tint — silver */
+[style*="background-color: #c0c0c0"],
+[style*="background-color:#c0c0c0"],
+[style*="background: #c0c0c0"],
+[style*="background:#c0c0c0"],
+[style*="background-color: #C0C0C0"],
+[style*="background-color:#C0C0C0"],
+[style*="background: #C0C0C0"],
+[style*="background:#C0C0C0"] {
+    background-color: rgba(192, 192, 192, 0.16) !important;
+    background-image: none !important;
+    color: #DCDCDC !important;
+}
+
+/* medal fills keep their metal as a tint — bronze */
+[style*="background-color: #cd7f32"],
+[style*="background-color:#cd7f32"],
+[style*="background: #cd7f32"],
+[style*="background:#cd7f32"],
+[style*="background-color: #CD7F32"],
+[style*="background-color:#CD7F32"],
+[style*="background: #CD7F32"],
+[style*="background:#CD7F32"] {
+    background-color: rgba(205, 127, 50, 0.18) !important;
+    background-image: none !important;
+    color: #EAA877 !important;
+}
+
+/* Inline text colours: every value below was chosen against a white page.
+   Each is lifted to its dark-theme equivalent — same hue, >= 4.5:1 ink. */
+
+/* light-page ink (white or black) -> the theme's ink */
+[style^="color: white"],
+[style^="color:white"],
+[style*=";color: white"],
+[style*=";color:white"],
+[style*="; color: white"],
+[style*="; color:white"],
+[style^="color: #fff"],
+[style^="color:#fff"],
+[style*=";color: #fff"],
+[style*=";color:#fff"],
+[style*="; color: #fff"],
+[style*="; color:#fff"],
+[style^="color: black"],
+[style^="color:black"],
+[style*=";color: black"],
+[style*=";color:black"],
+[style*="; color: black"],
+[style*="; color:black"],
+[style^="color: #000"],
+[style^="color:#000"],
+[style*=";color: #000"],
+[style*=";color:#000"],
+[style*="; color: #000"],
+[style*="; color:#000"],
+[style^="color: #f2f2f2"],
+[style^="color:#f2f2f2"],
+[style*=";color: #f2f2f2"],
+[style*=";color:#f2f2f2"],
+[style*="; color: #f2f2f2"],
+[style*="; color:#f2f2f2"],
+[style^="color: #d3d3d3"],
+[style^="color:#d3d3d3"],
+[style*=";color: #d3d3d3"],
+[style*=";color:#d3d3d3"],
+[style*="; color: #d3d3d3"],
+[style*="; color:#d3d3d3"] {
+    color: var(--ink) !important;
+}
+
+/* muted ink */
+[style^="color: grey"],
+[style^="color:grey"],
+[style*=";color: grey"],
+[style*=";color:grey"],
+[style*="; color: grey"],
+[style*="; color:grey"],
+[style^="color: #555555"],
+[style^="color:#555555"],
+[style*=";color: #555555"],
+[style*=";color:#555555"],
+[style*="; color: #555555"],
+[style*="; color:#555555"],
+[style^="color: #555"],
+[style^="color:#555"],
+[style*=";color: #555"],
+[style*=";color:#555"],
+[style*="; color: #555"],
+[style*="; color:#555"] {
+    color: var(--ink-muted) !important;
+}
+
+/* pale lilac */
+[style^="color: #e6ccff"],
+[style^="color:#e6ccff"],
+[style*=";color: #e6ccff"],
+[style*=";color:#e6ccff"],
+[style*="; color: #e6ccff"],
+[style*="; color:#e6ccff"] {
+    color: #DCC6FF !important;
+}
+
+/* greens */
+[style^="color: #228B22"],
+[style^="color:#228B22"],
+[style*=";color: #228B22"],
+[style*=";color:#228B22"],
+[style*="; color: #228B22"],
+[style*="; color:#228B22"],
+[style^="color: #107C10"],
+[style^="color:#107C10"],
+[style*=";color: #107C10"],
+[style*=";color:#107C10"],
+[style*="; color: #107C10"],
+[style*="; color:#107C10"],
+[style^="color: #32CD32"],
+[style^="color:#32CD32"],
+[style*=";color: #32CD32"],
+[style*=";color:#32CD32"],
+[style*="; color: #32CD32"],
+[style*="; color:#32CD32"],
+[style^="color: #2ecc71"],
+[style^="color:#2ecc71"],
+[style*=";color: #2ecc71"],
+[style*=";color:#2ecc71"],
+[style*="; color: #2ecc71"],
+[style*="; color:#2ecc71"],
+[style^="color: forestgreen"],
+[style^="color:forestgreen"],
+[style*=";color: forestgreen"],
+[style*=";color:forestgreen"],
+[style*="; color: forestgreen"],
+[style*="; color:forestgreen"] {
+    color: #4FD97A !important;
+}
+
+/* oranges */
+[style^="color: #FF8C00"],
+[style^="color:#FF8C00"],
+[style*=";color: #FF8C00"],
+[style*=";color:#FF8C00"],
+[style*="; color: #FF8C00"],
+[style*="; color:#FF8C00"],
+[style^="color: #ff8c00"],
+[style^="color:#ff8c00"],
+[style*=";color: #ff8c00"],
+[style*=";color:#ff8c00"],
+[style*="; color: #ff8c00"],
+[style*="; color:#ff8c00"],
+[style^="color: orange"],
+[style^="color:orange"],
+[style*=";color: orange"],
+[style*=";color:orange"],
+[style*="; color: orange"],
+[style*="; color:orange"],
+[style^="color: darkorange"],
+[style^="color:darkorange"],
+[style*=";color: darkorange"],
+[style*=";color:darkorange"],
+[style*="; color: darkorange"],
+[style*="; color:darkorange"] {
+    color: #FFB057 !important;
+}
+
+/* Aquila */
+[style^="color: blue"],
+[style^="color:blue"],
+[style*=";color: blue"],
+[style*=";color:blue"],
+[style*="; color: blue"],
+[style*="; color:blue"] {
+    color: #7AB0FF !important;
+}
+
+/* Ade */
+[style^="color: purple"],
+[style^="color:purple"],
+[style*=";color: purple"],
+[style*=";color:purple"],
+[style*="; color: purple"],
+[style*="; color:purple"] {
+    color: #C79CF2 !important;
+}
+
+/* Bastione */
+[style^="color: brown"],
+[style^="color:brown"],
+[style*=";color: brown"],
+[style*=";color:brown"],
+[style*="; color: brown"],
+[style*="; color:brown"] {
+    color: #E0A074 !important;
+}
+
+/* Pericolo */
+[style^="color: red"],
+[style^="color:red"],
+[style*=";color: red"],
+[style*=";color:red"],
+[style*="; color: red"],
+[style*="; color:red"] {
+    color: #FF8080 !important;
+}
+
+/* Valchiria */
+[style^="color: darkcyan"],
+[style^="color:darkcyan"],
+[style*=";color: darkcyan"],
+[style*=";color:darkcyan"],
+[style*="; color: darkcyan"],
+[style*="; color:darkcyan"] {
+    color: #45D6D6 !important;
+}
+
+/* Valore */
+[style^="color: #b8860b"],
+[style^="color:#b8860b"],
+[style*=";color: #b8860b"],
+[style*=";color:#b8860b"],
+[style*="; color: #b8860b"],
+[style*="; color:#b8860b"],
+[style^="color: #B8860B"],
+[style^="color:#B8860B"],
+[style*=";color: #B8860B"],
+[style*=";color:#B8860B"],
+[style*="; color: #B8860B"],
+[style*="; color:#B8860B"] {
+    color: #E8BF4E !important;
+}
+
+/* gold */
+[style^="color: #d4af37"],
+[style^="color:#d4af37"],
+[style*=";color: #d4af37"],
+[style*=";color:#d4af37"],
+[style*="; color: #d4af37"],
+[style*="; color:#d4af37"],
+[style^="color: #D4AF37"],
+[style^="color:#D4AF37"],
+[style*=";color: #D4AF37"],
+[style*=";color:#D4AF37"],
+[style*="; color: #D4AF37"],
+[style*="; color:#D4AF37"] {
+    color: #F2D777 !important;
+}
+
+/* silver */
+[style^="color: #c0c0c0"],
+[style^="color:#c0c0c0"],
+[style*=";color: #c0c0c0"],
+[style*=";color:#c0c0c0"],
+[style*="; color: #c0c0c0"],
+[style*="; color:#c0c0c0"],
+[style^="color: #C0C0C0"],
+[style^="color:#C0C0C0"],
+[style*=";color: #C0C0C0"],
+[style*=";color:#C0C0C0"],
+[style*="; color: #C0C0C0"],
+[style*="; color:#C0C0C0"] {
+    color: #DCDCDC !important;
+}
+
+/* bronze */
+[style^="color: #cd7f32"],
+[style^="color:#cd7f32"],
+[style*=";color: #cd7f32"],
+[style*=";color:#cd7f32"],
+[style*="; color: #cd7f32"],
+[style*="; color:#cd7f32"],
+[style^="color: #CD7F32"],
+[style^="color:#CD7F32"],
+[style*=";color: #CD7F32"],
+[style*=";color:#CD7F32"],
+[style*="; color: #CD7F32"],
+[style*="; color:#CD7F32"] {
+    color: #EAA877 !important;
+}
+
+/* body cells: transparent over the glass, hairline separators only */
 table td, table th {
-    border-color: var(--hair) !important;
+    border: 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+    padding: 10px 12px;
 }
 
-table tr[style*="background-color: white"],
-table td[style*="background-color: white"] {
-    background-color: var(--surface) !important;
-    color: var(--ink) !important;
-}
+table tr:last-child td { border-bottom: 0 !important; }
+table tbody tr:hover td { background-color: rgba(255, 255, 255, 0.045); }
 
-table tr[style*="background-color: #f2f2f2"] {
-    background-color: var(--surface) !important;
-}
-
-/* Giocato Con / Giocato Contro matrices (scores.html) */
+/* Giocato Con / Giocato Contro matrices (scores.html).
+   Every cell in these is an opaque heat-map swatch, so the glass blur behind
+   them buys nothing - and on a ~1200px-tall element it is expensive enough to
+   drop frames while scrolling. Opt them out of the backdrop filter. */
 #giocatoTable, #giocatoCONTROTable {
-    border-collapse: collapse;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: transparent;
+    border-collapse: separate !important;
+    border-spacing: 0;
     width: 100%;
     text-align: center;
 }
 
 #giocatoTable th, #giocatoTable td,
 #giocatoCONTROTable th, #giocatoCONTROTable td {
-    border: 1px solid var(--hair);
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
     padding: 5px;
-    background-color: var(--surface);
+    background-color: rgba(255, 255, 255, 0.02);
+    color: var(--ink);
 }
 
-#giocatoTable .header-special { background-color: #06210c; color: var(--ink); }
-#giocatoTable .header-normal { background-color: var(--surface-2); color: var(--ink); }
+#giocatoTable .header-special { background-color: rgba(47, 217, 79, 0.16); color: var(--ink); }
+#giocatoTable .header-normal { background-color: var(--glass-strong); color: var(--ink); }
 
-#giocatoTable .value-x { background-color: var(--surface); }
-#giocatoTable .value-0 { background-color: #17324a; }
-#giocatoTable .value-1-9 { background-color: #17381f; }
-#giocatoTable .value-5-10 { background-color: #4a3717; }
-#giocatoTable .value-11plus { background-color: #4a1717; }
-#giocatoTable .value-21plus { background-color: #7a1111; color: #fff; }
+/* heat-map cells: these encode data, so hues stay - lifted for contrast */
+#giocatoTable .value-x { background-color: rgba(255, 255, 255, 0.02); color: var(--ink-muted); }
+#giocatoTable .value-0 { background-color: #1d3d59; color: #eaf3ff; }
+#giocatoTable .value-1-9 { background-color: #1d4527; color: #e8ffee; }
+#giocatoTable .value-5-10 { background-color: #59431c; color: #fff4e2; }
+#giocatoTable .value-11plus { background-color: #5c1d1d; color: #ffeaea; }
+#giocatoTable .value-21plus { background-color: #8f1717; color: #ffffff; }
 
 #giocatoTable th {
     writing-mode: vertical-rl;
@@ -627,9 +1101,19 @@ table tr[style*="background-color: #f2f2f2"] {
 }
 
 #giocatoCONTROTable {
-    border-collapse: collapse;
+    border-collapse: separate !important;
+    border-spacing: 0;
     width: 100%;
     text-align: center;
+}
+
+/* wide data tables stay reachable on small screens */
+@media (max-width: 760px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
 }
 
 /* ---------- shop (legacy, present in CSS contract even if unused) ---------- */
