@@ -436,17 +436,41 @@ header > nav .active > a::before {
     opacity: 1;
 }
 
-/* ---------- character / feature cards ---------- */
+/* ---------- character / feature cards (tile grid, matching the main site's event cards) ---------- */
+#character-profile {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 26px;
+    align-items: stretch;
+}
+
+#character-profile > h1.highlight {
+    grid-column: 1 / -1;
+}
+
 #character-profile > .character {
     position: relative;
-    margin-bottom: 220px;
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--surface);
+    border: 1px solid var(--hair);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+#character-profile > .character:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 56px rgba(0, 0, 0, 0.55);
 }
 
 #character-profile > .character > figure {
     overflow: hidden;
-    height: 420px;
+    height: 180px;
     margin: 0;
-    border-radius: 22px;
+    border-radius: 0;
 }
 
 #character-profile > .character > figure > img {
@@ -461,22 +485,23 @@ header > nav .active > a::before {
 }
 
 #character-profile > .character > .character-bio {
-    position: absolute;
-    right: -30px;
-    top: 45%;
+    position: static;
+    right: auto;
+    top: auto;
     height: auto;
-    min-height: 200px;
-    background-color: var(--surface);
-    border: 1px solid var(--hair);
-    padding: 26px;
-    width: 26%;
-    border-radius: 18px;
-    border-top: 3px solid var(--primary-color);
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.7);
+    min-height: 0;
+    flex: 1;
+    background-color: transparent;
+    border: none;
+    padding: 22px 22px 24px;
+    width: auto;
+    border-radius: 0;
+    box-shadow: none;
 }
 
 #character-profile > .character > .character-bio > h1 {
-    font-size: 1.35em;
+    font-size: 1.2em;
+    letter-spacing: -0.02em;
 }
 
 /* ---------- tables (standings / stats) ---------- */
@@ -723,6 +748,7 @@ footer a:hover { text-decoration: underline; }
         background-color: rgba(0, 0, 0, 0.72);
         backdrop-filter: saturate(180%) blur(20px);
         -webkit-backdrop-filter: saturate(180%) blur(20px);
+        border-bottom: 1px solid var(--hair);
         transition: background-color 0.2s;
     }
     #main-header.scrolled {

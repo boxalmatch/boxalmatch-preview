@@ -6,8 +6,6 @@
    ============================================================ */
 
 @media only screen and (max-width: 1300px) {
-    #character-profile .character .character-bio { right: 0; }
-
     .container {
         max-width: 980px;
         padding: 20px;
@@ -150,10 +148,6 @@
         box-sizing: border-box;
     }
 
-    #character-profile .character { margin-bottom: 70px; }
-
-    #character-profile .character figure { height: auto; }
-
     #webshop .shop .shop-item {
         width: 44%;
         margin-bottom: 50px;
@@ -177,26 +171,8 @@
         margin: 0 27.5%;
     }
 
-    #character-profile .character {
-        margin: 0 0 70px;
-        flex-wrap: wrap;
-        overflow: hidden;
-        flex-basis: 1%;
-    }
-
-    #character-profile .character figure {
-        width: 100%;
-        height: auto;
-        border-radius: 18px;
-    }
-
-    #character-profile .character .character-bio {
-        position: static;
-        width: 100%;
-        border: 1px solid var(--hair, #38383c);
-        border-top: 3px solid var(--primary-color, #2fd94f);
-        box-sizing: border-box;
-        margin-top: 12px;
+    #character-profile {
+        grid-template-columns: 1fr;
     }
 }
 
