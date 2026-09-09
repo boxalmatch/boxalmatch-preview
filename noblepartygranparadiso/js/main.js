@@ -174,6 +174,24 @@ function initEpisodeRails() {
 
 document.addEventListener("DOMContentLoaded", initEpisodeRails);
 
+/* Some of the score matrices are wider than the page. Unwrapped they pushed
+   the document itself sideways, which threw every other element off centre.
+   Each table gets a scrolling box of its own: narrow ones still centre inside
+   it, wide ones scroll within it and the page stays put. */
+function initTableScroll() {
+    document.querySelectorAll("table").forEach(table => {
+        const parent = table.parentElement;
+        if (parent && parent.classList.contains("table-scroll")) return;
+        const wrap = document.createElement("div");
+        wrap.className = "table-scroll";
+        table.parentNode.insertBefore(wrap, table);
+        wrap.appendChild(table);
+    });
+}
+
+document.addEventListener("DOMContentLoaded", initTableScroll);
+
+
 /* ============================================================
    Lightbox
    ------------------------------------------------------------

@@ -145,6 +145,36 @@ of `index.html` is what renders them; it needs to stay.
 
 ---
 
+## Partners
+
+The section between Channels and Contact. **One partner is just a centred
+card**; from two upwards `initPartners()` in `js/main.js` turns the row into a
+rail and adds the same arrows and dots the other carousels use. Nothing to
+switch on — add the markup and it happens.
+
+```html
+<div class="partner">
+  <img src="img/partners/NAME.png" alt="NAME — what they do" loading="lazy" decoding="async"
+       onerror="this.closest('.partner').classList.add('no-logo')">
+  <span class="partner-name">NAME</span>
+  <span class="partner-kind">what they do</span>
+</div>
+```
+
+To make a card link out, swap the `<div>` for
+`<a class="partner" href="..." target="_blank" rel="noopener">`.
+
+Two things about the logo:
+
+- **`img/partners/panda.png` is not in the repository yet.** Until it is, the
+  card falls back to the wordmark as text — that is what the `onerror` does,
+  so no broken-image icon ever shows. Drop the file in and it appears.
+- Shop logos are usually black on white, which would vanish on this page, so
+  `.partner img` inverts them to white. A logo that is already light needs
+  that `filter` turned off for it.
+
+---
+
 ## The contact form
 
 The box at the foot of the home page takes a name, an email and a message,

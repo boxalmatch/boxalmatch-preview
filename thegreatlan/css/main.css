@@ -221,9 +221,10 @@ main > section.container h2 {
     border-bottom: 1px solid var(--hair);
 }
 
-#main-header.scrolled {
-    background-color: rgba(0, 0, 0, 0.9);
-}
+/* .scrolled used to deepen the fill to 0.9, which made the bar noticeably
+   more solid than the home page's the moment you scrolled — exactly when the
+   artwork passing behind it makes the glass worth having. The class is still
+   toggled by the legacy script; it just no longer changes the fill. */
 
 header > nav > ul {
     margin: 0;
@@ -347,7 +348,11 @@ header > nav .active > a {
 /* ---------- episode carousel (peek rail, scroll-snap) ---------- */
 .episodes {
     position: relative;
-    width: 100%;
+    /* auto, not 100%: the rail bleeds past its container by --rail-bleed on
+       both sides, and a fixed 100% left the negative right margin with
+       nothing to expand into, so the whole rail sat one bleed left of
+       centre. */
+    width: auto;
     background-color: transparent;
     border-radius: 0;
     display: flex;
@@ -661,6 +666,21 @@ header > nav .active > a {
 }
 
 /* ---------- tables (standings / stats) — glass ---------- */
+
+/* Some score matrices are wider than the page. Unwrapped they pushed the
+   document itself sideways, which threw every other element off centre. JS
+   gives each table a scrolling box: narrow ones still centre inside it, wide
+   ones scroll within it and the page stays put. */
+.table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    margin: 18px auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+}
+
+.table-scroll > table { margin: 0 auto; }
+
 table {
     border-radius: var(--r);
     overflow: hidden;
@@ -672,7 +692,9 @@ table {
     border: 1px solid var(--glass-hair) !important;
     box-shadow: var(--shadow);
     color: var(--ink);
-    margin: 18px 0;
+    /* auto, not 0: the legacy markup sets width inline (40%, 60%, 80%), which
+       left every table hard against the left edge of the container */
+    margin: 18px auto;
 }
 
 /* The legacy HTML hard-codes its table colours inline — they were picked for a

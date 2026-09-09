@@ -84,6 +84,24 @@
     }
   }
 
+
+  /* ---------- partners ---------- */
+  // One partner is just a centred card. From two upwards it becomes a rail
+  // with the same arrows and dots as the other carousels, built here rather
+  // than sitting in the markup unused.
+  function initPartners() {
+    var row = document.getElementById('rail-partners');
+    if (!row || row.children.length < 2) return;
+
+    row.classList.add('is-rail');
+    var arrows = document.createElement('div');
+    arrows.className = 'arrows';
+    arrows.innerHTML =
+      '<button class="arrow" data-rail="rail-partners" data-dir="-1" aria-label="Previous">\u2039</button>' +
+      '<button class="arrow" data-rail="rail-partners" data-dir="1" aria-label="Next">\u203a</button>';
+    row.parentNode.insertBefore(arrows, row.nextSibling);
+  }
+
   /* ---------- carousels ---------- */
   function initRails() {
     var btns = document.querySelectorAll('.arrow[data-rail]');
@@ -294,6 +312,7 @@
     initLang();
     initNav();
     initVideo();
+    initPartners();
     initRails();
     initReveal();
     initForm();

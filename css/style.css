@@ -793,3 +793,68 @@ p{ margin:0; }
   .egrid{ grid-template-columns:1fr; }
   .hero{ min-height:auto; padding:52px 22px 64px; }
 }
+
+/* ============================================================
+   PARTNERS
+   One logo today, so the row simply centres it. Add a second
+   .partner and initPartners() turns it into a rail with arrows
+   and dots — the same carousel the rest of the page uses.
+   ============================================================ */
+.partners{
+  display:flex;
+  justify-content:center;
+  align-items:stretch;
+  gap:20px;
+}
+.partners.is-rail{
+  justify-content:flex-start;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  scroll-behavior:smooth;
+  padding:4px 2px 20px;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+}
+.partners.is-rail::-webkit-scrollbar{ display:none; }
+
+.partner{
+  flex:0 0 auto;
+  width:min(320px,80vw);
+  scroll-snap-align:center;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px;
+  padding:34px 26px 26px;
+  border-radius:var(--r-lg);
+  text-align:center;
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-hair);
+  box-shadow:0 1px 0 rgba(255,255,255,0.06) inset, var(--shadow);
+  transition:transform .35s cubic-bezier(.2,.7,.3,1), background .35s, border-color .35s;
+}
+a.partner:hover{
+  transform:translateY(-5px);
+  background:var(--glass-2);
+  border-color:rgba(255,255,255,0.2);
+  text-decoration:none;
+}
+
+/* Most shop logos are black on white, which vanishes on this page. Inverting
+   puts them back to white on black without needing a second artwork file. */
+.partner img{
+  width:auto; max-width:100%; max-height:120px;
+  margin-bottom:10px;
+  filter:invert(1) brightness(1.9);
+}
+
+.partner-name{
+  font-size:19px; font-weight:600; letter-spacing:-0.02em;
+  color:var(--ink);
+}
+.partner-kind{ font-size:14px; color:var(--ink-2); }
+
+/* until the logo file is added, the wordmark carries the card on its own */
+.partner img{ display:block; }
+.partner.no-logo img{ display:none; }
+.partner.no-logo .partner-name{ font-size:26px; }
