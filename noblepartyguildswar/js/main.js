@@ -356,16 +356,14 @@ document.addEventListener('click', (e) => {
 function registerNavigationEvents(){
     const nav = document.querySelectorAll('nav ul li a');
 
-    const openButtonNav = document.querySelector('header .mobile-nav .toggle-nav');
-
     nav.forEach(function(elm) {
         elm.addEventListener("click", toggleActiveClass);
     });
 
-
-    openButtonNav.addEventListener('click', (e) => {
-       toggleMobileNav()
-    });
+    // The burger is already bound at the top of this file. Binding it a second
+    // time here toggled the menu twice per tap, so it opened and shut again
+    // and never appeared. (It only surfaced once initPage() stopped throwing
+    // before this function ran.)
 
     window.addEventListener('scroll', (e) => {
         const scroll = document.documentElement.scrollTop;
