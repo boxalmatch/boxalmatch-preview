@@ -514,16 +514,29 @@ p{ margin:0; }
 .vmeta .links a{ font-size:15px; }
 
 /* instagram card */
-.igcard{
-  width:min(340px,80vw);
-  border-radius:var(--r);
-  overflow:hidden;
-  position:relative;
-  display:flex; align-items:center; justify-content:center;
+/* Four posts side by side, not a rail: nothing scrolls, so there is nothing
+   to page through and no arrows or dots. */
+.ig-grid{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:20px;
+  align-items:start;      /* embeds differ in height; don't stretch them */
 }
-/* Instagram's own embed is a light card with its own fixed sizing. Let it set
-   the height, but stop its inline min-width:326px from overflowing the rail on
-   a narrow screen, and drop its margins so it fills the tile. */
+@media (max-width:1080px){ .ig-grid{ grid-template-columns:repeat(2, 1fr); } }
+@media (max-width:600px){  .ig-grid{ grid-template-columns:1fr; max-width:400px; margin:0 auto; } }
+
+.igcard{
+  border-radius:var(--r);
+  /* No fixed height and no overflow clip. Instagram sets the iframe's height
+     itself after the post loads, and anything that constrains it here cuts
+     the caption off at the bottom of the card. */
+  min-width:0;
+}
+
+/* Instagram's embed is a white card with its own sizing. Its inline
+   min-width:326px overflows a narrow column, and its default margin and
+   border fight the grid, so those are overridden — the rest is left alone,
+   since the iframe is cross-origin and cannot be themed. */
 .igcard .instagram-media{
   min-width:0 !important;
   width:100% !important;
@@ -531,13 +544,19 @@ p{ margin:0; }
   margin:0 !important;
   border:0 !important;
   border-radius:var(--r) !important;
-  box-shadow:none !important;
-  background:transparent !important;
+  /* lift the white card off the black page rather than letting it float */
+  box-shadow:0 10px 34px rgba(0,0,0,0.55) !important;
 }
+
 /* what shows while embed.js loads, or if it is blocked outright */
 .igcard .instagram-media > a{
   display:flex; align-items:center; justify-content:center;
   min-height:420px; padding:26px;
+  border-radius:var(--r);
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-hair);
   text-align:center; font-size:15px; line-height:1.5;
   color:var(--ink-2);
 }
