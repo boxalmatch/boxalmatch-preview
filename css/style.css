@@ -24,8 +24,11 @@
   --glass-blur:  blur(26px) saturate(150%);
   --accent:      #2fd94f;
   --accent-hov:  #55e36f;
-  /* the display italic sits at 60px+, where the full-strength green is too hot */
-  --accent-soft: #9BE88C;
+  /* the display italic in the hero, sampled from the wordmark's own green
+     (the logo runs a subtle gradient from #00AD17 to #00B81C; this is the
+     flat fill). 7.9:1 on black. Deliberately not --accent: the UI green is
+     brighter than the logo. */
+  --accent-soft: #00B81C;
   --nav-bg:      rgba(0,0,0,0.72);
   --shadow:      0 4px 24px rgba(0,0,0,0.6);
   --shadow-lg:   0 24px 70px rgba(0,0,0,0.8);
