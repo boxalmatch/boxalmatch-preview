@@ -116,17 +116,31 @@ of `index.html` is what renders them; it needs to stay.
 
 ---
 
-## The sign-up form
+## The contact form
 
-Currently shows a "not connected yet" message and points people to Instagram.
-To make it live, use a form service such as [Formspree](https://formspree.io) —
-create a form, then in `index.html`:
+The box at the foot of the home page takes a name, an email and a message,
+and is addressed to **boxalmatch@gmail.com**.
+
+There is no server behind GitHub Pages, so by default the form hands the
+finished message to the visitor's own mail client, pre-addressed and
+pre-filled. That works everywhere with no setup, but the visitor has to press
+send in their mail app, and it does nothing useful for someone browsing on a
+machine with no mail client configured — which is why the address is also
+printed as a link under the button, and in the footer.
+
+To have messages posted properly instead, create a form at a service such as
+[Formspree](https://formspree.io) with `boxalmatch@gmail.com` as the
+destination, then put its endpoint on the form in `index.html`:
 
 ```html
-<form class="jform" data-ready="true" action="https://formspree.io/f/YOUR_ID" method="POST">
+<form class="jform" data-endpoint="https://formspree.io/f/YOUR_ID" method="POST" novalidate>
 ```
 
-Setting `data-ready="true"` is what stops the placeholder message.
+With `data-endpoint` set, the form posts in the background and the visitor
+stays on the page; the mail-client path is only used when it is empty.
+
+To change the destination address, edit `EMAIL` in `js/main.js` — it is used
+for both paths and for the fallback link.
 
 ---
 

@@ -26,7 +26,7 @@
       <a href="#contenuti"><span lang="it">Contenuti</span><span lang="en">Content</span></a>
       <a href="#eventi"><span lang="it">Eventi</span><span lang="en">Events</span></a>
       <a href="#canali"><span lang="it">Canali</span><span lang="en">Channels</span></a>
-      <a href="#unisciti"><span lang="it">Unisciti</span><span lang="en">Join</span></a>
+      <a href="#contattaci"><span lang="it">Contattaci</span><span lang="en">Contact</span></a>
       <!-- Area membri: da aggiungere quando il login è pronto.
       <a href="members/"><span lang="it">Area Membri</span><span lang="en">Members</span></a> -->
     </nav>
@@ -451,22 +451,37 @@
   </div>
 </section>
 
-<!-- ══════════ UNISCITI ══════════ -->
-<section class="sec join" id="unisciti">
+<!-- ══════════ CONTATTACI ══════════ -->
+<section class="sec join" id="contattaci">
   <div class="wrap join-box rv">
-    <h2 lang="it">Unisciti a noi</h2>
-    <h2 lang="en">Join us</h2>
-    <p lang="it">Lascia la tua email per restare aggiornato su eventi, tornei e nuovi contenuti.</p>
-    <p lang="en">Leave your email to stay up to date on events, tournaments and new content.</p>
+    <h2 lang="it">Contattaci</h2>
+    <h2 lang="en">Contact us</h2>
+    <p lang="it">Scrivici un messaggio: domande, proposte, o solo per fare due chiacchiere.</p>
+    <p lang="en">Send us a message — questions, ideas, or just to say hello.</p>
 
-    <form class="jform" data-ready="false" action="#" method="POST">
-      <input type="email" name="email" required
-             placeholder="you@email.com" aria-label="Email">
+    <!-- No server here (GitHub Pages), so the form hands the message to the
+         visitor's mail client addressed to us. Point data-endpoint at a form
+         service (Formspree and the like) to have it posted instead: see the
+         README. -->
+    <form class="jform" data-endpoint="" method="POST" novalidate>
+      <label class="fld">
+        <span class="fld-lbl" lang="it">Nome</span><span class="fld-lbl" lang="en">Name</span>
+        <input type="text" name="name" required autocomplete="name">
+      </label>
+      <label class="fld">
+        <span class="fld-lbl">Email</span>
+        <input type="email" name="email" required autocomplete="email"
+               placeholder="you@email.com">
+      </label>
+      <label class="fld fld-wide">
+        <span class="fld-lbl" lang="it">Messaggio</span><span class="fld-lbl" lang="en">Message</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
       <button type="submit" class="btn btn-fill">
-        <span lang="it">Iscriviti</span><span lang="en">Sign up</span>
+        <span lang="it">Invia messaggio</span><span lang="en">Send message</span>
       </button>
     </form>
-    <p class="jnote" id="jnote"></p>
+    <p class="jnote" id="jnote" role="status" aria-live="polite"></p>
   </div>
 </section>
 
@@ -482,7 +497,7 @@
           <li><a href="#chi-siamo"><span lang="it">Chi siamo</span><span lang="en">About</span></a></li>
           <li><a href="#contenuti"><span lang="it">Contenuti</span><span lang="en">Content</span></a></li>
           <li><a href="#eventi"><span lang="it">Eventi</span><span lang="en">Events</span></a></li>
-          <li><a href="#unisciti"><span lang="it">Unisciti</span><span lang="en">Join</span></a></li>
+          <li><a href="#contattaci"><span lang="it">Contattaci</span><span lang="en">Contact</span></a></li>
           <!-- Area membri: da aggiungere quando il login è pronto.
           <li><a href="members/"><span lang="it">Area Membri</span><span lang="en">Member area</span></a></li> -->
         </ul>
@@ -498,6 +513,7 @@
       <div>
         <h4 lang="it">Contatti</h4><h4 lang="en">Contact</h4>
         <ul>
+          <li><a href="mailto:boxalmatch@gmail.com">boxalmatch@gmail.com</a></li>
           <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener"><span lang="it">Scrivici su Instagram</span><span lang="en">Message us on Instagram</span></a></li>
         </ul>
       </div>

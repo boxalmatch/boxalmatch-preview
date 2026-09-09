@@ -215,15 +215,74 @@
     var form = document.querySelector('.jform');
     var note = document.getElementById('jnote');
     if (!form) return;
+
+    var EMAIL = 'boxalmatch@gmail.com';
+
+    function say(it, en) {
+      if (note) note.textContent = root.getAttribute('data-lang') === 'en' ? en : it;
+    }
+
+    // the address as a real link, so there is always something to click even
+    // if the visitor has no mail client wired up
+    function sayWithAddress(it, en) {
+      if (!note) return;
+      note.textContent = (root.getAttribute('data-lang') === 'en' ? en : it) + ' ';
+      var a = document.createElement('a');
+      a.href = 'mailto:' + EMAIL;
+      a.textContent = EMAIL;
+      note.appendChild(a);
+    }
+
     form.addEventListener('submit', function (e) {
-      if (form.getAttribute('data-ready') !== 'true') {
-        e.preventDefault();
-        if (note) {
-          note.textContent = root.getAttribute('data-lang') === 'en'
-            ? 'Sign-up isn’t connected yet — for now, reach us on Instagram.'
-            : 'L’iscrizione non è ancora attiva — per ora scrivici su Instagram.';
-        }
+      e.preventDefault();
+
+      var name = (form.elements.name.value || '').trim();
+      var from = (form.elements.email.value || '').trim();
+      var body = (form.elements.message.value || '').trim();
+
+      if (!name || !from || !body) {
+        say('Compila tutti i campi prima di inviare.',
+            'Please fill in every field before sending.');
+        return;
       }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(from)) {
+        say('Controlla l’indirizzo email.', 'Please check the email address.');
+        return;
+      }
+
+      // A form service, if one has been wired up: it posts server-side and the
+      // visitor never leaves the page.
+      var endpoint = form.getAttribute('data-endpoint');
+      if (endpoint) {
+        say('Invio in corso…', 'Sending…');
+        fetch(endpoint, {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        }).then(function (r) {
+          if (!r.ok) throw new Error(r.status);
+          form.reset();
+          say('Messaggio inviato, grazie!', 'Message sent — thank you!');
+        }).catch(function () {
+          sayWithAddress('Invio non riuscito. Scrivici a',
+                         'Sending failed. Write to us at');
+        });
+        return;
+      }
+
+      // Otherwise hand the message to the visitor's mail client, pre-addressed
+      // and pre-filled. There is no server on GitHub Pages to post to, and a
+      // bare mailto: form would send a raw urlencoded blob.
+      var subject = 'BOXALMATCH \u2014 ' + name;
+      var text = name + ' <' + from + '>\n\n' + body;
+      form.dataset.mailto = 'mailto:' + EMAIL +
+        '?subject=' + encodeURIComponent(subject) +
+        '&body=' + encodeURIComponent(text);
+      window.location.href = form.dataset.mailto;
+      sayWithAddress('Apriamo il tuo programma di posta con il messaggio pronto. ' +
+                     'Se non succede nulla, scrivici a',
+                     'Opening your mail app with the message ready. ' +
+                     'If nothing happens, write to us at');
     });
   }
 
