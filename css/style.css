@@ -40,7 +40,7 @@
 }
 
 .tile,
-.val, .vcard, .ecard, .igcard, .ch, .m-tile, .m-event{
+.val, .vcard, .ecard, .ch, .m-tile, .m-event{
   background:var(--glass);
   backdrop-filter:var(--glass-blur);
   -webkit-backdrop-filter:var(--glass-blur);
@@ -526,11 +526,14 @@ p{ margin:0; }
 @media (max-width:600px){  .ig-grid{ grid-template-columns:1fr; max-width:400px; margin:0 auto; } }
 
 .igcard{
-  border-radius:var(--r);
-  /* No fixed height and no overflow clip. Instagram sets the iframe's height
-     itself after the post loads, and anything that constrains it here cuts
-     the caption off at the bottom of the card. */
+  /* No tile of its own: the Instagram embed is an opaque card that sizes
+     itself, so a glass tile behind it only ever showed as a mismatched frame
+     around the edges. The card the visitor sees is the embed. No fixed height
+     and no overflow clip either — Instagram sets the iframe height after the
+     post loads, and constraining it here cut the caption off. */
   min-width:0;
+  display:flex;
+  flex-direction:column;
 }
 
 /* Instagram's embed is a white card with its own sizing. Its inline

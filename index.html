@@ -263,9 +263,9 @@
         </blockquote>
       </div>
       <div class="igcard">
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/reel/DbtJdszMyKD/"
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/Dacg1Jsjlls/"
                     data-instgrm-version="14">
-          <a href="https://www.instagram.com/reel/DbtJdszMyKD/" target="_blank" rel="noopener">
+          <a href="https://www.instagram.com/p/Dacg1Jsjlls/" target="_blank" rel="noopener">
             <span lang="it">Guarda il post su Instagram</span><span lang="en">View this post on Instagram</span>
           </a>
         </blockquote>
@@ -464,6 +464,9 @@
          service (Formspree and the like) to have it posted instead: see the
          README. -->
     <form class="jform" data-endpoint="" method="POST" novalidate>
+      <!-- read by Formspree and friends as the subject of the email they send;
+           ignored on the mail-client path, which builds its own -->
+      <input type="hidden" name="_subject" value="BOXALMATCH — messaggio dal sito">
       <label class="fld">
         <span class="fld-lbl" lang="it">Nome</span><span class="fld-lbl" lang="en">Name</span>
         <input type="text" name="name" required autocomplete="name">

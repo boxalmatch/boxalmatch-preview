@@ -254,6 +254,8 @@
       // visitor never leaves the page.
       var endpoint = form.getAttribute('data-endpoint');
       if (endpoint) {
+        var send = form.querySelector('button[type=submit]');
+        if (send) send.disabled = true;
         say('Invio in corso…', 'Sending…');
         fetch(endpoint, {
           method: 'POST',
@@ -266,6 +268,8 @@
         }).catch(function () {
           sayWithAddress('Invio non riuscito. Scrivici a',
                          'Sending failed. Write to us at');
+        }).then(function () {
+          if (send) send.disabled = false;
         });
         return;
       }

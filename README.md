@@ -80,7 +80,7 @@ The four cards in the Instagram rail are live embeds, wired to these posts:
 | 1 | https://www.instagram.com/p/DaSju9UgC-P/ |
 | 2 | https://www.instagram.com/p/DSE85yDAMJT/ |
 | 3 | https://www.instagram.com/p/DEMkfnUg_3a/ |
-| 4 | https://www.instagram.com/reel/DbtJdszMyKD/ |
+| 4 | https://www.instagram.com/p/Dacg1Jsjlls/ |
 
 To swap one out, replace the two URLs in its card — `data-instgrm-permalink`
 on the `<blockquote>` and the `href` on the `<a>` inside it, which are the
@@ -109,7 +109,11 @@ Two things to know:
   styled rather than left blank.
 - **The embeds are Instagram's own light-themed cards**, served in an iframe
   from instagram.com, so they cannot be restyled to match the dark page. They
-  will read as white cards on black.
+  will read as white cards on black. The card you see *is* the embed — the
+  page draws no tile behind it, since a tile of its own only ever showed as a
+  mismatched frame around the edges.
+- Keep the four posts the same shape. A reel embed is much taller than a
+  photo one, and the row goes ragged.
 
 `<script async src="https://www.instagram.com/embed.js"></script>` at the foot
 of `index.html` is what renders them; it needs to stay.
@@ -119,28 +123,55 @@ of `index.html` is what renders them; it needs to stay.
 ## The contact form
 
 The box at the foot of the home page takes a name, an email and a message,
-and is addressed to **boxalmatch@gmail.com**.
+addressed to **boxalmatch@gmail.com**. It has two modes.
 
-There is no server behind GitHub Pages, so by default the form hands the
-finished message to the visitor's own mail client, pre-addressed and
-pre-filled. That works everywhere with no setup, but the visitor has to press
-send in their mail app, and it does nothing useful for someone browsing on a
-machine with no mail client configured — which is why the address is also
-printed as a link under the button, and in the footer.
+**As shipped**, with `data-endpoint` empty, it hands the finished message to
+the visitor's own mail client — pre-addressed, with a subject and the body
+already filled in. No setup, no third party, works offline of any service,
+but the visitor still has to press send in their mail app, and it does
+nothing for someone on a machine with no mail client configured. That is why
+the address is also printed as a link under the button and in the footer.
 
-To have messages posted properly instead, create a form at a service such as
-[Formspree](https://formspree.io) with `boxalmatch@gmail.com` as the
-destination, then put its endpoint on the form in `index.html`:
+**With a form service wired up**, the message is posted in the background and
+the visitor never leaves the page.
 
-```html
-<form class="jform" data-endpoint="https://formspree.io/f/YOUR_ID" method="POST" novalidate>
-```
+### Wiring up Formspree
 
-With `data-endpoint` set, the form posts in the background and the visitor
-stays on the page; the mail-client path is only used when it is empty.
+Someone with access to the boxalmatch@gmail.com inbox has to do this — it
+needs a sign-up and an email confirmation.
 
-To change the destination address, edit `EMAIL` in `js/main.js` — it is used
-for both paths and for the fallback link.
+1. Go to <https://formspree.io> and create an account. Use
+   **boxalmatch@gmail.com**, so the form's mail arrives where you already
+   read it. Confirm the address from the email they send.
+2. Create a form (New project → New form). Name it something recognisable —
+   "Sito BOXALMATCH" — and set the recipient to boxalmatch@gmail.com.
+3. Copy the form's endpoint. It looks like `https://formspree.io/f/abcdwxyz`.
+4. In `index.html`, put it on the form:
+
+   ```html
+   <form class="jform" data-endpoint="https://formspree.io/f/abcdwxyz" method="POST" novalidate>
+   ```
+
+5. Commit, push, wait for Pages to redeploy, then send yourself a test
+   message from the live site.
+6. **The first submission from a new domain has to be confirmed.** Formspree
+   emails you a "confirm this form" link the first time; until you click it,
+   messages are held rather than delivered. Send one test, click the link,
+   send a second to check it arrives clean.
+
+Notes:
+
+- The free plan allows 50 submissions a month. Past that, Formspree holds
+  them until the next month or an upgrade.
+- The hidden `_subject` field sets the subject line Formspree puts on the
+  email. Edit it in `index.html` to change what you see in the inbox.
+- The visitor's address goes through as the `email` field, so replying to the
+  notification replies to them.
+- If a submission fails, the form says so and falls back to showing the
+  address — it does not silently swallow the message.
+
+To change the destination address for both modes, edit `EMAIL` in
+`js/main.js`.
 
 ---
 
