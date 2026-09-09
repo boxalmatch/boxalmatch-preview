@@ -124,9 +124,18 @@ const thead = document.createElement("thead");
 const headerRow = document.createElement("tr");
 headerRow.classList.add("sub-header");
 
+// Display-only IT/EN labels; the raw header string `h` still drives all the
+// column-type logic below, so matching on it stays intact.
+const HEADER_LABELS = { "Guerre": "Wars", "Giocatore": "Player" };
+
 headers.forEach(h => {
     const th = document.createElement("th");
-    th.textContent = h;
+    if (HEADER_LABELS[h.trim()]) {
+        th.innerHTML = '<span lang="it">' + h.trim() + '</span>'
+                     + '<span lang="en">' + HEADER_LABELS[h.trim()] + '</span>';
+    } else {
+        th.textContent = h;
+    }
 
     // dataset.type per la logica colori
     const guildColumns = ["Ad","Aq","B","C","P","S","Vk","Va"];
