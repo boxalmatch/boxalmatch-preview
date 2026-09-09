@@ -232,6 +232,7 @@ header > nav > ul {
     list-style: none;
     justify-content: flex-start;
     align-items: center;
+    height: 48px;
     min-height: 48px;
     max-width: 1024px;
     margin-left: auto;
@@ -267,43 +268,25 @@ header > nav > ul > li.brand > img {
 
 header > nav > ul > li.brand > a { padding: 0; display: flex; align-items: center; }
 
+/* Exactly the home page's nav links: same size, same weight, same dim-to-full
+   opacity on hover, no padding (which was making this bar 54px against the
+   home page's 48px) and no underline under the active item — the home page
+   marks nothing, and the rule drew a green line across the foot of the bar. */
 header > nav > ul > li > a {
     position: relative;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
     letter-spacing: -0.01em;
     color: var(--ink);
     opacity: 0.85;
     display: block;
-    padding: 16px 0;
+    padding: 0;
 }
 
-header > nav > ul > li > a:before {
-    content: '';
-    height: 2px;
-    width: 100%;
-    position: absolute;
-    background-color: var(--primary-color);
-    bottom: 6px;
-    left: 0;
-    transform: scale3d(0, 1, 1);
-    transition: transform 0.15s;
-}
-
-header > nav > ul > li:hover > a {
-    color: var(--primary-color);
-    opacity: 1;
-}
-
+header > nav > ul > li:hover > a,
 header > nav .active > a {
     opacity: 1;
-}
-
-header > nav .active > a::before {
-    transform: scale3d(1, 1, 1);
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 0.3s;
 }
 
 /* ---------- slider / hero ---------- */
@@ -1334,7 +1317,20 @@ footer a:hover { text-decoration: underline; }
 }
 
 @media (min-width: 761px) {
-    #main-header { transition: background-color 0.2s; }
+    /* 48px total including the hairline, as on the home page — without an
+       explicit height the bar took the row's 48px and added the border on
+       top, coming out a pixel taller. Scoped to desktop: on mobile this
+       header also holds the burger bar, which is taller. */
+    #main-header {
+        height: 48px;
+        transition: background-color 0.2s;
+    }
+
+    #main-header > nav,
+    #main-header > nav > ul {
+        height: 100%;
+        min-height: 0;
+    }
 }
 
 @media (hover: hover) {
