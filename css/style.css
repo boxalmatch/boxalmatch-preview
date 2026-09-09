@@ -840,13 +840,18 @@ a.partner:hover{
   text-decoration:none;
 }
 
-/* Most shop logos are black on white, which vanishes on this page. Inverting
-   puts them back to white on black without needing a second artwork file. */
+/* Most shop logos are supplied as black artwork on a white canvas, which
+   would vanish on this page. invert() turns the mark white and the canvas
+   black; screen blending then drops that black out entirely, so the logo
+   sits on the card rather than inside a black rectangle. A logo that is
+   already light, or a transparent PNG, wants .partner.plain-logo instead. */
 .partner img{
   width:auto; max-width:100%; max-height:120px;
   margin-bottom:10px;
-  filter:invert(1) brightness(1.9);
+  filter:invert(1);
+  mix-blend-mode:screen;
 }
+.partner.plain-logo img{ filter:none; mix-blend-mode:normal; }
 
 .partner-name{
   font-size:19px; font-weight:600; letter-spacing:-0.02em;

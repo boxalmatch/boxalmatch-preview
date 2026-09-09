@@ -470,8 +470,11 @@
       <!-- give this a real link when you have one:
            <a class="partner" href="..." target="_blank" rel="noopener"> ... </a> -->
       <div class="partner">
-        <img src="img/partners/panda.png" alt="PANDA — Pizza e Pane" loading="lazy" decoding="async"
-             onerror="this.closest('.partner').classList.add('no-logo')">
+        <!-- .jpg first, then .png, then the wordmark below carries the card:
+             whichever file gets uploaded works, and nothing renders broken. -->
+        <img src="img/partners/panda.jpg" alt="PANDA — Pizza e Pane" loading="lazy" decoding="async"
+             onerror="if(!this.dataset.retried){this.dataset.retried=1;this.src='img/partners/panda.png';}
+                      else{this.closest('.partner').classList.add('no-logo');}">
         <span class="partner-name">PANDA</span>
         <span class="partner-kind">Pizza e Pane</span>
       </div>
