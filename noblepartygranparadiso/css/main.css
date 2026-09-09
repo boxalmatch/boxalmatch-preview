@@ -29,7 +29,12 @@
     --hair: #2a2a2e;
     /* the edge of anything clickable or typable, where WCAG wants 3:1 */
     --hair-strong: #5a5a63;
+    /* Tiles sit on pure black, so a flat near-black fill disappears into the
+       page. These are frosted greys instead: a translucent white wash with a
+       blur behind it and a lit top edge, which reads as a raised surface. */
     --glass: rgba(255, 255, 255, 0.055);
+    --glass-2: rgba(255, 255, 255, 0.085);
+    --glass-blur: blur(26px) saturate(150%);
     --glass-strong: rgba(255, 255, 255, 0.09);
     --glass-hair: rgba(255, 255, 255, 0.12);
     --r: 18px;
@@ -387,9 +392,11 @@ header > nav .active > a::before {
     scroll-snap-align: center;
     border-radius: var(--r-lg);
     overflow: hidden;
-    background-color: var(--surface-2);
-    border: 1px solid var(--hair);
-    box-shadow: var(--shadow-lg);
+    background-color: var(--glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-hair);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, var(--shadow-lg);
     transition: transform .4s cubic-bezier(.2,.7,.3,1), border-color .3s;
 }
 
@@ -444,22 +451,53 @@ header > nav .active > a::before {
     font-size: 0.8em;
 }
 
-/* counter now sits with the controls, under the rail */
-.episode-number {
-    position: static;
+/* The "No. #n" counter is replaced by a row of position dots, so the pill is
+   hidden rather than removed: the markup for it is in 24 legacy pages and the
+   old inline scripts still reach for it. */
+.episode-number { display: none !important; }
+
+/* Instagram-style position dots. A live control, not decoration: each dot is
+   a button that scrolls its slide into view, and the row is a tablist so it
+   works from the keyboard. Rails longer than the window show a sliding set
+   with the outer dots shrinking, rather than a 12-dot centipede. */
+.rail-dots {
+    --dot-slot: 14px;
     order: 2;
-    align-self: center;
-    background: rgba(255, 255, 255, 0.06);
-    border: 1px solid var(--hair);
-    padding: 5px 13px;
-    font-family: var(--font);
-    font-size: 0.72em;
-    letter-spacing: 0.03em;
-    color: var(--ink-muted);
-    border-radius: 980px;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    overflow: hidden;
+    margin: 0 4px;
+    max-width: calc(var(--dot-slot) * 7);
 }
+
+.rail-dots > .dots-track {
+    display: flex;
+    align-items: center;
+    transition: transform .3s cubic-bezier(.2, .7, .3, 1);
+}
+
+.rail-dots button {
+    /* the 14px slot is width + margins, not flex-basis: a basis wider than the
+       height would stretch each dot into a pill */
+    flex: 0 0 7px;
+    width: 7px;
+    height: 7px;
+    padding: 0;
+    margin: 0 3.5px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.26);
+    cursor: pointer;
+    transition: background-color .25s, transform .25s, opacity .25s;
+}
+
+.rail-dots button:hover { background: rgba(255, 255, 255, 0.45); }
+
+.rail-dots button.on {
+    background: var(--primary-color);
+    transform: scale(1.25);
+}
+
+.rail-dots button.near { transform: scale(.72); opacity: .75; }
+.rail-dots button.far  { transform: scale(.45); opacity: .5; }
 
 .season > .episodes,
 .season > .episodes > .episode {
@@ -504,6 +542,9 @@ header > nav .active > a::before {
     align-items: center;
     gap: 12px;
 }
+
+.controls > .prev { order: 1; }
+.controls > .next { order: 3; }
 
 .controls > button {
     background: rgba(255, 255, 255, 0.07);
@@ -572,15 +613,18 @@ header > nav .active > a::before {
     margin-bottom: 0;
     display: flex;
     flex-direction: column;
-    background-color: var(--surface);
-    border: 1px solid var(--hair);
+    background-color: var(--glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-hair);
     border-radius: 18px;
     overflow: hidden;
-    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.4);
-    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06) inset, 0 12px 48px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
 
 #character-profile > .character:hover {
+    background-color: var(--glass-2);
     transform: translateY(-4px);
     box-shadow: 0 16px 56px rgba(0, 0, 0, 0.55);
 }

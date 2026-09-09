@@ -15,6 +15,13 @@
      click or type into, where WCAG wants 3:1 against the page */
   --hair:        #2a2a2e;
   --hair-strong: #5a5a63;
+  /* Tiles sit on pure black, so a flat near-black fill disappears into the
+     page. These are frosted greys instead: a translucent white wash with a
+     blur behind it and a lit top edge, which reads as a raised surface. */
+  --glass:       rgba(255, 255, 255, 0.055);
+  --glass-2:     rgba(255, 255, 255, 0.085);
+  --glass-hair:  rgba(255, 255, 255, 0.13);
+  --glass-blur:  blur(26px) saturate(150%);
   --accent:      #2fd94f;
   --accent-hov:  #55e36f;
   /* the display italic sits at 60px+, where the full-strength green is too hot */
@@ -30,6 +37,19 @@
           "Helvetica Neue", Helvetica, Arial, sans-serif;
   --font-display: "Instrument Serif", "Iowan Old Style", Georgia,
           "Times New Roman", serif;
+}
+
+.tile,
+.val, .vcard, .ecard, .igcard, .ch, .m-tile, .m-event{
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-hair);
+  box-shadow:0 1px 0 rgba(255,255,255,0.06) inset, var(--shadow);
+}
+.val:hover, .vcard:hover, .ecard:hover, .m-tile:hover, .m-event:hover{
+  background:var(--glass-2);
+  border-color:rgba(255,255,255,0.2);
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -239,24 +259,13 @@ p{ margin:0; }
   transition:transform .5s cubic-bezier(.2,.7,.3,1), box-shadow .5s;
 }
 .fan-card:hover{ text-decoration:none; }
-/* The event artwork is 16:9 with its title set across the middle, so cropping
-   it into a portrait card beheads every one of them. Instead the same image is
-   laid down twice: a blurred, scaled copy fills the card edge to edge, and the
-   untouched artwork sits on top of it. Nothing is cropped and the card still
-   reads as a solid object rather than a letterboxed frame. */
-.fan-card .fan-fill{
-  position:absolute; inset:0;
-  width:100%; height:100%; object-fit:cover;
-  transform:scale(1.25);
-  filter:blur(26px) saturate(150%) brightness(.62);
+/* The posters are pre-composed at 4:5 (see tools that build
+   img/events/portrait): the artwork is whole and the frame around it is grown
+   from the image itself, so the card can simply cover with nothing cropped. */
+.fan-card img{
+  width:100%; height:100%;
+  object-fit:cover;
 }
-.fan-card .fan-art{
-  position:absolute; top:50%; left:0;
-  transform:translateY(-50%);
-  width:100%; height:auto;
-}
-/* scrim: the card name is white over a photo, so it carries its own
-   background rather than relying on whatever the image happens to be */
 .fan-card::after{
   content:"";
   position:absolute; inset:0;
@@ -386,7 +395,6 @@ p{ margin:0; }
   margin-top:56px;
 }
 .val{
-  background:var(--surface);
   border-radius:var(--r);
   padding:26px 24px;
 }
@@ -410,9 +418,41 @@ p{ margin:0; }
 .rail > *{ scroll-snap-align:center; flex:0 0 auto; }
 
 .arrows{
-  display:flex; gap:10px; justify-content:flex-end;
-  padding:0 22px; margin-top:-8px;
+  display:flex; gap:14px; justify-content:center; align-items:center;
+  padding:0 22px; margin-top:2px;
 }
+.arrow:disabled{ opacity:.3; cursor:default; }
+
+/* Instagram-style position dots. A live control, not decoration: each dot is
+   a button that scrolls its slide into view, and the group is a tablist so it
+   is reachable from the keyboard. Rails longer than the window show a sliding
+   set with the outer dots shrinking, rather than a 12-dot centipede. */
+.dots{
+  --dot-slot:14px;
+  overflow:hidden;
+  margin:0 4px;
+  max-width:calc(var(--dot-slot) * 7);
+}
+.dots-track{
+  display:flex; align-items:center;
+  transition:transform .3s cubic-bezier(.2,.7,.3,1);
+}
+.dot{
+  /* the 14px slot is width + margins, not flex-basis: a basis wider than the
+     height would stretch each dot into a pill */
+  flex:0 0 7px;
+  width:7px; height:7px; padding:0;
+  border:0; border-radius:50%;
+  background:rgba(255,255,255,0.26);
+  cursor:pointer;
+  margin:0 3.5px;
+  transition:background .25s, transform .25s, opacity .25s;
+}
+.dot:hover{ background:rgba(255,255,255,0.45); }
+.dot.on{ background:var(--accent); transform:scale(1.25); }
+.dot.near{ transform:scale(.72); opacity:.75; }
+.dot.far{ transform:scale(.45); opacity:.5; }
+.dot:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
 .arrow{
   width:36px; height:36px; border-radius:50%;
   border:0; cursor:pointer;
@@ -428,10 +468,8 @@ p{ margin:0; }
 /* video card */
 .vcard{
   width:min(560px,84vw);
-  background:var(--surface);
   border-radius:var(--r);
   overflow:hidden;
-  box-shadow:var(--shadow);
 }
 .vframe{
   position:relative;
@@ -482,9 +520,7 @@ p{ margin:0; }
   border-radius:var(--r);
   overflow:hidden;
   position:relative;
-  background:var(--surface-2);
   display:flex; align-items:center; justify-content:center;
-  border:1px solid var(--hair);
 }
 .igcard blockquote{ margin:0 !important; width:100%; }
 .ig-ph{
@@ -502,10 +538,8 @@ p{ margin:0; }
   gap:22px;
 }
 .ecard{
-  background:var(--surface);
   border-radius:var(--r-lg);
   overflow:hidden;
-  box-shadow:var(--shadow);
   display:flex; flex-direction:column;
   transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s;
 }
@@ -558,7 +592,12 @@ p{ margin:0; }
   pointer-events:none;
 }
 .ch > *{ position:relative; z-index:1; }
-.ch .glyph{ font-size:26px; margin-bottom:auto; }
+.ch .logo{
+  width:34px; height:34px;
+  margin-bottom:auto;
+  color:#fff;
+  filter:drop-shadow(0 2px 6px rgba(0,0,0,0.45));
+}
 .ch h3{ font-size:24px; letter-spacing:-0.022em; }
 .ch span{ font-size:15px; color:rgba(255,255,255,.92); }
 
@@ -581,8 +620,12 @@ p{ margin:0; }
   padding:13px 18px;
   border-radius:980px;
   border:1px solid var(--hair-strong);
-  background:var(--surface);
   color:var(--ink);
+}
+.jform input{
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
 }
 .jform input::placeholder{ color:var(--ink-3); }
 .jform input:focus{ outline:none; border-color:var(--accent); }

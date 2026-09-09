@@ -88,12 +88,75 @@
   function initRails() {
     var btns = document.querySelectorAll('.arrow[data-rail]');
 
-    function sync(rail, group) {
+    // Position along the rail, mapped evenly onto the dots. Nearest-to-centre
+    // reads wrong when two and a half cards are visible at once: at rest the
+    // rail is at scrollLeft 0 but the card nearest the centre is the second
+    // one, so the indicator would open on dot 2.
+    function current(rail) {
+      var n = rail.children.length;
+      var max = rail.scrollWidth - rail.clientWidth;
+      if (n < 2 || max <= 0) return 0;
+      return Math.min(n - 1, Math.max(0, Math.round(rail.scrollLeft / max * (n - 1))));
+    }
+
+    function sync(rail, group, dots) {
       var max = rail.scrollWidth - rail.clientWidth - 2;
       for (var i = 0; i < group.length; i++) {
         var dir = parseInt(group[i].getAttribute('data-dir'), 10);
         group[i].disabled = dir < 0 ? rail.scrollLeft <= 2 : rail.scrollLeft >= max;
       }
+      if (!dots) return;
+      paintDots(dots, current(rail));
+    }
+
+    // Instagram's sliding dot window: the active dot stays centred, the ones
+    // either side of it shrink, and anything past the window is off the strip.
+    var WINDOW = 7;
+
+    function paintDots(dots, at) {
+      var track = dots.firstElementChild;
+      var kids = track.children;
+      var n = kids.length;
+      for (var i = 0; i < n; i++) {
+        var off = Math.abs(i - at);
+        kids[i].className = 'dot' + (i === at ? ' on' : off === 2 ? ' near' : off > 2 ? ' far' : '');
+        kids[i].setAttribute('aria-selected', i === at ? 'true' : 'false');
+        kids[i].tabIndex = i === at ? 0 : -1;
+      }
+      if (n <= WINDOW) { track.style.transform = ''; return; }
+      var slot = parseFloat(getComputedStyle(dots).getPropertyValue('--dot-slot')) || 14;
+      // clamp so the strip never scrolls past either end
+      var shift = Math.min(Math.max(at - (WINDOW - 1) / 2, 0), n - WINDOW);
+      track.style.transform = 'translateX(' + (-shift * slot) + 'px)';
+    }
+
+    // one dot per slide, dropped between the two arrows
+    function buildDots(rail, arrows) {
+      if (rail.children.length < 2) return null;
+      var dots = document.createElement('div');
+      dots.className = 'dots';
+      dots.setAttribute('role', 'tablist');
+      dots.setAttribute('aria-label', 'Slides');
+      var track = document.createElement('div');
+      track.className = 'dots-track';
+      dots.appendChild(track);
+      for (var i = 0; i < rail.children.length; i++) {
+        (function (i) {
+          var d = document.createElement('button');
+          d.type = 'button';
+          d.className = 'dot';
+          d.setAttribute('role', 'tab');
+          d.setAttribute('aria-label', 'Slide ' + (i + 1));
+          d.addEventListener('click', function () {
+            var c = rail.children[i];
+            rail.scrollTo({ left: c.offsetLeft - (rail.clientWidth - c.offsetWidth) / 2, behavior: 'smooth' });
+          });
+          track.appendChild(d);
+        })(i);
+      }
+      // between prev and next, so the row reads  <  ....  >
+      arrows.insertBefore(dots, arrows.lastElementChild);
+      return dots;
     }
 
     var seen = {};
@@ -112,9 +175,10 @@
         if (!seen[id]) {
           seen[id] = true;
           var group = document.querySelectorAll('.arrow[data-rail="' + id + '"]');
-          rail.addEventListener('scroll', function () { sync(rail, group); });
-          window.addEventListener('resize', function () { sync(rail, group); });
-          setTimeout(function () { sync(rail, group); }, 60);
+          var dots = buildDots(rail, btn.parentNode);
+          rail.addEventListener('scroll', function () { sync(rail, group, dots); });
+          window.addEventListener('resize', function () { sync(rail, group, dots); });
+          setTimeout(function () { sync(rail, group, dots); }, 60);
         }
       })(btns[i]);
     }

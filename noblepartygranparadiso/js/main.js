@@ -47,27 +47,87 @@ function railItems(rail) {
     return rail ? rail.querySelectorAll(".episode") : [];
 }
 
+function railDots(rail) {
+    const wrap = rail.closest(".episodes-wrap");
+    return wrap ? wrap.querySelector(".rail-dots") : null;
+}
+
+// Position along the rail, mapped evenly onto the dots. Nearest-to-centre
+// reads wrong on the wider rails: at rest the rail is at scrollLeft 0 but the
+// card nearest the centre can be the second one, so the indicator would open
+// on dot 2.
+function railIndex(rail) {
+    const n = railItems(rail).length;
+    const max = rail.scrollWidth - rail.clientWidth;
+    if (n < 2 || max <= 0) return 0;
+    return Math.min(n - 1, Math.max(0, Math.round(rail.scrollLeft / max * (n - 1))));
+}
+
 function updateRailCounter(rail) {
     const wrap = rail.closest(".episodes-wrap");
     if (!wrap) return;
-    const counter = wrap.querySelector(".episode-number");
     const items = railItems(rail);
-    if (!counter || !items.length) return;
+    if (!items.length) return;
 
-    // the item whose centre is nearest the rail's centre is the current one
-    const mid = rail.scrollLeft + rail.clientWidth / 2;
-    let best = 0, bestDist = Infinity;
-    items.forEach((item, i) => {
-        const c = item.offsetLeft + item.offsetWidth / 2;
-        const d = Math.abs(c - mid);
-        if (d < bestDist) { bestDist = d; best = i; }
-    });
-    counter.innerHTML = "No. #" + (best + 1);
+    const dots = railDots(rail);
+    if (dots) paintRailDots(dots, railIndex(rail));
 
     const prev = wrap.querySelector(".controls .prev");
     const next = wrap.querySelector(".controls .next");
     if (prev) prev.disabled = rail.scrollLeft <= 2;
     if (next) next.disabled = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 2;
+}
+
+/* Instagram's sliding dot window: the active dot stays centred, the ones
+   either side of it shrink, and anything past the window is off the strip.
+   Some of these rails carry a dozen photos, which as a flat row of dots reads
+   as a centipede rather than a position indicator. */
+const DOT_WINDOW = 7;
+
+function paintRailDots(dots, at) {
+    const track = dots.firstElementChild;
+    const kids = track.children;
+    const n = kids.length;
+    for (let i = 0; i < n; i++) {
+        const off = Math.abs(i - at);
+        kids[i].className = i === at ? "on" : off === 2 ? "near" : off > 2 ? "far" : "";
+        kids[i].setAttribute("aria-selected", i === at ? "true" : "false");
+        kids[i].tabIndex = i === at ? 0 : -1;
+    }
+    if (n <= DOT_WINDOW) { track.style.transform = ""; return; }
+    const slot = parseFloat(getComputedStyle(dots).getPropertyValue("--dot-slot")) || 14;
+    // clamp so the strip never scrolls past either end
+    const shift = Math.min(Math.max(at - (DOT_WINDOW - 1) / 2, 0), n - DOT_WINDOW);
+    track.style.transform = `translateX(${-shift * slot}px)`;
+}
+
+function buildRailDots(rail, controls) {
+    const items = railItems(rail);
+    if (!controls || items.length < 2) return;
+
+    const dots = document.createElement("div");
+    dots.className = "rail-dots";
+    dots.setAttribute("role", "tablist");
+    dots.setAttribute("aria-label", "Slides");
+    const track = document.createElement("div");
+    track.className = "dots-track";
+    dots.appendChild(track);
+
+    items.forEach((item, i) => {
+        const d = document.createElement("button");
+        d.type = "button";
+        d.setAttribute("role", "tab");
+        d.setAttribute("aria-label", "Slide " + (i + 1));
+        d.addEventListener("click", () => {
+            rail.scrollTo({
+                left: item.offsetLeft - (rail.clientWidth - item.offsetWidth) / 2,
+                behavior: "smooth"
+            });
+        });
+        track.appendChild(d);
+    });
+
+    controls.appendChild(dots);   // CSS order puts it between the two arrows
 }
 
 function scrollRail(rail, dir) {
@@ -92,6 +152,7 @@ function initEpisodeRails() {
         if (controls) wrap.appendChild(controls);
         if (counter && controls) controls.appendChild(counter);
         else if (counter) wrap.appendChild(counter);
+        buildRailDots(rail, controls);
 
         // clear any inline opacity left over from the old cross-fade
         railItems(rail).forEach(ep => {
