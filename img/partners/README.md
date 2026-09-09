@@ -6,14 +6,22 @@ then .png).
 Until a file is present the card falls back to showing the partner's name as
 text, so nothing ever renders as a broken image.
 
-Black-on-white artwork is handled automatically: CSS inverts it and then
-blends it with `screen`, so the white canvas drops out entirely and only the
-mark is left, white, on the card. Nothing needs preparing for that.
+Upload the logo as it comes — black artwork on a white canvas is fine — then
+run it through the converter, which makes the mark white, the canvas
+transparent, and trims the margin:
 
-Two things do help:
+    python3 tools/partner_logo.py img/partners/NAME.jpg
 
-- **Trim the white margin before uploading.** The card scales the whole file
-  to 120px tall, so a wordmark sitting in a large empty canvas ends up small.
-- **A logo that is already light, or a transparent PNG,** should skip the
-  inversion — add `plain-logo` to its card:
-  `<div class="partner plain-logo">`.
+That writes `NAME.png` next to it. Point the card at the `.png` and mark it
+`plain-logo`, which skips the CSS inversion:
+
+    <div class="partner plain-logo">
+      <img src="img/partners/NAME.png" ...>
+
+Doing it in the file rather than in CSS is deliberate: inverting in CSS leaves
+a black rectangle on the card, and `mix-blend-mode: screen` does not drop it
+out, because `.partner` carries a `backdrop-filter` and that isolates the
+blend. JPEG compression also puts the "white" at 254 rather than 255, so
+there is nothing clean for a blend mode to key on.
+
+The original upload can stay in the folder; only the `.png` is referenced.

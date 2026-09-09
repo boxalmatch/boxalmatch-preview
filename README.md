@@ -164,22 +164,24 @@ switch on — add the markup and it happens.
 To make a card link out, swap the `<div>` for
 `<a class="partner" href="..." target="_blank" rel="noopener">`.
 
-Two things about the logo:
+Logos live in `img/partners/`. Upload one as it comes — black artwork on a
+white canvas is fine — then convert it:
 
-- **`img/partners/panda.jpg` is not in the repository yet.** Until it is, the
-  card falls back to the wordmark as text — that is what the `onerror` does,
-  so no broken-image icon ever shows. The card tries `.jpg` and then `.png`,
-  so either upload works. To add it from the browser: open the repository on
-  GitHub, go to `img/partners/`, **Add file → Upload files**, drop the logo
-  in and commit.
-- Shop logos usually arrive as black artwork on a white canvas, which would
-  vanish on this page. CSS inverts them and blends with `screen`, so the
-  canvas drops out entirely and only the mark is left, white, on the card —
-  no black rectangle, nothing to prepare. Trim the file's white margin before
-  uploading, though: the card scales the whole image to 120px tall, so a
-  wordmark in a big empty canvas ends up small. A logo that is already light,
-  or a transparent PNG, should skip the inversion — add `plain-logo` to its
-  card.
+```
+python3 tools/partner_logo.py img/partners/NAME.jpg
+```
+
+That writes a `.png` beside it with the mark white, the canvas transparent and
+the margin trimmed. Point the card at that `.png` and give it `plain-logo`,
+which skips the CSS inversion. Doing this in the file rather than in CSS is
+deliberate: inverting in CSS leaves a black rectangle on the card, and screen
+blending does not drop it out, because `.partner` has a `backdrop-filter` and
+that isolates the blend.
+
+If a card has no logo file, `onerror` falls it back to the partner's name as
+text, so nothing ever renders as a broken image. When a logo does load, that
+name is hidden — it would only repeat what the logo already says, and the
+`alt` carries the same words.
 
 ---
 

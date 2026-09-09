@@ -840,18 +840,18 @@ a.partner:hover{
   text-decoration:none;
 }
 
-/* Most shop logos are supplied as black artwork on a white canvas, which
-   would vanish on this page. invert() turns the mark white and the canvas
-   black; screen blending then drops that black out entirely, so the logo
-   sits on the card rather than inside a black rectangle. A logo that is
-   already light, or a transparent PNG, wants .partner.plain-logo instead. */
+/* Shop logos arrive as black artwork on a white canvas. Inverting them here
+   leaves a black rectangle on the card, and screen blending does not drop it
+   out, because .partner has a backdrop-filter and that isolates the blend —
+   so the transparency is baked into the file instead by
+   tools/partner_logo.py, and such a logo is marked .plain-logo. The invert
+   below is the fallback for a raw black-on-white file dropped straight in. */
 .partner img{
   width:auto; max-width:100%; max-height:120px;
   margin-bottom:10px;
   filter:invert(1);
-  mix-blend-mode:screen;
 }
-.partner.plain-logo img{ filter:none; mix-blend-mode:normal; }
+.partner.plain-logo img{ filter:none; }
 
 .partner-name{
   font-size:19px; font-weight:600; letter-spacing:-0.02em;
@@ -859,7 +859,11 @@ a.partner:hover{
 }
 .partner-kind{ font-size:14px; color:var(--ink-2); }
 
-/* until the logo file is added, the wordmark carries the card on its own */
+/* The name and kind are the fallback for a card with no logo file yet. When a
+   logo does load they would just repeat what it already says, so they step
+   aside — the img's alt carries the same words for anyone not seeing it. */
 .partner img{ display:block; }
 .partner.no-logo img{ display:none; }
+.partner:not(.no-logo) .partner-name,
+.partner:not(.no-logo) .partner-kind{ display:none; }
 .partner.no-logo .partner-name{ font-size:26px; }
