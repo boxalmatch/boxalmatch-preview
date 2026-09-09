@@ -515,14 +515,34 @@ p{ margin:0; }
 
 /* instagram card */
 .igcard{
-  width:min(320px,74vw);
-  aspect-ratio:4/5;
+  width:min(340px,80vw);
   border-radius:var(--r);
   overflow:hidden;
   position:relative;
   display:flex; align-items:center; justify-content:center;
 }
-.igcard blockquote{ margin:0 !important; width:100%; }
+/* Instagram's own embed is a light card with its own fixed sizing. Let it set
+   the height, but stop its inline min-width:326px from overflowing the rail on
+   a narrow screen, and drop its margins so it fills the tile. */
+.igcard .instagram-media{
+  min-width:0 !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:var(--r) !important;
+  box-shadow:none !important;
+  background:transparent !important;
+}
+/* what shows while embed.js loads, or if it is blocked outright */
+.igcard .instagram-media > a{
+  display:flex; align-items:center; justify-content:center;
+  min-height:420px; padding:26px;
+  text-align:center; font-size:15px; line-height:1.5;
+  color:var(--ink-2);
+}
+.igcard .instagram-media > a:hover{ color:var(--ink); text-decoration:none; }
+
 .ig-ph{
   text-align:center; padding:26px;
   color:var(--ink-3); font-size:14px; line-height:1.5;

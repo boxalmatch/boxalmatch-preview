@@ -73,29 +73,46 @@ To add a card, copy an existing `<article class="vcard">` and change:
 
 ## The Instagram carousel
 
-The four cards in the Instagram rail are **empty placeholders**. Instagram's
-embed system needs the permalink of each specific post, which I don't have.
+The four cards in the Instagram rail are live embeds, wired to these posts:
 
-To fill them in:
+| # | Post |
+|---|------|
+| 1 | https://www.instagram.com/p/DaSju9UgC-P/ |
+| 2 | https://www.instagram.com/p/DSE85yDAMJT/ |
+| 3 | https://www.instagram.com/p/DEMkfnUg_3a/ |
+| 4 | https://www.instagram.com/reel/DbtJdszMyKD/ |
 
-1. On Instagram, open a post → `…` → **Embed** → **Copy embed code**
-2. Replace the whole `<div class="igcard">…</div>` block with:
+To swap one out, replace the two URLs in its card — `data-instgrm-permalink`
+on the `<blockquote>` and the `href` on the `<a>` inside it, which are the
+same link:
 
 ```html
 <div class="igcard">
-  <blockquote class="instagram-media" data-instgrm-permalink="PASTE_POST_URL"
-              data-instgrm-version="14"></blockquote>
+  <blockquote class="instagram-media" data-instgrm-permalink="POST_URL"
+              data-instgrm-version="14">
+    <a href="POST_URL" target="_blank" rel="noopener">
+      <span lang="it">Guarda il post su Instagram</span><span lang="en">View this post on Instagram</span>
+    </a>
+  </blockquote>
 </div>
 ```
 
-3. Add this once, just before `</body>`:
+Use the bare permalink. Instagram's share menu appends `?utm_source=…&stkn=…`
+— the `stkn` is a share token tied to your account, so strip it rather than
+publishing it.
 
-```html
-<script async src="https://www.instagram.com/embed.js"></script>
-```
+Two things to know:
 
-Instagram embeds only render on a real domain, so they'll look blank when
-opening the file locally — that's expected, they appear once deployed.
+- **They only render on a real domain.** Opening the file locally shows the
+  `<a>` fallback instead — a plain "View this post on Instagram" tile. That is
+  also what visitors with a tracker blocker see, which is why the fallback is
+  styled rather than left blank.
+- **The embeds are Instagram's own light-themed cards**, served in an iframe
+  from instagram.com, so they cannot be restyled to match the dark page. They
+  will read as white cards on black.
+
+`<script async src="https://www.instagram.com/embed.js"></script>` at the foot
+of `index.html` is what renders them; it needs to stay.
 
 ---
 
