@@ -16,17 +16,19 @@
    ============================================================ */
 
 :root {
-    --main-bg-color: #0a0a0c;
-    --main-bg-color-fade-5: rgba(10, 10, 12, 0.6);
+    --main-bg-color: #000000;
+    --main-bg-color-fade-5: rgba(0, 0, 0, 0.6);
     --primary-color: #2fd94f;
     --primary-shade-color: #1ea83a;
     --secundary-color: #6e6e73;
 
-    --ink: #f5f5f7;
-    --ink-muted: #a1a1a6;
-    --surface: #17171a;
-    --surface-2: #121215;
-    --hair: #2c2c31;
+    --ink: #ffffff;
+    --ink-muted: #a8a8ae;
+    --surface: #0c0c0e;
+    --surface-2: #050506;
+    --hair: #2a2a2e;
+    /* the edge of anything clickable or typable, where WCAG wants 3:1 */
+    --hair-strong: #5a5a63;
     --glass: rgba(255, 255, 255, 0.055);
     --glass-strong: rgba(255, 255, 255, 0.09);
     --glass-hair: rgba(255, 255, 255, 0.12);
@@ -59,12 +61,7 @@ html { scroll-behavior: smooth; }
 
 body {
     background-color: var(--main-bg-color);
-    background-image:
-        radial-gradient(1100px 620px at 78% -8%, rgba(47, 217, 79, 0.055), transparent 62%),
-        radial-gradient(900px 520px at 8% 6%, rgba(120, 140, 255, 0.045), transparent 60%),
-        linear-gradient(180deg, #101014 0%, #0a0a0c 34%, #0a0a0c 100%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    background-image: none;
 }
 
 body, html {
@@ -99,7 +96,7 @@ a:hover { text-decoration: underline; }
 .lang-toggle {
     display: inline-flex;
     align-items: center;
-    border: 1px solid var(--hair);
+    border: 1px solid var(--hair-strong);
     border-radius: 980px;
     overflow: hidden;
 }

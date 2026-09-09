@@ -3,58 +3,33 @@
    ============================================================ */
 
 :root{
-  --ground:      #fbfbfd;
-  --surface:     #ffffff;
-  --surface-2:   #f5f5f7;
-  --ink:         #1d1d1f;
-  --ink-2:       #5f5f64;
-  --ink-3:       #6e6e73;
-  --hair:        #d2d2d7;
-  --accent:      #00761b;
-  --accent-hov:  #00a026;
-  --nav-bg:      rgba(251,251,253,0.72);
-  --shadow:      0 4px 24px rgba(0,0,0,0.06);
-  --shadow-lg:   0 12px 48px rgba(0,0,0,0.12);
+  color-scheme: dark;
+
+  --ground:      #000000;
+  --surface:     #0c0c0e;
+  --surface-2:   #050506;
+  --ink:         #ffffff;
+  --ink-2:       #a8a8ae;
+  --ink-3:       #86868b;
+  /* hairlines are decorative; --hair-strong is for the edge of anything you can
+     click or type into, where WCAG wants 3:1 against the page */
+  --hair:        #2a2a2e;
+  --hair-strong: #5a5a63;
+  --accent:      #2fd94f;
+  --accent-hov:  #55e36f;
+  /* the display italic sits at 60px+, where the full-strength green is too hot */
+  --accent-soft: #9BE88C;
+  --nav-bg:      rgba(0,0,0,0.72);
+  --shadow:      0 4px 24px rgba(0,0,0,0.6);
+  --shadow-lg:   0 24px 70px rgba(0,0,0,0.8);
   --r:           18px;
   --r-lg:        28px;
   --maxw:        1060px;
   --wide:        1440px;
   --font: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display",
           "Helvetica Neue", Helvetica, Arial, sans-serif;
-}
-
-:root:not([data-theme="light"]) { }
-
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --ground:    #000000;
-    --surface:   #1d1d1f;
-    --surface-2: #161617;
-    --ink:       #f5f5f7;
-    --ink-2:     #a1a1a6;
-    --ink-3:     #86868b;
-    --hair:      #38383c;
-    --accent:    #2fd94f;
-    --accent-hov:#55e36f;
-    --nav-bg:    rgba(0,0,0,0.72);
-    --shadow:    0 4px 24px rgba(0,0,0,0.5);
-    --shadow-lg: 0 12px 48px rgba(0,0,0,0.7);
-  }
-}
-
-:root[data-theme="dark"]{
-  --ground:    #000000;
-  --surface:   #1d1d1f;
-  --surface-2: #161617;
-  --ink:       #f5f5f7;
-  --ink-2:     #a1a1a6;
-  --ink-3:     #86868b;
-  --hair:      #38383c;
-  --accent:    #2fd94f;
-  --accent-hov:#55e36f;
-  --nav-bg:    rgba(0,0,0,0.72);
-  --shadow:    0 4px 24px rgba(0,0,0,0.5);
-  --shadow-lg: 0 12px 48px rgba(0,0,0,0.7);
+  --font-display: "Instrument Serif", "Iowan Old Style", Georgia,
+          "Times New Roman", serif;
 }
 
 *,*::before,*::after{ box-sizing:border-box; }
@@ -131,7 +106,7 @@ p{ margin:0; }
 
 .lang{
   display:inline-flex; align-items:center;
-  border:1px solid var(--hair); border-radius:980px;
+  border:1px solid var(--hair-strong); border-radius:980px;
   overflow:hidden;
 }
 .lang button{
@@ -184,7 +159,7 @@ p{ margin:0; }
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
   text-align:center;
-  padding:60px 22px 80px;
+  padding:clamp(40px,7vh,78px) 22px clamp(28px,5vh,56px);
   position:relative;
   overflow:hidden;
 }
@@ -195,28 +170,156 @@ p{ margin:0; }
   animation:rise .9s cubic-bezier(.2,.7,.3,1) .05s forwards;
 }
 .hero h1{
-  font-size:clamp(42px,7.4vw,86px);
+  font-size:clamp(44px,8vw,104px);
+  font-weight:500;
   letter-spacing:-0.035em;
-  max-width:14ch;
+  line-height:1.02;
+  max-width:16ch;
   opacity:0;
   animation:rise .9s cubic-bezier(.2,.7,.3,1) .18s forwards;
 }
-.hero .sub{
-  margin-top:20px;
-  font-size:clamp(19px,2.3vw,26px);
-  color:var(--ink-2);
-  max-width:34ch;
+/* the display serif, set in the soft green, is the whole signature of this
+   layout - it needs the optical size bump and the tighter leading to sit on
+   the same baseline rhythm as the grotesque around it */
+.hero h1 em{
+  font-family:var(--font-display);
+  font-style:italic;
+  font-weight:400;
+  color:var(--accent-soft);
+  font-size:1.06em;
   letter-spacing:-0.015em;
-  line-height:1.3;
+}
+.hero .sub{
+  margin-top:22px;
+  font-size:clamp(18px,2.1vw,23px);
+  color:var(--ink-2);
+  max-width:38ch;
+  letter-spacing:-0.015em;
+  line-height:1.35;
   opacity:0;
   animation:rise .9s cubic-bezier(.2,.7,.3,1) .3s forwards;
 }
 .hero-cta{
-  margin-top:32px;
+  margin-top:30px;
   display:flex; gap:26px; align-items:center; flex-wrap:wrap; justify-content:center;
   opacity:0;
   animation:rise .9s cubic-bezier(.2,.7,.3,1) .42s forwards;
 }
+
+/* ------------------------------------------------------------
+   HERO FAN
+   A row of event cards turned in 3D so the outer ones recede and
+   bleed off both edges. The rotation is decoration only: every card
+   is a plain link with a visible name, the row keeps DOM order, and
+   hover/focus flattens the card it lands on so nothing is ever read
+   at an angle.
+   ------------------------------------------------------------ */
+.fan{
+  margin-top:clamp(30px,5vh,54px);
+  width:100vw;
+  margin-left:calc(50% - 50vw);
+  padding:0 clamp(10px,3vw,40px);
+  display:flex; justify-content:center; align-items:center;
+  gap:clamp(6px,0.9vw,14px);
+  perspective:1500px;
+  perspective-origin:50% 50%;
+  opacity:0;
+  animation:rise 1.1s cubic-bezier(.2,.7,.3,1) .55s forwards;
+}
+.fan-card{
+  position:relative;
+  flex:0 0 auto;
+  width:clamp(160px,19.5vw,296px);
+  aspect-ratio:4/5;
+  border-radius:clamp(14px,1.4vw,22px);
+  overflow:hidden;
+  background:var(--surface);
+  box-shadow:var(--shadow-lg);
+  transform-style:preserve-3d;
+  transition:transform .5s cubic-bezier(.2,.7,.3,1), box-shadow .5s;
+}
+.fan-card:hover{ text-decoration:none; }
+/* The event artwork is 16:9 with its title set across the middle, so cropping
+   it into a portrait card beheads every one of them. Instead the same image is
+   laid down twice: a blurred, scaled copy fills the card edge to edge, and the
+   untouched artwork sits on top of it. Nothing is cropped and the card still
+   reads as a solid object rather than a letterboxed frame. */
+.fan-card .fan-fill{
+  position:absolute; inset:0;
+  width:100%; height:100%; object-fit:cover;
+  transform:scale(1.25);
+  filter:blur(26px) saturate(150%) brightness(.62);
+}
+.fan-card .fan-art{
+  position:absolute; top:50%; left:0;
+  transform:translateY(-50%);
+  width:100%; height:auto;
+}
+/* scrim: the card name is white over a photo, so it carries its own
+   background rather than relying on whatever the image happens to be */
+.fan-card::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.88) 0%, rgba(0,0,0,.55) 26%, rgba(0,0,0,0) 58%);
+}
+.fan-name{
+  position:absolute; left:0; right:0; bottom:0;
+  z-index:1;
+  padding:0 14px 15px;
+  font-size:clamp(13px,1.15vw,17px);
+  font-weight:600; letter-spacing:-0.02em; line-height:1.2;
+  color:#fff;
+  text-wrap:balance;
+}
+.fan-card:nth-child(1){ transform:rotateY(40deg)  translateZ(-40px) scale(.92); z-index:1; }
+.fan-card:nth-child(2){ transform:rotateY(22deg)  translateZ(-12px) scale(.97); z-index:2; }
+.fan-card:nth-child(3){ transform:none;                                         z-index:3; }
+.fan-card:nth-child(4){ transform:rotateY(-22deg) translateZ(-12px) scale(.97); z-index:2; }
+.fan-card:nth-child(5){ transform:rotateY(-40deg) translateZ(-40px) scale(.92); z-index:1; }
+
+/* whichever card you point at or tab to comes square-on and to the front,
+   so its name is never read through a perspective skew */
+.fan-card:hover,
+.fan-card:focus-visible{
+  transform:translateZ(40px) scale(1.02);
+  z-index:9;
+}
+.fan-card:focus-visible{ outline:2px solid var(--accent); outline-offset:4px; }
+
+@media (max-width:820px){
+  /* below the fold width the fan squashes into slivers - drop the 3D and
+     let it be an honest scroll rail instead */
+  .fan{
+    perspective:none;
+    justify-content:flex-start;
+    overflow-x:auto;
+    scroll-snap-type:x mandatory;
+    gap:12px;
+    padding:4px clamp(16px,6vw,40px) 10px;
+    scrollbar-width:none;
+  }
+  .fan::-webkit-scrollbar{ display:none; }
+  .fan-card,
+  .fan-card:nth-child(1),.fan-card:nth-child(2),.fan-card:nth-child(3),
+  .fan-card:nth-child(4),.fan-card:nth-child(5){
+    transform:none;
+    width:min(58vw,240px);
+    scroll-snap-align:center;
+  }
+  .fan-card:hover,.fan-card:focus-visible{ transform:none; }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .fan{ perspective:none; flex-wrap:wrap; }
+  .fan-card,
+  .fan-card:nth-child(1),.fan-card:nth-child(2),.fan-card:nth-child(3),
+  .fan-card:nth-child(4),.fan-card:nth-child(5),
+  .fan-card:hover,.fan-card:focus-visible{
+    transform:none;
+    transition:none;
+  }
+}
+
 .hero-shot{
   margin-top:58px;
   width:min(940px,100%);
@@ -243,7 +346,8 @@ p{ margin:0; }
   transition:background .22s, color .22s, border-color .22s;
 }
 .btn:hover{ text-decoration:none; }
-.btn-fill{ background:var(--accent); color:#fff; }
+/* white on the brand green is 1.9:1 - the fill takes black ink */
+.btn-fill{ background:var(--accent); color:#000; font-weight:500; }
 .btn-fill:hover{ background:var(--accent-hov); }
 .btn-line{ border-color:var(--accent); color:var(--accent); background:transparent; }
 .btn-line:hover{ background:var(--accent); color:#fff; }
@@ -444,9 +548,19 @@ p{ margin:0; }
 .ch-yt{ background:linear-gradient(150deg,#ff5b5b,#c4302b); }
 .ch-ig{ background:linear-gradient(150deg,#f9ce34,#ee2a7b 48%,#6228d7); }
 .ch-tw{ background:linear-gradient(150deg,#a970ff,#6441a5); }
+/* the brand gradients run through pale yellow and lilac, where the white label
+   drops to ~1.6:1. A scrim under the text keeps every card's ink above 7:1
+   without flattening the gradient that makes the card recognisable. */
+.ch::after{
+  content:"";
+  position:absolute; inset:0;
+  background:linear-gradient(to top, rgba(0,0,0,.72) 0%, rgba(0,0,0,.34) 46%, rgba(0,0,0,.14) 100%);
+  pointer-events:none;
+}
+.ch > *{ position:relative; z-index:1; }
 .ch .glyph{ font-size:26px; margin-bottom:auto; }
 .ch h3{ font-size:24px; letter-spacing:-0.022em; }
-.ch span{ font-size:15px; opacity:.9; }
+.ch span{ font-size:15px; color:rgba(255,255,255,.92); }
 
 /* ============================================================
    JOIN
@@ -466,10 +580,11 @@ p{ margin:0; }
   font-family:inherit; font-size:17px;
   padding:13px 18px;
   border-radius:980px;
-  border:1px solid var(--hair);
+  border:1px solid var(--hair-strong);
   background:var(--surface);
   color:var(--ink);
 }
+.jform input::placeholder{ color:var(--ink-3); }
 .jform input:focus{ outline:none; border-color:var(--accent); }
 .jnote{
   margin-top:16px; font-size:13px; color:var(--ink-3);
