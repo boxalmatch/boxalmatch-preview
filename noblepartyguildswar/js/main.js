@@ -174,6 +174,77 @@ function initEpisodeRails() {
 
 document.addEventListener("DOMContentLoaded", initEpisodeRails);
 
+/* ============================================================
+   Lightbox
+   ------------------------------------------------------------
+   Tap any photo in a rail or a character card to see it full size
+   without leaving the page. Built at runtime rather than added to
+   24 legacy pages by hand.
+   ============================================================ */
+const LIGHTBOX_SELECTOR = ".episode > img, .episodes img, #character-profile figure img, .slider figure img";
+
+function initLightbox() {
+    const shots = document.querySelectorAll(LIGHTBOX_SELECTOR);
+    if (!shots.length) return;
+
+    const box = document.createElement("div");
+    box.className = "lightbox";
+    box.setAttribute("role", "dialog");
+    box.setAttribute("aria-modal", "true");
+    box.hidden = true;
+    box.innerHTML =
+        '<button class="lightbox-close" type="button" aria-label="Close">&#10005;</button>' +
+        '<img alt="">' +
+        '<p class="lightbox-cap"></p>';
+    document.body.appendChild(box);
+
+    const full = box.querySelector("img");
+    const cap = box.querySelector(".lightbox-cap");
+    const closeBtn = box.querySelector(".lightbox-close");
+    let lastFocus = null;
+
+    function open(img) {
+        lastFocus = document.activeElement;
+        full.src = img.currentSrc || img.src;
+        full.alt = img.alt || "";
+        // the rails caption their photos in a sibling <figcaption>
+        const fig = img.closest("figure");
+        const text = fig && fig.querySelector("figcaption");
+        cap.textContent = text ? text.textContent.trim() : "";
+        cap.hidden = !cap.textContent;
+        box.hidden = false;
+        document.body.classList.add("lightbox-open");
+        closeBtn.focus();
+    }
+
+    function close() {
+        box.hidden = true;
+        full.removeAttribute("src");
+        document.body.classList.remove("lightbox-open");
+        if (lastFocus) lastFocus.focus();
+    }
+
+    shots.forEach(img => {
+        img.classList.add("zoomable");
+        img.tabIndex = 0;
+        img.setAttribute("role", "button");
+        img.addEventListener("click", () => open(img));
+        img.addEventListener("keydown", e => {
+            if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(img); }
+        });
+    });
+
+    closeBtn.addEventListener("click", close);
+    // clicking the backdrop closes; clicking the photo itself does not
+    box.addEventListener("click", e => { if (e.target === box) close(); });
+    document.addEventListener("keydown", e => {
+        if (e.key === "Escape" && !box.hidden) close();
+    });
+}
+
+document.addEventListener("DOMContentLoaded", initLightbox);
+
+
 function initEpisodeSlider() {
     // kept for the inline callers; the rail setup is idempotent
     initEpisodeRails();

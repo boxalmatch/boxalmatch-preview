@@ -205,21 +205,39 @@ To change the destination address for both modes, edit `EMAIL` in
 
 ## Event sub-pages
 
-Four event cards link to deeper pages carried over from the old site:
+`thegreatlan/`, `noblepartygranparadiso/`, `noblepartyguildswar/` and
+`boxstone/` are the original event sites, restyled to match. Their
+`css/main.css` and `js/main.js` are kept identical across the three restyled
+folders — **edit `thegreatlan/` and copy the file to the other two**, or they
+drift.
 
-- `boxstone/home.html`
-- `noblepartyguildswar/home.html`
-- `noblepartygranparadiso/home.html`
-- `thegreatlan/home.html`
+The header, the section bar and the language toggle are the home page's:
+sticky glass from the top, brand left, links centred, IT/EN pill right.
 
-Those folders are **not** included here. Either copy them across from the old
-repo, or remove those "Scopri / Explore" links until the pages are rebuilt.
+### Photos
 
-⚠️ Worth knowing: the old repo is about **1.1 GB**, nearly all of it photos and
-video committed straight into git — `noblepartyguildswar` and `thegreatlan`
-alone are roughly 1 GB. Don't carry that over wholesale. Host large media on
-YouTube or Google Drive and link to it; keep the repo to code and small images.
-For reference, this entire site is around 2 MB.
+Every photo opens full size in a lightbox on the page — click, or tab to it
+and press Enter. Escape, the close button, or a click on the backdrop closes
+it. The lightbox is built at runtime by `initLightbox()` in `js/main.js`, so
+photos added to a rail get it for free; nothing needs adding to the markup.
+
+The images are **web copies, not the originals.** The event folders shipped
+camera files — 7008x4672 JPEGs at 12 MB, 4K screen-grabs saved as PNG at
+11 MB — about 1 GB in all, displayed in rails roughly 780px wide.
+`tools/optimise_images.py` caps everything at 1920px on the long edge and
+moves photographic PNGs to JPEG (1065 MB to 85 MB). The originals are in git
+history if they are ever needed again.
+
+If you add a photo, run the script from the repository root:
+
+```
+python3 tools/optimise_images.py     # resize + re-encode, records any renames
+python3 tools/rewrite_refs.py        # point the pages at renamed files
+```
+
+New `<img>` tags want `loading="lazy" decoding="async"` — everything below
+the first screen already has it.
+
 
 ---
 
