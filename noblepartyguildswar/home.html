@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it" data-lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,10 +22,11 @@
     <nav>
         <ul>
             <li class="brand"><img src="img/icons/logo.png" alt="logo_npgw"></li>
-            <li class="active"><a href="#home">Benvenuti</a></li>
-            <li><a href="#notizie">In Evidenza</a></li>
-            <li><a href="#campionato">Campionato</a></li>
+            <li class="active"><a href="#home"><span lang="it">Benvenuti</span><span lang="en">Welcome</span></a></li>
+            <li><a href="#notizie"><span lang="it">In Evidenza</span><span lang="en">Highlights</span></a></li>
+            <li><a href="#campionato"><span lang="it">Campionato</span><span lang="en">Championship</span></a></li>
 			<li><a href="#character-profile">Game On</a></li> <!-- leave as "character-profile" still need to be worked on CSS -->
+                    <li class="lang-toggle"><button type="button" data-set="it" class="on">IT</button><button type="button" data-set="en">EN</button></li>
         </ul>
     </nav>
 
@@ -39,20 +40,29 @@
 		</figure>
 		<article class="slide-caption center-left">
 			<h1>Guilds War</h1>
-			<p><i>Noble Party Guilds War</i>, un Evento ideato da NobleBrassMan e organizzato da BOXALMATCH. [Torna alla <i><a href="../index.html" title="tornaHP">Home</a></i>]</p>
+			<p>
+				<span lang="it"><i>Noble Party Guilds War</i>, un Evento ideato da NobleBrassMan e organizzato da BOXALMATCH. [Torna alla <i><a href="../index.html" title="tornaHP">Home</a></i>]</span>
+				<span lang="en"><i>Noble Party Guilds War</i>, an Event conceived by NobleBrassMan and organized by BOXALMATCH. [Back to <i><a href="../index.html" title="backHP">Home</a></i>]</span>
+			</p>
 		</article>
 	</section>
 
     <!-- season info -->
 	<section id="notizie" class="container">
-		<h1 class="highlight">In Evidenza</h1>
+		<h1 class="highlight"><span lang="it">In Evidenza</span><span lang="en">Highlights</span></h1>
 
 		<article class="season">
 
-			<h2>Notizie Recenti</h2>
-				<p>			
-					Scontri conclusi, azioni mozzafiato e tanto altro! Guarda i nostri contenuti sul nostro canale <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a>. 
-					Inoltre Leggi le <a href="https://boxalmatch.github.io/noblepartyguildswar/chronicles.html">Chronicles</a> per capire questa sequenza di immagini relative alle notizie recenti. 
+			<h2><span lang="it">Notizie Recenti</span><span lang="en">Recent News</span></h2>
+				<p>
+					<span lang="it">
+						Scontri conclusi, azioni mozzafiato e tanto altro! Guarda i nostri contenuti sul nostro canale <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a>.
+						Inoltre Leggi le <a href="https://boxalmatch.github.io/noblepartyguildswar/chronicles.html">Chronicles</a> per capire questa sequenza di immagini relative alle notizie recenti.
+					</span>
+					<span lang="en">
+						Concluded battles, breathtaking action and much more! Check out our content on our <a href="https://www.instagram.com/boxalmatch/">Instagram</a> and <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a> channel.
+						Also read the <a href="https://boxalmatch.github.io/noblepartyguildswar/chronicles.html">Chronicles</a> to understand this sequence of images related to recent news.
+					</span>
 				</p>
 
 			<div role="group" class="episodes">
@@ -143,18 +153,28 @@
 	</section>
 
 	<section id="campionato" class="container">
-		<h1 class="highlight">Campionato</h1>
-		
+		<h1 class="highlight"><span lang="it">Campionato</span><span lang="en">Championship</span></h1>
+
 		<article class="season">
 
-			<h2>Introduzione</h2>
+			<h2><span lang="it">Introduzione</span><span lang="en">Introduction</span></h2>
 				<p class="description">
-					<i>Noble Party Guilds War</i>,
-					un Campionato su Halo Infinite per rivivere la storia
-					delle Guerre di Otto Gilde appartenenti alla stessa Famiglia.
-					&#129309;SCEGLI la tua Gilda
-					&#129338;FORGIA una nuova leggenda 
-					&#127942;conquista la VITTORIA!	
+					<span lang="it">
+						<i>Noble Party Guilds War</i>,
+						un Campionato su Halo Infinite per rivivere la storia
+						delle Guerre di Otto Gilde appartenenti alla stessa Famiglia.
+						&#129309;SCEGLI la tua Gilda
+						&#129338;FORGIA una nuova leggenda
+						&#127942;conquista la VITTORIA!
+					</span>
+					<span lang="en">
+						<i>Noble Party Guilds War</i>,
+						a Championship on Halo Infinite reliving the story
+						of the Wars of Eight Guilds belonging to the same Family.
+						&#129309;CHOOSE your Guild
+						&#129338;FORGE a new legend
+						&#127942;claim VICTORY!
+					</span>
 				</p>
 
 			<div role="group" class="episodes">
@@ -175,37 +195,58 @@
 
 			<h2>Info</h2>
 				<p>
-					Sei pronto per questa avventura? <i>Noble Party Guilds War</i>, un Evento ideato da NobleBrassMan e organizzato da BOXALMATCH.
-					Un Campionato su <i>Halo Infinite</i> (Xbox Series X e PC) che riscrive una storia fantasy di una famiglia nel Multiverso (della Forgia).
-					Infinite possibilit&agrave di scontro dove vecchi e nuovi giocatori si uniscono in squadre e combattono fra loro.
-					Immergiti in un gioco che permette qualsiasi sfida immaginaibile per divertirsi insieme e aggiungere un pizzico di competitivit&agrave.
-					Ad ogni Guerra, unisciti a una delle 8 Squadre, ottieni punti e vinci! Questo Campionato raccoglie +80 mappe, +20 modalit&agrave, +10 giochi sketch e molto altro.
-					
-					<br><br>
-					
-					La variabile tempo per questo campionato non esiste: l'evento evolve sulla sola volont&agrave dei partecipanti stessi. L'evento inizia quando una prima Guerra viene conclusa: 
-					potrebbe cominciare come potrebbe non cominciare mai. Le Guerre non hanno un ordine cronologico.
-					L'evento si conclude quando tutte le Guerre della Campagna Ufficiale sono concluse: potrebbe finire un giorno, oppure lasciato a met&agrave per sempre con Guerre ancora da concludersi.
+					<span lang="it">
+						Sei pronto per questa avventura? <i>Noble Party Guilds War</i>, un Evento ideato da NobleBrassMan e organizzato da BOXALMATCH.
+						Un Campionato su <i>Halo Infinite</i> (Xbox Series X e PC) che riscrive una storia fantasy di una famiglia nel Multiverso (della Forgia).
+						Infinite possibilit&agrave di scontro dove vecchi e nuovi giocatori si uniscono in squadre e combattono fra loro.
+						Immergiti in un gioco che permette qualsiasi sfida immaginaibile per divertirsi insieme e aggiungere un pizzico di competitivit&agrave.
+						Ad ogni Guerra, unisciti a una delle 8 Squadre, ottieni punti e vinci! Questo Campionato raccoglie +80 mappe, +20 modalit&agrave, +10 giochi sketch e molto altro.
+
+						<br><br>
+
+						La variabile tempo per questo campionato non esiste: l'evento evolve sulla sola volont&agrave dei partecipanti stessi. L'evento inizia quando una prima Guerra viene conclusa:
+						potrebbe cominciare come potrebbe non cominciare mai. Le Guerre non hanno un ordine cronologico.
+						L'evento si conclude quando tutte le Guerre della Campagna Ufficiale sono concluse: potrebbe finire un giorno, oppure lasciato a met&agrave per sempre con Guerre ancora da concludersi.
+					</span>
+					<span lang="en">
+						Ready for this adventure? <i>Noble Party Guilds War</i>, an Event conceived by NobleBrassMan and organized by BOXALMATCH.
+						A Championship on <i>Halo Infinite</i> (Xbox Series X and PC) rewriting a fantasy story of a family in the (Forge) Multiverse.
+						Infinite matchup possibilities where old and new players team up and fight each other.
+						Dive into a game that allows any imaginable challenge to have fun together and add a pinch of competitiveness.
+						With every War, join one of 8 Teams, earn points and win! This Championship features +80 maps, +20 modes, +10 sketch games and much more.
+
+						<br><br>
+
+						There is no time variable for this championship: the event evolves solely on the participants' own will. The event begins when a first War is concluded:
+						it might start, or it might never start. The Wars have no chronological order.
+						The event ends when all the Wars of the Official Campaign are concluded: it might end one day, or be left half-finished forever with Wars still to be concluded.
+					</span>
 				</p>
 		
-			<h2>Partecipanti</h2>
+			<h2><span lang="it">Partecipanti</span><span lang="en">Participants</span></h2>
 			<p>
-				Questi sono i partecipanti di <i>Noble Party Guilds War</i>.
-				Non ci sono scadenze per unirsi a questo Campionato: invita nuovi giocatori che saranno classificati come Leaders o Mercenari.
+				<span lang="it">
+					Questi sono i partecipanti di <i>Noble Party Guilds War</i>.
+					Non ci sono scadenze per unirsi a questo Campionato: invita nuovi giocatori che saranno classificati come Leaders o Mercenari.
+				</span>
+				<span lang="en">
+					These are the participants of <i>Noble Party Guilds War</i>.
+					There are no deadlines to join this Championship: invite new players who will be classified as Leaders or Mercenaries.
+				</span>
 			</p>
 
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 100%; text-align: left; font-family: Arial, sans-serif; font-weight: bold; border: 2px solid black;">
 			  <thead style="background-color: #228B22; color: black;">
 			    <tr>
-			      <th style="border: 2px solid black;">Qnt</th>
-			      <th style="border: 2px solid black;">Classe</th>
-			      <th style="border: 2px solid black;">Giocatore</th>
+			      <th style="border: 2px solid black;"><span lang="it">Qnt</span><span lang="en">Qty</span></th>
+			      <th style="border: 2px solid black;"><span lang="it">Classe</span><span lang="en">Class</span></th>
+			      <th style="border: 2px solid black;"><span lang="it">Giocatore</span><span lang="en">Player</span></th>
 			    </tr>
 			  </thead>
 			  <tbody>
 			    <tr>
 			      <td style="background-color: white; color: black; border: 2px solid black;">8</td>
-			      <td style="background-color: white; color: black; border: 2px solid black;">Leaders Principali (contano come Leaders)</td>
+			      <td style="background-color: white; color: black; border: 2px solid black;"><span lang="it">Leaders Principali (contano come Leaders)</span><span lang="en">Main Leaders (count as Leaders)</span></td>
 			      <td style="background-color: #FF8C00; color: white; border: 2px solid black;">
 					  NobleBrassMan, 
 					  KarmicScroll, 
@@ -224,7 +265,7 @@
 			    </tr>
 			    <tr>
 			      <td style="background-color: white; color: black; border: 2px solid black;">19</td>					
-			      <td style="background-color: white; color: black; border: 2px solid black;">Mercenari</td>
+			      <td style="background-color: white; color: black; border: 2px solid black;"><span lang="it">Mercenari</span><span lang="en">Mercenaries</span></td>
 			      <td style="background-color: #FF8C00; color: white; border: 2px solid black;">
 					  Pino’s Carrot, 
 					  Sootz, 
@@ -251,13 +292,21 @@
 			</table>
 			
 			
-			<h2>Campagna Ufficiale</h2>
+			<h2><span lang="it">Campagna Ufficiale</span><span lang="en">Official Campaign</span></h2>
 			<p>
-				Il Campionato si conclude quando tutte le Guerre di questa Campagna Ufficiale sono concluse.
-				Una Guerra si conclude esponendo il punteggio finale.
-                Una Guerra corrisponde a 4 partite. Conclusa una partita: il punteggio &egrave 1 per la Gilda o Armata che vince (quindi fino ad un massimo di 4 punti per Guerra) e 0 per quella che perde.
-				Il Capitolo 5 ha due partite obbligatorie (Dinastia e Il Giorno Maledetto) per questa ultima Guerra dove tutte le Gilde parteciperanno.
-			</p>			
+				<span lang="it">
+					Il Campionato si conclude quando tutte le Guerre di questa Campagna Ufficiale sono concluse.
+					Una Guerra si conclude esponendo il punteggio finale.
+	                Una Guerra corrisponde a 4 partite. Conclusa una partita: il punteggio &egrave 1 per la Gilda o Armata che vince (quindi fino ad un massimo di 4 punti per Guerra) e 0 per quella che perde.
+					Il Capitolo 5 ha due partite obbligatorie (Dinastia e Il Giorno Maledetto) per questa ultima Guerra dove tutte le Gilde parteciperanno.
+				</span>
+				<span lang="en">
+					The Championship ends when all the Wars of this Official Campaign are concluded.
+					A War ends by revealing the final score.
+					A War corresponds to 4 matches. Once a match is over: the score is 1 for the Guild or Army that wins (so up to a maximum of 4 points per War) and 0 for the one that loses.
+					Chapter 5 has two mandatory matches (Dynasty and The Cursed Day) for this final War in which all Guilds will take part.
+				</span>
+			</p>
 			<div role="group" class="episodes">
 				<!-- Episode counter -->
 				<div class="episode-number">No. #1</div>
@@ -330,8 +379,9 @@
 			</div>			
 
 			<p>
-				La Roadmap del Campionato. Sguardo alle milestones della Campagna Ufficiale.
-			</p>				
+				<span lang="it">La Roadmap del Campionato. Sguardo alle milestones della Campagna Ufficiale.</span>
+				<span lang="en">The Championship Roadmap. A look at the Official Campaign's milestones.</span>
+			</p>
 			
 			<div role="group" class="episodes">
 				<!-- Episode counter -->
@@ -350,10 +400,18 @@
 			</div>	
 
 			<p>
-				La Roadmap della Side Quest di Ciascuna Gilda. 
-				Sguardo agli Slots della Campagna Side Quests intrapresa da ciascuna Gilda.
-				A differenza della Campagna Ufficiale dove un Capitolo pu&ograve includere pi&ugrave Guerre, qui: 1 Capitolo = 1 Guerra = 1 Slot. 
-				Quindi Slots nome intercambiabile con Guerre o Capitoli.
+				<span lang="it">
+					La Roadmap della Side Quest di Ciascuna Gilda.
+					Sguardo agli Slots della Campagna Side Quests intrapresa da ciascuna Gilda.
+					A differenza della Campagna Ufficiale dove un Capitolo pu&ograve includere pi&ugrave Guerre, qui: 1 Capitolo = 1 Guerra = 1 Slot.
+					Quindi Slots nome intercambiabile con Guerre o Capitoli.
+				</span>
+				<span lang="en">
+					The Roadmap of Each Guild's Side Quest.
+					A look at the Slots of the Side Quests Campaign undertaken by each Guild.
+					Unlike the Official Campaign where a Chapter can include multiple Wars, here: 1 Chapter = 1 War = 1 Slot.
+					So "Slots" is interchangeable with "Wars" or "Chapters".
+				</span>
 			</p>
 			
 			<div role="group" class="episodes">
@@ -378,20 +436,21 @@
 			</div>			
 			
 			
-			<h2>Guerre Irripetibili</h2>
-	
+			<h2><span lang="it">Guerre Irripetibili</span><span lang="en">Unrepeatable Wars</span></h2>
+
 			<p>
-				Guerre dalla Campagna Ufficiale. Non esiste un ordine temporale delle Guerre, tranne per la Guerra a Otto Gilde che viene svolta come ultima e chiude il Campionato.
-			</p>			
+				<span lang="it">Guerre dalla Campagna Ufficiale. Non esiste un ordine temporale delle Guerre, tranne per la Guerra a Otto Gilde che viene svolta come ultima e chiude il Campionato.</span>
+				<span lang="en">Wars from the Official Campaign. There is no chronological order to the Wars, except for the Eight-Guild War, which is held last and closes the Championship.</span>
+			</p>
 			<table style="border-collapse: collapse; width: 100%; font-weight: bold;">
-			
+
 			  <!-- Header -->
 			  <tr style="background-color: #107C10; color: black;">
-			    <th style="border: 1px solid #000; padding: 8px; text-align: right;">Gilda (o Armata) 1</th>
-			    <th style="border: 1px solid #000; padding: 8px; text-align: center;">Risultato</th>
-			    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Gilda (o Armata) 2</th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: right;"><span lang="it">Gilda (o Armata) 1</span><span lang="en">Guild (or Army) 1</span></th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: center;"><span lang="it">Risultato</span><span lang="en">Result</span></th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: left;"><span lang="it">Gilda (o Armata) 2</span><span lang="en">Guild (or Army) 2</span></th>
 			  </tr>
-			
+
 			  <!-- Row 1 -->
 			  <tr style="background-color: #f2f2f2;">
 			    <td style="border: 1px solid #000; padding: 8px; text-align: right; color: blue;">Aquila</td>
@@ -560,18 +619,19 @@
 			</table>
 
 			<p>
-				Guerre dalla Campagna Side Quests. I partecipanti possono usare o programmare i loro Slots/Guerre: La programmazione di una o pi&ugrave Slots/Guerre non obbliga nessun ordine temporale.
-			</p>			
-			
+				<span lang="it">Guerre dalla Campagna Side Quests. I partecipanti possono usare o programmare i loro Slots/Guerre: La programmazione di una o pi&ugrave Slots/Guerre non obbliga nessun ordine temporale.</span>
+				<span lang="en">Wars from the Side Quests Campaign. Participants can use or schedule their Slots/Wars: scheduling one or more Slots/Wars does not require any chronological order.</span>
+			</p>
+
 			<table style="border-collapse: collapse; width: 100%; font-weight: bold;">
-			
+
 			  <!-- Header -->
 			  <tr style="background-color: #107C10; color: black;">
-			    <th style="border: 1px solid #000; padding: 8px; text-align: right;">Gilda (o Armata) 1</th>
-			    <th style="border: 1px solid #000; padding: 8px; text-align: center;">Risultato</th>
-			    <th style="border: 1px solid #000; padding: 8px; text-align: left;">Gilda (o Armata) 2</th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: right;"><span lang="it">Gilda (o Armata) 1</span><span lang="en">Guild (or Army) 1</span></th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: center;"><span lang="it">Risultato</span><span lang="en">Result</span></th>
+			    <th style="border: 1px solid #000; padding: 8px; text-align: left;"><span lang="it">Gilda (o Armata) 2</span><span lang="en">Guild (or Army) 2</span></th>
 			  </tr>
-			
+
 			  <!-- Row 1 -->
 			  <tr style="background-color: #f2f2f2;">
 			    <td style="border: 1px solid #000; padding: 8px; text-align: right; color: purple;">Ade</td>
@@ -657,55 +717,76 @@
 			</table>
 
 			<p class="description">
-				&#128073; Definizione di Irripetibilità: quando una qualsiasi Gilda 
-				propone una nuova Guerra per la sua Campagna Side Quests,
-				deve controllare che non &egrave avvenuta precedentemente o gi&agrave programmata
-				(inclusa la Campagna Ufficiale).
-				&#128073; Per principio di irripetibilità, ogni Guerra può essere 
-				narrata una sola volta nella Campagna Side Quests della Gilda che la propone: 
-				nei Capitoli 1–2 per scontri 1v1, nei Capitoli 3–4 per scontri 2v2 e 
-				nel Capitolo 5 per scontri 3v3. La stessa Guerra appare pure nella
-				Side Quest di ogni Gilda partecipante.
-				Nuove Guerre non possono avere le stesse combinazioni di Gilde o Armate 
-				ripetute in altri Capitoli; tuttavia, una o più Gilde che devono completare 
-				gli Slot 1-2-3-4-5, possono coinvolgere anche Gilde che hanno 
-				già esaurito i propri Slot, pubblicando la Guerra solo nelle Campagne Side Quest delle 
-				Gilde che hanno ancora Capitoli disponibili.
-                &#128073; Qualsiasi Capitolo di qualsiasi Campagna Side Quest concluso dopo
-				la fine del Campionato non viene considerato per gli Awards.
-				(Completa la tua Campagna Side Quest prima che il Campionato finisca!)
-			</p>	
+				<span lang="it">
+					&#128073; Definizione di Irripetibilità: quando una qualsiasi Gilda
+					propone una nuova Guerra per la sua Campagna Side Quests,
+					deve controllare che non &egrave avvenuta precedentemente o gi&agrave programmata
+					(inclusa la Campagna Ufficiale).
+					&#128073; Per principio di irripetibilità, ogni Guerra può essere
+					narrata una sola volta nella Campagna Side Quests della Gilda che la propone:
+					nei Capitoli 1–2 per scontri 1v1, nei Capitoli 3–4 per scontri 2v2 e
+					nel Capitolo 5 per scontri 3v3. La stessa Guerra appare pure nella
+					Side Quest di ogni Gilda partecipante.
+					Nuove Guerre non possono avere le stesse combinazioni di Gilde o Armate
+					ripetute in altri Capitoli; tuttavia, una o più Gilde che devono completare
+					gli Slot 1-2-3-4-5, possono coinvolgere anche Gilde che hanno
+					già esaurito i propri Slot, pubblicando la Guerra solo nelle Campagne Side Quest delle
+					Gilde che hanno ancora Capitoli disponibili.
+	                &#128073; Qualsiasi Capitolo di qualsiasi Campagna Side Quest concluso dopo
+					la fine del Campionato non viene considerato per gli Awards.
+					(Completa la tua Campagna Side Quest prima che il Campionato finisca!)
+				</span>
+				<span lang="en">
+					&#128073; Definition of Non-Repeatability: whenever any Guild
+					proposes a new War for its Side Quests Campaign,
+					it must check that it hasn't already happened or already been scheduled
+					(including in the Official Campaign).
+					&#128073; Under the non-repeatability principle, each War can be
+					told only once in the Side Quests Campaign of the Guild proposing it:
+					in Chapters 1–2 for 1v1 matchups, in Chapters 3–4 for 2v2 matchups, and
+					in Chapter 5 for 3v3 matchups. The same War also appears in the
+					Side Quest of every participating Guild.
+					New Wars cannot repeat the same Guild or Army combinations
+					used in other Chapters; however, one or more Guilds that still need to complete
+					Slots 1-2-3-4-5 may also involve Guilds that have
+					already used up their Slots, by publishing the War only in the Side Quest Campaigns of the
+					Guilds that still have Chapters available.
+					&#128073; Any Chapter of any Side Quest Campaign concluded after
+					the end of the Championship is not counted toward the Awards.
+					(Finish your Side Quest Campaign before the Championship ends!)
+				</span>
+			</p>
 			
 
 
 
-			<h2>Progresso Complessivo del Campionato</h2>
+			<h2><span lang="it">Progresso Complessivo del Campionato</span><span lang="en">Overall Championship Progress</span></h2>
 
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 60%; text-align: center; font-family: Arial, sans-serif; font-weight: bold;">
 			  <thead style="background-color: #228B22; color: white;">
 			    <tr>
-			      <th>Voce</th>
-			      <th>Campagna e Side Quests</th>
-			      <th>Campagna</th>
+			      <th><span lang="it">Voce</span><span lang="en">Item</span></th>
+			      <th><span lang="it">Campagna e Side Quests</span><span lang="en">Campaign and Side Quests</span></th>
+			      <th><span lang="it">Campagna</span><span lang="en">Campaign</span></th>
 			      <th>Side Quests</th>
 			    </tr>
 			  </thead>
-			
+
 			  <tbody>
 			    <tr style="background-color: white; color: black;">
-			      <td>Totale Partite Giocate</td><td>40</td><td>16</td><td>24</td>
+			      <td><span lang="it">Totale Partite Giocate</span><span lang="en">Total Matches Played</span></td><td>40</td><td>16</td><td>24</td>
 			    </tr>
 			    <tr style="background-color: white; color: black;">
-			      <td>Totale Guerre Giocate</td><td>10</td><td>4</td><td>6</td>
+			      <td><span lang="it">Totale Guerre Giocate</span><span lang="en">Total Wars Played</span></td><td>10</td><td>4</td><td>6</td>
 			    </tr>
 			    <tr style="background-color: white; color: black;">
-			      <td>Tutte le Guerre NPGW</td><td>51</td><td>11</td><td>40</td>
+			      <td><span lang="it">Tutte le Guerre NPGW</span><span lang="en">All NPGW Wars</span></td><td>51</td><td>11</td><td>40</td>
 			    </tr>
 			    <tr style="background-color: white; color: black;">
-			      <td>Tradotto in Partite NPGW</td><td>204</td><td>44</td><td>160</td>
+			      <td><span lang="it">Tradotto in Partite NPGW</span><span lang="en">Translated into NPGW Matches</span></td><td>204</td><td>44</td><td>160</td>
 			    </tr>
 			    <tr style="background-color: white; color: black;">
-			      <td>Evento Completato al</td><td>19,61%</td><td>36,36%</td><td>15,00%</td>
+			      <td><span lang="it">Evento Completato al</span><span lang="en">Event Completed at</span></td><td>19,61%</td><td>36,36%</td><td>15,00%</td>
 			    </tr>
 			  </tbody>
 			</table>
@@ -716,23 +797,34 @@
 			<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 			<!-- ( opzionale ) KaTeX example could be added similarly -->
 			
-			<h2>Combinazioni di Scontri Possibili</h2>
+			<h2><span lang="it">Combinazioni di Scontri Possibili</span><span lang="en">Possible Matchup Combinations</span></h2>
 
-			<p>Il numero di scontri possibili segue la formula:</p>
+			<p>
+				<span lang="it">Il numero di scontri possibili segue la formula:</span>
+				<span lang="en">The number of possible matchups follows the formula:</span>
+			</p>
 			<p class="formula">\(\mathrm{Numero\ Scontri}(N,G) = \dfrac{\binom{N}{G}\,\binom{N-G}{G}}{2}\)</p>
 			<p>
-				Nel Nostro Campionato, N sono le Gilde quindi 8, e questa formula rappresenta il 
-				numero di modi per estrarre due squadre da G Gilde ciascuna (quindi G pu&ograve essere 2,4,6,8), senza ordine tra le due squadre
-				e creando scontri unici (grazie alla divisione per 2).
-				La Campagna e le Side Quests non permettono tutte le combinazioni possibili ma limitano il Campionato a soli 51 scontri (invece di 553).
+				<span lang="it">
+					Nel Nostro Campionato, N sono le Gilde quindi 8, e questa formula rappresenta il
+					numero di modi per estrarre due squadre da G Gilde ciascuna (quindi G pu&ograve essere 2,4,6,8), senza ordine tra le due squadre
+					e creando scontri unici (grazie alla divisione per 2).
+					La Campagna e le Side Quests non permettono tutte le combinazioni possibili ma limitano il Campionato a soli 51 scontri (invece di 553).
+				</span>
+				<span lang="en">
+					In Our Championship, N is the number of Guilds, so 8, and this formula represents the
+					number of ways to draw two teams of G Guilds each (so G can be 2, 4, 6, 8), with no order between the two teams
+					and creating unique matchups (thanks to the division by 2).
+					The Campaign and Side Quests don't allow every possible combination but limit the Championship to just 51 matchups (instead of 553).
+				</span>
 			</p>
-		
+
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 70%; text-align: center; font-family: Arial, sans-serif; font-weight: bold;">
 			  <thead style="background-color: #228B22; color: white;">
 				<tr>
-				  <th>Numero di Gilde per Guerra (G)</th>
-				  <th>Totale Guerre Possibili</th>
-				  <th>NPGW Campagna</th>
+				  <th><span lang="it">Numero di Gilde per Guerra (G)</span><span lang="en">Number of Guilds per War (G)</span></th>
+				  <th><span lang="it">Totale Guerre Possibili</span><span lang="en">Total Possible Wars</span></th>
+				  <th>NPGW <span lang="it">Campagna</span><span lang="en">Campaign</span></th>
 				  <th>NPGW Side Quest</th>
 				  <th>NPGW TOTAL</th>
 				</tr>
@@ -772,7 +864,10 @@
 
             <section class="character-bio">
                 <h1 class="mb-1">Rules!</h1>
-                <p>Prima di giocare ricordati di leggere il <i><a href="regolamento.html" title="Rules">Regolamento</a></i>.
+                <p>
+					<span lang="it">Prima di giocare ricordati di leggere il <i><a href="regolamento.html" title="Rules">Regolamento</a></i>.</span>
+					<span lang="en">Before playing remember to read the <i><a href="regolamento.html" title="Rules">Rules</a></i>.</span>
+				</p>
             </section>
 
         </article>
@@ -784,15 +879,26 @@
             </figure>
 
             <section class="character-bio">
-                <h1 class="mb-1">Scegli la tua Gilda</h1>
+                <h1 class="mb-1"><span lang="it">Scegli la tua Gilda</span><span lang="en">Choose your Guild</span></h1>
                 <p>
-				Gilda <i><a href="ade.html" title="Ade">Ade</a></i>, Gilda <i><a href="aquila.html" title="Aquila">Aquila</a></i>, 
-				Gilda <i><a href="bastione.html" title="Bastione">Bastione</a></i>, 
-				Gilda <i><a href="cobra.html" title="Cobra">Cobra</a></i>, 
-				Gilda <i><a href="pericolo.html" title="Pericolo">Pericolo</a></i>, 
-				Gilda <i><a href="sciabola.html" title="Sciabola">Sciabola</a></i>, 
-				Gilda <i><a href="valchiria.html" title="Valchiria">Valchiria</a></i>, 
-				Gilda <i><a href="valore.html" title="Valore">Valore</a></i>.
+					<span lang="it">
+						Gilda <i><a href="ade.html" title="Ade">Ade</a></i>, Gilda <i><a href="aquila.html" title="Aquila">Aquila</a></i>,
+						Gilda <i><a href="bastione.html" title="Bastione">Bastione</a></i>,
+						Gilda <i><a href="cobra.html" title="Cobra">Cobra</a></i>,
+						Gilda <i><a href="pericolo.html" title="Pericolo">Pericolo</a></i>,
+						Gilda <i><a href="sciabola.html" title="Sciabola">Sciabola</a></i>,
+						Gilda <i><a href="valchiria.html" title="Valchiria">Valchiria</a></i>,
+						Gilda <i><a href="valore.html" title="Valore">Valore</a></i>.
+					</span>
+					<span lang="en">
+						Guild <i><a href="ade.html" title="Ade">Ade</a></i>, Guild <i><a href="aquila.html" title="Aquila">Aquila</a></i>,
+						Guild <i><a href="bastione.html" title="Bastione">Bastione</a></i>,
+						Guild <i><a href="cobra.html" title="Cobra">Cobra</a></i>,
+						Guild <i><a href="pericolo.html" title="Pericolo">Pericolo</a></i>,
+						Guild <i><a href="sciabola.html" title="Sciabola">Sciabola</a></i>,
+						Guild <i><a href="valchiria.html" title="Valchiria">Valchiria</a></i>,
+						Guild <i><a href="valore.html" title="Valore">Valore</a></i>.
+					</span>
 				</p>
             </section>
 
@@ -808,9 +914,16 @@
             <section class="character-bio">
                 <h1 class="mb-1">Agor&agrave</h1>
                 <p>
-				In questo luogo, i Mercenari attendono. Qui nascono alleanze, 
-				si stringono patti e i Leader scelgono chi marcerà con loro verso la prossima Guerra.
-				Scopri i Mercenari su <i><a href="agora.html" title="Agora">Agor&agrave</a></i>.
+					<span lang="it">
+						In questo luogo, i Mercenari attendono. Qui nascono alleanze,
+						si stringono patti e i Leader scelgono chi marcerà con loro verso la prossima Guerra.
+						Scopri i Mercenari su <i><a href="agora.html" title="Agora">Agor&agrave</a></i>.
+					</span>
+					<span lang="en">
+						In this place, the Mercenaries wait. Here alliances are born,
+						pacts are sealed and Leaders choose who will march with them into the next War.
+						Discover the Mercenaries on <i><a href="agora.html" title="Agora">Agor&agrave</a></i>.
+					</span>
 				</p>
             </section>
 
@@ -824,7 +937,10 @@
 
             <section class="character-bio">
                 <h1 class="mb-1">Chronicles</h1>
-                <p>I Racconti di chi ha vissuto questo Campionato su <i><a href="chronicles.html" title="Chronicles">Chronicles</a></i>.
+                <p>
+					<span lang="it">I Racconti di chi ha vissuto questo Campionato su <i><a href="chronicles.html" title="Chronicles">Chronicles</a></i>.</span>
+					<span lang="en">The Tales of those who lived this Championship on <i><a href="chronicles.html" title="Chronicles">Chronicles</a></i>.</span>
+				</p>
             </section>
 
         </article>		
@@ -837,7 +953,9 @@
 
             <section class="character-bio">
                 <h1 class="mb-1">Backlog</h1>
-                <p>Ogni Gilda accede alla <i><a href="backlog.html" title="Rules">Backlog</a></i> a piacere.
+                <p>
+					<span lang="it">Ogni Gilda accede alla <i><a href="backlog.html" title="Rules">Backlog</a></i> a piacere.</span>
+					<span lang="en">Every Guild can access the <i><a href="backlog.html" title="Rules">Backlog</a></i> at will.</span>
 				</p>
             </section>
 
@@ -851,7 +969,9 @@
 
             <section class="character-bio">
                 <h1 class="mb-1">Awards</h1>
-                <p>I vincitori di questo Campionato e informazioni sul punteggio sono su <i><a href="awards.html" title="awards">Awards</a></i>.
+                <p>
+					<span lang="it">I vincitori di questo Campionato e informazioni sul punteggio sono su <i><a href="awards.html" title="awards">Awards</a></i>.</span>
+					<span lang="en">The winners of this Championship and scoring information are on <i><a href="awards.html" title="awards">Awards</a></i>.</span>
 				</p>
             </section>
 
@@ -865,7 +985,10 @@
 
             <section class="character-bio">
                 <h1 class="mb-1">Scores</h1>
-                <p>Ispeziona i Punteggi del Campionato <i><a href="scores.html" title="Scores">Scores</a></i>.
+                <p>
+					<span lang="it">Ispeziona i Punteggi del Campionato <i><a href="scores.html" title="Scores">Scores</a></i>.</span>
+					<span lang="en">Inspect the Championship Scores on <i><a href="scores.html" title="Scores">Scores</a></i>.</span>
+				</p>
             </section>
 
         </article>		
@@ -877,8 +1000,10 @@
             </figure>
 
             <section class="character-bio">
-                <h1 class="mb-1">Storia</h1>
-                <p>La storia dietro a questo Campionato la trovi su <i><a href="storia.html" title="Aetherium">Aetherium Lore</a></i>.
+                <h1 class="mb-1"><span lang="it">Storia</span><span lang="en">Story</span></h1>
+                <p>
+					<span lang="it">La storia dietro a questo Campionato la trovi su <i><a href="storia.html" title="Aetherium">Aetherium Lore</a></i>.</span>
+					<span lang="en">The story behind this Championship is on <i><a href="storia.html" title="Aetherium">Aetherium Lore</a></i>.</span>
 				</p>
             </section>
 
@@ -889,12 +1014,17 @@
 </main>
 
 <footer>
-    &copy; 2026 BOXALMATCH. Tutti i diritti riservati.<br>
-    Un gruppo di amici con la passione per l’intrattenimento collettivo.<br>
-    Seguici su <a href="https://www.instagram.com/boxalmatch/">Instagram</a> e <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a><br><br>
-    
-    Evento <strong>Noble Party Guilds War</strong> ideato da <span style="font-weight:bold;">NobleBrassMan</span> 
-    insieme a BOXALMATCH.<br><br>
+    <span lang="it">&copy; 2026 BOXALMATCH. Tutti i diritti riservati.</span>
+    <span lang="en">&copy; 2026 BOXALMATCH. All rights reserved.</span><br>
+    <span lang="it">Un gruppo di amici con la passione per l'intrattenimento collettivo.</span>
+    <span lang="en">A group of friends with a passion for collective entertainment.</span><br>
+    <span lang="it">Seguici su</span><span lang="en">Follow us on</span>
+    <a href="https://www.instagram.com/boxalmatch/">Instagram</a>
+    <span lang="it">e</span><span lang="en">and</span>
+    <a href="https://www.youtube.com/@BOXALMATCH">YouTube</a><br><br>
+
+    <span lang="it">Evento <strong>Noble Party Guilds War</strong> ideato da <span style="font-weight:bold;">NobleBrassMan</span> insieme a BOXALMATCH.</span>
+    <span lang="en">The <strong>Noble Party Guilds War</strong> event, conceived by <span style="font-weight:bold;">NobleBrassMan</span> together with BOXALMATCH.</span><br><br>
 </footer>
 
 <script src="js/main.js"></script>

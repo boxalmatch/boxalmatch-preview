@@ -7,6 +7,28 @@ function initPage() {
 
 }
 
+function setupLangToggle() {
+    const toggle = document.querySelector('.lang-toggle');
+    if (!toggle) return;
+
+    const buttons = toggle.querySelectorAll('button');
+    const saved = localStorage.getItem('bm-lang') || 'it';
+    setLang(saved);
+
+    function setLang(lang) {
+        document.documentElement.setAttribute('data-lang', lang);
+        buttons.forEach(b => b.classList.toggle('on', b.dataset.set === lang));
+    }
+
+    buttons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const lang = btn.dataset.set;
+            localStorage.setItem('bm-lang', lang);
+            setLang(lang);
+        });
+    });
+}
+
 document.addEventListener("DOMContentLoaded", function() {
     const seasons = document.querySelectorAll(".episodes");
 
@@ -385,4 +407,5 @@ function moveSlide(int){
     autoSlider = setInterval(next, 4000)
 }
 
+setupLangToggle();
 initPage();
