@@ -18,8 +18,11 @@
 :root {
     --main-bg-color: #000000;
     --main-bg-color-fade-5: rgba(0, 0, 0, 0.6);
-    --primary-color: #2fd94f;
-    --primary-shade-color: #1ea83a;
+    /* the brand green, sampled from the wordmark (see css/style.css). Hover
+       goes lighter rather than darker: the button fill carries dark ink, and
+       darkening it drops that below 4.5:1. */
+    --primary-color: #00B81C;
+    --primary-shade-color: #00CE1F;
     --secundary-color: #6e6e73;
 
     --ink: #ffffff;
@@ -1117,7 +1120,7 @@ table tbody tr:hover td { background-color: rgba(255, 255, 255, 0.045); }
     color: var(--ink);
 }
 
-#giocatoTable .header-special { background-color: rgba(47, 217, 79, 0.16); color: var(--ink); }
+#giocatoTable .header-special { background-color: rgba(0, 184, 28, 0.18); color: var(--ink); }
 #giocatoTable .header-normal { background-color: var(--glass-strong); color: var(--ink); }
 
 /* heat-map cells: these encode data, so hues stay - lifted for contrast */

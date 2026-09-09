@@ -27,17 +27,42 @@ the login can be bypassed.
 
 ## Design
 
-Layout and typography take their cues from apple.com — sticky translucent nav,
-large centred headlines, generous whitespace, rounded cards, restrained motion.
-The accent colour is **your own brand green**, not Apple's blue, so the site
-reads as Boxalmatch rather than an Apple clone. Two shades are used so text
-stays legible on either background:
+The site is black, always — there is no light theme and it does not follow the
+system preference. Layout and typography borrow from apple.com and Bending
+Spoons: sticky translucent nav, large centred headlines, frosted tiles,
+restrained motion.
 
-| | light | dark |
+### The green
+
+The accent is the wordmark's own green, sampled from `img/icons/wordmark.png`.
+The logo runs a subtle gradient from `#00AD17` to `#00B81C`; the flat fill is
+what the site uses.
+
+| token | value | where |
 |---|---|---|
-| accent | `#00871f` | `#2fd94f` |
+| `--accent` | `#00B81C` | links, buttons, eyebrows, the hero italic, active dots, focus rings |
+| `--accent-hov` | `#00E623` | hover on the above |
+| `--primary-color` | `#00B81C` | the same green in the event sub-pages (`*/css/main.css`) |
 
-The page follows the visitor's system light/dark preference automatically.
+Hover goes **lighter, not darker**. A filled button carries dark ink, and
+darkening the fill drops that ink below the 4.5:1 minimum.
+
+The per-guild files (`noblepartyguildswar/css/main_*.css`) override
+`--primary-color` with each guild's own colour and are deliberately left
+alone — those are identity, not brand.
+
+### Contrast
+
+Everything on the page has been measured against WCAG AA with a checker that
+walks the real composited background stack, across all pages in both
+languages. If you change a colour, keep to it:
+
+- text 4.5:1 against what is actually behind it (3:1 for large display text)
+- 3:1 for the edge of anything clickable or typable — that is what
+  `--hair-strong` is for; the decorative `--hair` is too faint to delineate a
+  control
+- gradients can't be sampled from computed style, so the channel tiles and
+  the member card were checked by eye and carry their own scrim
 
 ---
 
@@ -133,12 +158,15 @@ nothing for someone on a machine with no mail client configured. That is why
 the address is also printed as a link under the button and in the footer.
 
 **With a form service wired up**, the message is posted in the background and
-the visitor never leaves the page.
+the visitor never leaves the page. **This is the live mode** — the form points
+at Formspree (`https://formspree.io/f/xdeoydlz`), so the mail-client path is
+only a fallback for when that post fails.
 
 ### Wiring up Formspree
 
-Someone with access to the boxalmatch@gmail.com inbox has to do this — it
-needs a sign-up and an email confirmation.
+Already done; these are the steps if the form ever has to be recreated. It
+needs access to the boxalmatch@gmail.com inbox — a sign-up and an email
+confirmation.
 
 1. Go to <https://formspree.io> and create an account. Use
    **boxalmatch@gmail.com**, so the form's mail arrives where you already

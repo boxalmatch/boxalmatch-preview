@@ -22,13 +22,12 @@
   --glass-2:     rgba(255, 255, 255, 0.085);
   --glass-hair:  rgba(255, 255, 255, 0.13);
   --glass-blur:  blur(26px) saturate(150%);
-  --accent:      #2fd94f;
-  --accent-hov:  #55e36f;
-  /* the display italic in the hero, sampled from the wordmark's own green
-     (the logo runs a subtle gradient from #00AD17 to #00B81C; this is the
-     flat fill). 7.9:1 on black. Deliberately not --accent: the UI green is
-     brighter than the logo. */
-  --accent-soft: #00B81C;
+  /* The brand green, sampled from wordmark.png: the logo runs a subtle
+     gradient from #00AD17 to #00B81C and this is the flat fill. 7.9:1 on
+     black, and 7.9:1 the other way for the black ink on a filled button.
+     Hover goes lighter, not darker — the fill carries dark text. */
+  --accent:      #00B81C;
+  --accent-hov:  #00E623;
   --nav-bg:      rgba(0,0,0,0.72);
   --shadow:      0 4px 24px rgba(0,0,0,0.6);
   --shadow-lg:   0 24px 70px rgba(0,0,0,0.8);
@@ -208,7 +207,7 @@ p{ margin:0; }
   font-family:var(--font-display);
   font-style:italic;
   font-weight:400;
-  color:var(--accent-soft);
+  color:var(--accent);
   font-size:1.06em;
   letter-spacing:-0.015em;
 }
