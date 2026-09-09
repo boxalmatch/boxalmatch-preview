@@ -736,10 +736,32 @@ p{ margin:0; }
 /* ============================================================
    REVEAL ON SCROLL
    ============================================================ */
-.rv{ opacity:0; transform:translateY(26px); }
+/* Everything rises a short way and fades as it comes into view. The curve is
+   a hard ease-out — most of the travel happens immediately and it settles
+   slowly — which is what reads as "fluid" rather than "sliding". --rv-delay
+   is set per element by initReveal() so the items in a row arrive one after
+   another instead of as a slab. */
+.rv{
+  opacity:0;
+  transform:translateY(24px);
+  will-change:opacity, transform;
+}
 .rv.in{
-  opacity:1; transform:none;
-  transition:opacity .8s cubic-bezier(.2,.7,.3,1), transform .8s cubic-bezier(.2,.7,.3,1);
+  opacity:1;
+  transform:none;
+  transition:opacity .9s cubic-bezier(.16,1,.3,1) var(--rv-delay,0s),
+             transform .9s cubic-bezier(.16,1,.3,1) var(--rv-delay,0s);
+}
+/* once it has arrived, stop paying for the compositing hint */
+.rv.done{ will-change:auto; }
+
+/* cards carry a touch of scale as well — the same move, just more of it,
+   because a card is a bigger object than a line of type */
+.val.rv, .ecard.rv, .ch.rv, .vcard.rv, .igcard.rv, .partner.rv{
+  transform:translateY(28px) scale(.985);
+}
+.val.rv.in, .ecard.rv.in, .ch.rv.in, .vcard.rv.in, .igcard.rv.in, .partner.rv.in{
+  transform:none;
 }
 
 @media (prefers-reduced-motion:reduce){
@@ -747,7 +769,7 @@ p{ margin:0; }
     animation-duration:.001ms !important;
     transition-duration:.001ms !important;
   }
-  .rv{ opacity:1; transform:none; }
+  .rv, .rv.in{ opacity:1 !important; transform:none !important; }
   .hero-logo,.hero h1,.hero .sub,.hero-cta,.hero-shot{ opacity:1; animation:none; }
   html{ scroll-behavior:auto; }
 }

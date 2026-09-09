@@ -204,19 +204,46 @@
 
   /* ---------- reveal on scroll ---------- */
   function initReveal() {
+    // Rows and grids reveal their own children, so a group cascades instead of
+    // landing in one piece. Marked here rather than in the markup: these are
+    // the same containers the rest of the page already knows about.
+    var GROUPS = ['.vals', '.egrid', '.channels', '.ig-grid', '.partners', '.rail'];
+    GROUPS.forEach(function (sel) {
+      var group = document.querySelector(sel);
+      if (!group) return;
+      for (var i = 0; i < group.children.length; i++) {
+        group.children[i].classList.add('rv');
+      }
+    });
+
     var els = document.querySelectorAll('.rv');
+
+    // stagger by position within the parent, capped so a long row never ends
+    // up waiting on the item before it
+    for (var d = 0; d < els.length; d++) {
+      var el = els[d];
+      var index = Array.prototype.indexOf.call(el.parentNode.children, el);
+      el.style.setProperty('--rv-delay', Math.min(index, 5) * 0.07 + 's');
+    }
+
+    function arrive(el) {
+      el.classList.add('in');
+      // drop the compositing hint once the transition is over
+      setTimeout(function () { el.classList.add('done'); }, 1400);
+    }
+
     if (!('IntersectionObserver' in window)) {
-      for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+      for (var i = 0; i < els.length; i++) arrive(els[i]);
       return;
     }
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
         if (en.isIntersecting) {
-          en.target.classList.add('in');
+          arrive(en.target);
           io.unobserve(en.target);
         }
       });
-    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.06 });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
 
     for (var j = 0; j < els.length; j++) io.observe(els[j]);
 
@@ -224,7 +251,7 @@
     // observer doesn't fire (printing, odd viewports, headless capture).
     setTimeout(function () {
       var still = document.querySelectorAll('.rv:not(.in)');
-      for (var k = 0; k < still.length; k++) still[k].classList.add('in');
+      for (var k = 0; k < still.length; k++) arrive(still[k]);
     }, 2600);
   }
 
