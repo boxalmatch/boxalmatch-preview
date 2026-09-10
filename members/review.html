@@ -21,10 +21,16 @@
     <a href="../index.html" class="nav-logo" aria-label="BOXALMATCH">
       <img src="../img/icons/wordmark.png" alt="BOXALMATCH">
     </a>
-    <nav class="nav-links" id="navlinks">
-      <a href="index.html"><span lang="it">Area membri</span><span lang="en">Member area</span></a>
+    <nav class="nav-links member-nav" id="navlinks">
+      <!-- These are the member-area destinations. On a desktop they are
+           hidden (.member-nav) because the user menu carries them; on a
+           phone there is no user menu, so this burger panel is where they
+           live. Keep the two in step. -->
+      <a href="index.html#contenuti-riservati"><span lang="it">Contenuti riservati</span><span lang="en">Member content</span></a>
+      <a href="index.html#prossimi-eventi"><span lang="it">Prossimi eventi</span><span lang="en">Upcoming events</span></a>
+      <a href="index.html#community">Community</a>
       <a href="submit.html"><span lang="it">Invia contenuti</span><span lang="en">Submit</span></a>
-      <a href="review.html"><span lang="it">Revisione</span><span lang="en">Review</span></a>
+      <a href="card.html"><span lang="it">La mia tessera</span><span lang="en">My card</span></a>
       <!-- Ends the Cloudflare Access session. Without this the only way out
            is clearing cookies, and the session lasts a month. -->
       <a href="/cdn-cgi/access/logout" class="signout"><span lang="it">Esci</span><span lang="en">Sign out</span></a>

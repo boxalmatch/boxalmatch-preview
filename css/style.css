@@ -170,6 +170,8 @@ p{ margin:0; }
    selector outranks it — so .user-menu{display:flex} below quietly beat
    it and el.hidden stopped hiding anything. This puts it back. */
 .user-menu[hidden]{ display:none; }
+/* same trap: a class selector would beat the browser's [hidden] rule */
+.user-menu a[hidden]{ display:none; }
 
 .user-menu{
   position:absolute; top:calc(100% + 10px); right:0;
@@ -199,6 +201,13 @@ p{ margin:0; }
 
 /* The user is a nav item on a phone and a chip on a desktop — never both. */
 .nav-links a.nav-user{ display:none; }
+
+/* Member pages keep their links in the markup for the phone's burger
+   panel, but show nothing in the desktop bar: up there the user menu
+   is the one place they live. */
+@media (min-width:821px){
+  .nav-links.member-nav{ display:none; }
+}
 
 .burger{
   display:none; background:none; border:0; cursor:pointer;

@@ -74,11 +74,22 @@
       encodeURIComponent(location.origin + '/');
   }
 
+  /* Everything the member area offers. The desktop bar shows none of it —
+     this menu is the single place it lives up there. */
   var USER_SECTIONS = [
     ['#contenuti-riservati', 'Contenuti riservati', 'Member content'],
     ['#prossimi-eventi', 'Prossimi eventi', 'Upcoming events'],
     ['#community', 'Community', 'Community']
   ];
+
+  var USER_PAGES = [
+    ['submit.html', 'Invia contenuti', 'Submit content'],
+    ['card.html', 'La mia tessera', 'My card']
+  ];
+
+  function memberPage(file) {
+    return (IN_MEMBERS ? '' : 'members/') + file;
+  }
 
   function bilingual(it, en) {
     if (it === en) return document.createTextNode(it);
@@ -139,6 +150,21 @@
       a.appendChild(bilingual(row[1], row[2]));
       menu.appendChild(a);
     });
+
+    USER_PAGES.forEach(function (row) {
+      var a = document.createElement('a');
+      a.href = memberPage(row[0]);
+      a.appendChild(bilingual(row[1], row[2]));
+      menu.appendChild(a);
+    });
+
+    /* Slot for the review queue, filled in only for admins. */
+    var review = document.createElement('a');
+    review.href = memberPage('review.html');
+    review.className = 'review-link';
+    review.hidden = true;
+    review.appendChild(bilingual('Revisione invii', 'Review submissions'));
+    menu.appendChild(review);
 
     var out = document.createElement('a');
     out.href = logoutHref();
@@ -236,7 +262,52 @@
         var name = displayName(identity, member);
         buildDesktopUser(name);
         buildMobileUser(name);
+        revealAdminLinks();
       });
+  }
+
+  /* The review queue is admin-only, and the browser cannot know who is an
+     admin — ADMIN_EMAILS lives in the deployment, not in the page. The API
+     reports it, so ask once per session and remember the answer rather than
+     showing every member a link that will refuse them. */
+  function revealAdminLinks() {
+    var CACHE = 'bm-admin';
+    var known = null;
+    try { known = sessionStorage.getItem(CACHE); } catch (e) { /* private mode */ }
+
+    if (known !== null) {
+      if (known === '1') showAdminLinks();
+      return;
+    }
+
+    fetch('/api/submissions', { credentials: 'same-origin' })
+      .then(function (r) {
+        var type = r.headers.get('content-type') || '';
+        return type.indexOf('application/json') === -1 ? null : r.json();
+      })
+      .catch(function () { return null; })
+      .then(function (data) {
+        var admin = !!(data && data.isAdmin);
+        try { sessionStorage.setItem(CACHE, admin ? '1' : '0'); } catch (e) {}
+        if (admin) showAdminLinks();
+      });
+  }
+
+  function showAdminLinks() {
+    var slot = document.querySelector('.user-menu .review-link');
+    if (slot) slot.hidden = false;
+
+    /* the phone's burger panel carries the same set */
+    var links = document.getElementById('navlinks');
+    if (!links || !links.classList.contains('member-nav')) return;
+    if (links.querySelector('.review-link')) return;
+
+    var a = document.createElement('a');
+    a.className = 'review-link';
+    a.href = 'review.html';
+    a.appendChild(bilingual('Revisione invii', 'Review submissions'));
+    var signout = links.querySelector('a.signout');
+    links.insertBefore(a, signout || null);
   }
 
   /* ---------- youtube click-to-play ---------- */
