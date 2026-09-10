@@ -44,7 +44,10 @@
   /* ---------- card ---------- */
   function cardURL(member) {
     // Encoded in the QR: a stable, shareable pointer to this membership.
-    return location.origin + '/members/card.html?n=' + encodeURIComponent(member.number);
+    // Resolved against the current page, not location.origin: on the
+    // GitHub Pages preview the site lives under /boxalmatch-preview/,
+    // and an origin-rooted path produced a QR that scanned to a 404.
+    return new URL('card.html?n=' + encodeURIComponent(member.number), location.href).href;
   }
 
   function paintCard(member) {
