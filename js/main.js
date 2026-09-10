@@ -156,6 +156,18 @@
       menu.hidden = !menu.hidden;
       btn.setAttribute('aria-expanded', menu.hidden ? 'false' : 'true');
     });
+
+    /* Close on any link inside it. Following one is usually a real
+       navigation that takes the menu with it, but not always: on the
+       member home the section links are same-document jumps, and the
+       menu would sit there open over the section it just moved to. */
+    menu.addEventListener('click', function (e) {
+      if (e.target.closest('a')) close();
+    });
+
+    /* Coming back via the back button can restore the page from the
+       bfcache with the menu exactly as it was left. */
+    window.addEventListener('pageshow', close);
     document.addEventListener('click', function (e) {
       if (!wrap.contains(e.target)) close();
     });
