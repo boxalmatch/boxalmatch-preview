@@ -1,7 +1,11 @@
 # Member area — setup guide
 
 Everything is built and works. What's left is connecting real logins.
-Budget about half an hour.
+You can do all of it from a browser — no terminal needed.
+
+Do it in this order. The domain move comes **last**, on purpose: you can have
+the login working and tested on a free Cloudflare address first, and only touch
+your DNS once you have seen it work.
 
 ---
 
@@ -12,8 +16,8 @@ your site and checks who someone is before letting the page load.
 
 There's a catch worth understanding. If the site stays on GitHub Pages, the
 files also remain reachable at `boxalmatch.github.io/members/` — and Cloudflare
-can't protect that address, only your own domain. Anyone who knows the github.io
-URL walks straight past the login.
+can't protect that address. Anyone who knows the github.io URL walks straight
+past the login.
 
 **The fix is to deploy through Cloudflare Pages instead of GitHub Pages.** You
 keep the same GitHub repo and the same `git push` workflow — Cloudflare just
@@ -24,57 +28,60 @@ area as a soft gate: nothing genuinely private behind it.
 
 ---
 
-## Step 1 — Move the domain to Cloudflare
+## Step 1 — Deploy with Cloudflare Pages
 
-1. Create a free account at [cloudflare.com](https://cloudflare.com) and choose
-   **Add a site**, entering your domain.
-2. Cloudflare gives you two nameservers, something like
-   `xxx.ns.cloudflare.com`.
-3. In Squarespace: **Domains → your domain → Nameservers** → switch to custom
-   nameservers and enter Cloudflare's two.
-4. Wait for Cloudflare to confirm the domain is active (usually well under an
-   hour). From now on you manage DNS in Cloudflare, not Squarespace — and you
-   still don't need any Squarespace subscription beyond the domain itself.
+No domain needed for this. You get a free `*.pages.dev` address to test on.
 
----
-
-## Step 2 — Deploy with Cloudflare Pages
-
-1. In Cloudflare: **Workers & Pages → Create → Pages → Connect to Git**.
-2. Authorise GitHub and pick the `boxalmatch.github.io` repo.
-3. Build settings — this is a plain static site, so:
+1. Create a free account at [cloudflare.com](https://cloudflare.com).
+2. **Workers & Pages → Create → Pages → Connect to Git**.
+3. Authorise GitHub and pick the `boxalmatch-preview` repo.
+4. Build settings — this is a plain static site, so:
    - Framework preset: **None**
    - Build command: *leave empty*
    - Output directory: `/`
-4. Deploy. You'll get a `*.pages.dev` URL immediately.
-5. **Custom domains → Set up a custom domain** → enter your domain. Cloudflare
-   adds the DNS records itself.
+5. Deploy. You get a URL like `boxalmatch.pages.dev` within a minute.
 
-Every `git push` now redeploys automatically.
+Every `git push` now redeploys automatically, exactly like GitHub Pages did.
+
+Open `boxalmatch.pages.dev` and check the site looks right before going on.
 
 ---
 
-## Step 3 — Protect the member area
+## Step 2 — Turn on the login
+
+Protect the `pages.dev` address first. It costs nothing to try, and if the login
+misbehaves you have not touched your real domain.
 
 1. In Cloudflare: **Zero Trust → Access → Applications → Add an application →
    Self-hosted**.
 2. Configure:
    - Application name: `Boxalmatch — Area Membri`
    - Session duration: `1 month` (so members don't log in constantly)
-   - Domain: your domain, path `members`
-3. Add a policy:
+   - Domain: `boxalmatch.pages.dev`, path `members`
+3. Add a second domain entry for path `api` as well — that is the submissions
+   API, and leaving it open would mean the pages are locked while the endpoints
+   that write to them are not. (See SUBMISSIONS-SETUP.md.)
+4. Add a policy:
    - Policy name: `Membri approvati`
    - Action: **Allow**
    - Include → **Emails** → paste the member email addresses
-     *(or use **Emails ending in** `@yourdomain.it` if you ever issue your own)*
-4. On the login-methods step, enable **One-time PIN**. Members enter their email,
-   receive a code, and they're in — no passwords for you to manage or leak.
+5. On the login-methods step, enable **One-time PIN**. Members enter their
+   email, receive a code, and they're in — no passwords for you to manage,
+   store, reset or leak.
 
-Visiting `/members/` now shows Cloudflare's login screen first.
+Visit `boxalmatch.pages.dev/members/` in a private window. You should get
+Cloudflare's login screen, a code by email, and then the member area with your
+name on the card.
+
+**If the dashboard will not accept a `pages.dev` hostname**, skip to Step 4, move
+the domain first, and then come back and use your own domain here instead. I was
+not able to reach Cloudflare's documentation from this session to confirm which
+of the two it is, so treat the `pages.dev` route as worth trying rather than
+guaranteed.
 
 ---
 
-## Step 4 — Add your members
+## Step 3 — Add your members
 
 Two lists have to agree:
 
@@ -104,6 +111,40 @@ The email must match what they log in with, exactly. Commit, push, done.
 If someone gets past Access but isn't in `members.json`, they see a friendly
 "you're not on the list yet" screen pointing them to Instagram — so a mismatch
 fails gracefully rather than breaking.
+
+---
+
+## Step 4 — Move your domain (when you are ready)
+
+Only once the login works on `pages.dev`. This is the step that changes DNS, so
+do it with the rest already proven.
+
+1. In Cloudflare: **Add a site**, entering your domain.
+2. Cloudflare gives you two nameservers, something like `xxx.ns.cloudflare.com`.
+3. In Squarespace: **Domains → your domain → Nameservers** → switch to custom
+   nameservers and enter Cloudflare's two.
+4. Wait for Cloudflare to confirm the domain is active (usually well under an
+   hour). From now on you manage DNS in Cloudflare, not Squarespace — and you
+   still don't need any Squarespace subscription beyond the domain itself.
+5. In your Pages project: **Custom domains → Set up a custom domain** → enter
+   your domain. Cloudflare adds the DNS records itself.
+6. Back in **Zero Trust → Access → Applications**, edit the application from
+   Step 2 and add your real domain alongside the `pages.dev` one (paths
+   `members` and `api` again).
+
+---
+
+## Step 5 — Close the back door
+
+Cloudflare is now serving the site, but GitHub Pages is still serving its own
+copy at `boxalmatch.github.io` — including `/members/`, with no login in front
+of it. Until you turn it off, the member area is not actually private.
+
+**GitHub → the repo → Settings → Pages → Source → None.**
+
+Do this only once your own domain is serving correctly from Cloudflare, so you
+are never left with nothing live. Check `boxalmatch.github.io/members/` afterwards
+and confirm it 404s.
 
 ---
 

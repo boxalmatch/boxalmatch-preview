@@ -28,27 +28,31 @@ Budget about twenty minutes.
 
 ## Step 1 — Create the database
 
-```sh
-npx wrangler d1 create boxalmatch
-```
+In the Cloudflare dashboard: **Storage & Databases → D1 → Create database**.
 
-Paste the `database_id` it prints into `wrangler.toml`, then create the table:
+- Name: `boxalmatch`
 
-```sh
-npx wrangler d1 execute boxalmatch --remote --file=db/schema.sql
-```
+Open it, go to the **Console** tab, paste the contents of
+[`db/schema.sql`](db/schema.sql) from this repo, and run it. That creates the
+`submissions` table and its two indexes.
+
+*(With a terminal you could instead run `npx wrangler d1 create boxalmatch` and
+`npx wrangler d1 execute boxalmatch --remote --file=db/schema.sql`. The
+dashboard route above does the same thing and needs nothing installed.)*
 
 ---
 
 ## Step 2 — Create the bucket
 
-```sh
-npx wrangler r2 bucket create boxalmatch-media
-```
+**R2 → Create bucket**.
 
-**Leave it private.** Do not connect a public domain to it. Files are served
-through `/api/media/*`, which checks who is asking — a public bucket would make
-every pending upload readable by anyone who guessed the URL, reviewed or not.
+- Name: `boxalmatch-media`
+- Location: whichever is nearest you
+
+**Leave it private.** Do not connect a public domain to it, and do not enable
+public access. Files are served through `/api/media/*`, which checks who is
+asking — a public bucket would make every pending upload readable by anyone who
+guessed the URL, reviewed or not.
 
 ---
 
@@ -61,6 +65,9 @@ Bindings**.
 - R2 bucket binding — variable name `MEDIA`, bucket `boxalmatch-media`
 
 The names must match exactly; the code looks for `env.DB` and `env.MEDIA`.
+
+`wrangler.toml` deliberately leaves these out, so the dashboard stays the one
+place they are set — declaring them in both is how they drift apart.
 
 ---
 
@@ -105,6 +112,9 @@ open to the world.
 
 ## Working on it locally
 
+This part does need a terminal, and is entirely optional — skip it if you work
+in the browser.
+
 ```sh
 cp .dev.vars.example .dev.vars     # gitignored, never deployed
 npx wrangler pages dev .
@@ -114,6 +124,10 @@ With no `ACCESS_TEAM_DOMAIN` set, the API treats you as `DEV_EMAIL` so the pages
 work offline. In production the real Access check takes precedence and
 `DEV_EMAIL` is ignored — the ordering in `functions/api/_access.js` makes sure a
 stray value cannot become a bypass.
+
+Without a terminal, the equivalent is simply to push and let Cloudflare Pages
+deploy: each push gets its own preview URL, so you can try a change before it
+reaches the live address.
 
 ---
 
