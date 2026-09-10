@@ -487,7 +487,15 @@ p{ margin:0; }
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   scroll-behavior:smooth;
+  /* The rail bleeds to the screen edge so cards can peek off the right.
+     Its LEADING edge should still line up with the column everything else
+     in the section sits in — otherwise the first card starts 164px left of
+     the heading and the events grid below, and nothing lines up with
+     anything. max() collapses it back to the plain gutter once the screen
+     is narrower than the column. */
   padding:4px 22px 26px;
+  padding-left:max(22px, calc((100% - var(--maxw) + 44px) / 2 + 22px));
+  scroll-padding-left:max(22px, calc((100% - var(--maxw) + 44px) / 2 + 22px));
   margin:0 -22px;
   -ms-overflow-style:none; scrollbar-width:none;
 }
@@ -603,13 +611,19 @@ p{ margin:0; }
 /* instagram card */
 /* Four posts side by side, not a rail: nothing scrolls, so there is nothing
    to page through and no arrows or dots. */
+/* Two across, in the same column as the rest of the page.
+   It was four across in .wrap-wide, which made the row run 22..1418 on a
+   1440 screen while every other section sat 214..1226 — a 400px step that
+   read as a mistake rather than a device. Four in the narrow column is not
+   an option: an Instagram embed will not go below ~326px, and a quarter of
+   the column is 239px. Two across gives each post ~498px, which is closer
+   to how Instagram renders them anyway. */
 .ig-grid{
   display:grid;
-  grid-template-columns:repeat(4, 1fr);
+  grid-template-columns:repeat(2, 1fr);
   gap:20px;
   align-items:start;      /* embeds differ in height; don't stretch them */
 }
-@media (max-width:1080px){ .ig-grid{ grid-template-columns:repeat(2, 1fr); } }
 @media (max-width:600px){  .ig-grid{ grid-template-columns:1fr; max-width:400px; margin:0 auto; } }
 
 .igcard{
@@ -684,6 +698,13 @@ p{ margin:0; }
   font-size:12px; font-weight:600; letter-spacing:.03em; color:var(--ink-3);
 }
 .ecard h3{ font-size:23px; letter-spacing:-0.024em; margin:6px 0 9px; }
+/* Reserve two lines for the title so a card whose name wraps ("Noble Party
+   Gran Paradiso") does not push its description 24px below its neighbours'.
+   Only where cards sit side by side — in one column there is nothing to
+   line up with and it would just add a gap. */
+@media (min-width:521px){
+  .ecard h3{ min-height:2.1em; }
+}
 .ecard p{ font-size:15px; color:var(--ink-2); line-height:1.47; flex:1; }
 .ecard .links{ margin-top:16px; display:flex; gap:18px; flex-wrap:wrap; }
 .ecard .links a{ font-size:15px; }

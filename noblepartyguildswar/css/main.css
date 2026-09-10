@@ -207,8 +207,11 @@ main > section.container h2 {
 }
 
 /* ---------- navigation ---------- */
+/* Named properties, not `all`. `all` animated the focus outline too, so a
+   keyboard user's ring faded in over 200ms instead of appearing, and every
+   descendant carried a transition for properties that never change. */
 #main-header, #main-header * {
-    transition: all 0.2s;
+    transition: opacity 0.2s, background-color 0.2s, color 0.2s, border-color 0.2s;
 }
 
 /* Same bar as the home page: sticky from the top, glass from the top, one
