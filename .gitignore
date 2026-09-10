@@ -1,0 +1,4 @@
+
+# wrangler local development secrets — never committed
+.dev.vars
+.wrangler/

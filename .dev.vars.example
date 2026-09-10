@@ -1,0 +1,8 @@
+# Copy to .dev.vars for local `wrangler pages dev` runs.
+# .dev.vars is gitignored and never deployed.
+#
+# With no ACCESS_TEAM_DOMAIN set, the API treats you as this member so
+# the pages can be worked on offline. In production the Access check
+# takes precedence and this value is ignored.
+DEV_EMAIL = "alberto.noferi@gmail.com"
+ADMIN_EMAILS = "alberto.noferi@gmail.com"

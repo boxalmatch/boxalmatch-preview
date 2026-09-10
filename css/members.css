@@ -196,3 +196,171 @@ a.m-tile:hover{
   .nav,.foot,.card-actions,.m-sec{ display:none !important; }
   .mcard{ box-shadow:none; }
 }
+
+/* ============================================================
+   SUBMISSIONS — upload form and review queue
+   ============================================================ */
+
+.sub-form{ display:grid; gap:18px; max-width:640px; }
+
+/* drop zone */
+.drop{
+  position:relative;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px; text-align:center;
+  padding:38px 22px;
+  border:1px dashed var(--hair-strong);
+  border-radius:var(--r-lg);
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  cursor:pointer;
+  transition:border-color .2s, background .2s;
+}
+.drop:hover,
+.drop.over{ border-color:var(--accent); background:var(--glass-2); }
+.drop.has-file{ border-style:solid; border-color:var(--accent); }
+/* The input still has to be focusable for the keyboard, so it is
+   made invisible rather than display:none. */
+.drop input[type=file]{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  opacity:0; cursor:pointer;
+}
+.drop input[type=file]:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+.drop-glyph{ font-size:22px; color:var(--accent); line-height:1; }
+.drop-line{ font-size:16px; color:var(--ink); word-break:break-word; }
+.drop-hint{ font-size:13px; color:var(--ink-3); }
+
+/* fields */
+.fld{ display:grid; gap:6px; }
+.fld label{ font-size:13px; color:var(--ink-2); letter-spacing:-0.01em; }
+/* --hair-strong, not --glass-hair, matching the contact form on the
+   home page: a control's own boundary needs 3:1 against the page
+   (WCAG 1.4.11) and the glass hairline only reaches 1.5:1. */
+.fld input,
+.fld textarea{
+  font-family:inherit; font-size:16px; color:var(--ink);
+  background:var(--glass);
+  border:1px solid var(--hair-strong);
+  border-radius:var(--r);
+  padding:11px 13px;
+  width:100%;
+  resize:vertical;
+}
+.fld input::placeholder,
+.fld textarea::placeholder{ color:var(--ink-3); }
+.fld input:focus,
+.fld textarea:focus{ outline:none; border-color:var(--accent); }
+
+/* upload progress */
+.bar{
+  height:2px; border-radius:2px;
+  background:var(--hair);
+  overflow:hidden;
+}
+.bar-fill{
+  height:100%; width:0;
+  background:var(--accent);
+  transition:width .2s linear;
+}
+
+.form-msg{ font-size:14px; color:var(--ink-2); min-height:1.2em; }
+.form-msg.good{ color:var(--accent); }
+/* A light red, not the pure #ff0000 that vibrates on black. */
+.form-msg.bad{ color:#ff8a80; }
+
+.linkish{
+  background:none; border:0; padding:0;
+  font-family:inherit; font-size:14px;
+  color:var(--ink-3); cursor:pointer;
+  text-decoration:underline;
+}
+.linkish:hover{ color:var(--ink); }
+
+/* my submissions */
+.sub-list{
+  border-top:1px solid var(--hair);
+}
+.sub-row{
+  display:flex; align-items:center; gap:14px;
+  padding:16px 0;
+  border-bottom:1px solid var(--hair);
+}
+.sub-main{ flex:1; min-width:0; }
+.sub-title{ font-size:16px; letter-spacing:-0.015em; color:var(--ink); }
+.sub-meta{ font-size:13px; color:var(--ink-3); margin-top:3px; word-break:break-word; }
+.sub-note{ font-size:13px; color:var(--ink-2); margin-top:6px; font-style:italic; }
+
+/* review queue */
+.tabs{ display:flex; gap:8px; flex-wrap:wrap; margin-bottom:22px; }
+.tab{
+  font-family:inherit; font-size:14px;
+  color:var(--ink-2);
+  background:var(--glass);
+  border:1px solid var(--hair-strong);
+  border-radius:980px;
+  padding:7px 15px;
+  cursor:pointer;
+  transition:background .2s, color .2s, border-color .2s;
+}
+.tab:hover{ color:var(--ink); }
+.tab.on{ background:var(--ink); color:var(--ground); border-color:var(--ink); }
+.tab .count{ font-variant-numeric:tabular-nums; opacity:.75; }
+.tab .count:not(:empty){ margin-left:6px; }
+
+.rev-list{ display:grid; gap:18px; }
+.rev-card{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:20px;
+  padding:18px;
+  border-radius:var(--r-lg);
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  border:1px solid var(--glass-hair);
+  box-shadow:0 1px 0 rgba(255,255,255,0.06) inset, var(--shadow);
+}
+.rev-thumb{
+  display:flex; align-items:center; justify-content:center;
+  aspect-ratio:4/3;
+  border-radius:var(--r);
+  overflow:hidden;
+  background:var(--surface-2);
+}
+.rev-thumb img,
+.rev-thumb video{ width:100%; height:100%; object-fit:cover; }
+.rev-file{ font-size:14px; color:var(--accent); padding:12px; text-align:center; }
+
+.rev-body{ display:grid; gap:8px; align-content:start; min-width:0; }
+.rev-body h3{ font-size:18px; letter-spacing:-0.02em; color:var(--ink); }
+.rev-meta{ font-size:13px; color:var(--ink-3); }
+.rev-note{ font-size:14px; color:var(--ink-2); }
+.rev-reason{
+  font-family:inherit; font-size:15px; color:var(--ink);
+  background:var(--glass);
+  border:1px solid var(--hair-strong);
+  border-radius:var(--r);
+  padding:9px 12px;
+  width:100%;
+  margin-top:4px;
+}
+.rev-reason:focus{ outline:none; border-color:var(--accent); }
+/* Reject is deliberately not the green outline button — a
+   destructive choice should not wear the brand's approving colour. */
+.btn-quiet{
+  border-color:var(--hair-strong);
+  color:var(--ink-2);
+  background:transparent;
+}
+.btn-quiet:hover{ border-color:var(--ink-2); color:var(--ink); }
+
+.rev-actions{ display:flex; gap:10px; flex-wrap:wrap; margin-top:4px; }
+.rev-actions .btn{ font-size:15px; padding:9px 18px; }
+
+@media (max-width:640px){
+  .rev-card{ grid-template-columns:1fr; }
+  .rev-thumb{ aspect-ratio:16/9; }
+  .sub-row{ flex-wrap:wrap; }
+}

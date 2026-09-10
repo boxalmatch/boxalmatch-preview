@@ -361,7 +361,9 @@ p{ margin:0; }
 .btn-fill{ background:var(--accent); color:#000; font-weight:500; }
 .btn-fill:hover{ background:var(--accent-hov); }
 .btn-line{ border-color:var(--accent); color:var(--accent); background:transparent; }
-.btn-line:hover{ background:var(--accent); color:#fff; }
+/* Black ink on the fill, for the same reason .btn-fill takes it:
+   white on the brand green is 2.7:1, under the 4.5:1 floor. */
+.btn-line:hover{ background:var(--accent); color:#000; }
 
 .lnk{
   font-size:17px; color:var(--accent);

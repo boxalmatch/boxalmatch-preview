@@ -1,0 +1,29 @@
+# Cloudflare Pages configuration.
+#
+# Inert while the site is served by GitHub Pages — nothing here runs
+# until the project is deployed through Cloudflare Pages, as described
+# in MEMBERS-SETUP.md. Committed now so the bindings are ready.
+
+name = "boxalmatch"
+pages_build_output_dir = "."
+compatibility_date = "2026-01-01"
+
+# Submission metadata. Create with:
+#   wrangler d1 create boxalmatch
+# then paste the id it prints.
+[[d1_databases]]
+binding = "DB"
+database_name = "boxalmatch"
+database_id = "REPLACE_WITH_THE_ID_WRANGLER_PRINTS"
+
+# The uploaded files. Create with:
+#   wrangler r2 bucket create boxalmatch-media
+# Keep it private — files are served through /api/media/*, which
+# checks who is asking.
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "boxalmatch-media"
+
+# ACCESS_TEAM_DOMAIN, ACCESS_AUD and ADMIN_EMAILS are set in the
+# Pages dashboard (Settings -> Environment variables), not here —
+# the AUD tag is per-application and this file is public.

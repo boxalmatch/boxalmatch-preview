@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Revisione invii — BOXALMATCH</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Coda di revisione dei contenuti inviati dai membri.">
+
+<link rel="icon" type="image/png" href="../img/icons/favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/members.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a href="../index.html" class="nav-logo" aria-label="BOXALMATCH">
+      <img src="../img/icons/wordmark.png" alt="BOXALMATCH">
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a href="index.html"><span lang="it">Area membri</span><span lang="en">Member area</span></a>
+      <a href="submit.html"><span lang="it">Invia contenuti</span><span lang="en">Submit</span></a>
+      <a href="review.html"><span lang="it">Revisione</span><span lang="en">Review</span></a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang">
+        <button type="button" data-set="it">IT</button>
+        <button type="button" data-set="en">EN</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="m-main">
+  <div class="wrap">
+
+    <div class="m-head">
+      <div class="hi" lang="it">Revisione.</div>
+      <div class="hi" lang="en">Review.</div>
+      <p class="sub" lang="it">Niente diventa pubblico prima di essere approvato qui.</p>
+      <p class="sub" lang="en">Nothing goes public until it is approved here.</p>
+    </div>
+
+    <div class="m-state" id="r-loading">
+      <div class="spinner"></div>
+      <p lang="it">Un attimo…</p>
+      <p lang="en">One moment…</p>
+    </div>
+
+    <div class="m-state" id="r-offline" hidden>
+      <h2 lang="it">Non ancora attivo</h2>
+      <h2 lang="en">Not switched on yet</h2>
+      <p lang="it">La coda di revisione funziona quando il sito è pubblicato con Cloudflare Pages.</p>
+      <p lang="en">The review queue works once the site is deployed with Cloudflare Pages.</p>
+    </div>
+
+    <div class="m-state" id="r-denied" hidden>
+      <h2 lang="it">Riservato agli amministratori</h2>
+      <h2 lang="en">Admins only</h2>
+      <p lang="it">Il tuo indirizzo non è tra quelli che possono revisionare gli invii.</p>
+      <p lang="en">Your address is not one of those allowed to review submissions.</p>
+      <a href="index.html" class="btn btn-fill">
+        <span lang="it">Torna all'area membri</span><span lang="en">Back to the member area</span>
+      </a>
+    </div>
+
+    <div id="r-main" hidden>
+      <div class="tabs" id="r-tabs" role="tablist">
+        <button type="button" class="tab on" data-status="pending" role="tab">
+          <span lang="it">Da rivedere</span><span lang="en">To review</span>
+          <span class="count" id="c-pending"></span>
+        </button>
+        <button type="button" class="tab" data-status="approved" role="tab">
+          <span lang="it">Approvati</span><span lang="en">Approved</span>
+        </button>
+        <button type="button" class="tab" data-status="rejected" role="tab">
+          <span lang="it">Rifiutati</span><span lang="en">Rejected</span>
+        </button>
+      </div>
+
+      <p class="form-msg" id="r-msg" role="status" aria-live="polite"></p>
+
+      <div id="r-list" class="rev-list"></div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-bot">
+      <span>&copy; 2026 BOXALMATCH</span>
+      <span lang="it">Area riservata ai membri.</span>
+      <span lang="en">Members only area.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/review.js"></script>
+</body>
+</html>

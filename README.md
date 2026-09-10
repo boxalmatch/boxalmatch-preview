@@ -8,6 +8,10 @@ index.html            public page
 members/index.html    member profile area
 members/card.html     full-screen membership card
 members/members.json  approved member registry
+members/submit.html   member upload form
+members/review.html   admin approval queue
+functions/api/        Cloudflare Pages Functions (submissions API)
+db/schema.sql         D1 table for submissions
 css/style.css         site styling
 css/members.css       member-area styling
 js/main.js            language toggle, mobile nav, carousels, video player
@@ -18,7 +22,10 @@ img/group.jpg         hero photo
 img/icons/            wordmark + favicon
 ```
 
-**Member area:** see [MEMBERS-SETUP.md](MEMBERS-SETUP.md) for the login setup.
+**Member area:** see [MEMBERS-SETUP.md](MEMBERS-SETUP.md) for the login setup, and
+[SUBMISSIONS-SETUP.md](SUBMISSIONS-SETUP.md) for member uploads and the review
+queue. Both need Cloudflare Pages; on GitHub Pages the `/api/*` Functions do not
+exist and the pages that use them say so rather than breaking.
 Note that it recommends deploying via Cloudflare Pages rather than GitHub Pages —
 otherwise the member pages stay reachable at the public `github.io` address and
 the login can be bypassed.

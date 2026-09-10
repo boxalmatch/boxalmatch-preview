@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Invia contenuti — BOXALMATCH</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="description" content="Invia foto e video degli eventi Boxalmatch.">
+
+<link rel="icon" type="image/png" href="../img/icons/favicon.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="../css/style.css" rel="stylesheet">
+<link href="../css/members.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a href="../index.html" class="nav-logo" aria-label="BOXALMATCH">
+      <img src="../img/icons/wordmark.png" alt="BOXALMATCH">
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a href="index.html"><span lang="it">Area membri</span><span lang="en">Member area</span></a>
+      <a href="submit.html"><span lang="it">Invia contenuti</span><span lang="en">Submit</span></a>
+      <a href="card.html"><span lang="it">La mia tessera</span><span lang="en">My card</span></a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang">
+        <button type="button" data-set="it">IT</button>
+        <button type="button" data-set="en">EN</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="m-main">
+  <div class="wrap">
+
+    <div class="m-head">
+      <div class="hi" lang="it">Invia contenuti.</div>
+      <div class="hi" lang="en">Submit content.</div>
+      <p class="sub" lang="it">Foto e video dei nostri eventi. Li rivediamo prima di pubblicarli.</p>
+      <p class="sub" lang="en">Photos and video from our events. We review them before publishing.</p>
+    </div>
+
+    <!-- ---------- loading ---------- -->
+    <div class="m-state" id="s-loading">
+      <div class="spinner"></div>
+      <p lang="it">Un attimo…</p>
+      <p lang="en">One moment…</p>
+    </div>
+
+    <!-- ---------- API not deployed yet ---------- -->
+    <div class="m-state" id="s-offline" hidden>
+      <h2 lang="it">Non ancora attivo</h2>
+      <h2 lang="en">Not switched on yet</h2>
+      <p lang="it">
+        Gli invii funzionano quando il sito è pubblicato con Cloudflare Pages.
+        Fino ad allora questa pagina resta qui, pronta.
+      </p>
+      <p lang="en">
+        Submissions work once the site is deployed with Cloudflare Pages.
+        Until then this page just sits here, ready.
+      </p>
+    </div>
+
+    <!-- ---------- signed in, not a member ---------- -->
+    <div class="m-state" id="s-denied" hidden>
+      <h2 lang="it">Non sei ancora nella lista</h2>
+      <h2 lang="en">You're not on the list yet</h2>
+      <p class="mail" id="s-denied-msg"></p>
+    </div>
+
+    <!-- ---------- the form ---------- -->
+    <div id="s-form" hidden>
+      <form class="sub-form" id="subform" novalidate>
+
+        <label class="drop" id="drop" for="file">
+          <input type="file" id="file" name="file"
+                 accept="image/jpeg,image/png,image/webp,image/gif,image/heic,video/mp4,video/quicktime,video/webm,application/pdf">
+          <span class="drop-glyph">↑</span>
+          <span class="drop-line" id="drop-label">
+            <span lang="it">Scegli un file o trascinalo qui</span>
+            <span lang="en">Choose a file or drop it here</span>
+          </span>
+          <span class="drop-hint" lang="it">Foto, video o PDF — fino a 100 MB</span>
+          <span class="drop-hint" lang="en">Photo, video or PDF — up to 100 MB</span>
+        </label>
+
+        <div class="fld">
+          <label for="title" lang="it">Titolo</label>
+          <label for="title" lang="en">Title</label>
+          <input type="text" id="title" name="title" maxlength="140" required>
+        </div>
+
+        <div class="fld">
+          <label for="event" lang="it">Evento (facoltativo)</label>
+          <label for="event" lang="en">Event (optional)</label>
+          <input type="text" id="event" name="event" maxlength="140"
+                 list="events" placeholder="The Great LAN, Guild War…">
+          <datalist id="events">
+            <option value="The Great LAN"></option>
+            <option value="Noble Party Gran Paradiso"></option>
+            <option value="Noble Party Guild War"></option>
+          </datalist>
+        </div>
+
+        <div class="fld">
+          <label for="note" lang="it">Note (facoltative)</label>
+          <label for="note" lang="en">Notes (optional)</label>
+          <textarea id="note" name="note" rows="3" maxlength="2000"></textarea>
+        </div>
+
+        <div class="bar" id="bar" hidden><div class="bar-fill" id="bar-fill"></div></div>
+
+        <p class="form-msg" id="s-msg" role="status" aria-live="polite"></p>
+
+        <button type="submit" class="btn btn-fill" id="s-send">
+          <span lang="it">Invia</span><span lang="en">Send</span>
+        </button>
+      </form>
+
+      <section class="m-sec">
+        <h2 lang="it">I tuoi invii</h2>
+        <h2 lang="en">Your submissions</h2>
+        <div id="s-list" class="sub-list"></div>
+      </section>
+    </div>
+
+  </div>
+</main>
+
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-bot">
+      <span>&copy; 2026 BOXALMATCH</span>
+      <span lang="it">Area riservata ai membri.</span>
+      <span lang="en">Members only area.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="../js/main.js"></script>
+<script src="../js/api.js"></script>
+<script src="../js/submit.js"></script>
+</body>
+</html>
