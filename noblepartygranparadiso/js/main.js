@@ -561,5 +561,48 @@ function moveSlide(int){
     autoSlider = setInterval(next, 4000)
 }
 
+/* ============================================================
+   Mobile header bar
+   ------------------------------------------------------------
+   On phones the bar carries the IT/EN pill next to the burger,
+   exactly like the home page. The markup keeps the toggle inside
+   nav > ul, where it belongs on desktop, so the node is relocated
+   at the mobile breakpoint. CSS alone cannot do it: header > nav
+   becomes a fixed drop-down panel, so the pill would be trapped
+   inside the menu instead of sitting in the bar.
+   ============================================================ */
+function setupMobileNavBar() {
+    const bar = document.querySelector('#main-header .mobile-nav');
+    const list = document.querySelector('#main-header > nav > ul');
+    if (!bar || !list) return;
+
+    const burger = bar.querySelector('.toggle-nav');
+    const lang = document.querySelector('#main-header .lang-toggle');
+    if (!burger || !lang) return;
+
+    let right = bar.querySelector('.mobile-nav-right');
+    if (!right) {
+        right = document.createElement('div');
+        right.className = 'mobile-nav-right';
+        bar.appendChild(right);
+        right.appendChild(burger);
+    }
+
+    const mq = window.matchMedia('(max-width: 820px)');
+
+    function place() {
+        if (mq.matches) {
+            if (lang.parentElement !== right) right.insertBefore(lang, burger);
+        } else if (lang.parentElement !== list) {
+            list.appendChild(lang);
+        }
+    }
+
+    place();
+    if (mq.addEventListener) mq.addEventListener('change', place);
+    else if (mq.addListener) mq.addListener(place);
+}
+
 setupLangToggle();
+setupMobileNavBar();
 initPage();

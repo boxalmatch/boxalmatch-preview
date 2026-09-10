@@ -254,6 +254,26 @@ drift.
 The header, the section bar and the language toggle are the home page's:
 sticky glass from the top, brand left, links centred, IT/EN pill right.
 
+### On a phone
+
+The sub-pages use the home page's mobile header, and switch to it at the same
+820px. The bar is a 48px opaque strip — logo left, IT/EN pill and burger right
+— and the menu drops a glass panel from under it with left-aligned,
+hairline-separated links. It is opaque rather than glass on purpose: a
+`backdrop-filter` on the bar would make it a backdrop root, and the panel
+nested inside would have nothing left of the page to blur.
+
+The markup keeps the IT/EN toggle inside `nav > ul`, where it belongs on
+desktop, so `setupMobileNavBar()` in `js/main.js` moves the node into the bar
+below 820px and back above it. CSS cannot: the open menu is a fixed-position
+panel, and the pill would be trapped inside it.
+
+Photo rails bleed `--rail-bleed` past the text column on both sides so the
+next card peeks in at the edge. That bleed can never be wider than the gutter
+between the column and the window or the whole page scrolls sideways, so it is
+capped against the real gutter above 820px and set flush with the screen edge
+below it.
+
 ### Photos
 
 Every photo opens full size in a lightbox on the page — click, or tab to it

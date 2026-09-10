@@ -376,6 +376,19 @@ header > nav .active > a {
 
 .episodes::-webkit-scrollbar { display: none; }
 
+/* The bleed may never exceed the space between the container and the window,
+   or the page itself scrolls sideways (it did, by 19px, at exactly 1024px).
+   Inside the rail, 100% is the container's content box, so (100vw - 100%) / 2
+   is precisely the gutter left over on each side; the 8px keeps a classic
+   scrollbar — which 100vw counts and clientWidth does not — from eating the
+   margin. Below 821px the rail is deliberately flush with the screen edge and
+   --rail-bleed is set to the gutter directly. */
+@media (min-width: 821px) {
+    .episodes {
+        --rail-bleed: min(clamp(16px, 6vw, 90px), calc((100vw - 100%) / 2 - 8px));
+    }
+}
+
 /* a rail with a single item is centred rather than left-aligned */
 .episodes.is-single { justify-content: center; }
 
@@ -1321,12 +1334,12 @@ footer a { color: var(--primary-color); }
 footer a:hover { text-decoration: underline; }
 
 /* ---------- responsive base kept from original ---------- */
-@media (max-width: 1024px) {
-    .episodes { height: 50vh; }
-}
-
+/* The rail used to be a fixed-height stage (50vh / 40vh) with absolutely
+   positioned slides. It is now a scroll-snap peek rail whose cards carry
+   their own 16/10 aspect-ratio, and a viewport height on the rail simply
+   stretched every card past that ratio — 284x348 instead of 284x177 on a
+   phone. The rail takes its height from the cards. */
 @media (max-width: 600px) {
-    .episodes { height: 40vh; }
     .episode > img { max-height: 100%; }
 }
 
