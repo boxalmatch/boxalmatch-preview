@@ -173,7 +173,8 @@ switch on — add the markup and it happens.
 ```
 
 To make a card link out, swap the `<div>` for
-`<a class="partner" href="..." target="_blank" rel="noopener">` — PANDA is one.
+`<a class="partner" href="..." target="_blank" rel="noopener">` — PANDA is one,
+pointing at its Google Maps listing.
 A linked card keeps the site's ink rather than the accent link colour, drops the
 underline, and lifts its logo slightly on hover so it reads as clickable.
 
