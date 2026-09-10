@@ -22,10 +22,14 @@ img/group.jpg         hero photo
 img/icons/            wordmark + favicon
 ```
 
+**Live at [boxalmatch.com](https://boxalmatch.com)**, served by Cloudflare Pages
+from `main`. Every push deploys. GitHub Pages is no longer used — it served a
+second copy of the site that Cloudflare Access could not protect.
+
 **Member area:** see [MEMBERS-SETUP.md](MEMBERS-SETUP.md) for the login setup, and
 [SUBMISSIONS-SETUP.md](SUBMISSIONS-SETUP.md) for member uploads and the review
-queue. Both need Cloudflare Pages; on GitHub Pages the `/api/*` Functions do not
-exist and the pages that use them say so rather than breaking.
+queue. The `/api/*` Functions only exist on Cloudflare Pages; opened any other way,
+the pages that use them say so rather than breaking.
 Note that it recommends deploying via Cloudflare Pages rather than GitHub Pages —
 otherwise the member pages stay reachable at the public `github.io` address and
 the login can be bypassed.

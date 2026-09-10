@@ -1,11 +1,23 @@
 # Member area — setup guide
 
-Everything is built and works. What's left is connecting real logins.
-You can do all of it from a browser — no terminal needed.
+**This is done.** boxalmatch.com is served by Cloudflare Pages, `/members/` is
+behind Cloudflare Access, and members log in with an emailed code. The steps
+below are kept as the record of how it was set up and what to change if any of
+it needs redoing.
 
-Do it in this order. The domain move comes **last**, on purpose: you can have
-the login working and tested on a free Cloudflare address first, and only touch
-your DNS once you have seen it work.
+Live configuration:
+
+| Thing | Value |
+|---|---|
+| Domain | `boxalmatch.com` (+ `www`), registered at Squarespace, DNS on Cloudflare |
+| Hosting | Cloudflare Pages project `boxalmatch-preview`, deploying from `main` |
+| Test address | `boxalmatch-preview.pages.dev` — still live, also behind Access |
+| Access team | `boxalmatch.cloudflareaccess.com` |
+| Access app | `BOXALMATCH - Area Membri`, destinations on both hosts, paths `members` and `api` |
+| Login method | One-time PIN (emailed code) |
+| GitHub Pages | unpublished — it was a copy of `/members/` with no login in front of it |
+
+Everything below was done from a browser; no terminal needed.
 
 ---
 
