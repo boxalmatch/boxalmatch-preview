@@ -1,6 +1,9 @@
 -- BOXALMATCH — member submissions
 -- Apply with:
 --   wrangler d1 execute boxalmatch --remote --file=db/schema.sql
+--
+-- Pasting into the D1 dashboard console instead? Use db/schema-console.sql.
+-- The console input is one line, so these -- comments would swallow the script.
 
 CREATE TABLE IF NOT EXISTS submissions (
     id            TEXT PRIMARY KEY,           -- also the R2 key prefix

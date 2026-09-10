@@ -32,9 +32,17 @@ In the Cloudflare dashboard: **Storage & Databases → D1 → Create database**.
 
 - Name: `boxalmatch`
 
-Open it, go to the **Console** tab, paste the contents of
-[`db/schema.sql`](db/schema.sql) from this repo, and run it. That creates the
-`submissions` table and its two indexes.
+Open it, go to the **Console** tab, and paste the three statements from
+[`db/schema-console.sql`](db/schema-console.sql) — **one at a time**, pressing
+Execute after each. That creates the `submissions` table and its two indexes.
+
+Use that file, not `db/schema.sql`, even though they build the same thing. The
+console's input is a single line, so pasting the commented version collapses it
+onto one line and the first `--` comments out the entire rest of the script; the
+console then reports "The request is malformed: Requests without any query are
+not supported." `schema-console.sql` has no comments and one statement per line
+for exactly that reason. `db/schema.sql` stays the readable, canonical copy for
+the CLI.
 
 *(With a terminal you could instead run `npx wrangler d1 create boxalmatch` and
 `npx wrangler d1 execute boxalmatch --remote --file=db/schema.sql`. The
