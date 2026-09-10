@@ -367,5 +367,12 @@ a.m-tile:hover{
 
 /* Sign out sits with the nav links but reads as secondary — it is an
    escape hatch, not a destination. */
-.nav-links a.signout{ color:var(--ink-3); }
+/* On a desktop the sign-out lives in the user menu, so the nav copy
+   would be a duplicate; on a phone there is no chip, so it is the only
+   way out and has to show. */
+.nav-links a.signout{ display:none; color:var(--ink-3); }
 .nav-links a.signout:hover{ color:var(--ink); }
+
+@media (max-width:820px){
+  .nav-links a.signout{ display:block; }
+}

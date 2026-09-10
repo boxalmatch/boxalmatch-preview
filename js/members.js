@@ -85,6 +85,7 @@
         if (banner) banner.hidden = false;
         paintCard(DEMO);
         show('m-content');
+        scrollToHash();
         return;
       }
 
@@ -108,7 +109,41 @@
       }
       paintCard(member);
       show('m-content');
+      scrollToHash();
     });
+  }
+
+  /* A link like members/index.html#community lands here while #m-content
+     is still hidden, so the browser has nothing to scroll to and gives
+     up. Once the content is revealed, honour the hash ourselves. */
+  function scrollToHash() {
+    if (!location.hash || location.hash.length < 2) return;
+    var target;
+    try {
+      target = document.querySelector(location.hash);
+    } catch (e) {
+      return;                       /* not a usable selector */
+    }
+    if (!target) return;
+
+    /* Scrolling once is not enough: images above the target are still
+       loading, and each one that arrives pushes the section further down
+       than where we just scrolled to. Re-run as the page settles, and
+       stop as soon as the target is where it should be. */
+    function settle() {
+      var top = target.getBoundingClientRect().top;
+      /* html carries scroll-padding-top, so "arrived" is that inset,
+         not zero */
+      if (Math.abs(top - 60) < 8) return;
+      target.scrollIntoView({ block: 'start', behavior: 'auto' });
+    }
+
+    requestAnimationFrame(settle);
+    setTimeout(settle, 250);
+    setTimeout(settle, 700);
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', settle, { once: true });
+    }
   }
 
   /* Re-render language-dependent card text when the toggle is used. */

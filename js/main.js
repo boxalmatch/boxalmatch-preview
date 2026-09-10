@@ -40,14 +40,191 @@
       burger.setAttribute('aria-expanded', open ? 'true' : 'false');
     });
 
-    var as = links.querySelectorAll('a');
-    for (var i = 0; i < as.length; i++) {
-      as[i].addEventListener('click', function () {
-        links.classList.remove('open');
-        burger.classList.remove('on');
-        burger.setAttribute('aria-expanded', 'false');
-      });
+    /* Delegated, not bound per link: the signed-in user item is injected
+       after this runs, and a direct binding would miss it. */
+    links.addEventListener('click', function (e) {
+      if (!e.target.closest('a')) return;
+      links.classList.remove('open');
+      burger.classList.remove('on');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  }
+
+  /* ============================================================
+     SIGNED-IN USER
+     ------------------------------------------------------------
+     Cloudflare Access exposes the current user at
+     /cdn-cgi/access/get-identity. On pages that are not behind
+     Access the call simply fails, and nothing is rendered — which
+     is what a logged-out visitor should see.
+     ============================================================ */
+
+  var IN_MEMBERS = /\/members\//.test(location.pathname);
+
+  /* Links into the member area resolve differently depending on whether
+     the current page already lives inside members/. */
+  function memberHref(hash) {
+    return (IN_MEMBERS ? 'index.html' : 'members/index.html') + (hash || '');
+  }
+
+  /* returnTo brings the browser back to the home page instead of
+     leaving it on Cloudflare's bare "logged out" screen. */
+  function logoutHref() {
+    return '/cdn-cgi/access/logout?returnTo=' +
+      encodeURIComponent(location.origin + '/');
+  }
+
+  var USER_SECTIONS = [
+    ['#contenuti-riservati', 'Contenuti riservati', 'Member content'],
+    ['#prossimi-eventi', 'Prossimi eventi', 'Upcoming events'],
+    ['#community', 'Community', 'Community']
+  ];
+
+  function bilingual(it, en) {
+    if (it === en) return document.createTextNode(it);
+    var frag = document.createDocumentFragment();
+    var a = document.createElement('span');
+    a.setAttribute('lang', 'it');
+    a.textContent = it;
+    var b = document.createElement('span');
+    b.setAttribute('lang', 'en');
+    b.textContent = en;
+    frag.appendChild(a);
+    frag.appendChild(b);
+    return frag;
+  }
+
+  function personIcon() {
+    var span = document.createElement('span');
+    span.className = 'user-ic';
+    span.setAttribute('aria-hidden', 'true');
+    span.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+      'stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+      '<path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>' +
+      '<circle cx="12" cy="7" r="4"></circle></svg>';
+    return span;
+  }
+
+  function displayName(identity, member) {
+    if (member && member.name) return member.name.split(' ')[0];
+    if (identity.name) return String(identity.name).split(' ')[0];
+    return String(identity.email).split('@')[0];
+  }
+
+  function buildDesktopUser(name) {
+    var right = document.querySelector('.nav-right');
+    if (!right || right.querySelector('.user')) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'user';
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'user-btn';
+    btn.setAttribute('aria-haspopup', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.appendChild(personIcon());
+    var label = document.createElement('span');
+    label.className = 'user-name';
+    label.textContent = name;
+    btn.appendChild(label);
+
+    var menu = document.createElement('div');
+    menu.className = 'user-menu';
+    menu.hidden = true;
+
+    USER_SECTIONS.forEach(function (row) {
+      var a = document.createElement('a');
+      a.href = memberHref(row[0]);
+      a.appendChild(bilingual(row[1], row[2]));
+      menu.appendChild(a);
+    });
+
+    var out = document.createElement('a');
+    out.href = logoutHref();
+    out.className = 'signout';
+    out.appendChild(bilingual('Esci', 'Sign out'));
+    menu.appendChild(out);
+
+    function close() {
+      menu.hidden = true;
+      btn.setAttribute('aria-expanded', 'false');
     }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      menu.hidden = !menu.hidden;
+      btn.setAttribute('aria-expanded', menu.hidden ? 'false' : 'true');
+    });
+    document.addEventListener('click', function (e) {
+      if (!wrap.contains(e.target)) close();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') close();
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(menu);
+    /* before the burger, so the burger stays hard against the edge */
+    right.insertBefore(wrap, right.querySelector('.burger'));
+  }
+
+  /* On a phone the chip would crowd a 48px bar, so the user becomes the
+     last item of the burger menu instead — a plain link into the member
+     area, as asked. Pointless on the member pages themselves. */
+  function buildMobileUser(name) {
+    if (IN_MEMBERS) return;
+    var links = document.getElementById('navlinks');
+    if (!links || links.querySelector('.nav-user')) return;
+
+    var a = document.createElement('a');
+    a.className = 'nav-user';
+    a.href = memberHref('');
+    a.appendChild(personIcon());
+    var label = document.createElement('span');
+    label.textContent = name;
+    a.appendChild(label);
+    links.appendChild(a);
+  }
+
+  /* The sign-out link in the member nav is static markup; give it the
+     returnTo so it lands on the home page rather than Cloudflare's
+     bare "you are logged out" screen. */
+  function initSignoutLinks() {
+    var as = document.querySelectorAll('a.signout');
+    for (var i = 0; i < as.length; i++) {
+      if (as[i].closest('.user-menu')) continue;
+      as[i].href = logoutHref();
+    }
+  }
+
+  function initUser() {
+    var identity = null;
+
+    fetch('/cdn-cgi/access/get-identity', { credentials: 'same-origin' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .catch(function () { return null; })
+      .then(function (id) {
+        if (!id || !id.email) return null;
+        identity = id;
+        /* The registry holds the real name; the token may carry none. */
+        return fetch(IN_MEMBERS ? 'members.json' : 'members/members.json',
+                     { cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : null; })
+          .catch(function () { return null; });
+      })
+      .then(function (registry) {
+        if (!identity) return;
+        var email = String(identity.email).toLowerCase();
+        var list = (registry && registry.members) || [];
+        var member = null;
+        for (var i = 0; i < list.length; i++) {
+          if (String(list[i].email).toLowerCase() === email) { member = list[i]; break; }
+        }
+        var name = displayName(identity, member);
+        buildDesktopUser(name);
+        buildMobileUser(name);
+      });
   }
 
   /* ---------- youtube click-to-play ---------- */
@@ -338,6 +515,8 @@
   document.addEventListener('DOMContentLoaded', function () {
     initLang();
     initNav();
+    initUser();
+    initSignoutLinks();
     initVideo();
     initPartners();
     initRails();
