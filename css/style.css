@@ -306,8 +306,13 @@ p{ margin:0; }
    ------------------------------------------------------------ */
 .fan{
   margin-top:clamp(30px,5vh,54px);
-  width:100vw;
+  /* auto width with a matching negative margin on both sides, not
+     width:100vw with one. 100vw counts the scrollbar and 50% does not, so
+     the single-margin version pushed the fan ~11px left of centre on a
+     desktop. Symmetric margins cancel the discrepancy whatever it is. */
+  width:auto;
   margin-left:calc(50% - 50vw);
+  margin-right:calc(50% - 50vw);
   padding:0 clamp(10px,3vw,40px);
   display:flex; justify-content:center; align-items:center;
   gap:clamp(6px,0.9vw,14px);
@@ -525,6 +530,16 @@ p{ margin:0; }
 .dot.near{ transform:scale(.72); opacity:.75; }
 .dot.far{ transform:scale(.45); opacity:.5; }
 .dot:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+/* A 7px dot is a 7px target. The pseudo-element widens what a finger has to
+   hit to 28px without touching the layout — it is transparent and takes no
+   space, and pointer events on it belong to the button. */
+.dot{ position:relative; }
+.dot::after{
+  content:'';
+  position:absolute; left:50%; top:50%;
+  width:28px; height:28px;
+  transform:translate(-50%,-50%);
+}
 .arrow{
   width:36px; height:36px; border-radius:50%;
   border:0; cursor:pointer;
@@ -876,6 +891,11 @@ p{ margin:0; }
     border-bottom:1px solid var(--hair);
   }
   .nav-links a:last-child{ border-bottom:0; }
+  /* 20px and 30px tall respectively on a phone — under the 24px WCAG
+     minimum for the pill, and awkward for the burger. The bar is 48px,
+     so there is room for both to grow. */
+  .lang button{ padding:8px 13px; }
+  .burger{ width:44px; height:44px; margin-right:-7px; }
   .nav-links a.nav-user{
     display:flex; align-items:center; gap:10px;
   }

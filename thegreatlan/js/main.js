@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", initTableScroll);
    without leaving the page. Built at runtime rather than added to
    24 legacy pages by hand.
    ============================================================ */
-const LIGHTBOX_SELECTOR = ".episode > img, .episodes img, #character-profile figure img, .slider figure img";
+const LIGHTBOX_SELECTOR = ".episode > img, .episodes img, .character-profile figure img, .slider figure img";
 
 function initLightbox() {
     const shots = document.querySelectorAll(LIGHTBOX_SELECTOR);
@@ -445,9 +445,12 @@ toggleBtn.addEventListener('click', (e) => {
 // Close nav when clicking a link
 navLinks.forEach(link => {
     link.addEventListener('click', (ev) => {
+        const href = link.getAttribute('href') || '';
+        const target = href.charAt(0) === '#' ? document.getElementById(href.slice(1)) : null;
+        // Not an in-page anchor, or the section is gone: leave it to the
+        // browser rather than swallowing the click.
+        if (!target) return;
         ev.preventDefault();
-        const targetId = link.getAttribute('href').substring(1);
-        const target = document.getElementById(targetId);
 
         // Scroll
         const headingOffset = 80;
@@ -470,11 +473,14 @@ document.addEventListener('click', (e) => {
 });
 
 function registerNavigationEvents(){
-    const nav = document.querySelectorAll('nav ul li a');
-
-    nav.forEach(function(elm) {
-        elm.addEventListener("click", toggleActiveClass);
-    });
+    // toggleActiveClass used to be bound here, to every nav link. It was both
+    // redundant and broken: the handler above already scrolls, closes the
+    // mobile menu and sets .active on the right <li>, while this one read
+    // ev.target.getAttribute('href') — and ev.target is the inner
+    // <span lang="it">, not the <a>, so every nav click threw
+    // "Cannot read properties of null (reading 'substr')" and left the
+    // active state unchanged. It also scrolled a second time, instantly,
+    // fighting the smooth scroll of the first handler.
 
     // The burger is already bound at the top of this file. Binding it a second
     // time here toggled the menu twice per tap, so it opened and shut again

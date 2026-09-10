@@ -124,6 +124,11 @@ a:hover { text-decoration: underline; }
 
 .lang-toggle button:hover { background-color: transparent; opacity: 1; }
 
+/* 24px tall on a phone, right on the WCAG floor and awkward with a thumb. */
+@media (max-width: 820px) {
+    .lang-toggle button { padding: 8px 13px; }
+}
+
 .lang-toggle button.on {
     background-color: var(--ink);
     color: var(--main-bg-color);
@@ -502,6 +507,19 @@ header > nav .active > a {
 
 .rail-dots button:hover { background: rgba(255, 255, 255, 0.45); }
 
+/* Same trick as the home page: a transparent 28px pseudo-element gives the
+   7px dot a finger-sized target without changing the layout. */
+.rail-dots button { position: relative; }
+.rail-dots button::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%);
+}
+
 .rail-dots button.on {
     background: var(--primary-color);
     transform: scale(1.25);
@@ -608,18 +626,18 @@ header > nav .active > a {
 }
 
 /* ---------- character / feature cards (tile grid, matching the main site's event cards) ---------- */
-#character-profile {
+.character-profile {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
     gap: 26px;
     align-items: stretch;
 }
 
-#character-profile > h1.highlight {
+.character-profile > h1.highlight {
     grid-column: 1 / -1;
 }
 
-#character-profile > .character {
+.character-profile > .character {
     position: relative;
     margin-bottom: 0;
     display: flex;
@@ -634,31 +652,31 @@ header > nav .active > a {
     transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
 }
 
-#character-profile > .character:hover {
+.character-profile > .character:hover {
     background-color: var(--glass-2);
     transform: translateY(-4px);
     box-shadow: 0 16px 56px rgba(0, 0, 0, 0.55);
 }
 
-#character-profile > .character > figure {
+.character-profile > .character > figure {
     overflow: hidden;
     height: 180px;
     margin: 0;
     border-radius: 0;
 }
 
-#character-profile > .character > figure > img {
+.character-profile > .character > figure > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.5s;
 }
 
-#character-profile > .character > figure > img:hover {
+.character-profile > .character > figure > img:hover {
     transform: scale(1.08);
 }
 
-#character-profile > .character > .character-bio {
+.character-profile > .character > .character-bio {
     position: static;
     right: auto;
     top: auto;
@@ -673,7 +691,7 @@ header > nav .active > a {
     box-shadow: none;
 }
 
-#character-profile > .character > .character-bio > h1 {
+.character-profile > .character > .character-bio > h1 {
     font-size: 1.2em;
     letter-spacing: -0.02em;
 }
@@ -1406,7 +1424,7 @@ footer a:hover { text-decoration: underline; }
 
 @media (hover: hover) {
     .season > .episodes > .episode > img:hover,
-    #character-profile > .character > figure > img:hover,
+    .character-profile > .character > figure > img:hover,
     .shop > .shop-item figure:hover {
         transform: none !important;
         transition: none !important;
