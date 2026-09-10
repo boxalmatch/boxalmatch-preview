@@ -10,6 +10,8 @@
   var el = {};
   var chosen = null;
   var busy = false;
+  /* id of a file already in R2 whose submission has not been recorded yet */
+  var uploaded = null;
 
   function isIT() { return root.getAttribute('data-lang') !== 'en'; }
   function t(it, en) { return isIT() ? it : en; }
@@ -173,6 +175,7 @@
       el.barFill.style.width = Math.round(fraction * 100) + '%';
     }).then(function (up) {
       if (up.unavailable) { show('s-offline'); return null; }
+      uploaded = up.id;
       say(t('Quasi fatto…', 'Almost there…'));
       return window.BMApi.create({
         id: up.id,
@@ -183,12 +186,20 @@
       });
     }).then(function (created) {
       if (!created) return;
+      uploaded = null;
       el.form.reset();
       pick(null);
       say(t('Inviato. Lo rivediamo a breve.', 'Sent. We will review it shortly.'), 'good');
       refresh();
     }).catch(function (err) {
       say(err.message, 'bad');
+      /* The bytes are already in R2 but no row will ever point at them.
+         Clear them rather than leave the bucket filling up with uploads
+         that were never finished. */
+      if (uploaded) {
+        window.BMApi.remove(uploaded).catch(function () { /* best effort */ });
+        uploaded = null;
+      }
     }).then(function () {
       busy = false;
       el.send.disabled = false;

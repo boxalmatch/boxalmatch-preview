@@ -49,7 +49,14 @@ export async function onRequestPatch(context) {
 
 export async function onRequestDelete(context) {
     const { env, params, data } = context;
-    const row = await load(env, params.id);
+
+    const row = await env.DB.prepare("SELECT * FROM submissions WHERE id = ?")
+        .bind(params.id).first();
+
+    /* No row can still mean there are bytes to clean up: the browser posts
+       the file first and the title second, so anything that goes wrong in
+       between leaves an object in R2 that nothing points at. */
+    if (!row) return deleteOrphanUpload(context);
 
     const owns = row.member_email === data.identity.email;
     if (!owns && !data.isAdmin) throw new ApiError(403, "That is not yours to delete.");
@@ -64,4 +71,26 @@ export async function onRequestDelete(context) {
     await env.DB.prepare("DELETE FROM submissions WHERE id = ?").bind(row.id).run();
 
     return json({ deleted: row.id });
+}
+
+/* Only the member who uploaded it may clear it, and only while it has no
+   row — otherwise this would be a way to delete other people's files. */
+async function deleteOrphanUpload({ env, params, data }) {
+    const listed = await env.MEDIA.list({
+        prefix: "pending/" + params.id + "/",
+        limit: 10,
+        include: ["customMetadata"]
+    });
+
+    const mine = (listed.objects || []).filter(function (o) {
+        return (o.customMetadata || {}).uploadedBy === data.identity.email;
+    });
+
+    if (!mine.length) throw new ApiError(404, "No submission with that id.");
+
+    for (const object of mine) {
+        await env.MEDIA.delete(object.key);
+    }
+
+    return json({ deleted: params.id, orphan: true });
 }

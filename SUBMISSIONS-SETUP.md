@@ -163,3 +163,12 @@ appear is a design decision, not a plumbing one.
 
 **Storage costs.** R2 charges for what you store; event video adds up faster
 than photos. Worth a look at the bucket every few months.
+
+**Abandoned uploads.** The browser sends the file first and the title second,
+so anything that fails in between leaves bytes in R2 with no row pointing at
+them. When the second step fails the page cleans up after itself, and the
+member can only ever clear their own. What it cannot cover is someone closing
+the tab mid-upload — those objects stay. It is a slow drip rather than a leak,
+but if you want it airtight, add an R2 **lifecycle rule** in the dashboard that
+deletes objects under `pending/` older than, say, 30 days: an approved
+submission keeps its row, so anything that old with no row is abandoned.
