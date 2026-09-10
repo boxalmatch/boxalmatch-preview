@@ -74,8 +74,13 @@ Bindings**.
 
 The names must match exactly; the code looks for `env.DB` and `env.MEDIA`.
 
-`wrangler.toml` deliberately leaves these out, so the dashboard stays the one
-place they are set — declaring them in both is how they drift apart.
+**There is deliberately no `wrangler.toml` in this repo.** If one exists, Pages
+takes its configuration from the file and disables the dashboard's Bindings and
+Environment variables UI — it reports "bindings for this project have been
+managed through wrangler.toml" and there is nothing to click. Since this project
+is configured from the dashboard, the file has to be absent. Add it back only if
+you switch to deploying with the wrangler CLI, and then keep every binding and
+variable in it, because the dashboard will no longer be an option.
 
 ---
 
