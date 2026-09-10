@@ -949,6 +949,22 @@ a.partner:hover{
 }
 .partner.plain-logo img{ filter:none; }
 
+/* A partner card may be a link. It should not pick up link underlining
+   or the accent colour, but it should say it is clickable. */
+a.partner{ color:inherit; }
+a.partner:hover{
+  text-decoration:none;
+  background:var(--glass-2);
+  border-color:var(--hair-strong);
+}
+a.partner:hover img{ transform:scale(1.03); }
+a.partner img{ transition:transform .35s cubic-bezier(.2,.7,.3,1); }
+
+@media (prefers-reduced-motion:reduce){
+  a.partner img,
+  a.partner:hover img{ transition:none; transform:none; }
+}
+
 .partner-name{
   font-size:19px; font-weight:600; letter-spacing:-0.02em;
   color:var(--ink);

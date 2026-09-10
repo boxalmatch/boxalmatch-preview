@@ -173,7 +173,9 @@ switch on — add the markup and it happens.
 ```
 
 To make a card link out, swap the `<div>` for
-`<a class="partner" href="..." target="_blank" rel="noopener">`.
+`<a class="partner" href="..." target="_blank" rel="noopener">` — PANDA is one.
+A linked card keeps the site's ink rather than the accent link colour, drops the
+underline, and lifts its logo slightly on hover so it reads as clickable.
 
 Logos live in `img/partners/`. Upload one as it comes — black artwork on a
 white canvas is fine — then convert it:
