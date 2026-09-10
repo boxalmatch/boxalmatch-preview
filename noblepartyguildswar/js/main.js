@@ -180,12 +180,39 @@ document.addEventListener("DOMContentLoaded", initEpisodeRails);
    it, wide ones scroll within it and the page stays put. */
 function initTableScroll() {
     document.querySelectorAll("table").forEach(table => {
+        softenRunTogetherLists(table);
+
         const parent = table.parentElement;
         if (parent && parent.classList.contains("table-scroll")) return;
         const wrap = document.createElement("div");
         wrap.className = "table-scroll";
         table.parentNode.insertBefore(wrap, table);
         wrap.appendChild(table);
+    });
+}
+
+/* Some cells hold a roster written without spaces —
+   "Karmic,Baudo,Colt,Clavuss,Glimpse,Skate,Spartan,Tigrozzo" — which the
+   browser reads as one unbreakable 500px word. On a phone that single cell
+   held its whole table 200px wider than the screen for what is really two
+   lines of text. A zero-width space after each comma gives the line breaker
+   somewhere to break; nothing is added to the text itself, and names stay
+   whole (letting the cell break anywhere would snap them mid-syllable and
+   crush every other column with them). */
+function softenRunTogetherLists(table) {
+    const LONGEST_UNBREAKABLE = 18;
+    const walker = document.createTreeWalker(table, NodeFilter.SHOW_TEXT);
+    const targets = [];
+
+    while (walker.nextNode()) {
+        const text = walker.currentNode.nodeValue;
+        if (text.indexOf(",") === -1 || text.indexOf("\u200B") !== -1) continue;
+        const longest = text.split(/\s+/).reduce((a, w) => Math.max(a, w.length), 0);
+        if (longest > LONGEST_UNBREAKABLE) targets.push(walker.currentNode);
+    }
+
+    targets.forEach(node => {
+        node.nodeValue = node.nodeValue.replace(/,(?=\S)/g, ",\u200B");
     });
 }
 

@@ -694,6 +694,44 @@ header > nav .active > a {
 
 .table-scroll > table { margin: 0 auto; }
 
+/* On a phone the legacy inline widths are dropped so every table sizes itself
+   against the column: one that fits wraps its text inside it, one that cannot
+   (the 16- and 30-column score matrices) keeps its natural width and scrolls
+   inside .table-scroll, leaving the page itself where it is. Cell padding
+   comes down a little to buy width back.
+
+   Note there is deliberately no overflow-wrap here. Letting cells break
+   anywhere does make a table fit, but it also lowers every column's
+   min-content width, so the table collapses to its narrowest possible layout
+   and words snap mid-syllable — "Marin / e", "TOTA / LE". Cells that really
+   have nowhere to break are handled at the source instead: initTableScroll()
+   adds zero-width breaks after the commas in the run-together player lists. */
+@media (max-width: 820px) {
+    /* The scrolling box bleeds to the screen edge like the photo rails do:
+       a wide table gets the whole width to work with, and running visibly off
+       the edge of the screen is the only hint a phone gives that it scrolls. */
+    .table-scroll {
+        /* none, not the 100% the desktop rule carries: 100% is the text
+           column, and with the bleed's padding inside it the box would be
+           narrower than where it started. */
+        max-width: none;
+        margin-left: calc(var(--rail-bleed) * -1);
+        margin-right: calc(var(--rail-bleed) * -1);
+        padding-left: var(--rail-bleed);
+        padding-right: var(--rail-bleed);
+    }
+
+    .table-scroll > table {
+        width: auto !important;
+        min-width: 0;
+    }
+
+    .table-scroll > table td,
+    .table-scroll > table th {
+        padding: 9px 10px;
+    }
+}
+
 table {
     border-radius: var(--r);
     overflow: hidden;
@@ -1176,14 +1214,12 @@ table tbody tr:hover td { background-color: rgba(255, 255, 255, 0.045); }
     text-align: center;
 }
 
-/* wide data tables stay reachable on small screens */
-@media (max-width: 760px) {
-    table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-}
+/* Wide data tables stay reachable on small screens through .table-scroll —
+   see the rule next to it. This used to be `table { display: block }`, which
+   was the reason tables looked shrunk on a phone: as a block the table honours
+   its inline width (the legacy markup sets 45%, 50%, 80%), so a table needing
+   589px was drawn 168px wide inside a 374px column and scrolled inside itself,
+   while the wrapper that should have scrolled sat there unused. */
 
 /* ---------- shop (legacy, present in CSS contract even if unused) ---------- */
 #webshop > .shop { display: flex; flex-wrap: wrap; }

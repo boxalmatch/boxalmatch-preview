@@ -268,6 +268,17 @@ desktop, so `setupMobileNavBar()` in `js/main.js` moves the node into the bar
 below 820px and back above it. CSS cannot: the open menu is a fixed-position
 panel, and the pill would be trapped inside it.
 
+Tables size themselves against the column: one that fits wraps its text
+inside it, one that cannot — the 16- and 30-column score matrices — keeps its
+natural width and scrolls inside `.table-scroll`, which bleeds to the screen
+edge so it has the room and so the run-off is visible. The legacy inline
+widths (`45%`, `80%`) are dropped below 820px; they used to be honoured
+literally, which is why tables looked shrunk. Do not reach for
+`overflow-wrap: anywhere` to make a table fit — it lowers every column's
+min-content width, so the table collapses to its narrowest layout and words
+snap mid-syllable. `initTableScroll()` handles the one case that needs it,
+adding zero-width breaks after the commas in the run-together player lists.
+
 Photo rails bleed `--rail-bleed` past the text column on both sides so the
 next card peeks in at the edge. That bleed can never be wider than the gutter
 between the column and the window or the whole page scrolls sideways, so it is
