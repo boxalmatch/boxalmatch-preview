@@ -364,3 +364,8 @@ a.m-tile:hover{
   .rev-thumb{ aspect-ratio:16/9; }
   .sub-row{ flex-wrap:wrap; }
 }
+
+/* Sign out sits with the nav links but reads as secondary — it is an
+   escape hatch, not a destination. */
+.nav-links a.signout{ color:var(--ink-3); }
+.nav-links a.signout:hover{ color:var(--ink); }

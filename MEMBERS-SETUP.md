@@ -15,6 +15,7 @@ Live configuration:
 | Access team | `boxalmatch.cloudflareaccess.com` |
 | Access app | `BOXALMATCH - Area Membri`, destinations on both hosts, paths `members` and `api` |
 | Login method | One-time PIN (emailed code) |
+| Session | 1 month per browser; "Esci / Sign out" in the member nav ends it |
 | GitHub Pages | unpublished — it was a copy of `/members/` with no login in front of it |
 
 Everything below was done from a browser; no terminal needed.
