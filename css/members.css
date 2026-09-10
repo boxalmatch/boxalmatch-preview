@@ -132,6 +132,14 @@ a.m-tile:hover{
 .m-tile p{ font-size:14px; color:var(--ink-2); line-height:1.45; }
 .m-tile .go{ margin-top:14px; font-size:14px; color:var(--accent); }
 
+/* Tiles waiting for a real destination. They stay visible — they say what is
+   coming — but they no longer pretend to be links: no pointer cursor, no
+   hover lift, and the arrow drops to muted so it does not read as an action.
+   Give one an href and it becomes a normal tile again with no other change. */
+.m-tile[data-todo]{ cursor:default; }
+.m-tile[data-todo]:hover{ transform:none; background:var(--glass); border-color:var(--glass-hair); }
+.m-tile[data-todo] .go{ color:var(--ink-3); }
+
 /* events list */
 .m-events{
   border:1px solid var(--hair);
