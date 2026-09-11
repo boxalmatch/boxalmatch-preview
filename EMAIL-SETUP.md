@@ -1,122 +1,145 @@
-# Email — @boxalmatch.com setup guide
+# Email — @boxalmatch.com
 
-Free, and mail still lives inside Gmail. Two pieces, because receiving and
-sending are genuinely separate problems:
+**This is done.** `info@boxalmatch.com` receives instantly into Gmail via
+Cloudflare Email Routing, and sends properly authenticated as the domain
+through Brevo's SMTP relay wired into Gmail's "Send mail as" — no "via
+gmail.com" tag. Confirmed on a real test message (11 Sept 2026):
+`SPF: PASS`, `DKIM: 'PASS' with domain boxalmatch.com`, `DMARC: 'PASS'`.
 
-- **Receiving**: Cloudflare Email Routing forwards `boxalmatch@boxalmatch.com`
-  straight into your existing Gmail inbox. Instant, no second inbox to check.
-- **Sending**: Gmail's own "Send mail as" can reply *as* that address, but
-  routed through Gmail's own servers it can't sign the message as your
-  domain — only Google Workspace can do that natively. **Brevo** (a free
-  transactional email service) authenticates boxalmatch.com for you, and
-  Gmail relays through it instead. That's what gets rid of the "via
-  gmail.com" tag and makes the mail pass DMARC properly.
+Live configuration:
 
-Do it in this order. About 30–40 minutes, all from a browser.
+| Thing | Value |
+|---|---|
+| Address in use | `info@boxalmatch.com` (add more the same way — see Step 1) |
+| Receiving | Cloudflare Email Routing → forwards into Gmail, instant |
+| Catch-all | Set, same destination — anything else `@boxalmatch.com` still arrives rather than bouncing |
+| Sending | Brevo (free tier), domain authenticated — no SPF record involved, DKIM CNAME delegation + a Brevo-hosted DMARC record do the work |
+| Gmail wiring | Send mail as → `info@boxalmatch.com` via `smtp-relay.brevo.com:587`, set as default |
+| DMARC policy | `p=none` (monitoring) — reports go to Brevo's own dashboard, not an inbox |
 
----
-
-## Step 1 — Pick your address(es)
-
-Default, unless you want something different: **`boxalmatch@boxalmatch.com`**,
-plus a **catch-all** so anything else sent to `@boxalmatch.com` (a typo, an
-address you never explicitly created) also lands in the same inbox rather
-than bouncing. Cheap insurance, no extra setup.
+Everything below is the record of how it was built — useful if you add
+another address, lose the SMTP key, or move to Workspace later.
 
 ---
 
-## Step 2 — Cloudflare Email Routing (receiving)
+## What's actually in DNS
 
-1. Cloudflare dashboard → your domain → **Email → Email Routing**.
-2. **Enable Email Routing.** Cloudflare adds the MX records and a
-   verification TXT record for you — nothing to type in by hand here.
-3. **Destination addresses** → add `boxalmatch@gmail.com` (or whichever
-   Gmail inbox should receive it) → Cloudflare emails a confirmation link to
-   that address → click it.
-4. **Routing rules** → add a rule: `boxalmatch@boxalmatch.com` → the
-   destination you just verified.
-5. Also set the **Catch-all address** to the same destination, action
-   "Send to an email", so nothing silently bounces.
+Cloudflare Email Routing and Brevo each added their own records. Zero
+overlap, zero conflict:
 
-Send yourself a test email to `boxalmatch@boxalmatch.com` from any other
-account and confirm it lands in Gmail before moving on.
+**Cloudflare (receiving — locked/managed, don't hand-edit these):**
+- 3× MX records → `route1/2/3.mx.cloudflare.net`
+- `v=spf1 include:_spf.mx.cloudflare.net ~all` — authorizes Cloudflare's
+  *own* forwarding infrastructure. Unrelated to sending; leave it alone.
+- `cf2024-1._domainkey` TXT — Cloudflare re-signs the forwarded copy with
+  its own key so it lands cleanly in Gmail's spam filter.
 
----
+**Brevo (sending):**
+- `brevo-code:...` TXT at `@` — proves domain ownership.
+- `brevo1._domainkey` / `brevo2._domainkey` CNAMEs → Brevo's DKIM keys.
+  **These must be "DNS only", not proxied.** Cloudflare defaulted them
+  correctly on this domain; if it doesn't on a future one, switch the
+  cloud icon to grey before Brevo can verify.
+- `_dmarc` TXT — `v=DMARC1; p=none; rua=mailto:rua@dmarc.brevo.com`.
 
-## Step 3 — Brevo (authenticates boxalmatch.com for sending)
+**No SPF record was needed for Brevo, and none was given.** Its
+authentication here runs entirely on DKIM alignment — don't add an SPF
+include for it on a hunch; it isn't part of how this actually works.
 
-1. Create a free account at [brevo.com](https://www.brevo.com).
-2. **Settings → Senders, Domains & Dedicated IPs → Domains → Add a domain** →
-   enter `boxalmatch.com`.
-3. Brevo shows you DNS records to add — typically an SPF piece, one or two
-   DKIM records, and a domain-ownership TXT record. **Copy them exactly as
-   Brevo displays them** rather than from any example here — the exact
-   hostnames Brevo uses can change, and a copy-paste error is the single
-   most common way this breaks.
-4. Add those records in **Cloudflare → DNS → Records**.
-
-**One thing to get right:** a domain can only have **one** `v=spf1` TXT
-record. If you already have an SPF record (you shouldn't yet, since this
-domain had none before now), don't add a second `v=spf1` line — merge
-Brevo's `include:` into the existing record instead. Two separate SPF
-records make SPF fail outright rather than just not helping.
-
-5. Back in Brevo, click **Authenticate** / **Verify** on the domain. DNS
-   changes can take a few minutes to a few hours to propagate — if it fails
-   immediately, wait and retry before assuming something's wrong.
-6. Once verified, go to **SMTP & API → SMTP** and note the SMTP host
-   (`smtp-relay.brevo.com`), port (587), your login, and generate an **SMTP
-   key** (not your account password — a separate key made for this).
+Two records a domain can only carry one of, in practice: `v=spf1` and
+`_dmarc`. If a future service asks you to add either, merge into the
+existing one rather than creating a second — a duplicate breaks the
+mechanism outright rather than just doing nothing.
 
 ---
 
-## Step 4 — Gmail: Send mail as boxalmatch@boxalmatch.com
+## Step 1 — Add another address
 
-1. In the Gmail inbox that receives the forwarded mail: **Settings → See all
-   settings → Accounts and Import → Send mail as → Add another email
-   address**.
-2. Name: `BOXALMATCH`. Email: `boxalmatch@boxalmatch.com`. Leave "Treat as
-   an alias" as offered (it may not even appear for a non-Google domain).
-3. **Next Step → "Send through SMTP server"** (not "Send through Gmail" —
-   that's the path that keeps the via-gmail.com tag). Enter:
-   - SMTP Server: `smtp-relay.brevo.com`
-   - Port: `587`
-   - Username / Password: the SMTP login and key from Step 3
-   - Secured connection: TLS
-4. **Add Account.** Gmail sends a verification code to
-   `boxalmatch@boxalmatch.com` — which, thanks to Step 2, forwards straight
-   into this same Gmail inbox. Copy the code back into Gmail's verification
-   box.
-5. Done. Composing a new message now shows a **From** dropdown with
-   `boxalmatch@boxalmatch.com` as an option. Set it as the default for
-   replies to that address, or leave it as a manual choice.
+1. **Cloudflare → Email → Email Routing → Routing rules → Create routing
+   rule.** Email pattern: the local part (`boxalmatch`, `ciao`, …) @
+   `boxalmatch.com`. Action: **Send to an email** → your Gmail address.
+2. Test by emailing the new address from any other account — should land
+   in Gmail within seconds.
+3. To send *as* the new address too, repeat Step 3 below in Gmail. Brevo's
+   domain authentication already covers any address `@boxalmatch.com` —
+   no new DNS work needed per address.
+
+The catch-all already forwards anything unrouted to the same inbox, so a
+brand-new address works for *receiving* the moment you create the rule,
+even before you set up sending for it.
 
 ---
 
-## Step 5 — DMARC (do this after Step 3 is verified, not before)
+## Step 2 — Brevo (domain already authenticated)
 
-Add a TXT record at `_dmarc.boxalmatch.com`:
+Already done for boxalmatch.com. If this ever needs redoing:
+
+1. Free account at brevo.com → **Senders, Domains & Dedicated IPs →
+   Domains → Add a domain**.
+2. Choose **Manual**, not Automatic. Automatic hands Brevo an API token
+   with write access to your Cloudflare DNS for a job that takes two
+   minutes by hand. Manual also lets you check each record before it's
+   live — which is how the "no SPF record, just DKIM + DMARC" shape of
+   this setup got confirmed rather than assumed.
+3. Add the records exactly as Brevo displays them — see "What's actually
+   in DNS" above for the shape they took on this domain, but copy the
+   live values from Brevo's own screen, not from memory of a past setup.
+4. Click **Verify** in Brevo.
+5. **SMTP & API → SMTP** → generate a key, Standard variant. **Brevo shows
+   the key exactly once** — copy it immediately. It can't be retrieved
+   again, only replaced with a new one.
+
+If sending fails with no visible authentication error, check two things
+in Brevo before assuming the SMTP config itself is wrong:
+- **Dashboard home** — a banner about restricted or under-review sending
+  (common on brand-new free accounts; sometimes lifted by adding a phone
+  number).
+- **Senders, Domains & Dedicated IPs → Senders** — a list separate from
+  Domains. The specific sending address may need to be listed here too,
+  not just the domain behind it.
+
+---
+
+## Step 3 — Gmail: Send mail as
+
+1. **Settings → See all settings → Accounts and Import → Send mail as →
+   Add another email address.**
+2. Name + the `@boxalmatch.com` address. Leave "Treat as an alias" as
+   offered.
+3. **Next Step → "Send through [smtp-relay.brevo.com] SMTP servers"** —
+   not "Send through Gmail." That second option is the path that produces
+   the "via gmail.com" tag; the whole point of Brevo is to skip it.
+4. Server `smtp-relay.brevo.com`, port `587`, your Brevo login as
+   username, the SMTP key as password, TLS.
+5. **Add Account.** Gmail emails a verification code to the new address —
+   which, thanks to Cloudflare's forwarding, arrives right in this same
+   inbox. Copy the code back in.
+6. **If Send does nothing at all** — no error, no Outbox entry, the
+   compose window just doesn't close — that's very likely stale page
+   state from before the alias was added, not a real send failure.
+   **Hard-refresh Gmail (or sign out and back in) and retry** before
+   troubleshooting anything server-side. This was the actual cause the
+   one time it happened here — Brevo, DNS and Gmail's own config were
+   all already correct.
+7. Once it sends cleanly, go back to **Send mail as** and click **make
+   default** next to the address so new messages use it automatically.
+
+---
+
+## Step 4 — Confirm it actually authenticated
+
+Send a real test message, then on the received copy: **⋮ → Show
+original.** Look for all three:
 
 ```
-v=DMARC1; p=none; rua=mailto:boxalmatch@gmail.com
+SPF:   PASS  (may not be aligned to boxalmatch.com — doesn't matter, see below)
+DKIM:  'PASS' with domain boxalmatch.com   <- this is the one that matters
+DMARC: 'PASS'
 ```
 
-Start at `p=none` — monitoring only, nothing gets blocked — for a week or
-two while you confirm mail from Brevo authenticates cleanly. Only then
-consider moving to `p=quarantine`. Setting a strict policy before verifying
-alignment actually works is how you accidentally get your own mail rejected.
-
----
-
-## Step 6 — Test checklist
-
-- [ ] Email to `boxalmatch@boxalmatch.com` arrives in Gmail (Step 2)
-- [ ] Email to a made-up address (`xyz@boxalmatch.com`) also arrives, via the
-      catch-all
-- [ ] A reply sent **as** `boxalmatch@boxalmatch.com` shows no "via
-      gmail.com" in the recipient's Gmail
-- [ ] View the sent message's original ("Show original" in Gmail) — SPF and
-      DKIM should both show **PASS**, aligned to boxalmatch.com
+DMARC only needs SPF **or** DKIM to pass *and* align with the visible
+From address — not both. DKIM alignment via Brevo's CNAME delegation is
+what actually carries it here; SPF passing or not is beside the point.
 
 ---
 
@@ -132,28 +155,30 @@ not a rebuild:
    the current list).
 3. Add Workspace's own DKIM TXT record (`google._domainkey`), generated in
    the Workspace admin console.
-4. Your SPF record already includes Google (`include:_spf.google.com` is
-   commonly required either way) — check whether Brevo's include is still
-   needed once you're fully on Workspace, and drop it if not.
+4. Check whether Brevo's DKIM/DMARC records are still needed once fully on
+   Workspace — drop them if you're no longer sending through Brevo at all.
 5. Want the old Gmail history inside the new Workspace mailbox? Workspace's
    built-in **Data Migration Service** pulls it in over IMAP — no manual
    export/import.
 
-DMARC and the catch-all habit both carry over unchanged.
+The catch-all habit carries over unchanged; DMARC can move from `p=none`
+to `p=quarantine` once you trust everything authenticates cleanly either
+way.
 
 ---
 
 ## Alternative considered: Zoho Mail (free tier)
 
-If running a second service (Brevo) feels like one moving part too many:
-**Zoho Mail's free tier** (up to 5 mailboxes) can be the domain's actual mail
-host — MX points to Zoho, and it signs DKIM correctly for boxalmatch.com
-natively, no relay needed. The trade-off is it's a separate mailbox with its
-own login rather than living inside Gmail; you'd either check Zoho's own
-webmail, or pull it into Gmail via **Settings → Accounts → Check mail from
-other accounts (POP)**, which polls every hour or so rather than arriving
-instantly like Cloudflare's forwarding does.
+If running a second service (Brevo) ever feels like one moving part too
+many: **Zoho Mail's free tier** (up to 5 mailboxes) can be the domain's
+actual mail host — MX points to Zoho, and it signs DKIM correctly for
+boxalmatch.com natively, no relay needed. The trade-off is it's a separate
+mailbox with its own login rather than living inside Gmail; you'd either
+check Zoho's own webmail, or pull it into Gmail via **Settings → Accounts
+→ Check mail from other accounts (POP)**, which polls every hour or so
+rather than arriving instantly like Cloudflare's forwarding does.
 
-Went with Cloudflare + Brevo instead because it keeps everything inside
-Gmail with no delay on receiving. Worth knowing this exists if the Brevo
-step turns out to be more friction than it's worth.
+Went with Cloudflare + Brevo instead, and it's working as intended: mail
+stays inside Gmail, receiving is instant, sending is properly
+authenticated. Worth knowing Zoho exists as a one-service alternative if
+that ever changes.
