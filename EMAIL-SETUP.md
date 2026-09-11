@@ -56,17 +56,55 @@ mechanism outright rather than just doing nothing.
 ## Step 1 — Add another address
 
 1. **Cloudflare → Email → Email Routing → Routing rules → Create routing
-   rule.** Email pattern: the local part (`boxalmatch`, `ciao`, …) @
-   `boxalmatch.com`. Action: **Send to an email** → your Gmail address.
+   rule.** Email pattern: the local part (`events`, `ciao`, …) @
+   `boxalmatch.com`. Action: **Send to an email** → the destination.
 2. Test by emailing the new address from any other account — should land
-   in Gmail within seconds.
-3. To send *as* the new address too, repeat Step 3 below in Gmail. Brevo's
-   domain authentication already covers any address `@boxalmatch.com` —
-   no new DNS work needed per address.
+   within seconds.
+3. To send *as* the new address too, see "Sending as a second address"
+   below. Brevo's domain authentication already covers every address
+   `@boxalmatch.com`, so no new DNS work is ever needed per address.
 
-The catch-all already forwards anything unrouted to the same inbox, so a
-brand-new address works for *receiving* the moment you create the rule,
-even before you set up sending for it.
+The catch-all already forwards anything unrouted to the main inbox, so a
+brand-new address receives mail the moment the rule exists — and in fact
+even before, via the catch-all.
+
+### Sending it somewhere other than the main inbox
+
+Rules can point at different people. `aerostokes@boxalmatch.com` going to
+someone's personal Gmail while everything else goes to the club inbox is
+a normal thing to want.
+
+**A destination has to be verified before a rule can use it.** Cloudflare
+will not forward to an address that has not agreed to receive:
+
+1. **Email Routing → Destination addresses → Add address** → the new
+   Gmail address.
+2. Cloudflare emails a confirmation link there. Click it.
+3. *Then* create the routing rule pointing at it.
+
+**Explicit rules beat the catch-all.** Cloudflare matches named rules
+first and only falls back to the catch-all for addresses nothing else
+claims — so one address can go to a different person even though the
+catch-all points at the main inbox. No need to disable or special-case
+anything.
+
+### Sending as a second address
+
+Receiving is a Cloudflare rule; sending is a Gmail setting, and they are
+independent. Two things to know:
+
+**Do the routing rule first.** Adding a send-as in Gmail triggers a
+verification code emailed to the new address — which only arrives if
+routing already delivers it somewhere. The other order leaves you waiting
+on a code that went nowhere.
+
+**The send-as lives in whichever Gmail account will be sending.** An
+address routed to someone's personal Gmail gets its send-as configured
+*there*, not in the club account — same Brevo host, port, login and SMTP
+key as Step 3, since Brevo authenticates the domain rather than any
+individual address. One consequence worth remembering: the SMTP key then
+exists in more than one Gmail account, so rotating it in Brevo means
+updating each of them.
 
 ---
 
