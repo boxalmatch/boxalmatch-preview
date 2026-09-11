@@ -19,7 +19,7 @@ js/members.js         member identity + card rendering
 js/qr.js              QR code generator (self-contained)
 img/events/           event artwork (optimised, ~150–280 KB each)
 img/group.jpg         hero photo
-img/icons/            wordmark, mark (header icon + favicon)
+img/icons/            wordmark, mark (header icon + favicon), mark-source
 ```
 
 **Live at [boxalmatch.com](https://boxalmatch.com)**, served by Cloudflare Pages
@@ -50,13 +50,18 @@ restrained motion.
 ### The green
 
 The accent is the wordmark's own green, sampled from `img/icons/wordmark.png`.
-The round mark beside it in the header, and in the browser tab, is
-`img/icons/mark.png` — recoloured to that same accent by
-`tools/mark_logo.py`, which also cuts away the black canvas it was
-exported on. It arrived as #01EE0E, close enough to the wordmark's
-#00B81C that the two side by side read as a mistake rather than a choice.
 The logo runs a subtle gradient from `#00AD17` to `#00B81C`; the flat fill is
 what the site uses.
+
+The round mark beside the wordmark in the header, and in the browser tab, is
+`img/icons/mark.png`, built from `img/icons/mark-source.png` by
+`tools/mark_logo.py`. The source arrives as flat green on a black square, and
+the tool does two things to it: cuts away the canvas (including the almond of
+background between the two crescents, which is meant to show the page through)
+and repaints every remaining pixel in `--accent`. That recolour is deliberate —
+the export is #01EE0E, close enough to the wordmark's #00B81C that the two side
+by side read as a mistake rather than a choice. Re-run the tool if the source
+artwork changes; nothing else needs touching.
 
 | token | value | where |
 |---|---|---|

@@ -828,6 +828,18 @@ p{ margin:0; }
 }
 .foot ul{ list-style:none; margin:0; padding:0; }
 .foot li{ margin-bottom:8px; }
+/* Addressed contacts: a quiet label above the address, so the three read as
+   three purposes rather than three lookalike strings. */
+.foot-mail li{ margin-bottom:12px; }
+.foot-lbl{
+  display:block;
+  font-size:11px; color:var(--ink-3);
+  letter-spacing:.01em;
+  margin-bottom:1px;
+}
+/* The addresses are long; let the column widen before they wrap mid-word. */
+.foot-mail{ min-width:0; }
+.foot-mail a{ word-break:break-word; }
 .foot a{ color:var(--ink-2); }
 .foot a:hover{ color:var(--ink); text-decoration:underline; }
 .foot-bot{
