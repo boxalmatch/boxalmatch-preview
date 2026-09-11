@@ -521,7 +521,7 @@
     var note = document.getElementById('jnote');
     if (!form) return;
 
-    var EMAIL = 'boxalmatch@gmail.com';
+    var EMAIL = 'info@boxalmatch.com';
 
     function say(it, en) {
       if (note) note.textContent = root.getAttribute('data-lang') === 'en' ? en : it;

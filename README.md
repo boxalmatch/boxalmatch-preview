@@ -206,7 +206,8 @@ name is hidden — it would only repeat what the logo already says, and the
 ## The contact form
 
 The box at the foot of the home page takes a name, an email and a message,
-addressed to **boxalmatch@gmail.com**. It has two modes.
+addressed to **info@boxalmatch.com** (see [EMAIL-SETUP.md](EMAIL-SETUP.md) for
+how that address itself works). It has two modes.
 
 **As shipped**, with `data-endpoint` empty, it hands the finished message to
 the visitor's own mail client — pre-addressed, with a subject and the body
@@ -222,24 +223,38 @@ only a fallback for when that post fails.
 
 ### Wiring up Formspree
 
-Already done; these are the steps if the form ever has to be recreated. It
-needs access to the boxalmatch@gmail.com inbox — a sign-up and an email
-confirmation.
+Already done. The form's endpoint and its recipient are two separate settings
+— the endpoint lives in `index.html` (below), the recipient lives in
+Formspree's own dashboard for that form and **cannot be changed by editing
+this repo**. If mail from the form ever needs to move to a different address
+again, it's Formspree's site you go to, not this file.
 
-1. Go to <https://formspree.io> and create an account. Use
-   **boxalmatch@gmail.com**, so the form's mail arrives where you already
-   read it. Confirm the address from the email they send.
-2. Create a form (New project → New form). Name it something recognisable —
-   "Sito BOXALMATCH" — and set the recipient to boxalmatch@gmail.com.
-3. Copy the form's endpoint. It looks like `https://formspree.io/f/abcdwxyz`.
+**To change who the form's mail goes to** (already done, pointing at
+info@boxalmatch.com):
+
+1. <https://formspree.io> → the `xdeoydlz` form → **Settings** (or
+   "Recipients," depending on Formspree's current layout).
+2. Add or change the recipient email. Formspree emails a confirmation link to
+   the new address before it takes effect — since info@boxalmatch.com forwards
+   into Gmail, that confirmation just shows up there like any other mail.
+3. Send a test message from the live site's contact form and confirm it
+   arrives at the new address.
+
+**If the form itself ever has to be recreated from scratch** (a new
+Formspree account, a deleted form):
+
+1. Go to <https://formspree.io>, sign up, confirm the account email.
+2. Create a form (New project → New form) and set its recipient to
+   info@boxalmatch.com.
+3. Copy the form's endpoint — looks like `https://formspree.io/f/abcdwxyz`.
 4. In `index.html`, put it on the form:
 
    ```html
    <form class="jform" data-endpoint="https://formspree.io/f/abcdwxyz" method="POST" novalidate>
    ```
 
-5. Commit, push, wait for Pages to redeploy, then send yourself a test
-   message from the live site.
+5. Commit, push, wait for Pages to redeploy, then send a test message from
+   the live site.
 6. **The first submission from a new domain has to be confirmed.** Formspree
    emails you a "confirm this form" link the first time; until you click it,
    messages are held rather than delivered. Send one test, click the link,
