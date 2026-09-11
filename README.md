@@ -30,6 +30,10 @@ second copy of the site that Cloudflare Access could not protect.
 [SUBMISSIONS-SETUP.md](SUBMISSIONS-SETUP.md) for member uploads and the review
 queue. The `/api/*` Functions only exist on Cloudflare Pages; opened any other way,
 the pages that use them say so rather than breaking.
+
+**Email:** see [EMAIL-SETUP.md](EMAIL-SETUP.md) for `@boxalmatch.com` addresses —
+free, receives instantly into Gmail, sends properly authenticated as the domain
+(no "via gmail.com"), and migrates cleanly to Google Workspace later if needed.
 Note that it recommends deploying via Cloudflare Pages rather than GitHub Pages —
 otherwise the member pages stay reachable at the public `github.io` address and
 the login can be bypassed.
