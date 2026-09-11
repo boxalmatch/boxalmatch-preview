@@ -143,6 +143,27 @@ what actually carries it here; SPF passing or not is beside the point.
 
 ---
 
+## Using it from the phone
+
+Nothing to set up. The Gmail mobile apps can't add or edit send-as
+addresses at all — that is a web-settings-only feature — but they inherit
+whatever is configured there. `info@boxalmatch.com` shows up on its own.
+
+- **Composing:** tap the **From** row at the top of the compose screen to
+  pick the address. Because it is set as the default on web, new messages
+  already open with it selected, and replies to mail sent *to* it pick it
+  automatically.
+- **If it isn't there yet:** it is a sync delay, not a configuration
+  problem — the alias lives in the account, not on the device. Pull to
+  refresh, or force-quit and reopen the app. (That was all it took here.)
+
+Mail sent from the phone still goes out through Brevo. The custom SMTP
+setting lives server-side on the Gmail account rather than in the client,
+so Google applies it whichever app hits Send — same DKIM signing, same
+absence of a "via gmail.com" tag, from any device.
+
+---
+
 ## Later: migrating to Google Workspace
 
 Nothing here is a dead end. Moving to Workspace later is mostly DNS swaps,
