@@ -7,7 +7,7 @@
 <meta name="robots" content="noindex, nofollow">
 <meta name="description" content="Coda di revisione dei contenuti inviati dai membri.">
 
-<link rel="icon" type="image/png" href="../img/icons/favicon.jpg">
+<link rel="icon" type="image/png" href="../img/icons/mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -19,7 +19,11 @@
 <header class="nav">
   <div class="nav-in">
     <a href="../index.html" class="nav-logo" aria-label="BOXALMATCH">
-      <img src="../img/icons/wordmark.png" alt="BOXALMATCH">
+      <!-- decorative: the wordmark beside it already carries the name,
+           and the link has its own aria-label -->
+      <img class="nav-mark" src="../img/icons/mark.png" alt="" aria-hidden="true"
+           width="256" height="256" decoding="async">
+      <img class="nav-word" src="../img/icons/wordmark.png" alt="BOXALMATCH">
     </a>
     <nav class="nav-links member-nav" id="navlinks">
       <!-- These are the member-area destinations. On a desktop they are

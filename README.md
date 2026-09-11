@@ -19,7 +19,7 @@ js/members.js         member identity + card rendering
 js/qr.js              QR code generator (self-contained)
 img/events/           event artwork (optimised, ~150–280 KB each)
 img/group.jpg         hero photo
-img/icons/            wordmark + favicon
+img/icons/            wordmark, mark (header icon + favicon)
 ```
 
 **Live at [boxalmatch.com](https://boxalmatch.com)**, served by Cloudflare Pages
@@ -50,6 +50,11 @@ restrained motion.
 ### The green
 
 The accent is the wordmark's own green, sampled from `img/icons/wordmark.png`.
+The round mark beside it in the header, and in the browser tab, is
+`img/icons/mark.png` — recoloured to that same accent by
+`tools/mark_logo.py`, which also cuts away the black canvas it was
+exported on. It arrived as #01EE0E, close enough to the wordmark's
+#00B81C that the two side by side read as a mistake rather than a choice.
 The logo runs a subtle gradient from `#00AD17` to `#00B81C`; the flat fill is
 what the site uses.
 

@@ -115,7 +115,12 @@ p{ margin:0; }
   color:var(--ink);
 }
 .nav-logo:hover{ text-decoration:none; }
-.nav-logo img{ height:15px; width:auto; }
+.nav-logo img{ width:auto; }
+/* The wordmark is set to its cap height; the mark is round, so matching that
+   number would leave it looking smaller than the letters beside it. A little
+   taller reads as the same size. */
+.nav-word{ height:15px; }
+.nav-mark{ height:22px; }
 
 .nav-links{ display:flex; align-items:center; gap:30px; }
 .nav-links a{
