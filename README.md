@@ -76,6 +76,31 @@ The per-guild files (`noblepartyguildswar/css/main_*.css`) override
 `--primary-color` with each guild's own colour and are deliberately left
 alone — those are identity, not brand.
 
+### The hero posters
+
+The five cards under the headline are 4:5, and every piece of event key art is
+16:9, so nine sixteenths of a card cannot come from the picture. `tools/portrait.py`
+builds them, and the thing to know before changing it is that the two obvious
+answers were both tried and both look wrong.
+
+Padding the art into the frame — scale it to the card width, grow a blurred
+copy of itself around it — leaves more than half the card as soft mush, worst
+where the art is lightest. Cover-cropping a 4:5 window slices the title lockup
+in half on the three Halo posters, because there the lockup and the Spartans
+sit at opposite ends of the frame.
+
+What ships instead composes each card from two crops of its own artwork: the
+subject, cover-cropped full-bleed from a region of the source carrying no
+type, and the title lockup, lifted from wherever it sits and re-placed across
+a scrimmed top with a lighten blend, so the ground it was cut from disappears
+instead of arriving as a rectangle. The regions are hand-set per poster in
+`CFG` — they have to be, since "where is the type" is not something to guess.
+
+If you can find portrait originals, use them: drop one in
+`img/events/portrait-src/<name>.jpg` and the tool fits it directly and skips
+all of the above. Several of the 16:9 files are themselves crops of taller
+artwork, so the originals exist somewhere.
+
 ### Contrast
 
 Everything on the page has been measured against WCAG AA with a checker that

@@ -339,9 +339,9 @@ p{ margin:0; }
   transition:transform .5s cubic-bezier(.2,.7,.3,1), box-shadow .5s;
 }
 .fan-card:hover{ text-decoration:none; }
-/* The posters are pre-composed at 4:5 (see tools that build
-   img/events/portrait): the artwork is whole and the frame around it is grown
-   from the image itself, so the card can simply cover with nothing cropped. */
+/* The posters are recomposed at 4:5 by tools/portrait.py — the subject
+   cover-cropped full-bleed and the title lockup re-placed across the top — so
+   the card already matches the frame and cover has nothing left to crop. */
 .fan-card img{
   width:100%; height:100%;
   object-fit:cover;
