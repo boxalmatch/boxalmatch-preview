@@ -380,6 +380,14 @@ p{ margin:0; }
      let it be an honest scroll rail instead */
   .fan{
     perspective:none;
+    /* The hero is a column flex box with align-items:center, which makes the
+       fan a shrink-to-fit flex item — width:auto resolved to max-content, so
+       the row sized itself to all five cards and never overflowed its own
+       box. overflow-x:auto had nothing to scroll and the hero's overflow:hidden
+       simply cut the outer cards off. Stretching it makes width:auto fill the
+       hero instead, which the bleed margins then widen to exactly the
+       viewport, so the cards overflow and the rail scrolls. */
+    align-self:stretch;
     justify-content:flex-start;
     overflow-x:auto;
     scroll-snap-type:x mandatory;
@@ -398,8 +406,14 @@ p{ margin:0; }
   .fan-card:hover,.fan-card:focus-visible{ transform:none; }
 }
 
+/* Wrapping is how the desktop fan unstacks once the 3D is gone. Below 821px
+   the fan is already a scroll rail, and wrapping it there turns five cards
+   into a 1500px column — so that part is desktop-only, just below. */
+@media (prefers-reduced-motion:reduce) and (min-width:821px){
+  .fan{ flex-wrap:wrap; }
+}
 @media (prefers-reduced-motion:reduce){
-  .fan{ perspective:none; flex-wrap:wrap; }
+  .fan{ perspective:none; }
   .fan-card,
   .fan-card:nth-child(1),.fan-card:nth-child(2),.fan-card:nth-child(3),
   .fan-card:nth-child(4),.fan-card:nth-child(5),
