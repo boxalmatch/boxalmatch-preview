@@ -2,12 +2,33 @@
   "_comment": "Approved members. The email must match the one they log in with via Cloudflare Access. Add or remove people here, then commit and push.",
   "members": [
     {
-      "email": "alberto.noferi@gmail.com",
+      "email": "alberto@boxalmatch.com",
       "name": "Alberto Noferi",
+      "number": "0007",
+      "since": "2021",
+      "role": "Founding Member"
+    },
+    {
+      "email": "matteo@boxalmatch.com",
+      "name": "Matteo Ciocca",
+      "number": "0003",
+      "since": "2019",
+      "role": "Founding Member"
+    },
+    {
+      "email": "tommaso@boxalmatch.com",
+      "name": "Tommaso Bocci",
       "number": "0001",
       "since": "2019",
-      "role": "Founder"
+      "role": "Founding Member"
     },
+    {
+      "email": "eugenio@boxalmatch.com",
+      "name": "Eugenio Inoccenti",
+      "number": "0002",
+      "since": "2019",
+      "role": "Founding Member"
+    },    
     {
       "email": "example@boxalmatch.it",
       "name": "Nome Cognome",
