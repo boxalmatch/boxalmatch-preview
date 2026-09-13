@@ -337,7 +337,10 @@ To change the destination address for both modes, edit `EMAIL` in
 ## Event sub-pages
 
 `thegreatlan/`, `noblepartygranparadiso/`, `noblepartyguildswar/` and
-`boxstone/` are the original event sites, restyled to match. Their
+`boxstone/` are the event sites, restyled to match. `boxstone/home.html` is a
+placeholder — the event has no content yet, but the home page links to it in
+two places, so it is a real page in the site's own clothes rather than a 404.
+Their
 `css/main.css` and `js/main.js` are kept identical across the three restyled
 folders — **edit `thegreatlan/` and copy the file to the other two**, or they
 drift.
@@ -378,6 +381,37 @@ out the translate that centring it any other way needs. And the phone had its
 own hero — `height: 100vh`, the image blown to 250% width and dragged up by a
 third — which had to be deleted from `responsive.css` at the same time, or the
 phone kept the full-screen hero regardless of the base rule.
+
+### The way back
+
+Every sub-page carries the way back up in the header, as the first item in the
+bar: an event's `home.html` goes to BOXALMATCH, everything else goes to the
+event's own home. It used to be a `[Torna alla Home]` at the end of the hero
+paragraph — easy to miss, and gone the moment you scrolled past the hero.
+
+### Guild colours
+
+Each of the nine `noblepartyguildswar/css/main_<guild>.css` files sets a
+colour. It used to reach only inline links, so a page could be Ade purple or
+Sciabola orange and you would never notice. It now also carries the hero
+title, the section titles and a wash over the hero artwork.
+
+Those files set the colour **three times on purpose**, and the names are not
+interchangeable:
+
+- `--primary-color` — the legacy accent, used by buttons, focus rings and
+  links in the shared stylesheet.
+- `--guild-color` — the same value, but its real job is to be *absent*. The
+  shared stylesheet writes `var(--guild-color, var(--ink))`, so one rule can
+  colour a guild's headings without turning every other event's headings
+  green. Only the nine guild files define it.
+- `--guild-rgb` — the same colour as bare `r, g, b` channels, because `rgba()`
+  needs channels rather than a colour. Unset it resolves to `0, 0, 0`, which
+  is transparent at the alphas the hero wash uses, so non-guild pages get the
+  plain black ramp.
+
+All nine colours already clear 4.5:1 on black, so none of them needed
+lightening for text — worth re-checking if a new guild colour is ever added.
 
 ### On a phone
 

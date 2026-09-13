@@ -184,6 +184,21 @@ main > section.container > h1.highlight {
     font-size: clamp(32px, 4.2vw, 48px);
     letter-spacing: -0.03em;
     margin-bottom: 44px;
+    color: var(--guild-color, var(--ink));
+}
+
+/* A short rule under each section title, in the page's accent. On a guild
+   page that is the guild's colour; everywhere else it is the BOXALMATCH
+   green, which is why it is --primary-color and not --guild-color. */
+main > section.container > h1.highlight::after {
+    content: "";
+    display: block;
+    width: 54px;
+    height: 2px;
+    margin: 18px auto -8px;
+    border-radius: 2px;
+    background: var(--primary-color);
+    opacity: 0.85;
 }
 
 main > section.container h2 {
@@ -256,10 +271,32 @@ header > nav > ul > li {
 }
 
 /* The brand used to be pinned left here. The wordmark has moved onto the
-   artwork, so the links start at the left edge and the language toggle is
-   still pushed to the right. */
+   artwork, and the way back up the site took its place: every sub-page now
+   carries it in the bar rather than buried in a [Torna alla Home] at the end
+   of the hero paragraph, where it was easy to miss and gone the moment you
+   scrolled. */
 header > nav > ul > li.lang-toggle {
     margin-left: auto;
+}
+
+header > nav > ul > li.nav-home > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    opacity: 0.72;
+}
+
+header > nav > ul > li.nav-home > a:hover {
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+/* Sized and nudged by hand: the chevron's own side bearing leaves it looking
+   detached from the word otherwise. */
+.nav-home-ic {
+    font-size: 1.25em;
+    line-height: 1;
+    transform: translateY(-1px);
 }
 
 /* Exactly the home page's nav links: same size, same weight, same dim-to-full
@@ -324,12 +361,22 @@ header > nav .active > a {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(to bottom,
-        rgba(0, 0, 0, 0.62) 0,
-        rgba(0, 0, 0, 0.20) 26%,
-        rgba(0, 0, 0, 0.42) 62%,
-        rgba(0, 0, 0, 0.86) 86%,
-        var(--main-bg-color) 100%);
+    /* Two layers, the guild wash on top of the black ramp. --guild-rgb is a
+       bare "r, g, b" triple because rgba() needs the channels, not a colour —
+       and unset it resolves to 0,0,0, which is transparent at these alphas
+       and leaves the ramp alone on every non-guild page. */
+    background:
+        linear-gradient(to bottom,
+            rgba(var(--guild-rgb, 0, 0, 0), 0.20) 0,
+            rgba(var(--guild-rgb, 0, 0, 0), 0.07) 45%,
+            rgba(var(--guild-rgb, 0, 0, 0), 0.16) 78%,
+            transparent 100%),
+        linear-gradient(to bottom,
+            rgba(0, 0, 0, 0.62) 0,
+            rgba(0, 0, 0, 0.20) 26%,
+            rgba(0, 0, 0, 0.42) 62%,
+            rgba(0, 0, 0, 0.86) 86%,
+            var(--main-bg-color) 100%);
 }
 
 .slider > .slide-caption {
@@ -392,9 +439,15 @@ header > nav .active > a {
     .slider > .slide-caption { animation: none; opacity: 1; }
 }
 
+/* On a guild page the hero title takes the guild's own colour. --guild-color
+   is set only by the nine main_<guild>.css files, so everywhere else this
+   falls back to white and nothing changes — that is what keeps one rule in
+   the shared stylesheet from turning every event's hero green. Each of those
+   colours was picked to clear 4.5:1 on black already; the shadow below covers
+   the artwork it actually sits on. */
 .slider > .slide-caption h1,
 .slider > .slide > .slide-caption h1 {
-    color: var(--ink);
+    color: var(--guild-color, var(--ink));
     text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.85);
     font-size: clamp(38px, 5.4vw, 68px);
     margin: 0 0 .35em;

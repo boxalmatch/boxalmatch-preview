@@ -2,5 +2,12 @@
 @import url("main.css");
 :root {
     --primary-color: #887BB8;
+    /* Same colour again under a second name, and as bare channels.
+       --guild-color is the flag the shared stylesheet keys off to know
+       this page belongs to a guild at all: unset, its rules fall back to
+       white and the plain green. --guild-rgb exists because rgba() needs
+       channels rather than a colour, and it tints the hero wash. */
+    --guild-color: #887BB8;
+    --guild-rgb: 136, 123, 184;
     --primary-shade-color: #E74B5E;
 }
