@@ -506,16 +506,22 @@ p{ margin:0; }
   overflow-x:auto;
   scroll-snap-type:x mandatory;
   scroll-behavior:smooth;
-  /* The rail bleeds to the screen edge so cards can peek off the right.
-     Its LEADING edge should still line up with the column everything else
-     in the section sits in — otherwise the first card starts 164px left of
-     the heading and the events grid below, and nothing lines up with
-     anything. max() collapses it back to the plain gutter once the screen
-     is narrower than the column. */
-  padding:4px 22px 26px;
-  padding-left:max(22px, calc((100% - var(--maxw) + 44px) / 2 + 22px));
-  scroll-padding-left:max(22px, calc((100% - var(--maxw) + 44px) / 2 + 22px));
-  margin:0 -22px;
+  /* The track is symmetric on purpose, and that is the whole trick here.
+     A scroller's content starts at its padding edge but overflows straight
+     past the opposite one, so the leading padding is a visible gap while the
+     trailing padding is not — cards run under it and get clipped at the box.
+     Any leading inset therefore shows up as pure asymmetry: this rail used to
+     indent its left edge to the text column, which at 1920 left 452px of
+     emptiness on the left against 240px on the right and read as shoved
+     sideways, even though the number came from lining up with the heading.
+
+     So no leading inset and no bleed margin: the rail is exactly the
+     .wrap-wide content box, which is already centred, so the gutters match at
+     every width and the cards start flush at the track. What it gives up is
+     agreement with the narrower .wrap column the heading and events grid use
+     — being visibly centred is worth more than sharing an edge with a block
+     that is 190px further in. */
+  padding:4px 0 26px;
   -ms-overflow-style:none; scrollbar-width:none;
 }
 .rail::-webkit-scrollbar{ display:none; }
