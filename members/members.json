@@ -4,10 +4,31 @@
     {
       "email": "alberto.noferi@gmail.com",
       "name": "Alberto Noferi",
+      "number": "0007",
+      "since": "2021",
+      "role": "Founding Member"
+    },
+    {
+      "email": "cioccamatteo26@gmail.com",
+      "name": "Matteo Ciocca",
+      "number": "0003",
+      "since": "2019",
+      "role": "Founding Member"
+    },
+    {
+      "email": "boccit5@gmail.com",
+      "name": "Tommaso Bocci",
       "number": "0001",
       "since": "2019",
-      "role": "Founder"
+      "role": "Founding Member"
     },
+    {
+      "email": "eugenio.innocenti91@gmail.com",
+      "name": "Eugenio Inoccenti",
+      "number": "0002",
+      "since": "2019",
+      "role": "Founding Member"
+    },    
     {
       "email": "example@boxalmatch.it",
       "name": "Nome Cognome",
