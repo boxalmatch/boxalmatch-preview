@@ -343,7 +343,41 @@ folders — **edit `thegreatlan/` and copy the file to the other two**, or they
 drift.
 
 The header, the section bar and the language toggle are the home page's:
-sticky glass from the top, brand left, links centred, IT/EN pill right.
+sticky glass from the top, links left, IT/EN pill right.
+
+### The hero, and where the wordmark went
+
+There is no event logo in the header. It used to sit there at 28px under
+`brightness(0) invert(1)`, which threw away the colour it was drawn with and
+left a white smudge nobody could read. It is now the masthead on the hero
+artwork instead, in its own colours and at a size worth looking at.
+
+`tools/hero_logo.py` prepares it. The three logos were drawn on very
+different canvases — The Great LAN's artwork fills 28% of its frame, Gran
+Paradiso's 45%, Guilds War's 81% — so sizing them by CSS alone would have
+rendered them at wildly different scales. The tool crops each to its own
+alpha box and writes `<site>/img/icons/hero-logo.png` at a common width, after
+which one CSS rule means the same apparent size on all three. Re-run it if a
+logo is redrawn.
+
+On the three `home.html` pages the wordmark *is* the `<h1>`, since a text
+heading beside it would say the same thing twice. On the other twenty-one it
+is a decorative mark above the page's own title.
+
+The hero itself is a band — `clamp(300px, 52vh, 520px)` — not a screen. It ran
+to `max-height: 100vh` before, which put the first line of content 909px down
+on a laptop and a full screen down on a phone. It also ends by dissolving:
+a gradient over the image darkens the top for the nav, holds a scrim behind
+the caption, and takes the foot all the way to the page colour, so there is no
+cut edge between artwork and page.
+
+Two things worth knowing before editing it. The figure and the caption are
+stacked in one grid cell rather than absolutely positioned, because the
+caption's entrance animation ends on `transform: none` and would have wiped
+out the translate that centring it any other way needs. And the phone had its
+own hero — `height: 100vh`, the image blown to 250% width and dragged up by a
+third — which had to be deleted from `responsive.css` at the same time, or the
+phone kept the full-screen hero regardless of the base rule.
 
 ### On a phone
 

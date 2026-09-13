@@ -33,8 +33,6 @@
         top: 30px;
     }
 
-    header > nav > ul > li.brand { max-width: 15%; }
-
     h1 { font-size: 2em !important; }
     h2 { font-size: 1.8em !important; }
     h3 { font-size: 1.6em !important; }
@@ -88,7 +86,9 @@
     .mobile-nav {
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        /* Nothing on the left since the wordmark moved to the artwork, so the
+           burger and the IT/EN pill sit against the right edge. */
+        justify-content: flex-end;
         gap: 14px;
         box-sizing: border-box;
         height: 48px;
@@ -101,14 +101,6 @@
         /* above the panel, so the burger stays tappable when open */
         position: relative;
         z-index: 1002;
-    }
-
-    .mobile-nav img {
-        width: auto;
-        height: 28px;
-        max-width: 45vw;
-        margin: 0;
-        filter: brightness(0) invert(1);
     }
 
     /* built by js: holds the IT/EN pill and the burger */
@@ -232,14 +224,12 @@
 
 @media only screen and (max-width: 760px) {
 
+    /* The panel and the absolute placement are both gone from the base rule
+       now, so this only has to give the caption a little more of the width. */
     .slider .slide-caption {
-        width: 100%;
-        border: none;
-        border-radius: 0;
-        position: static;
+        width: min(760px, 92%);
+        padding: 0 18px;
         box-sizing: border-box;
-        bottom: 50px;
-        top: unset;
     }
 
     #webshop .shop .shop-item {
@@ -272,27 +262,24 @@
 
 @media only screen and (max-width: 560px) {
 
+    /* The phone hero used to be a screen of its own: height:100vh, the image
+       blown up to 250% width and dragged up by a third to fake a crop, and
+       the caption stacked underneath in a second grid row. That is exactly
+       the "scroll forever before the content" this change is undoing, and it
+       also fought the stacked grid the base rule now uses — leaving it in
+       gave the phone two rows totalling 100vh with the caption marooned in
+       the black half. The image crops itself properly now. */
     .slider {
         max-height: unset;
-        height: 100vh;
-        position: relative;
-        display: grid;
-        grid-template-rows: min-content auto;
         overflow: hidden;
-        align-items: start;
     }
 
     .slider > figure {
-        width: 250%;
-        margin-left: -50%;
-        margin-top: -30%;
         display: block;
     }
 
     .slider .slide-caption {
         width: 100%;
-        border: none;
-        position: static;
         box-sizing: border-box;
     }
 

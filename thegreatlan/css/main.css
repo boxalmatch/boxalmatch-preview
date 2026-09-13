@@ -255,27 +255,12 @@ header > nav > ul > li {
     position: relative;
 }
 
-header > nav > ul > li.brand {
-    max-width: none;
-    margin: 0 auto 0 0;
-    display: flex;
-    align-items: center;
-}
-
-/* auto margins on both sides of the link group centre the links,
-   with the brand pinned left and the language toggle pinned right */
+/* The brand used to be pinned left here. The wordmark has moved onto the
+   artwork, so the links start at the left edge and the language toggle is
+   still pushed to the right. */
 header > nav > ul > li.lang-toggle {
     margin-left: auto;
 }
-
-header > nav > ul > li.brand > img {
-    width: auto;
-    height: 28px;
-    max-width: 150px;
-    filter: brightness(0) invert(1);
-}
-
-header > nav > ul > li.brand > a { padding: 0; display: flex; align-items: center; }
 
 /* Exactly the home page's nav links: same size, same weight, same dim-to-full
    opacity on hover, no padding (which was making this bar 54px against the
@@ -298,31 +283,104 @@ header > nav .active > a {
     opacity: 1;
 }
 
-/* ---------- slider / hero ---------- */
-.slider > figure { margin: 0; }
+/* ---------- slider / hero ----------
+   The hero used to run to max-height:100vh, so every page opened on a full
+   screen of artwork and the content began below the fold — on a laptop that
+   was 853px of scrolling before the first word. It is now a band, and it
+   dissolves into the page rather than ending on a cut edge.
+
+   Figure and caption are stacked with grid rather than absolute positioning.
+   The caption used to be absolutely placed at top:26% and its entrance
+   animation ends on transform:none — which would have wiped out the
+   translate(-50%) that centring it that way needs. Stacking both children in
+   one grid cell sidesteps that: the caption centres by alignment, and the
+   animation keeps the transform to itself. */
+.slider {
+    display: grid;
+    isolation: isolate;
+}
+
+.slider > figure,
+.slider > .slide-caption {
+    grid-area: 1 / 1;
+}
+
+.slider > figure {
+    margin: 0;
+    position: relative;
+}
 
 .slider > figure > img {
+    display: block;
     width: 100%;
-    max-height: 100vh;
+    height: clamp(300px, 52vh, 520px);
     object-fit: cover;
 }
 
-.slider > .slide-caption {
-    background-color: rgba(0, 0, 0, 0.55);
-    backdrop-filter: blur(14px) saturate(160%);
-    -webkit-backdrop-filter: blur(14px) saturate(160%);
-    border-radius: 22px;
-    color: var(--ink);
+/* Darkens the top so the nav keeps its footing, holds a scrim behind the
+   caption, and takes the foot of the image all the way down to the page
+   colour — which is what makes the artwork end without a seam. */
+.slider > figure::after {
+    content: "";
     position: absolute;
-    top: 26%;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
-    width: min(720px, 86%);
-    padding: 36px 40px 40px;
+    inset: 0;
+    background: linear-gradient(to bottom,
+        rgba(0, 0, 0, 0.62) 0,
+        rgba(0, 0, 0, 0.20) 26%,
+        rgba(0, 0, 0, 0.42) 62%,
+        rgba(0, 0, 0, 0.86) 86%,
+        var(--main-bg-color) 100%);
+}
+
+.slider > .slide-caption {
+    /* No panel any more: the wordmark and the copy sit on the artwork, which
+       is the point of moving the logo out of the header. The gradient above
+       does the work the frosted card used to do. */
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border-radius: 0;
+    color: var(--ink);
+    position: relative;
+    z-index: 1;
+    align-self: center;
+    justify-self: center;
+    width: min(760px, 88%);
+    padding: 0 22px;
     text-align: center;
     opacity: 0;
     animation: legacy-rise .9s cubic-bezier(.2,.7,.3,1) .1s forwards;
+}
+
+/* ---------- the event wordmark, on the artwork ----------
+   It used to sit in the header at 28px with brightness(0) invert(1) over it,
+   which threw away the colour it was drawn with and left a smudge. Here it is
+   the masthead, in its own colours, at a size worth reading. tools/hero_logo.py
+   trims each one to its alpha box first, so the three events match in apparent
+   size rather than in canvas size. */
+.slider .hero-logo {
+    margin: 0;
+    font-size: 0;
+    line-height: 0;
+}
+
+.slider .hero-logo > img,
+.slider .hero-mark {
+    display: block;
+    width: min(420px, 74%);
+    height: auto;
+    margin: 0 auto 20px;
+    /* Two shadows: a wide soft one to lift the whole mark off busy artwork,
+       and a tight dark one so the outline stays crisp against light patches. */
+    filter: drop-shadow(0 8px 30px rgba(0, 0, 0, 0.85))
+            drop-shadow(0 1px 3px rgba(0, 0, 0, 0.9));
+}
+
+/* On the inner pages the page's own title is the heading, so the mark is a
+   brand signature above it and steps down in size. */
+.slider .hero-mark {
+    width: min(250px, 54%);
+    margin-bottom: 16px;
 }
 
 @keyframes legacy-rise {
@@ -337,6 +395,7 @@ header > nav .active > a {
 .slider > .slide-caption h1,
 .slider > .slide > .slide-caption h1 {
     color: var(--ink);
+    text-shadow: 0 2px 18px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.85);
     font-size: clamp(38px, 5.4vw, 68px);
     margin: 0 0 .35em;
     letter-spacing: -0.035em;
@@ -344,7 +403,10 @@ header > nav .active > a {
 }
 
 .slider > .slide-caption p {
-    color: var(--ink-muted);
+    color: var(--ink);
+    /* Without the frosted card behind it this sits straight on the artwork,
+       so it carries its own contrast rather than relying on the panel. */
+    text-shadow: 0 1px 12px rgba(0, 0, 0, 0.9), 0 1px 3px rgba(0, 0, 0, 0.8);
     font-size: clamp(17px, 1.5vw, 21px);
     line-height: 1.4;
     letter-spacing: -0.015em;
