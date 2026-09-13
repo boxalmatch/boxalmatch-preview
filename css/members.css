@@ -92,9 +92,28 @@
   color:rgba(255,255,255,.62);
   font-variant-numeric:tabular-nums;
 }
-.mcard-qr{
-  width:74px; height:74px; flex:0 0 auto;
-  background:#fff; border-radius:10px; padding:6px;
+/* The mark replaces the QR that used to sit here. It is decorative — the
+   card already names its holder — so it carries an empty alt and is free to
+   sit at whatever weight looks right. Low opacity on purpose: at full
+   strength a 74px mark competes with the name for the eye. */
+.mcard-mark{
+  width:68px; height:68px; flex:0 0 auto;
+  /* Held back from full strength so it does not compete with the name, but
+     not so far that it reads as a watermark — it sits where a card scheme's
+     logo sits, and it should look as deliberate as one. */
+  opacity:.6;
+}
+
+/* The tag people actually know each other by, above the name on the card.
+   Hidden by [hidden] until members.json supplies one — and .mcard-nick is a
+   class selector, which outranks the browser's own [hidden] rule, so it has
+   to say so itself. */
+.mcard-nick[hidden]{ display:none; }
+.mcard-nick{
+  font-size:11px; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase;
+  color:var(--accent);
+  margin-bottom:6px;
 }
 
 /* actions under the card */

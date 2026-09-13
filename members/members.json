@@ -1,9 +1,10 @@
 {
-  "_comment": "Approved members. The email must match the one they log in with via Cloudflare Access. Add or remove people here, then commit and push.",
+  "_comment": "Approved members. The email must match the one they log in with via Cloudflare Access. nickname is optional \u2014 the card hides that line when it is missing. Add or remove people here, then commit and push.",
   "members": [
     {
       "email": "alberto.noferi@gmail.com",
       "name": "Alberto Noferi",
+      "nickname": "AeroStokes",
       "number": "0007",
       "since": "2021",
       "role": "Founding Member"
@@ -32,6 +33,7 @@
     {
       "email": "example@boxalmatch.it",
       "name": "Nome Cognome",
+      "nickname": "TagInGioco",
       "number": "0002",
       "since": "2026",
       "role": "Member"

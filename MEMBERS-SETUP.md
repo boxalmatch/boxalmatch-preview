@@ -167,18 +167,31 @@ and confirm it 404s.
 content tiles, upcoming events, community links.
 
 **`members/card.html`** — the card full-screen, sized to real bank-card
-proportions, with a QR code. Members add it to their Home Screen and it opens
-without browser chrome, like an app.
+proportions. Members add it to their Home Screen and it opens without browser
+chrome, like an app.
 
 Identity comes from Cloudflare's `/cdn-cgi/access/get-identity` endpoint. Opened
 locally, where that endpoint doesn't exist, the pages fall back to a clearly
 labelled **demo member** so you can keep working on the design offline.
 
-### The QR code
+### What is on the card
 
-Generated in the browser — no external service, nothing to sign up for, and it
-works offline. It encodes `yourdomain/members/card.html?n=MEMBERNUMBER`, so
-scanning it opens the site. Verified against a real decoder, not just eyeballed.
+The wordmark and the mark, both in a pale grey drawn for the dark slab by
+`tools/card_art.py`; the member's tag, name, number and join year; and their
+role. The mark sits bottom right, where a bank card puts its scheme logo.
+
+A QR code used to occupy that corner, encoding a link back to the card. It was
+generated in the browser by `js/qr.js` — no external service, worked offline —
+but it pointed at a page you could only reach by already being signed in, so
+it was decoration with a job title. Both it and the generator are gone; the
+file is in git history if it is ever wanted back.
+
+### The `nickname` field
+
+Optional, and per member in `members/members.json`. The card shows it above
+the name in the accent colour, and hides that line entirely when a member has
+none — so adding tags for the rest of the roster is a data change, nothing
+else.
 
 ---
 

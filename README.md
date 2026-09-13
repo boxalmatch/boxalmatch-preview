@@ -17,11 +17,11 @@ css/style.css         site styling
 css/members.css       member-area styling
 js/main.js            language toggle, mobile nav, carousels, video player
 js/members.js         member identity + card rendering
-js/qr.js              QR code generator (self-contained)
 img/events/           event artwork (optimised, ~150–280 KB each)
 img/group.jpg         the fourteen, on storia.html
 img/crew/             founder portraits (placeholders — see tools/crew_placeholder.py)
-img/icons/            wordmark, mark (header icon + favicon), mark-source
+img/icons/            wordmark, mark (header icon + favicon), mark-source,
+                      and their pale -light variants for the member card
 ```
 
 **Live at [boxalmatch.com](https://boxalmatch.com)**, served by Cloudflare Pages

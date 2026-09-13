@@ -12,6 +12,7 @@
   var DEMO = {
     email: 'demo@boxalmatch.it',
     name: 'Demo Member',
+    nickname: 'DemoTag',
     number: '0000',
     since: '2026',
     role: 'Anteprima'
@@ -42,19 +43,11 @@
   }
 
   /* ---------- card ---------- */
-  function cardURL(member) {
-    // Encoded in the QR: a stable, shareable pointer to this membership.
-    // Resolved against the current page, not location.origin: on the
-    // GitHub Pages preview the site lives under /boxalmatch-preview/,
-    // and an origin-rooted path produced a QR that scanned to a 404.
-    return new URL('card.html?n=' + encodeURIComponent(member.number), location.href).href;
-  }
-
   function paintCard(member) {
     var nameEl = document.querySelector('[data-card-name]');
+    var nickEl = document.querySelector('[data-card-nick]');
     var metaEl = document.querySelector('[data-card-meta]');
     var roleEl = document.querySelector('[data-card-role]');
-    var qrEl = document.querySelector('[data-card-qr]');
 
     if (nameEl) nameEl.textContent = member.name;
     if (metaEl) {
@@ -63,12 +56,13 @@
     }
     if (roleEl) roleEl.textContent = member.role || 'Member';
 
-    if (qrEl && window.QR) {
-      try {
-        window.QR.render(qrEl, cardURL(member), { fg: '#071409', bg: '#ffffff', quiet: 1 });
-      } catch (e) {
-        qrEl.textContent = '';
-      }
+    /* Optional: most people have a tag, not everyone in members.json does
+       yet, and a card with an empty accent line above the name looks broken
+       rather than blank. */
+    if (nickEl) {
+      var nick = member.nickname || '';
+      nickEl.textContent = nick;
+      nickEl.hidden = !nick;
     }
   }
 
