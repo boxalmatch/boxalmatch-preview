@@ -158,6 +158,9 @@ p{ margin:0; }
   transition:background .2s;
 }
 .user-btn:hover{ background:var(--glass-2); }
+/* Signed out there is no name beside the icon, so the padding that balanced
+   one would sit all on the right. */
+.user-btn-anon{ padding:4px; }
 .user-ic{
   flex:0 0 auto;
   width:24px; height:24px; border-radius:50%;
@@ -1057,3 +1060,100 @@ a.partner img{ transition:transform .35s cubic-bezier(.2,.7,.3,1); }
 .partner:not(.no-logo) .partner-name,
 .partner:not(.no-logo) .partner-kind{ display:none; }
 .partner.no-logo .partner-name{ font-size:26px; }
+
+/* ============================================================
+   STORY PAGE  (storia.html)
+   ============================================================ */
+
+/* The page opens on a heading rather than the hero, so it needs the nav's
+   height back as breathing room at the top. */
+.story-top{ padding-top:clamp(56px,8vh,92px); }
+.story-top h1{ font-size:clamp(38px,6vw,72px); }
+
+.story-shot{
+  margin:0 0 clamp(44px,6vh,72px);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  background:var(--surface-2);
+  box-shadow:var(--shadow-lg);
+}
+.story-shot img{ width:100%; height:auto; }
+
+/* Measure, not column width: .wrap is 1060px, far too wide to read a
+   paragraph across. This narrows it to roughly 65 characters and inherits
+   .wrap's auto margins, so the text block stays centred under the heading
+   and the photo while the lines themselves stay ranged left. */
+.prose{ max-width:min(33em, 100%); }
+.prose p{
+  font-size:clamp(17px,1.35vw,20px);
+  line-height:1.62;
+  color:var(--ink-2);
+}
+.prose p + p{ margin-top:1.15em; }
+.prose em{ color:var(--ink); font-style:italic; }
+
+/* One paragraph carries the turn in the story, so it is set as the page's
+   voice rather than another block of body copy. */
+.prose p.pull{
+  font-size:clamp(21px,2vw,28px);
+  line-height:1.34;
+  letter-spacing:-0.02em;
+  color:var(--ink);
+  margin-top:1.5em;
+  padding-left:clamp(16px,2vw,24px);
+  border-left:2px solid var(--accent);
+}
+.prose p.pull + p{ margin-top:1.5em; }
+
+/* ---------- the founders ---------- */
+.crew{
+  display:grid;
+  /* auto-fill rather than auto-fit: with fourteen cards a part-empty last row
+     should keep the card size of the rows above it, not stretch to fill. */
+  grid-template-columns:repeat(auto-fill,minmax(178px,1fr));
+  gap:clamp(12px,1.4vw,20px);
+}
+.crew-card{
+  margin:0;
+  border-radius:var(--r);
+  overflow:hidden;
+  background:var(--surface);
+  border:1px solid var(--glass-hair);
+  transition:transform .35s cubic-bezier(.2,.7,.3,1), border-color .35s;
+}
+.crew-card:hover{ transform:translateY(-4px); border-color:var(--hair-strong); }
+.crew-card img{
+  width:100%;
+  /* height:auto is load-bearing, not tidiness. The width/height attributes in
+     the markup are there for layout stability, but they land as presentational
+     hints — an explicit height:750px — and a box with both dimensions set
+     ignores aspect-ratio entirely. Without this the tiles rendered 189x750. */
+  height:auto;
+  aspect-ratio:4/5;
+  /* Placeholders are already 4:5, but a real photo will not be — cover crops
+     it to the tile so one long portrait cannot set the height of its row. */
+  object-fit:cover;
+}
+.crew-name{
+  padding:11px 13px 13px;
+  font-size:14px; font-weight:500; letter-spacing:-0.01em;
+  color:var(--ink);
+  /* Names run to seventeen characters and the tiles are narrow; let them wrap
+     rather than clip, and keep every card's caption the same two-line height
+     so the grid rows stay level. */
+  line-height:1.3;
+  min-height:calc(2 * 1.3em + 24px);
+}
+
+.story-back{ margin-top:clamp(44px,6vh,72px); text-align:center; }
+
+@media (max-width:520px){
+  .crew{ grid-template-columns:repeat(2,1fr); }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .crew-card,
+  .crew-card:hover{ transform:none; transition:none; }
+}
+
+.vals-cta{ margin-top:clamp(34px,4vh,52px); text-align:center; }

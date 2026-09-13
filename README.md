@@ -5,6 +5,7 @@ Open `index.html` in a browser and it just works.
 
 ```
 index.html            public page
+storia.html           "La nostra storia" — the founding story and the fourteen
 members/index.html    member profile area
 members/card.html     full-screen membership card
 members/members.json  approved member registry
@@ -18,7 +19,8 @@ js/main.js            language toggle, mobile nav, carousels, video player
 js/members.js         member identity + card rendering
 js/qr.js              QR code generator (self-contained)
 img/events/           event artwork (optimised, ~150–280 KB each)
-img/group.jpg         hero photo
+img/group.jpg         the fourteen, on storia.html
+img/crew/             founder portraits (placeholders — see tools/crew_placeholder.py)
 img/icons/            wordmark, mark (header icon + favicon), mark-source
 ```
 
@@ -192,6 +194,27 @@ Two things to know:
 
 `<script async src="https://www.instagram.com/embed.js"></script>` at the foot
 of `index.html` is what renders them; it needs to stay.
+
+---
+
+## La nostra storia
+
+`storia.html` — the founding story, the group photograph and a grid of the
+fourteen founders. Reached from the button under the values on the home page
+and from the footer; it carries the home page's own nav, with every section
+link pointing back at `index.html#...` rather than jumping in-page.
+
+The portraits are placeholders. `tools/crew_placeholder.py` generates them —
+a near-black tile with the member's initials sunk into it, quiet enough to
+read as "photo not here yet" rather than as a design. **To put a real photo
+in, drop it over `img/crew/<slug>.jpg`.** Any size and any shape works: the
+tile cover-crops to 4:5. The tool will not overwrite it — it marks its own
+output and skips anything it did not make — so re-running it after adding
+real photographs is safe.
+
+Adding or renaming a founder means editing both the `NAMES` list in the tool
+and the tiles in `storia.html`; there are fourteen and they are unlikely to
+change, so they are written out rather than generated.
 
 ---
 

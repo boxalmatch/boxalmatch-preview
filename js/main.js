@@ -122,28 +122,16 @@
     return String(identity.email).split('@')[0];
   }
 
-  function buildDesktopUser(name) {
-    var right = document.querySelector('.nav-right');
-    if (!right || right.querySelector('.user')) return;
+  /* One item, and it is a link rather than a button: /members/ is behind
+     Cloudflare Access, so following it *is* the login. */
+  function fillAnonMenu(menu) {
+    var a = document.createElement('a');
+    a.href = memberHref('');
+    a.appendChild(bilingual('Accedi', 'Sign in'));
+    menu.appendChild(a);
+  }
 
-    var wrap = document.createElement('div');
-    wrap.className = 'user';
-
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'user-btn';
-    btn.setAttribute('aria-haspopup', 'true');
-    btn.setAttribute('aria-expanded', 'false');
-    btn.appendChild(personIcon());
-    var label = document.createElement('span');
-    label.className = 'user-name';
-    label.textContent = name;
-    btn.appendChild(label);
-
-    var menu = document.createElement('div');
-    menu.className = 'user-menu';
-    menu.hidden = true;
-
+  function fillMemberMenu(menu) {
     USER_SECTIONS.forEach(function (row) {
       var a = document.createElement('a');
       a.href = memberHref(row[0]);
@@ -171,6 +159,41 @@
     out.className = 'signout';
     out.appendChild(bilingual('Esci', 'Sign out'));
     menu.appendChild(out);
+  }
+
+  /* name is null for a visitor who is not signed in. The chip is built either
+     way — it is the only route to the member area now that the bar link is
+     gone — and the menu is the one thing that differs: a single Accedi, which
+     is a link to /members/ and therefore to Cloudflare's login, since that is
+     what guards it. */
+  function buildDesktopUser(name) {
+    var right = document.querySelector('.nav-right');
+    if (!right || right.querySelector('.user')) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'user';
+
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'user-btn';
+    btn.setAttribute('aria-haspopup', 'true');
+    btn.setAttribute('aria-expanded', 'false');
+    btn.appendChild(personIcon());
+    if (name) {
+      var label = document.createElement('span');
+      label.className = 'user-name';
+      label.textContent = name;
+      btn.appendChild(label);
+    } else {
+      /* Icon only, so the button needs the name the label would have given. */
+      btn.setAttribute('aria-label', 'Account');
+      btn.classList.add('user-btn-anon');
+    }
+
+    var menu = document.createElement('div');
+    menu.className = 'user-menu';
+    menu.hidden = true;
+    (name ? fillMemberMenu : fillAnonMenu)(menu);
 
     function close() {
       menu.hidden = true;
@@ -220,7 +243,8 @@
     a.href = memberHref('');
     a.appendChild(personIcon());
     var label = document.createElement('span');
-    label.textContent = name;
+    if (name) label.textContent = name;
+    else label.appendChild(bilingual('Accedi', 'Sign in'));
     a.appendChild(label);
     links.appendChild(a);
   }
@@ -252,7 +276,12 @@
           .catch(function () { return null; });
       })
       .then(function (registry) {
-        if (!identity) return;
+        if (!identity) {
+          /* Not signed in — still show the chip, with Accedi behind it. */
+          buildDesktopUser(null);
+          buildMobileUser(null);
+          return;
+        }
         var email = String(identity.email).toLowerCase();
         var list = (registry && registry.members) || [];
         var member = null;
@@ -467,7 +496,7 @@
     // Rows and grids reveal their own children, so a group cascades instead of
     // landing in one piece. Marked here rather than in the markup: these are
     // the same containers the rest of the page already knows about.
-    var GROUPS = ['.vals', '.egrid', '.channels', '.ig-grid', '.partners', '.rail'];
+    var GROUPS = ['.vals', '.egrid', '.channels', '.ig-grid', '.partners', '.rail', '.crew'];
     GROUPS.forEach(function (sel) {
       var group = document.querySelector(sel);
       if (!group) return;
