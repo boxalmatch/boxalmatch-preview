@@ -11,12 +11,14 @@ members/card.html     full-screen membership card
 members/members.json  approved member registry
 members/submit.html   member upload form
 members/review.html   admin approval queue
+members/archive.html  shared R2 archive browser (library/ prefix)
 functions/api/        Cloudflare Pages Functions (submissions API)
 db/schema.sql         D1 table for submissions
 css/style.css         site styling
 css/members.css       member-area styling
 js/main.js            language toggle, mobile nav, carousels, video player
 js/members.js         member identity + card rendering
+js/archive.js         the archive browser
 img/events/           event artwork (optimised, ~150–280 KB each)
 img/group.jpg         the fourteen, on storia.html
 img/crew/             founder portraits (placeholders — see tools/crew_placeholder.py)

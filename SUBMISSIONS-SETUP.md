@@ -26,9 +26,36 @@ Cloudflare Access that guards the rest of `/members`.
 So a submitted file is private by default and stays private until it is
 approved, and even then it is only served to someone who got through Access.
 
-The **Drive archive** tile on the member page is a separate thing: a link to a
-folder someone keeps by hand, for full-resolution originals. Nothing in the
-submission flow writes to it. Moving uploads there instead would mean giving
+## The shared archive
+
+`members/archive.html` browses the same R2 bucket under one prefix, **`library/`**,
+and every signed-in member can read all of it. Nothing else to switch on: it
+uses the `MEDIA` binding that already exists.
+
+To put files in it, open the bucket in the Cloudflare dashboard and upload into
+a `library/` folder — `library/2026 The Great LAN/foto/…` and so on. Folder names
+can contain spaces and accents. R2 has no real folders; a key is a flat string
+and the slashes are what the browser renders as a tree, so creating a folder
+means uploading something into it.
+
+Authorisation is a property of the key, not of a database row, which is what
+lets files that never went through the upload form be readable without
+inventing rows for them:
+
+| prefix | who can read |
+|---|---|
+| `library/…` | every signed-in member |
+| everything else | the owner and admins, plus anyone once it is approved |
+
+`functions/api/library/[[path]].js` lists a folder and can only ever look under
+`library/` — it prepends the prefix itself and refuses a path containing `..`,
+so a crafted URL asking for `pending/secret` resolves to `library/pending/secret/`
+and finds nothing. `functions/api/media/[[path]].js` applies the same split when
+serving bytes. The two share the constant deliberately; if you move the archive,
+move it in both.
+
+The **Drive archive** tile on the member page is a different thing again: a link
+to a folder someone keeps by hand. Nothing in the submission flow writes to it. Moving uploads there instead would mean giving
 the Worker a Google service account — its private key as a Cloudflare secret,
 the folder shared with the service account, a signed JWT exchanged for an
 access token on each upload — and it would trade Access-gated delivery for

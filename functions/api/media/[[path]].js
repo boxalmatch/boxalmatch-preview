@@ -3,25 +3,45 @@
    ------------------------------------------------------------
    The bucket is private. Files come back through here so the same
    rules that govern the listing govern the bytes: a member sees
-   approved files and their own, an admin sees everything.
+   approved files and their own, an admin sees everything, and
+   everybody signed in can read the shared archive under library/.
 
    Serving R2 publicly instead would make every pending upload
    readable by anyone who guessed the URL, review or no review.
    ============================================================ */
 import { ApiError } from "../_access.js";
 
+/* Kept in step with functions/api/library/[[path]].js — the listing
+   route decides what a member can see, this one what they can fetch,
+   and they must agree on where the archive starts. */
+const LIBRARY_PREFIX = "library/";
+
 export async function onRequestGet(context) {
     const { env, params, data, request } = context;
 
     const key = Array.isArray(params.path) ? params.path.join("/") : String(params.path || "");
     if (!key) throw new ApiError(400, "No file named.");
+    if (key.split("/").some(seg => seg === "..")) throw new ApiError(400, "Bad path.");
 
-    const row = await env.DB.prepare("SELECT * FROM submissions WHERE object_key = ?").bind(key).first();
-    if (!row) throw new ApiError(404, "No such file.");
+    /* Two kinds of object live in this bucket and they are authorised
+       differently.
 
-    const owns = row.member_email === data.identity.email;
-    if (!data.isAdmin && !owns && row.status !== "approved") {
-        throw new ApiError(403, "That file is still under review.");
+       Anything under library/ is the shared archive: every signed-in
+       member reads all of it, and there is no submissions row to consult
+       because these files never went through the upload form. Reaching
+       this line at all means _middleware.js already verified an Access
+       identity, so membership is established.
+
+       Everything else is a submission, and stays owner-and-admin until it
+       has been approved. */
+    if (!key.startsWith(LIBRARY_PREFIX)) {
+        const row = await env.DB.prepare("SELECT * FROM submissions WHERE object_key = ?").bind(key).first();
+        if (!row) throw new ApiError(404, "No such file.");
+
+        const owns = row.member_email === data.identity.email;
+        if (!data.isAdmin && !owns && row.status !== "approved") {
+            throw new ApiError(403, "That file is still under review.");
+        }
     }
 
     /* R2 takes the Headers object here, not the Request — passing the

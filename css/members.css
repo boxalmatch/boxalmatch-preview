@@ -403,3 +403,68 @@ a.m-tile:hover{
 @media (max-width:820px){
   .nav-links a.signout{ display:block; }
 }
+
+/* ============================================================
+   ARCHIVE BROWSER  (members/archive.html)
+   ============================================================ */
+.ar-crumbs{
+  display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+  font-size:14px; margin-bottom:18px;
+}
+.ar-crumbs a{ color:var(--ink-2); }
+.ar-crumbs a:hover{ color:var(--accent); text-decoration:none; }
+.ar-crumbs .sep{ color:var(--ink-3); }
+.ar-crumbs .here{ color:var(--ink); font-weight:500; }
+
+.ar-list{
+  border:1px solid var(--hair);
+  border-radius:var(--r);
+  overflow:hidden;
+  background:var(--surface);
+}
+
+.ar-row{
+  display:flex; align-items:center; gap:14px;
+  padding:14px 18px;
+  color:var(--ink);
+  border-bottom:1px solid var(--hair);
+  transition:background .2s;
+}
+.ar-row:last-child{ border-bottom:0; }
+.ar-row:hover{ background:var(--glass-2); text-decoration:none; }
+
+.ar-ic{
+  flex:0 0 auto;
+  width:22px; text-align:center;
+  color:var(--accent);
+  font-size:15px;
+}
+/* Folders lead somewhere rather than being a thing in themselves, so their
+   marker is muted and the name carries the weight. */
+.ar-folder .ar-ic{ color:var(--ink-3); }
+
+.ar-name{
+  flex:1 1 auto; min-width:0;
+  /* Filenames off a camera are long and have no spaces to break at. */
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+}
+
+.ar-meta{
+  flex:0 0 auto;
+  font-size:13px; color:var(--ink-3);
+  font-variant-numeric:tabular-nums;
+}
+
+.ar-list[aria-busy="true"]{ opacity:.5; }
+
+#a-more{ margin-top:20px; }
+
+@media (max-width:560px){
+  .ar-row{ padding:13px 14px; gap:11px; }
+  /* The size and date drop below the name rather than squeezing it: on a
+     narrow screen the filename is the part you are reading. */
+  .ar-row{ flex-wrap:wrap; }
+  .ar-name{ flex:1 1 100%; order:1; white-space:normal; word-break:break-word; }
+  .ar-ic{ order:0; }
+  .ar-meta{ order:2; flex:1 1 100%; padding-left:36px; }
+}

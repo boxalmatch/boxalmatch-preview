@@ -83,6 +83,13 @@
     review: function (id, body) { return call('/submissions/' + id, { method: 'PATCH', body: body }); },
     remove: function (id) { return call('/submissions/' + id, { method: 'DELETE' }); },
     mediaURL: function (key) { return BASE + '/media/' + key; },
+    /* Browse the shared archive. path is '' for the root, otherwise the
+       folder path under library/ without that prefix — the route adds it,
+       so a caller cannot ask for anything outside it. */
+    library: function (path, cursor) {
+      var p = '/library' + (path ? '/' + path.split('/').map(encodeURIComponent).join('/') : '');
+      return call(p + (cursor ? '?cursor=' + encodeURIComponent(cursor) : ''));
+    },
     upload: upload
   };
 })();

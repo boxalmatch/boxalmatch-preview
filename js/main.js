@@ -13,6 +13,13 @@
     for (var i = 0; i < btns.length; i++) {
       btns[i].classList.toggle('on', btns[i].getAttribute('data-set') === l);
     }
+    /* Most of the site switches language through CSS on [data-lang], which
+       needs no notification. Anything built in JS does: a rendered list of
+       dates and folder labels has to be redrawn, not restyled. Listeners are
+       optional, so this is inert on every page that has none. */
+    try {
+      document.dispatchEvent(new CustomEvent('bm:lang', { detail: { lang: l } }));
+    } catch (e) {}
   }
 
   function initLang() {
@@ -84,6 +91,7 @@
 
   var USER_PAGES = [
     ['submit.html', 'Invia contenuti', 'Submit content'],
+    ['archive.html', 'Archivio', 'Archive'],
     ['card.html', 'La mia tessera', 'My card']
   ];
 
