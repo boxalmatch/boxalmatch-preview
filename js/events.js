@@ -48,7 +48,19 @@
     var info = document.createElement('div');
     info.className = 'info';
     var h = document.createElement('h3');
-    h.textContent = ev.title;
+    /* The title is the other half of the same link as the button beside it.
+       Someone scanning a list clicks the name of the thing, not the word
+       next to it. Events with no page of their own stay plain text. */
+    if (ev.url) {
+      var t = document.createElement('a');
+      t.href = ev.url;
+      t.target = '_blank';
+      t.rel = 'noopener';
+      t.textContent = ev.title;
+      h.appendChild(t);
+    } else {
+      h.textContent = ev.title;
+    }
     info.appendChild(h);
 
     /* Time and place first, then whatever the description opens with —

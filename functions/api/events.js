@@ -97,16 +97,44 @@ function parseICS(text) {
 
 /* ---------- shaping ---------- */
 
+/* These feeds carry no URL property. The event's public page appears only
+   inside DESCRIPTION, so that is where it has to be read from. */
+const EVENT_LINK = /https?:\/\/(?:[\w-]+\.)*(?:lu\.ma|luma\.com)\/[^\s<>"']+/i;
+
+/* DESCRIPTION opens with a sentence addressed to whoever owns the feed —
+   "You are hosting this event. View the public page at ..." — which is
+   true of them and of nobody reading the site. It is not a description,
+   it is the calendar talking to its owner, and it has to go. */
+const OWNER_LINE = /^(you are (hosting|registered|going|invited)|view the (public|event) page|manage your registration|rsvp)\b/i;
+
+/* A postal address is not a place. Drop the CAP, and drop the country when
+   it is the one everyone reading is standing in — anywhere else keeps its
+   country, which is exactly when it is worth saying. */
+function tidyLocation(loc) {
+    if (!loc) return null;
+    const parts = String(loc).split(",").map(s => s.trim()).filter(Boolean);
+    if (parts.length > 1 && /^(italy|italia)$/i.test(parts[parts.length - 1])) parts.pop();
+    if (parts.length) parts[0] = parts[0].replace(/^\d{5}\s+/, "");
+    return parts.join(", ") || null;
+}
+
 function toEvent(e) {
+    const desc = e.description || "";
+    const link = desc.match(EVENT_LINK);
+
+    /* What the organiser actually wrote: whatever survives once the owner's
+       sentence and any bare link are out of the way. One paragraph is all a
+       listing row can show. */
+    const body = desc.split("\n").map(s => s.trim()).filter(Boolean)
+        .filter(l => !OWNER_LINE.test(l) && !/^https?:\/\/\S+$/i.test(l));
+
     return {
         uid: e.uid || null,
         title: e.title || "",
-        /* Luma puts the event page and a lot of boilerplate in DESCRIPTION.
-           One paragraph is all a listing row can show. */
-        summary: (e.description || "").split("\n").map(s => s.trim())
-                    .filter(Boolean)[0] || null,
-        location: e.location || null,
-        url: e.url || null,
+        summary: body[0] || null,
+        location: tidyLocation(e.location),
+        /* Trailing punctuation belongs to the sentence, not to the link. */
+        url: e.url || (link ? link[0].replace(/[.,;:)\]]+$/, "") : null),
         start: e.start ? e.start.iso : null,
         end: e.end ? e.end.iso : null,
         allDay: !!(e.start && e.start.allDay)

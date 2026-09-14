@@ -229,8 +229,16 @@ What the page does with a feed:
   so an evening LAN does not vanish from the page halfway through itself
 - `STATUS:CANCELLED` is dropped
 - the soonest twelve are shown
-- the Luma page becomes an **Iscriviti / Register** button; an event without
-  a URL falls back to the plain "In arrivo" pill
+- the event's title and an **Iscriviti / Register** button both link to its
+  Luma page; an event with no page falls back to a plain "In arrivo" pill
+- these feeds ship no `URL` property, so the link is read out of the
+  description, which is the only place Luma puts it
+- the description's opening line is written for whoever owns the feed —
+  *"You are hosting this event. View the public page at…"* — and is dropped
+  rather than shown to members as though it were the event's blurb
+- a postal address loses its CAP and, when it is in Italy, its country: a
+  listing row wants a place, not an envelope. Events elsewhere keep the
+  country, which is when it is worth reading
 - all-day events show no time, and a `TZID` wall clock is shown as written
   rather than converted, which is right for a calendar whose audience shares
   its timezone
