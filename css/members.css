@@ -504,3 +504,14 @@ a.m-tile:hover{
 .glyph.whatsapp { color:#25D366; }
 .glyph.instagram{ color:#F05C8B; }
 .glyph.twitch   { color:#A970FF; }
+
+/* A pill that is a link to the Luma page, rather than a status word. */
+.pill-link{
+  border-color:var(--accent);
+  color:var(--accent);
+}
+.pill-link:hover{
+  background:var(--accent);
+  color:#000;
+  text-decoration:none;
+}

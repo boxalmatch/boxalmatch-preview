@@ -19,6 +19,7 @@ css/members.css       member-area styling
 js/main.js            language toggle, mobile nav, carousels, video player
 js/members.js         member identity + card rendering
 js/archive.js         the archive browser
+js/events.js          upcoming events, from the Luma calendar
 img/events/           event artwork (optimised, ~150–280 KB each)
 img/group.jpg         the fourteen, on storia.html
 img/crew/             founder portraits (placeholders — see tools/crew_placeholder.py)

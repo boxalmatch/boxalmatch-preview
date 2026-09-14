@@ -86,6 +86,7 @@
     /* Browse the shared archive. path is '' for the root, otherwise the
        folder path under library/ without that prefix — the route adds it,
        so a caller cannot ask for anything outside it. */
+    events: function () { return call('/events'); },
     library: function (path, cursor) {
       var p = '/library' + (path ? '/' + path.split('/').map(encodeURIComponent).join('/') : '');
       return call(p + (cursor ? '?cursor=' + encodeURIComponent(cursor) : ''));

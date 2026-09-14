@@ -195,12 +195,54 @@ else.
 
 ---
 
+
+## Events, from Luma
+
+Events created in Luma appear on the member page on their own. One setting
+switches it on.
+
+1. In Luma, open the calendar → **Settings → Import / Subscribe** (wording
+   moves around) and copy the calendar's **iCal / subscription URL**. It is
+   the one that starts `webcal://` or ends `.ics`. Both work here — a
+   `webcal://` URL is rewritten to `https://` before it is fetched, since
+   that scheme exists to open a desktop calendar app and `fetch` will not
+   touch it.
+2. **Cloudflare Pages → your project → Settings → Environment variables**,
+   add `LUMA_ICS_URL` with that value, for Production (and Preview if you
+   use it).
+3. Redeploy. `/api/events` starts answering and the page fills itself in.
+
+The URL is a setting rather than a line of code on purpose: Luma owns that
+URL's shape and can change it, and any other calendar that emits iCal works
+here unchanged.
+
+**Nothing is destructive about switching it on or off.** The events written
+by hand in `members/index.html` stay in the markup and are what the page
+shows whenever Luma has nothing to say — not configured, unreachable, or
+simply nothing coming up. A section that empties itself because a feed
+hiccuped is worse than one that is a little out of date, so the swap only
+happens once real events are in hand.
+
+What the page does with a feed:
+
+- past events are dropped, and an event counts as upcoming until it **ends**,
+  so an evening LAN does not vanish from the page halfway through itself
+- `STATUS:CANCELLED` is dropped
+- the soonest twelve are shown
+- the Luma page becomes an **Iscriviti / Register** button; an event without
+  a URL falls back to the plain "In arrivo" pill
+- all-day events show no time, and a `TZID` wall clock is shown as written
+  rather than converted, which is right for a calendar whose audience shares
+  its timezone
+
+If the page keeps showing the hand-written events after you set the variable,
+call `/api/events` directly while signed in. `{"configured":false}` means the
+variable did not reach the deployment; a 502 says what went wrong reaching
+Luma, including the case where the URL returns an HTML login page with a 200.
+
+---
+
 ## What still needs filling in
-
-Search `data-todo` in `members/index.html`:
-
-- Behind-the-scenes link
-- Community documents link
 
 The Drive archive tile is linked. Note what that link is and is not: the member
 page is behind Cloudflare Access, but a Google Drive folder is protected by
