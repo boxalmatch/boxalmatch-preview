@@ -893,9 +893,20 @@ table {
    The `color:` selectors anchor on `^color:` / `;color:` so they can never
    collide with a `background-color:` declaration of the same value. */
 
-/* header fills — green, wherever they sit (thead / tr / th / td) */
+/* Table headers: neutral glass. These are chrome, not data. */
 table thead tr,
-table thead th,
+table thead th {
+    background-color: var(--glass-strong) !important;
+    background-image: none !important;
+    color: var(--ink) !important;
+}
+
+/* Green fills stay green. They used to share the rule above, which is how a
+   winners' row and a table header ended up the same grey — the one distinction
+   in the legacy markup that was actually carrying meaning. The tint is dark
+   enough that white ink sits at ~11:1 on it, so the hue is free to be obvious.
+   font-weight is a second, non-colour cue, since a green row means something
+   (qualified, won) and colour alone should not be the only way to see it. */
 [style*="background-color: #228B22"],
 [style*="background-color:#228B22"],
 [style*="background: #228B22"],
@@ -912,12 +923,21 @@ table thead th,
 [style*="background-color:#2ecc71"],
 [style*="background: #2ecc71"],
 [style*="background:#2ecc71"] {
-    background-color: var(--glass-strong) !important;
+    background-color: rgba(0, 184, 28, 0.22) !important;
     background-image: none !important;
     color: var(--ink) !important;
+    font-weight: 600;
 }
 
-/* light fills -> transparent, so the glass behind them shows through */
+/* The legacy page used four different light fills and they were not
+   interchangeable: white was the default cell, #f2f2f2 was zebra striping,
+   #d3d3d3 and grey labelled guild-name cells, #e6ccff marked a category of
+   row. Collapsing all four to transparent — which is what this rule used to do
+   — threw away the striping and the labels along with the glare. They are
+   separated below, each as a step on the same neutral ramp so the original
+   ordering survives, except the purple which keeps its hue. */
+
+/* default cells: nothing to say, let the glass show */
 [style*="background-color: white"],
 [style*="background-color:white"],
 [style*="background: white"],
@@ -925,24 +945,42 @@ table thead th,
 [style*="background-color: #fff"],
 [style*="background-color:#fff"],
 [style*="background: #fff"],
-[style*="background:#fff"],
+[style*="background:#fff"] {
+    background-color: transparent !important;
+    background-image: none !important;
+    color: var(--ink) !important;
+}
+
+/* zebra striping */
 [style*="background-color: #f2f2f2"],
 [style*="background-color:#f2f2f2"],
 [style*="background: #f2f2f2"],
-[style*="background:#f2f2f2"],
+[style*="background:#f2f2f2"] {
+    background-color: rgba(255, 255, 255, 0.035) !important;
+    background-image: none !important;
+    color: var(--ink) !important;
+}
+
+/* label cells, a step up the ramp from the striping */
 [style*="background-color: #d3d3d3"],
 [style*="background-color:#d3d3d3"],
 [style*="background: #d3d3d3"],
 [style*="background:#d3d3d3"],
-[style*="background-color: #e6ccff"],
-[style*="background-color:#e6ccff"],
-[style*="background: #e6ccff"],
-[style*="background:#e6ccff"],
 [style*="background-color: grey"],
 [style*="background-color:grey"],
 [style*="background: grey"],
 [style*="background:grey"] {
-    background-color: transparent !important;
+    background-color: rgba(255, 255, 255, 0.10) !important;
+    background-image: none !important;
+    color: var(--ink) !important;
+}
+
+/* the purple category rows keep their hue */
+[style*="background-color: #e6ccff"],
+[style*="background-color:#e6ccff"],
+[style*="background: #e6ccff"],
+[style*="background:#e6ccff"] {
+    background-color: rgba(167, 139, 250, 0.20) !important;
     background-image: none !important;
     color: var(--ink) !important;
 }

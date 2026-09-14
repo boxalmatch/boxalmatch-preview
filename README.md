@@ -444,6 +444,33 @@ between the column and the window or the whole page scrolls sideways, so it is
 capped against the real gutter above 820px and set flush with the screen edge
 below it.
 
+### Legacy table colours
+
+The event HTML hard-codes its table fills inline — `background-color: #228B22`
+on a winners' row, `#f2f2f2` for zebra striping, `#d3d3d3` on guild-name cells,
+`#e6ccff` on a category of row, plus orange player chips and gold/silver/bronze
+podium rows. They were picked for a white page, so on this theme they range
+from ugly to unreadable, and `css/main.css` re-maps every one of them with
+`!important` (inline styles beat stylesheet rules, so nothing else would).
+
+The mapping keeps the hue rather than flattening it, and that is the point.
+An earlier version sent all four light fills to transparent and lumped the
+greens in with `table thead tr` — which meant a winners' row and a table header
+came out the same grey, and the zebra striping vanished. Colour was the only
+thing carrying that information, so it has to survive the theme change: each
+fill now becomes a dark tint of its original hue, stepped so the original
+ordering is still readable.
+
+Green rows also get `font-weight: 600`, so "this row qualified" is not
+conveyed by colour alone.
+
+When adding a mapping, check the rendered result rather than the arithmetic.
+These cells sit inside glass panels, so a translucent tint composites over its
+ancestors, not over the page — sizing one against the page's black reads
+several points high. The membership of every ramp here was set by measuring
+the worst cell on all 25 legacy pages in the browser; it currently sits at
+4.58:1.
+
 ### The scores tables
 
 `noblepartyguildswar/scores.html` builds three tables in the browser from CSV
