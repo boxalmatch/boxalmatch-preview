@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var listEl, crumbEl, msgEl, moreBtn;
+  var listEl, crumbEl, msgEl, moreBtn, upSec, upList;
   var current = '';
   var cursor = null;
 
@@ -113,7 +113,9 @@
        the folder the member is standing in. */
     a.target = '_blank';
     a.rel = 'noopener';
-    a.innerHTML = '<span class="ar-ic" aria-hidden="true">' + icon(f.name) + '</span>';
+    /* iconName, not name: an upload is labelled with the member's title
+       ("Finale Halo"), which has no extension to read a type from. */
+    a.innerHTML = '<span class="ar-ic" aria-hidden="true">' + icon(f.iconName || f.name) + '</span>';
     var name = document.createElement('span');
     name.className = 'ar-name';
     name.textContent = f.name;
@@ -123,6 +125,32 @@
     meta.textContent = [size(f.size), when(f.uploaded)].filter(Boolean).join('  ·  ');
     a.appendChild(meta);
     return a;
+  }
+
+  /* Approved uploads, listed from the database rather than from the bucket.
+     A member's upload is keyed pending/<id>/<file> when it arrives and stays
+     there when it is approved — approval only flips a column — so the only
+     way these appear in an archive is by asking D1 what is approved. */
+  function loadUploads(path) {
+    if (path) { upSec.hidden = true; return Promise.resolve(); }
+
+    return window.BMApi.list('approved').then(function (data) {
+      if (!data || data.unavailable || !data.submissions) { upSec.hidden = true; return; }
+
+      var rows = data.submissions;
+      upList.textContent = '';
+      rows.forEach(function (r) {
+        upList.appendChild(fileRow({
+          name: r.title || r.filename,
+          iconName: r.filename,
+          size: r.sizeBytes,
+          uploaded: r.createdAt,
+          href: window.BMApi.mediaURL(
+            String(r.objectKey).split('/').map(encodeURIComponent).join('/'))
+        }));
+      });
+      upSec.hidden = !rows.length;
+    }).catch(function () { upSec.hidden = true; });
   }
 
   function render(data, append) {
@@ -135,9 +163,14 @@
     moreBtn.hidden = !data.truncated;
 
     if (!listEl.children.length) {
+      /* At the root this is the common case rather than an error: library/
+         is filled by hand and may simply not exist yet, while the uploads
+         section below can still have plenty in it. Say which is which. */
       msgEl.textContent = isIT()
-        ? 'Questa cartella è vuota.'
-        : 'This folder is empty.';
+        ? (current ? 'Questa cartella è vuota.'
+                   : 'Nessun file in library/ nel bucket. Gli invii approvati dei membri sono qui sotto.')
+        : (current ? 'This folder is empty.'
+                   : 'Nothing under library/ in the bucket yet. Approved member uploads are listed below.');
     } else {
       msgEl.textContent = '';
     }
@@ -158,6 +191,7 @@
       show('a-main');
       crumbs(path);
       render(data, append);
+      if (!append) loadUploads(path);
     }).catch(function (err) {
       listEl.removeAttribute('aria-busy');
       show('a-main');
@@ -187,6 +221,8 @@
     crumbEl = document.getElementById('a-crumbs');
     msgEl = document.getElementById('a-msg');
     moreBtn = document.getElementById('a-more');
+    upSec = document.getElementById('a-uploads');
+    upList = document.getElementById('a-uploads-list');
     if (!listEl) return;
 
     moreBtn.addEventListener('click', function () { load(current, true); });

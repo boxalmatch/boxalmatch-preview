@@ -32,8 +32,16 @@ approved, and even then it is only served to someone who got through Access.
 and every signed-in member can read all of it. Nothing else to switch on: it
 uses the `MEDIA` binding that already exists.
 
-To put files in it, open the bucket in the Cloudflare dashboard and upload into
-a `library/` folder — `library/2026 The Great LAN/foto/…` and so on. Folder names
+**Member uploads do not appear in that tree, and never will.** An upload is
+keyed `pending/<id>/<file>` when it arrives and approval does not move it —
+approving only flips a column in D1 — so the key stays under `pending/` for
+life. The archive page lists them from the database instead, in their own
+"Invii dei membri" section under the folder tree, and only at the root. Every
+member sees every approved upload; `pending` and `rejected` stay visible to
+their owner and to admins alone.
+
+To put files in the `library/` tree, open the bucket in the Cloudflare dashboard
+and upload into a `library/` folder — `library/2026 The Great LAN/foto/…` and so on. Folder names
 can contain spaces and accents. R2 has no real folders; a key is a flat string
 and the slashes are what the browser renders as a tree, so creating a folder
 means uploading something into it.

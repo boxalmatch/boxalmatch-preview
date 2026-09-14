@@ -20,8 +20,16 @@ export async function onRequestGet(context) {
     const where = [];
     const binds = [];
 
-    /* A member sees only their own, whatever they ask for. */
-    if (!data.isAdmin) {
+    /* Approved material is the shared pool: anyone who got through Access may
+       list it, which is what makes the archive page show a member something
+       other than their own uploads. /api/media already took this view — it
+       serves any approved file to any member — so this is the listing catching
+       up with what delivery already allowed, not a widening of it.
+
+       Everything else stays owner-only. Pending work in particular: seeing
+       what other people have submitted before it is reviewed is moderation,
+       and that is what isAdmin is for. */
+    if (!data.isAdmin && status !== "approved") {
         where.push("member_email = ?");
         binds.push(data.identity.email);
     }

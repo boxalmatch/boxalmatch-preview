@@ -468,3 +468,9 @@ a.m-tile:hover{
   .ar-ic{ order:0; }
   .ar-meta{ order:2; flex:1 1 100%; padding-left:36px; }
 }
+
+.ar-head{
+  font-size:13px; font-weight:600; letter-spacing:.02em;
+  color:var(--accent);
+  margin:36px 0 14px;
+}
