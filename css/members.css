@@ -491,3 +491,16 @@ a.m-tile:hover{
   .ar-chip{ order:2; margin-left:36px; }
   .ar-waiting .ar-meta{ padding-left:10px; }
 }
+
+/* Brand marks on the community and archive tiles. Each carries its own
+   colour so it is recognisable at a glance; the monochrome ones inherit it
+   from the tile, the Drive triangle brings its own fills. */
+.glyph.brand{
+  line-height:0;
+  margin-bottom:12px;
+}
+.glyph.brand svg{ width:24px; height:24px; display:block; }
+.glyph.discord  { color:#7A84F5; }
+.glyph.whatsapp { color:#25D366; }
+.glyph.instagram{ color:#F05C8B; }
+.glyph.twitch   { color:#A970FF; }

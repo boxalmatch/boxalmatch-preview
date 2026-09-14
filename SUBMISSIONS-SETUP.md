@@ -53,8 +53,12 @@ keyed `pending/<id>/<file>` when it arrives and approval does not move it —
 approving only flips a column in D1 — so the key stays under `pending/` for
 life. The archive page lists them from the database instead, in their own
 "Invii dei membri" section under the folder tree, and only at the root. Every
-member sees every approved upload; `pending` and `rejected` stay visible to
-their owner and to admins alone.
+member sees every approved upload, and their own still waiting for review,
+carrying a chip that says so.
+
+Rejected uploads are not listed there. A refusal is a decision, and a file
+left sitting in the archive under a label reads as though it is still in play.
+It stays on `members/submit.html`, where its owner can withdraw or replace it.
 
 To put files in the `library/` tree, open the bucket in the Cloudflare dashboard
 and upload into a `library/` folder — `library/2026 The Great LAN/foto/…` and so on. Folder names

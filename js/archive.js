@@ -133,7 +133,6 @@
      way these appear in an archive is by asking D1 what is approved. */
   function statusLabel(status) {
     if (status === 'pending') return isIT() ? 'In attesa di revisione' : 'Awaiting review';
-    if (status === 'rejected') return isIT() ? 'Non approvato' : 'Not approved';
     return '';
   }
 
@@ -180,7 +179,13 @@
       /* Own approved rows arrive in both lists. */
       var seen = {};
       shared.forEach(function (r) { seen[r.id] = true; });
-      var waiting = mine.filter(function (r) { return !seen[r.id]; });
+      /* Rejected uploads are not listed. A refusal is a decision, and leaving
+         the file sitting in the archive under a label reads as though it is
+         still in play. It stays reachable on the submit page, where its owner
+         can withdraw or replace it. */
+      var waiting = mine.filter(function (r) {
+        return !seen[r.id] && r.status !== 'rejected';
+      });
 
       upList.textContent = '';
       shared.forEach(function (r) { upList.appendChild(uploadRow(r)); });
@@ -199,15 +204,12 @@
     cursor = data.cursor;
     moreBtn.hidden = !data.truncated;
 
-    if (!listEl.children.length) {
-      /* At the root this is the common case rather than an error: library/
-         is filled by hand and may simply not exist yet, while the uploads
-         section below can still have plenty in it. Say which is which. */
-      msgEl.textContent = isIT()
-        ? (current ? 'Questa cartella è vuota.'
-                   : 'Nessun file in library/ nel bucket. Gli invii approvati dei membri sono qui sotto.')
-        : (current ? 'This folder is empty.'
-                   : 'Nothing under library/ in the bucket yet. Approved member uploads are listed below.');
+    /* Only inside a folder is emptiness worth saying out loud. At the root
+       the uploads section below is doing the talking, and explaining that
+       library/ happens to be empty is noise about a storage layout no member
+       needs to know exists. */
+    if (!listEl.children.length && current) {
+      msgEl.textContent = isIT() ? 'Questa cartella è vuota.' : 'This folder is empty.';
     } else {
       msgEl.textContent = '';
     }

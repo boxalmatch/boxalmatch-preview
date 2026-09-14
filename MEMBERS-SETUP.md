@@ -201,7 +201,6 @@ Search `data-todo` in `members/index.html`:
 
 - Behind-the-scenes link
 - Community documents link
-- Discord invite
 
 The Drive archive tile is linked. Note what that link is and is not: the member
 page is behind Cloudflare Access, but a Google Drive folder is protected by
