@@ -199,10 +199,16 @@ else.
 
 Search `data-todo` in `members/index.html`:
 
-- Drive archive link
 - Behind-the-scenes link
 - Community documents link
 - Discord invite
+
+The Drive archive tile is linked. Note what that link is and is not: the member
+page is behind Cloudflare Access, but a Google Drive folder is protected by
+Drive's own sharing settings. Anyone who has the URL can open it if the folder
+is set to "anyone with the link", whether or not they ever passed Access. If
+the archive should stay members-only, set the folder to specific people and add
+them in Drive — the tile being behind a login does not do it for you.
 
 And the two placeholder events near the bottom of the same file.
 

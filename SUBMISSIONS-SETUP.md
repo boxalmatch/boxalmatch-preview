@@ -13,6 +13,28 @@ Budget about twenty minutes.
 
 ---
 
+
+## Where an upload actually goes
+
+`functions/api/upload.js` streams the request body straight into the **R2
+bucket** bound as `MEDIA` — never into the page, never through Drive — under
+the key `objectKey(id, filename)`. The row describing it (title, author,
+status, `object_key`) goes into **D1**. Approved media is read back out by
+`functions/api/media/[[path]].js` with `env.MEDIA.get(key)`, behind the same
+Cloudflare Access that guards the rest of `/members`.
+
+So a submitted file is private by default and stays private until it is
+approved, and even then it is only served to someone who got through Access.
+
+The **Drive archive** tile on the member page is a separate thing: a link to a
+folder someone keeps by hand, for full-resolution originals. Nothing in the
+submission flow writes to it. Moving uploads there instead would mean giving
+the Worker a Google service account — its private key as a Cloudflare secret,
+the folder shared with the service account, a signed JWT exchanged for an
+access token on each upload — and it would trade Access-gated delivery for
+Drive's own sharing rules.
+
+
 ## What each piece does
 
 | Piece | Role |
