@@ -229,13 +229,22 @@ What the page does with a feed:
   so an evening LAN does not vanish from the page halfway through itself
 - `STATUS:CANCELLED` is dropped
 - the soonest twelve are shown
-- the event's title and an **Iscriviti / Register** button both link to its
-  Luma page; an event with no page falls back to a plain "In arrivo" pill
+- the **whole row** links to the event's Luma page — title, blurb, empty
+  space and the **Iscriviti / Register** button alike; an event with no page
+  falls back to a plain "In arrivo" pill and is not clickable
 - these feeds ship no `URL` property, so the link is read out of the
   description, which is the only place Luma puts it
-- the description's opening line is written for whoever owns the feed —
-  *"You are hosting this event. View the public page at…"* — and is dropped
-  rather than shown to members as though it were the event's blurb
+- **a host's feed also carries the console for editing the event**
+  (`.../event/manage/...`). That link is never published and never used as
+  the row's destination: an event whose only link is a management one gets
+  no link at all. If Luma ever put such a URL in the `URL` property it would
+  be refused there too
+- the lines Luma writes to the feed's owner — *"You are hosting this event.
+  View the public page at…"*, *"Manage the event at…"* — are dropped rather
+  than shown to members as the event's blurb. They are recognised by the fact
+  that they link to Luma itself: nobody writing a description links to the
+  page the description is on, so this catches the phrasings we have seen and
+  the ones we have not
 - a postal address loses its CAP and, when it is in Italy, its country: a
   listing row wants a place, not an envelope. Events elsewhere keep the
   country, which is when it is worth reading

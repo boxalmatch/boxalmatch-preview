@@ -37,6 +37,9 @@
 
     var el = document.createElement('div');
     el.className = 'm-event';
+    /* Marks the row as one whole target. A class rather than :has() so the
+       styling does not depend on selector support. */
+    if (ev.url) el.classList.add('is-link');
 
     var when = document.createElement('div');
     when.className = 'when';
@@ -48,9 +51,12 @@
     var info = document.createElement('div');
     info.className = 'info';
     var h = document.createElement('h3');
-    /* The title is the other half of the same link as the button beside it.
-       Someone scanning a list clicks the name of the thing, not the word
-       next to it. Events with no page of their own stay plain text. */
+    /* The title anchor is the row's link: CSS stretches it over the whole
+       block, so a click anywhere on the row opens the event. It is an anchor
+       rather than a click handler on the div because that is what gives the
+       row a real destination — middle-click, right-click, copy link address,
+       keyboard focus and a screen reader's list of links all keep working.
+       Events with no page of their own stay plain text. */
     if (ev.url) {
       var t = document.createElement('a');
       t.href = ev.url;

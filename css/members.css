@@ -190,6 +190,26 @@ a.m-tile:hover{
 .m-event .info h3 a{ color:inherit; text-decoration:none; }
 .m-event .info h3 a:hover,
 .m-event .info h3 a:focus-visible{ color:var(--accent); text-decoration:underline; }
+
+/* The whole row is the target, not just the words. The title's own anchor is
+   stretched across the block with a pseudo-element, which beats wrapping the
+   row in an <a>: an anchor may not contain another anchor, and the button on
+   the right is one. So the overlay goes under the button, which is lifted
+   back above it and stays its own target.
+
+   Everything a link should do still works — focus lands on the title, a
+   screen reader reads the title as the link's name, and middle-click and
+   "copy link address" behave — because this is a real anchor with a real
+   href, not a click handler bolted to a div. */
+.m-event.is-link{ position:relative; }
+.m-event.is-link .info h3 a::after{
+  content:''; position:absolute; inset:0;
+}
+.m-event.is-link .act{ position:relative; z-index:1; }
+/* The row answers the pointer, so it is clear the whole thing is clickable
+   rather than only the title the cursor happens to be over. */
+.m-event.is-link:hover{ background:rgba(255,255,255,.035); }
+.m-event.is-link:hover .info h3 a{ color:var(--accent); }
 .m-event .info p{ font-size:14px; color:var(--ink-2); margin-top:2px; }
 .m-event .act{ flex:0 0 auto; }
 

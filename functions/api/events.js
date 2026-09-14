@@ -99,13 +99,12 @@ function parseICS(text) {
 
 /* These feeds carry no URL property. The event's public page appears only
    inside DESCRIPTION, so that is where it has to be read from. */
-const EVENT_LINK = /https?:\/\/(?:[\w-]+\.)*(?:lu\.ma|luma\.com)\/[^\s<>"']+/i;
+const EVENT_LINK = /https?:\/\/(?:[\w-]+\.)*(?:lu\.ma|luma\.com)\/[^\s<>"']+/ig;
 
-/* DESCRIPTION opens with a sentence addressed to whoever owns the feed —
-   "You are hosting this event. View the public page at ..." — which is
-   true of them and of nobody reading the site. It is not a description,
-   it is the calendar talking to its owner, and it has to go. */
-const OWNER_LINE = /^(you are (hosting|registered|going|invited)|view the (public|event) page|manage your registration|rsvp)\b/i;
+/* Not every link in there is one to hand a member. A feed belonging to the
+   event's host also carries the console for editing it — .../event/manage/...
+   — and publishing that on a members page hands the controls to the room. */
+const PRIVATE_LINK = /\/(?:manage|edit|host|dashboard|admin)(?:\/|$|\?)/i;
 
 /* A postal address is not a place. Drop the CAP, and drop the country when
    it is the one everyone reading is standing in — anywhere else keeps its
@@ -118,23 +117,40 @@ function tidyLocation(loc) {
     return parts.join(", ") || null;
 }
 
+/* Every line the calendar wrote to its own owner is a line that mentions one
+   of its own URLs — "You are hosting this event. View the public page at X",
+   "Manage the event at Y". Nobody writing a blurb links to the page the blurb
+   is on, so recognising those lines by the link in them catches the ones I
+   have seen and the ones I have not, and guarantees that a private URL can
+   never be the thing a member reads. */
+function isPlumbing(line) {
+    EVENT_LINK.lastIndex = 0;
+    return EVENT_LINK.test(line) || /^https?:\/\/\S+$/i.test(line);
+}
+
+/* Trailing punctuation belongs to the sentence, not to the link. */
+function links(desc) {
+    EVENT_LINK.lastIndex = 0;
+    return (desc.match(EVENT_LINK) || []).map(u => u.replace(/[.,;:)\]]+$/, ""));
+}
+
 function toEvent(e) {
     const desc = e.description || "";
-    const link = desc.match(EVENT_LINK);
 
-    /* What the organiser actually wrote: whatever survives once the owner's
-       sentence and any bare link are out of the way. One paragraph is all a
+    /* What the organiser actually wrote: whatever is left once the
+       calendar's own lines are out of the way. One paragraph is all a
        listing row can show. */
-    const body = desc.split("\n").map(s => s.trim()).filter(Boolean)
-        .filter(l => !OWNER_LINE.test(l) && !/^https?:\/\/\S+$/i.test(l));
+    const body = desc.split("\n").map(s => s.trim())
+        .filter(Boolean).filter(l => !isPlumbing(l));
+
+    const publicLink = links(desc).filter(u => !PRIVATE_LINK.test(u))[0] || null;
 
     return {
         uid: e.uid || null,
         title: e.title || "",
         summary: body[0] || null,
         location: tidyLocation(e.location),
-        /* Trailing punctuation belongs to the sentence, not to the link. */
-        url: e.url || (link ? link[0].replace(/[.,;:)\]]+$/, "") : null),
+        url: (e.url && !PRIVATE_LINK.test(e.url) ? e.url : null) || publicLink,
         start: e.start ? e.start.iso : null,
         end: e.end ? e.end.iso : null,
         allDay: !!(e.start && e.start.allDay)
