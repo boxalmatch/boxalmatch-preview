@@ -131,25 +131,62 @@
      A member's upload is keyed pending/<id>/<file> when it arrives and stays
      there when it is approved — approval only flips a column — so the only
      way these appear in an archive is by asking D1 what is approved. */
+  function statusLabel(status) {
+    if (status === 'pending') return isIT() ? 'In attesa di revisione' : 'Awaiting review';
+    if (status === 'rejected') return isIT() ? 'Non approvato' : 'Not approved';
+    return '';
+  }
+
+  function uploadRow(r) {
+    var row = fileRow({
+      name: r.title || r.filename,
+      iconName: r.filename,
+      size: r.sizeBytes,
+      uploaded: r.createdAt,
+      href: window.BMApi.mediaURL(
+        String(r.objectKey).split('/').map(encodeURIComponent).join('/'))
+    });
+    if (r.status !== 'approved') {
+      row.classList.add('ar-waiting');
+      var chip = document.createElement('span');
+      chip.className = 'ar-chip';
+      chip.textContent = statusLabel(r.status);
+      /* Before the size and date, so the state is the first thing read
+         on the row rather than the last. */
+      row.insertBefore(chip, row.querySelector('.ar-meta'));
+    }
+    return row;
+  }
+
   function loadUploads(path) {
     if (path) { upSec.hidden = true; return Promise.resolve(); }
 
-    return window.BMApi.list('approved').then(function (data) {
-      if (!data || data.unavailable || !data.submissions) { upSec.hidden = true; return; }
+    /* Two lists, because they answer two different questions. The approved
+       pool is what every member may see. The caller's own rows are what
+       answers "where did my upload go?" — a file sitting at pending is
+       invisible to everyone else by design, and a page that simply showed
+       nothing is what made that look like a bug rather than a queue. */
+    return Promise.all([
+      window.BMApi.list('approved'),
+      window.BMApi.list()
+    ]).then(function (res) {
+      var shared = (res[0] && res[0].submissions) || [];
+      var mine = (res[1] && res[1].submissions) || [];
+      if ((res[0] && res[0].unavailable) || (res[1] && res[1].unavailable)) {
+        upSec.hidden = true;
+        return;
+      }
 
-      var rows = data.submissions;
+      /* Own approved rows arrive in both lists. */
+      var seen = {};
+      shared.forEach(function (r) { seen[r.id] = true; });
+      var waiting = mine.filter(function (r) { return !seen[r.id]; });
+
       upList.textContent = '';
-      rows.forEach(function (r) {
-        upList.appendChild(fileRow({
-          name: r.title || r.filename,
-          iconName: r.filename,
-          size: r.sizeBytes,
-          uploaded: r.createdAt,
-          href: window.BMApi.mediaURL(
-            String(r.objectKey).split('/').map(encodeURIComponent).join('/'))
-        }));
-      });
-      upSec.hidden = !rows.length;
+      shared.forEach(function (r) { upList.appendChild(uploadRow(r)); });
+      waiting.forEach(function (r) { upList.appendChild(uploadRow(r)); });
+
+      upSec.hidden = !(shared.length || waiting.length);
     }).catch(function () { upSec.hidden = true; });
   }
 

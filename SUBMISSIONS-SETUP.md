@@ -32,7 +32,23 @@ approved, and even then it is only served to someone who got through Access.
 and every signed-in member can read all of it. Nothing else to switch on: it
 uses the `MEDIA` binding that already exists.
 
-**Member uploads do not appear in that tree, and never will.** An upload is
+### Why an upload does not appear anywhere public
+
+Every row is inserted `'pending'` — the status is hard-coded in the INSERT —
+and the archive lists approved material. **An upload is invisible to everyone
+but its owner and the admins until someone approves it** in
+`members/review.html`. That is the system working; it is also the single most
+confusing thing about it, so the archive lists the caller's own pending and
+rejected uploads with a status chip rather than showing them nothing.
+
+If a file is in neither `members/submit.html` nor the review queue, the bytes
+reached R2 but the second call did not land — the browser POSTs `/api/upload`
+for the file and then `/api/submissions` for the title, and only the second
+creates the row. The object is then an orphan under `pending/<id>/` with
+nothing describing it. Look in the bucket under that prefix; `DELETE
+/api/submissions/<id>` cleans one up.
+
+**Member uploads do not appear in the `library/` tree, and never will.** An upload is
 keyed `pending/<id>/<file>` when it arrives and approval does not move it —
 approving only flips a column in D1 — so the key stays under `pending/` for
 life. The archive page lists them from the database instead, in their own

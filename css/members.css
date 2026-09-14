@@ -474,3 +474,20 @@ a.m-tile:hover{
   color:var(--accent);
   margin:36px 0 14px;
 }
+
+/* A member's own upload that is not approved yet. It is listed so "where did
+   my file go" has an answer on the page, but it is not shared material — the
+   muted row and the chip say so without needing a second section. */
+.ar-waiting .ar-name{ color:var(--ink-2); }
+.ar-chip{
+  flex:0 0 auto;
+  font-size:11px; font-weight:600; letter-spacing:.06em; text-transform:uppercase;
+  color:var(--ink-2);
+  border:1px solid var(--hair-strong);
+  border-radius:980px;
+  padding:3px 9px;
+}
+@media (max-width:560px){
+  .ar-chip{ order:2; margin-left:36px; }
+  .ar-waiting .ar-meta{ padding-left:10px; }
+}
