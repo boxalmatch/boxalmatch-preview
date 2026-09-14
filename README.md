@@ -444,6 +444,40 @@ between the column and the window or the whole page scrolls sideways, so it is
 capped against the real gutter above 820px and set flush with the screen edge
 below it.
 
+### The scores tables
+
+`noblepartyguildswar/scores.html` builds three tables in the browser from CSV
+embedded in `js/tables_call.js`, and colours the cells by value. That script is
+the event's own and is **not** to be rewritten to fit this theme — it is shared
+with the upstream site.
+
+What it needs from CSS is a set of class names, and the rebrand that replaced
+`css/main.css` at the start of this repo dropped most of them. The symptom was
+that the tables "stopped working" when the script was untouched and fine: it
+was tagging 226 cells in the Accesso Awards matrix with names no rule matched,
+and the Giocato Contro matrix was rendering 870 identical grey cells because
+its heat-map rules named only `#giocatoTable`.
+
+If a table goes flat again, check the class names before the script:
+
+- `#new-guild-table` — `.value-green`, `.value-yellow`, the guild
+  abbreviations `.ad .aq .b .c .p .s .vk .va`, one class per player name, and
+  `.mercenario`.
+- `#giocatoTable` and `#giocatoCONTROTable` — `.value-x`, `.value-0`,
+  `.value-1-9`, `.value-5-10`, `.value-11plus`, `.value-21plus`,
+  `.header-special`, `.header-normal`, `.vertical-text`. **Both** ids.
+
+Two traps live in this corner of the stylesheet. The guild header rules carry
+`!important` because `table thead th` pins every header's colour further up
+the file — without it they apply and lose. And the script sets
+`td.style.color = "black"` inline on the matrix cells; a `[style*="color"]`
+rule overrides that back to `--ink`, which is the only reason the text is
+readable, since black on those swatches is about 2.4:1. Leave that override
+alone.
+
+Colours here are not decorative: the guild abbreviations and the eight leader
+names use the colour each guild already carries in `css/main_<guild>.css`.
+
 ### Photos
 
 Every photo opens full size in a lightbox on the page — click, or tab to it

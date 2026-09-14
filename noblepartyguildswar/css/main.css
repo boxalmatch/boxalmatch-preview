@@ -978,7 +978,7 @@ table thead th,
 [style*="background-color:#ff8c00"],
 [style*="background: #ff8c00"],
 [style*="background:#ff8c00"] {
-    background-color: rgba(224, 132, 38, 0.16) !important;
+    background-color: rgba(224, 132, 38, 0.10) !important;
     background-image: none !important;
     color: #FFC78A !important;
 }
@@ -1017,7 +1017,7 @@ table thead th,
 [style*="background-color:#C0C0C0"],
 [style*="background: #C0C0C0"],
 [style*="background:#C0C0C0"] {
-    background-color: rgba(192, 192, 192, 0.16) !important;
+    background-color: rgba(192, 192, 192, 0.10) !important;
     background-image: none !important;
     color: #DCDCDC !important;
 }
@@ -1319,28 +1319,158 @@ table tbody tr:hover td { background-color: rgba(255, 255, 255, 0.045); }
     color: var(--ink);
 }
 
-#giocatoTable .header-special { background-color: rgba(0, 184, 28, 0.18); color: var(--ink); }
-#giocatoTable .header-normal { background-color: var(--glass-strong); color: var(--ink); }
+#giocatoTable .header-special,
+#giocatoCONTROTable .header-special { background-color: rgba(0, 184, 28, 0.18); color: var(--ink); }
+#giocatoTable .header-normal,
+#giocatoCONTROTable .header-normal { background-color: var(--glass-strong); color: var(--ink); }
 
-/* heat-map cells: these encode data, so hues stay - lifted for contrast */
-#giocatoTable .value-x { background-color: rgba(255, 255, 255, 0.02); color: var(--ink-muted); }
-#giocatoTable .value-0 { background-color: #1d3d59; color: #eaf3ff; }
-#giocatoTable .value-1-9 { background-color: #1d4527; color: #e8ffee; }
-#giocatoTable .value-5-10 { background-color: #59431c; color: #fff4e2; }
-#giocatoTable .value-11plus { background-color: #5c1d1d; color: #ffeaea; }
-#giocatoTable .value-21plus { background-color: #8f1717; color: #ffffff; }
+/* heat-map cells: these encode data, so hues stay - lifted for contrast.
+   Both matrices, not just the first: js/tables_call.js builds Giocato Con and
+   Giocato Contro with the same class names, but these rules named only
+   #giocatoTable, so the second table came out as 870 identical grey cells —
+   every class applied, none of them meaning anything. */
+#giocatoTable .value-x,
+#giocatoCONTROTable .value-x { background-color: rgba(255, 255, 255, 0.02); color: var(--ink-muted); }
+#giocatoTable .value-0,
+#giocatoCONTROTable .value-0 { background-color: #1d3d59; color: #eaf3ff; }
+#giocatoTable .value-1-9,
+#giocatoCONTROTable .value-1-9 { background-color: #1d4527; color: #e8ffee; }
+#giocatoTable .value-5-10,
+#giocatoCONTROTable .value-5-10 { background-color: #59431c; color: #fff4e2; }
+#giocatoTable .value-11plus,
+#giocatoCONTROTable .value-11plus { background-color: #5c1d1d; color: #ffeaea; }
+#giocatoTable .value-21plus,
+#giocatoCONTROTable .value-21plus { background-color: #8f1717; color: #ffffff; }
 
-#giocatoTable th {
+#giocatoTable th,
+#giocatoCONTROTable th {
     writing-mode: vertical-rl;
     transform: rotate(180deg);
     padding: 5px;
     white-space: nowrap;
 }
 
-#giocatoTable .vertical-text {
+#giocatoTable .vertical-text,
+#giocatoCONTROTable .vertical-text {
     writing-mode: vertical-rl;
     transform: rotate(0deg);
     white-space: nowrap;
+}
+
+/* ---------- Accesso Awards matrix (#new-guild-table, scores.html) ----------
+   js/tables_call.js builds this table and tags 226 of its cells — value-green,
+   value-yellow, the guild abbreviations, one class per player — and until now
+   not one of those class names existed in this stylesheet, so the whole table
+   rendered flat. The script was never the problem: the rebrand that replaced
+   this file at the start dropped the rules its classes refer to.
+
+   Everything is scoped to #new-guild-table on purpose. The guild classes are
+   .b, .c, .p, .s — single letters that would be a menace loose in a global
+   stylesheet.
+
+   Colours are not invented. The guild abbreviations take the colour each
+   guild already carries in css/main_<guild>.css, and the eight leader names
+   take their own guild's, which each guild page states: ade/swine,
+   aquila/baudo, bastione/copter, cobra/colt, pericolo/puffo, sciabola/karmic,
+   valchiria/drius, valore/noble. */
+
+#new-guild-table {
+    border-collapse: separate !important;
+    border-spacing: 0;
+    width: 100%;
+    text-align: center;
+}
+
+#new-guild-table th,
+#new-guild-table td {
+    border: 1px solid rgba(255, 255, 255, 0.07) !important;
+    padding: 5px 7px;
+    background-color: rgba(255, 255, 255, 0.02);
+    color: var(--ink);
+    white-space: nowrap;
+}
+
+#new-guild-table thead th {
+    font-weight: 600;
+}
+
+/* Met the threshold / one short of it. Same green as .header-special above, so
+   the two matrices read as one family. */
+#new-guild-table .value-green {
+    background-color: rgba(0, 184, 28, 0.20);
+    color: #7BEF92;
+}
+
+#new-guild-table .value-yellow {
+    background-color: rgba(226, 163, 102, 0.20);
+    color: #F3C48E;
+}
+
+/* The guild abbreviations, each in its own guild's colour. These land on the
+   header cells, and `table thead th` further up this file pins every header's
+   colour and background with !important — part of the rebrand's contract for
+   flattening the legacy inline styling. Without matching that weight these
+   rules apply and lose, which is exactly how they looked: classes present,
+   headers still plain glass.
+
+   The backgrounds are opaque hex rather than a translucent tint, and that is
+   a contrast decision. A tint composites over whatever is behind it, and these
+   cells sit on the table's glass panels, not on the page — measured on the
+   real page a 0.16 tint put five of the eight at 3.6-4.4:1 even though the
+   arithmetic against the page's black said 4.45+. Each value below is that
+   guild's colour at 10% over the page black, baked flat, so what the cell
+   paints no longer depends on what is underneath it. Worst is now 4.78:1. */
+#new-guild-table .ad { color: #887BB8 !important; background-color: #17151D !important; }
+#new-guild-table .aq { color: #3C89C6 !important; background-color: #0F171F !important; }
+#new-guild-table .b  { color: #A17D52 !important; background-color: #191613 !important; }
+#new-guild-table .c  { color: #6F8D48 !important; background-color: #141712 !important; }
+#new-guild-table .p  { color: #C16A6A !important; background-color: #1C1415 !important; }
+#new-guild-table .s  { color: #E2A366 !important; background-color: #201915 !important; }
+#new-guild-table .vk { color: #94DDDF !important; background-color: #181F21 !important; }
+#new-guild-table .va { color: #BFA451 !important; background-color: #1C1913 !important; }
+
+/* The eight leaders, in the colour of the guild they lead. Only the first and
+   last column carry these — the script puts the player's name at both ends of
+   every row so a wide table stays readable without scrolling back. */
+#new-guild-table .swine  { color: #887BB8; }
+#new-guild-table .baudo  { color: #3C89C6; }
+#new-guild-table .copter { color: #A17D52; }
+#new-guild-table .colt   { color: #6F8D48; }
+#new-guild-table .puffo  { color: #C16A6A; }
+#new-guild-table .karmic { color: #E2A366; }
+#new-guild-table .drius  { color: #94DDDF; }
+#new-guild-table .noble  { color: #BFA451; }
+
+#new-guild-table .swine,
+#new-guild-table .baudo,
+#new-guild-table .copter,
+#new-guild-table .colt,
+#new-guild-table .puffo,
+#new-guild-table .karmic,
+#new-guild-table .drius,
+#new-guild-table .noble {
+    font-weight: 600;
+    /* Opaque for the same reason as the abbreviations above: a white tint here
+       rides on the glass behind the table and drags the darker guild colours
+       under 4.5:1. Flat, the worst of the eight is 4.58:1. */
+    background-color: #1A1A1C;
+    text-align: left;
+}
+
+/* Everyone who plays without a guild. */
+#new-guild-table .mercenario {
+    color: var(--ink);
+    text-align: left;
+}
+
+/* The four who have not played a war yet — every figure on their row is
+   blank, so the name is dimmed rather than sitting there as loud as the rest. */
+#new-guild-table .socrem,
+#new-guild-table .bibobio,
+#new-guild-table .trimrex,
+#new-guild-table .deadrick {
+    color: var(--ink-muted);
+    text-align: left;
 }
 
 #giocatoCONTROTable {
