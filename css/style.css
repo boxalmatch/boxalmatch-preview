@@ -1253,6 +1253,11 @@ a.partner img{ transition:transform .35s cubic-bezier(.2,.7,.3,1); }
 /* The why: a single column of prose, narrower than the cards, so it reads as
    someone talking rather than as another panel of features. */
 .why{ max-width:680px; margin:0 auto; }
+/* Only when something follows it in the same section. On supportaci.html the
+   intro is the last thing in its section and the section padding already does
+   this job; on eventi and contenuti a grid or a carousel comes straight after,
+   and 18px of air made the prose read as a caption for it. */
+.why:not(:last-child){ margin-bottom:clamp(44px,6vh,72px); }
 .why p{
   font-size:18px; color:var(--ink-2); line-height:1.62;
   margin:0 0 18px;
