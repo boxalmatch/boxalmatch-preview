@@ -21,7 +21,7 @@ js/members.js         member identity + card rendering
 js/archive.js         the archive browser
 js/events.js          upcoming events, from the Luma calendar
 img/events/           event artwork (optimised, ~150–280 KB each)
-img/group.jpg         the fourteen, on storia.html
+img/group.webp         the fourteen, on storia.html
 img/crew/             founder portraits (placeholders — see tools/crew_placeholder.py)
 img/icons/            wordmark, mark (header icon + favicon), mark-source,
                       and their pale -light variants for the member card
@@ -54,7 +54,7 @@ restrained motion.
 
 ### The green
 
-The accent is the wordmark's own green, sampled from `img/icons/wordmark.png`.
+The accent is the wordmark's own green, sampled from `img/icons/wordmark.webp`.
 The logo runs a subtle gradient from `#00AD17` to `#00B81C`; the flat fill is
 what the site uses.
 
