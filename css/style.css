@@ -42,14 +42,14 @@
 }
 
 .tile,
-.val, .vcard, .ecard, .ch, .m-tile, .m-event{
+.val, .vcard, .ecard, .ch, .m-tile, .m-event, .tier{
   background:var(--glass);
   backdrop-filter:var(--glass-blur);
   -webkit-backdrop-filter:var(--glass-blur);
   border:1px solid var(--glass-hair);
   box-shadow:0 1px 0 rgba(255,255,255,0.06) inset, var(--shadow);
 }
-.val:hover, .vcard:hover, .ecard:hover, .m-tile:hover, .m-event:hover{
+.val:hover, .vcard:hover, .ecard:hover, .m-tile:hover, .m-event:hover, .tier:hover{
   background:var(--glass-2);
   border-color:rgba(255,255,255,0.2);
 }
@@ -1157,3 +1157,106 @@ a.partner img{ transition:transform .35s cubic-bezier(.2,.7,.3,1); }
 }
 
 .vals-cta{ margin-top:clamp(34px,4vh,52px); text-align:center; }
+
+/* ══════════ SUPPORT TIERS (supportaci.html) ══════════
+   Three membership cards. auto-fit rather than a fixed three columns so the
+   row collapses to two and then one on its own; the cards stretch to equal
+   height so the buttons line up across a row whatever the perk lists do. */
+.tiers{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  gap:22px;
+  align-items:stretch;
+}
+.tier{
+  border-radius:var(--r-lg);
+  padding:30px 28px 28px;
+  display:flex; flex-direction:column;
+  transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s;
+}
+.tier:hover{ transform:translateY(-5px); box-shadow:var(--shadow-lg); }
+
+/* The rank, not a price label: "01 / 02 / 03" reads as an order to climb
+   rather than as three unrelated products. */
+.tier .rank{
+  font-size:12px; font-weight:600; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink-3);
+}
+.tier h3{
+  font-size:27px; letter-spacing:-0.026em;
+  margin:8px 0 0;
+}
+.tier .price{
+  display:flex; align-items:baseline; gap:6px;
+  margin:14px 0 22px;
+  padding-bottom:22px;
+  border-bottom:1px solid var(--glass-hair);
+}
+.tier .amt{
+  font-size:40px; font-weight:600; letter-spacing:-0.03em;
+  color:var(--accent); line-height:1;
+  font-variant-numeric:tabular-nums;
+}
+.tier .per{ font-size:15px; color:var(--ink-2); }
+
+/* flex:1 pushes the button to the bottom edge of every card, so a short list
+   and a long one still end level with each other. */
+.tier .perks{
+  list-style:none; margin:0; padding:0; flex:1;
+  display:flex; flex-direction:column; gap:11px;
+}
+.tier .perks li{
+  display:flex; gap:11px; align-items:flex-start;
+  font-size:15px; color:var(--ink-2); line-height:1.45;
+}
+/* The tick is drawn, not typed: a real character here would be read out on
+   every single line by a screen reader. */
+.tier .perks li::before{
+  content:''; flex:0 0 16px; height:16px; margin-top:3px;
+  background:var(--accent);
+  -webkit-mask:var(--tick) center/13px no-repeat;
+          mask:var(--tick) center/13px no-repeat;
+}
+/* "Everything in the tier below, plus:" — it inherits rather than repeats, so
+   it is the one line that is about the other cards and is marked as such. */
+.tier .perks li.carry{
+  color:var(--ink); font-weight:500;
+  padding-bottom:11px; margin-bottom:0;
+  border-bottom:1px solid var(--glass-hair);
+}
+.tier .perks li.carry::before{
+  -webkit-mask:var(--carry) center/13px no-repeat;
+          mask:var(--carry) center/13px no-repeat;
+}
+.tier .btn{ margin-top:26px; width:100%; justify-content:center; }
+
+/* The two marks above, inline so they cost no request and inherit no colour
+   of their own — the mask takes the shape, --accent paints it. */
+:root{
+  --tick:  url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M9.6 17.2 4.4 12l1.7-1.7 3.5 3.5 8.3-8.3L19.6 7z"/></svg>');
+  --carry: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="black" d="M12 3.6 6.8 8.8l1.7 1.7 2.3-2.3v12.2h2.4V8.2l2.3 2.3 1.7-1.7z"/></svg>');
+}
+
+/* The why: a single column of prose, narrower than the cards, so it reads as
+   someone talking rather than as another panel of features. */
+.why{ max-width:680px; margin:0 auto; }
+.why p{
+  font-size:18px; color:var(--ink-2); line-height:1.62;
+  margin:0 0 18px;
+}
+.why p:last-child{ margin-bottom:0; }
+.why strong{ color:var(--ink); font-weight:500; }
+
+/* How to join, under the cards: quieter than a tier, and never a third thing
+   competing with them for attention. */
+.join-note{
+  margin-top:34px; text-align:center;
+  font-size:15px; color:var(--ink-3);
+}
+.join-note a{ color:var(--accent); }
+
+@media (max-width:520px){
+  .tier{ padding:26px 22px 24px; }
+  .tier .amt{ font-size:34px; }
+  .why p{ font-size:17px; }
+}

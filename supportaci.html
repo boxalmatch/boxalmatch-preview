@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Supportaci — BOXALMATCH</title>
+<meta name="description" content="Tre modi per sostenere BOXALMATCH: Marine, TALO e Spartan. Anche il contributo più piccolo aiuta il gruppo a crescere e a sbloccare nuovi livelli di intrattenimento.">
+
+<link rel="icon" type="image/png" href="img/icons/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- ══════════ NAV ══════════
+     Same bar as everywhere else, with the section links pointing back at the
+     home page. They are cross-page navigations here rather than in-page
+     jumps, which the nav handler leaves alone — it only intercepts hrefs
+     starting with #.
+     ══════════════════════════ -->
+<header class="nav">
+  <div class="nav-in">
+    <a href="index.html#top" class="nav-logo" aria-label="BOXALMATCH">
+      <!-- decorative: the wordmark beside it already carries the name,
+           and the link has its own aria-label -->
+      <img class="nav-mark" src="img/icons/mark.png" alt="" aria-hidden="true"
+           width="256" height="256" decoding="async">
+      <img class="nav-word" src="img/icons/wordmark.png" alt="BOXALMATCH">
+    </a>
+
+    <nav class="nav-links" id="navlinks">
+      <a href="index.html#chi-siamo"><span lang="it">Chi siamo</span><span lang="en">About</span></a>
+      <a href="index.html#contenuti"><span lang="it">Contenuti</span><span lang="en">Content</span></a>
+      <a href="index.html#eventi"><span lang="it">Eventi</span><span lang="en">Events</span></a>
+      <a href="index.html#canali"><span lang="it">Canali</span><span lang="en">Channels</span></a>
+      <a href="supportaci.html" aria-current="page"><span lang="it">Supportaci</span><span lang="en">Support us</span></a>
+      <a href="index.html#contattaci"><span lang="it">Contattaci</span><span lang="en">Contact</span></a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="lang">
+        <button type="button" data-set="it">IT</button>
+        <button type="button" data-set="en">EN</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══════════ WHY ══════════ -->
+<section class="sec story-top">
+  <div class="wrap sec-head rv">
+    <span class="eyebrow" lang="it">Sostieni il progetto</span>
+    <span class="eyebrow" lang="en">Back the project</span>
+    <h1 lang="it">Supportaci</h1>
+    <h1 lang="en">Support us</h1>
+    <p lang="it">Perché serve, e cosa ci fai sbloccare.</p>
+    <p lang="en">Why it matters, and what it unlocks.</p>
+  </div>
+
+  <div class="wrap why rv">
+    <p lang="it">Abbiamo tutti una vita: un lavoro, una famiglia, le nostre giornate.
+      BOXALMATCH lo facciamo dopo, <strong>per passione</strong>, con gli strumenti
+      che abbiamo a disposizione.</p>
+    <p lang="en">We all have lives — a job, a family, our own days. BOXALMATCH is
+      what we do afterwards, <strong>out of passion</strong>, with whatever tools
+      we have to hand.</p>
+
+    <p lang="it">Di idee ne abbiamo tante, e l'ultima cosa che vogliamo è mettere
+      un limite alla creatività del gruppo. Quando quel limite arriva, non è mai
+      la voglia di fare: <strong>sono i mezzi</strong>.</p>
+    <p lang="en">We have no shortage of ideas, and the last thing we want is to put
+      a ceiling on what the group comes up with. When that ceiling does show up,
+      it is never for lack of wanting to — <strong>it is the means</strong>.</p>
+
+    <p lang="it">Ecco perché <strong>anche il contributo più piccolo conta davvero</strong>.
+      Sostiene il lavoro che c'è dietro, ci aiuta a farlo crescere e ci permette di
+      sbloccare nuovi livelli di intrattenimento: eventi più grandi, produzioni più
+      curate, le cose che oggi restano nel cassetto.</p>
+    <p lang="en">That is why <strong>even the smallest contribution genuinely counts</strong>.
+      It backs the work behind all this, helps it grow, and unlocks new levels of
+      entertainment: bigger events, better productions, the things still sitting
+      in a drawer.</p>
+  </div>
+</section>
+
+<!-- ══════════ TIERS ══════════
+     Three cards, cheapest first. Each one inherits the tier below it rather
+     than repeating its perks — the "carry" line is what says so, and it is
+     the only line on a card that talks about a different card.
+     ═══════════════════════════ -->
+<section class="sec sec-tight" id="livelli">
+  <div class="wrap sec-head rv">
+    <h2 lang="it">Scegli il tuo livello</h2>
+    <h2 lang="en">Pick your tier</h2>
+    <p lang="it">Tre modi per starci dentro. Ognuno comprende tutto quello del precedente.</p>
+    <p lang="en">Three ways to be part of it. Each one includes everything below it.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="tiers">
+
+      <article class="tier rv">
+        <div class="rank" lang="it">Livello 01</div>
+        <div class="rank" lang="en">Tier 01</div>
+        <h3>Marine</h3>
+        <div class="price">
+          <span class="amt">10&thinsp;€</span>
+          <span class="per" lang="it">/ anno</span>
+          <span class="per" lang="en">/ year</span>
+        </div>
+        <ul class="perks">
+          <li lang="it">Accesso ai contenuti esclusivi</li>
+          <li lang="en">Access to exclusive content</li>
+          <li lang="it">Accesso al Discord</li>
+          <li lang="en">Access to Discord</li>
+        </ul>
+        <a class="btn btn-line"
+           href="mailto:info@boxalmatch.com?subject=BOXALMATCH%20%E2%80%94%20Marine%20(10%20EUR%2Fanno)">
+          <span lang="it">Iscriviti a Marine</span>
+          <span lang="en">Join Marine</span>
+        </a>
+      </article>
+
+      <article class="tier rv">
+        <div class="rank" lang="it">Livello 02</div>
+        <div class="rank" lang="en">Tier 02</div>
+        <!-- The tier has a different name in each language, not a translated
+             one: TALO in Italian, ODST in English. -->
+        <h3><span lang="it">TALO</span><span lang="en">ODST</span></h3>
+        <div class="price">
+          <span class="amt">20&thinsp;€</span>
+          <span class="per" lang="it">/ anno</span>
+          <span class="per" lang="en">/ year</span>
+        </div>
+        <ul class="perks">
+          <li class="carry" lang="it">Tutto quello che c'è in Marine, più:</li>
+          <li class="carry" lang="en">Everything in Marine, plus:</li>
+          <li lang="it">Community WhatsApp</li>
+          <li lang="en">WhatsApp community</li>
+          <li lang="it">1 personaggio BoxStone</li>
+          <li lang="en">1 BoxStone character</li>
+        </ul>
+        <a class="btn btn-line"
+           href="mailto:info@boxalmatch.com?subject=BOXALMATCH%20%E2%80%94%20TALO%20%2F%20ODST%20(20%20EUR%2Fanno)">
+          <span lang="it">Iscriviti a TALO</span>
+          <span lang="en">Join ODST</span>
+        </a>
+      </article>
+
+      <article class="tier rv">
+        <div class="rank" lang="it">Livello 03</div>
+        <div class="rank" lang="en">Tier 03</div>
+        <h3>Spartan</h3>
+        <div class="price">
+          <span class="amt">50&thinsp;€</span>
+          <span class="per" lang="it">/ anno</span>
+          <span class="per" lang="en">/ year</span>
+        </div>
+        <ul class="perks">
+          <li class="carry" lang="it">Tutto quello che c'è in TALO, più:</li>
+          <li class="carry" lang="en">Everything in ODST, plus:</li>
+          <li lang="it">Accesso a tutti i contenuti esclusivi, inediti compresi</li>
+          <li lang="en">Access to every exclusive, unreleased ones included</li>
+          <li lang="it">3 carte personaggio BoxStone</li>
+          <li lang="en">3 BoxStone character cards</li>
+          <li lang="it">1 articolo di merch</li>
+          <li lang="en">1 merch item</li>
+        </ul>
+        <a class="btn btn-line"
+           href="mailto:info@boxalmatch.com?subject=BOXALMATCH%20%E2%80%94%20Spartan%20(50%20EUR%2Fanno)">
+          <span lang="it">Iscriviti a Spartan</span>
+          <span lang="en">Join Spartan</span>
+        </a>
+      </article>
+
+    </div>
+
+    <!-- Says out loud how joining actually works today, so nobody presses a
+         button expecting a checkout and wonders what happened. -->
+    <p class="join-note rv" lang="it">
+      Per ora le iscrizioni si fanno via email: scrivici a
+      <a href="mailto:info@boxalmatch.com">info@boxalmatch.com</a> e ti
+      rispondiamo con i dettagli per il pagamento e l'accesso.
+    </p>
+    <p class="join-note rv" lang="en">
+      For now we handle sign-ups by email: write to
+      <a href="mailto:info@boxalmatch.com">info@boxalmatch.com</a> and we will
+      reply with the payment and access details.
+    </p>
+  </div>
+
+  <div class="wrap story-back rv">
+    <a href="index.html#top" class="btn btn-line">
+      <span lang="it">Torna alla home</span><span lang="en">Back to the home page</span>
+    </a>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-cols">
+      <div>
+        <h4 lang="it">Naviga</h4><h4 lang="en">Navigate</h4>
+        <ul>
+          <li><a href="index.html#chi-siamo"><span lang="it">Chi siamo</span><span lang="en">About</span></a></li>
+          <li><a href="storia.html"><span lang="it">La nostra storia</span><span lang="en">Our story</span></a></li>
+          <li><a href="index.html#contenuti"><span lang="it">Contenuti</span><span lang="en">Content</span></a></li>
+          <li><a href="index.html#eventi"><span lang="it">Eventi</span><span lang="en">Events</span></a></li>
+          <li><a href="supportaci.html"><span lang="it">Supportaci</span><span lang="en">Support us</span></a></li>
+          <li><a href="index.html#partners">Partners</a></li>
+          <li><a href="index.html#contattaci"><span lang="it">Contattaci</span><span lang="en">Contact</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 lang="it">Canali</h4><h4 lang="en">Channels</h4>
+        <ul>
+          <li><a href="https://www.youtube.com/@BOXALMATCH" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.twitch.tv/boxalmatch" target="_blank" rel="noopener">Twitch</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 lang="it">Contatti</h4><h4 lang="en">Contact</h4>
+        <ul class="foot-mail">
+          <li>
+            <span class="foot-lbl" lang="it">Per informazioni</span><span class="foot-lbl" lang="en">General enquiries</span>
+            <a href="mailto:info@boxalmatch.com">info@boxalmatch.com</a>
+          </li>
+          <li>
+            <span class="foot-lbl" lang="it">Per collaborazioni</span><span class="foot-lbl" lang="en">Partnerships</span>
+            <a href="mailto:partnerships@boxalmatch.com">partnerships@boxalmatch.com</a>
+          </li>
+          <li>
+            <span class="foot-lbl" lang="it">Per eventi</span><span class="foot-lbl" lang="en">Events</span>
+            <a href="mailto:events@boxalmatch.com">events@boxalmatch.com</a>
+          </li>
+          <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener"><span lang="it">Scrivici su Instagram</span><span lang="en">Message us on Instagram</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <span>&copy; 2026 BOXALMATCH</span>
+      <span lang="it">Un gruppo di amici con la passione per l'intrattenimento collettivo.</span>
+      <span lang="en">A group of friends with a passion for collective entertainment.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
