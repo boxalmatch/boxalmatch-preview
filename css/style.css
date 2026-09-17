@@ -1327,10 +1327,25 @@ a.partner img{ transition:transform .35s cubic-bezier(.2,.7,.3,1); }
   font-size:15px; word-break:break-word;
 }
 
-/* The form sits below the three cards and repeats where it lands, so it wants
-   air above it rather than to read as a fourth card. */
-.join-box + .jnote, .addr-grid + .join-box{ margin-top:0; }
-.sec .addr-grid ~ .join-box{ margin-top:clamp(44px,6vh,72px); }
+/* The form sits below the three address cards, so it wants air above it
+   rather than to read as a fourth one. Keyed on position, not on a sibling
+   selector: .addr-grid lives inside its own .wrap, so ".addr-grid ~ .join-box"
+   — which is what I reached for first — can never match, and the form sat
+   flush against the cards. When .join-box IS the first thing in its section,
+   as it was on the home page, the section padding already does the job. */
+main > section > .join-box:not(:first-child){
+  margin-top:clamp(56px,7vh,84px);
+}
+/* And it stops being the headline of its own section. At 48px it dwarfed the
+   20px headings on the three address cards above it, which are its peers on
+   this page, and read as the start of something new rather than as the other
+   way to do the same thing. */
+main > section > .join-box:not(:first-child) h2{
+  font-size:clamp(24px,2.6vw,30px);
+}
+main > section > .join-box:not(:first-child) > p{
+  font-size:16px;
+}
 
 /* ══════════ ACCEDI / REGISTRATI ══════════ */
 .auth-act{
