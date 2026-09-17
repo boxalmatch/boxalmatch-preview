@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contatti — BOXALMATCH</title>
+<meta name="description" content="Scrivi a BOXALMATCH: informazioni, eventi e collaborazioni, ognuno con il suo indirizzo, più un modulo per tutto il resto.">
+
+<link rel="icon" type="image/png" href="img/icons/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a href="index.html#top" class="nav-logo" aria-label="BOXALMATCH">
+      <!-- decorative: the wordmark beside it already carries the name,
+           and the link has its own aria-label -->
+      <img class="nav-mark" src="img/icons/mark.png" alt="" aria-hidden="true"
+           width="256" height="256" decoding="async">
+      <img class="nav-word" src="img/icons/wordmark.webp" alt="BOXALMATCH">
+    </a>
+
+    <nav class="nav-links" id="navlinks">
+      <a href="contenuti.html"><span lang="it">Contenuti</span><span lang="en">Content</span></a>
+      <a href="eventi.html"><span lang="it">Eventi</span><span lang="en">Events</span></a>
+      <a href="supportaci.html"><span lang="it">Supportaci</span><span lang="en">Support us</span></a>
+      <a href="contatti.html" aria-current="page"><span lang="it">Contatti</span><span lang="en">Contact us</span></a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="lang">
+        <button type="button" data-set="it">IT</button>
+        <button type="button" data-set="en">EN</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="sec story-top">
+  <div class="wrap sec-head rv">
+    <span class="eyebrow" lang="it">Parliamone</span>
+    <span class="eyebrow" lang="en">Let's talk</span>
+    <h1 lang="it">Contatti</h1>
+    <h1 lang="en">Contact us</h1>
+    <p lang="it">Tre indirizzi e un modulo. Rispondiamo sempre.</p>
+    <p lang="en">Three addresses and a form. We always reply.</p>
+  </div>
+
+  <div class="wrap why rv">
+    <p lang="it">Dietro BOXALMATCH non c'è un ufficio: ci siamo noi, la sera, quando
+      la giornata è finita. Questo vuol dire che <strong>non rispondiamo in due
+      minuti</strong> — ma vuol dire anche che a leggerti c'è una persona, non un
+      modulo di assistenza.</p>
+    <p lang="en">There is no office behind BOXALMATCH: there is us, in the evening,
+      once the day is done. That means <strong>we will not reply in two
+      minutes</strong> — but it also means a person reads what you write, not a
+      support queue.</p>
+
+    <p lang="it">Scrivi all'indirizzo giusto e arrivi prima alla persona giusta.
+      Se non sai quale scegliere, <strong>usa il modulo qui sotto</strong>: ci
+      pensiamo noi a girarlo a chi di dovere.</p>
+    <p lang="en">Write to the right address and you reach the right person sooner.
+      If you cannot tell which one, <strong>use the form below</strong> and we
+      will pass it on ourselves.</p>
+  </div>
+
+  <div class="wrap">
+    <div class="addr-grid">
+
+      <article class="addr rv">
+        <h2 lang="it">Informazioni</h2>
+        <h2 lang="en">General</h2>
+        <p lang="it">Domande, proposte, o solo per fare due chiacchiere. Se hai un
+          dubbio e non sai a chi chiederlo, è questo.</p>
+        <p lang="en">Questions, ideas, or just to say hello. If you are not sure who
+          to ask, ask here.</p>
+        <a href="mailto:info@boxalmatch.com">info@boxalmatch.com</a>
+      </article>
+
+      <article class="addr rv">
+        <h2 lang="it">Eventi</h2>
+        <h2 lang="en">Events</h2>
+        <p lang="it">Vuoi partecipare a una LAN, iscrivere una squadra, proporci una
+          serata o ospitarci da te. Tutto quello che si gioca insieme.</p>
+        <p lang="en">Joining a LAN, entering a team, pitching us a night or hosting
+          one. Anything that gets played together.</p>
+        <a href="mailto:events@boxalmatch.com">events@boxalmatch.com</a>
+      </article>
+
+      <article class="addr rv">
+        <h2 lang="it">Collaborazioni</h2>
+        <h2 lang="en">Partnerships</h2>
+        <p lang="it">Sponsorizzazioni, premi per i tornei, collaborazioni con locali,
+          negozi e altre realtà. Si parte da qui.</p>
+        <p lang="en">Sponsorships, tournament prizes, working with venues, shops and
+          anyone else. Start here.</p>
+        <a href="mailto:partnerships@boxalmatch.com">partnerships@boxalmatch.com</a>
+      </article>
+
+    </div>
+  </div>
+
+  <div class="wrap join-box rv">
+    <h2 lang="it">Oppure scrivici da qui</h2>
+    <h2 lang="en">Or write to us here</h2>
+    <p lang="it">Arriva a <em>info@boxalmatch.com</em>, e da lì lo giriamo a chi serve.</p>
+    <p lang="en">It lands at <em>info@boxalmatch.com</em>, and we pass it on from there.</p>
+
+<!-- No server here (GitHub Pages), so the form hands the message to the
+         visitor's mail client addressed to us. Point data-endpoint at a form
+         service (Formspree and the like) to have it posted instead: see the
+         README. -->
+    <form class="jform" data-endpoint="https://formspree.io/f/xdeoydlz" method="POST" novalidate>
+      <!-- read by Formspree and friends as the subject of the email they send;
+           ignored on the mail-client path, which builds its own -->
+      <input type="hidden" name="_subject" value="BOXALMATCH — messaggio dal sito">
+      <label class="fld">
+        <span class="fld-lbl" lang="it">Nome</span><span class="fld-lbl" lang="en">Name</span>
+        <input type="text" name="name" required autocomplete="name">
+      </label>
+      <label class="fld">
+        <span class="fld-lbl">Email</span>
+        <input type="email" name="email" required autocomplete="email"
+               placeholder="you@email.com">
+      </label>
+      <label class="fld fld-wide">
+        <span class="fld-lbl" lang="it">Messaggio</span><span class="fld-lbl" lang="en">Message</span>
+        <textarea name="message" rows="5" required></textarea>
+      </label>
+      <button type="submit" class="btn btn-fill">
+        <span lang="it">Invia messaggio</span><span lang="en">Send message</span>
+      </button>
+    </form>    <p class="jnote" id="jnote" role="status" aria-live="polite"></p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-cols">
+      <div>
+        <h4 lang="it">Naviga</h4><h4 lang="en">Navigate</h4>
+        <ul>
+          <li><a href="index.html#chi-siamo"><span lang="it">Chi siamo</span><span lang="en">About</span></a></li>
+          <li><a href="storia.html"><span lang="it">La nostra storia</span><span lang="en">Our story</span></a></li>
+          <li><a href="eventi.html"><span lang="it">Eventi</span><span lang="en">Events</span></a></li>
+          <li><a href="contenuti.html"><span lang="it">Contenuti</span><span lang="en">Content</span></a></li>
+          <li><a href="supportaci.html"><span lang="it">Supportaci</span><span lang="en">Support us</span></a></li>
+          <li><a href="index.html#partners">Partners</a></li>
+          <li><a href="contatti.html"><span lang="it">Contatti</span><span lang="en">Contact us</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 lang="it">Canali</h4><h4 lang="en">Channels</h4>
+        <ul>
+          <li><a href="https://www.youtube.com/@BOXALMATCH" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.twitch.tv/boxalmatch" target="_blank" rel="noopener">Twitch</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 lang="it">Contatti</h4><h4 lang="en">Contact</h4>
+        <ul class="foot-mail">
+          <li>
+            <span class="foot-lbl" lang="it">Per informazioni</span><span class="foot-lbl" lang="en">General enquiries</span>
+            <a href="mailto:info@boxalmatch.com">info@boxalmatch.com</a>
+          </li>
+          <li>
+            <span class="foot-lbl" lang="it">Per collaborazioni</span><span class="foot-lbl" lang="en">Partnerships</span>
+            <a href="mailto:partnerships@boxalmatch.com">partnerships@boxalmatch.com</a>
+          </li>
+          <li>
+            <span class="foot-lbl" lang="it">Per eventi</span><span class="foot-lbl" lang="en">Events</span>
+            <a href="mailto:events@boxalmatch.com">events@boxalmatch.com</a>
+          </li>
+          <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener"><span lang="it">Scrivici su Instagram</span><span lang="en">Message us on Instagram</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <span>&copy; 2026 BOXALMATCH</span>
+      <span lang="it">Un gruppo di amici con la passione per l'intrattenimento collettivo.</span>
+      <span lang="en">A group of friends with a passion for collective entertainment.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

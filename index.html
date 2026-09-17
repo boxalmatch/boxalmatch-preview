@@ -26,13 +26,11 @@
     </a>
 
     <nav class="nav-links" id="navlinks">
-      <a href="#chi-siamo"><span lang="it">Chi siamo</span><span lang="en">About</span></a>
       <a href="contenuti.html"><span lang="it">Contenuti</span><span lang="en">Content</span></a>
       <a href="eventi.html"><span lang="it">Eventi</span><span lang="en">Events</span></a>
-      <a href="#canali"><span lang="it">Canali</span><span lang="en">Channels</span></a>
       <a href="supportaci.html"><span lang="it">Supportaci</span><span lang="en">Support us</span></a>
       <a href="#partners">Partners</a>
-      <a href="#contattaci"><span lang="it">Contattaci</span><span lang="en">Contact</span></a>
+      <a href="contatti.html"><span lang="it">Contatti</span><span lang="en">Contact us</span></a>
       <!-- The member area is not a bar link any more: it lives behind the
            profile chip next to IT/EN, which js/main.js builds signed in or
            out. On a phone the same JS appends it here as the last item. -->
@@ -376,41 +374,6 @@
 </section>
 
 <!-- ══════════ CONTATTACI ══════════ -->
-<section class="sec join" id="contattaci">
-  <div class="wrap join-box rv">
-    <h2 lang="it">Contattaci</h2>
-    <h2 lang="en">Contact us</h2>
-    <p lang="it">Scrivici un messaggio: domande, proposte, o solo per fare due chiacchiere.</p>
-    <p lang="en">Send us a message — questions, ideas, or just to say hello.</p>
-
-    <!-- No server here (GitHub Pages), so the form hands the message to the
-         visitor's mail client addressed to us. Point data-endpoint at a form
-         service (Formspree and the like) to have it posted instead: see the
-         README. -->
-    <form class="jform" data-endpoint="https://formspree.io/f/xdeoydlz" method="POST" novalidate>
-      <!-- read by Formspree and friends as the subject of the email they send;
-           ignored on the mail-client path, which builds its own -->
-      <input type="hidden" name="_subject" value="BOXALMATCH — messaggio dal sito">
-      <label class="fld">
-        <span class="fld-lbl" lang="it">Nome</span><span class="fld-lbl" lang="en">Name</span>
-        <input type="text" name="name" required autocomplete="name">
-      </label>
-      <label class="fld">
-        <span class="fld-lbl">Email</span>
-        <input type="email" name="email" required autocomplete="email"
-               placeholder="you@email.com">
-      </label>
-      <label class="fld fld-wide">
-        <span class="fld-lbl" lang="it">Messaggio</span><span class="fld-lbl" lang="en">Message</span>
-        <textarea name="message" rows="5" required></textarea>
-      </label>
-      <button type="submit" class="btn btn-fill">
-        <span lang="it">Invia messaggio</span><span lang="en">Send message</span>
-      </button>
-    </form>
-    <p class="jnote" id="jnote" role="status" aria-live="polite"></p>
-  </div>
-</section>
 
 </main>
 
@@ -427,7 +390,7 @@
           <li><a href="eventi.html"><span lang="it">Eventi</span><span lang="en">Events</span></a></li>
           <li><a href="contenuti.html"><span lang="it">Contenuti</span><span lang="en">Content</span></a></li>
           <li><a href="supportaci.html"><span lang="it">Supportaci</span><span lang="en">Support us</span></a></li>
-          <li><a href="#contattaci"><span lang="it">Contattaci</span><span lang="en">Contact</span></a></li>
+          <li><a href="contatti.html"><span lang="it">Contatti</span><span lang="en">Contact us</span></a></li>
         </ul>
       </div>
       <div>

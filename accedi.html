@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it" data-lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Accedi — BOXALMATCH</title>
+<meta name="description" content="Entra nell'area riservata BOXALMATCH: niente password, solo un codice usa e getta all'indirizzo con cui sei iscritto.">
+
+<link rel="icon" type="image/png" href="img/icons/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@1&display=swap" rel="stylesheet">
+<link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-in">
+    <a href="index.html#top" class="nav-logo" aria-label="BOXALMATCH">
+      <!-- decorative: the wordmark beside it already carries the name,
+           and the link has its own aria-label -->
+      <img class="nav-mark" src="img/icons/mark.png" alt="" aria-hidden="true"
+           width="256" height="256" decoding="async">
+      <img class="nav-word" src="img/icons/wordmark.webp" alt="BOXALMATCH">
+    </a>
+
+    <nav class="nav-links" id="navlinks">
+      <a href="contenuti.html"><span lang="it">Contenuti</span><span lang="en">Content</span></a>
+      <a href="eventi.html"><span lang="it">Eventi</span><span lang="en">Events</span></a>
+      <a href="supportaci.html"><span lang="it">Supportaci</span><span lang="en">Support us</span></a>
+      <a href="contatti.html"><span lang="it">Contatti</span><span lang="en">Contact us</span></a>
+    </nav>
+
+    <div class="nav-right">
+      <div class="lang">
+        <button type="button" data-set="it">IT</button>
+        <button type="button" data-set="en">EN</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="sec story-top">
+  <div class="wrap sec-head rv">
+    <span class="eyebrow" lang="it">Area riservata</span>
+    <span class="eyebrow" lang="en">Members area</span>
+    <h1 lang="it">Accedi</h1>
+    <h1 lang="en">Sign in</h1>
+    <p lang="it">Se sei già dei nostri, si entra da qui.</p>
+    <p lang="en">If you are already one of us, this is the way in.</p>
+  </div>
+
+  <div class="wrap why rv">
+    <p lang="it">L'accesso funziona <strong>senza password</strong>. Premi il tasto
+      qui sotto, scrivi l'indirizzo email con cui sei iscritto e ti arriva un
+      codice usa e getta: lo incolli, e sei dentro.</p>
+    <p lang="en">Signing in works <strong>without a password</strong>. Press the
+      button below, type the email address you are registered with, and a
+      one-time code arrives: paste it, and you are in.</p>
+
+    <p lang="it">Funziona solo con <strong>l'indirizzo che ci hai dato</strong>. Se
+      il codice non arriva, controlla lo spam e poi
+      <a href="contatti.html">scrivici</a>: probabilmente la tua email non è
+      ancora nella lista.</p>
+    <p lang="en">It only works with <strong>the address you gave us</strong>. If the
+      code does not arrive, check your spam folder and then
+      <a href="contatti.html">get in touch</a>: most likely your address is not
+      on the list yet.</p>
+  </div>
+
+  <div class="wrap auth-act rv">
+    <!-- /members/ sits behind Cloudflare Access, so following this link IS the
+         login — there is no form of our own to submit. -->
+    <a href="members/" class="btn btn-fill">
+      <span lang="it">Vai all'area riservata</span>
+      <span lang="en">Go to the members area</span>
+    </a>
+    <p class="auth-alt" lang="it">Non sei ancora iscritto? <a href="registrati.html">Registrati</a>.</p>
+    <p class="auth-alt" lang="en">Not a member yet? <a href="registrati.html">Sign up</a>.</p>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer class="foot">
+  <div class="foot-in">
+    <div class="foot-cols">
+      <div>
+        <h4 lang="it">Naviga</h4><h4 lang="en">Navigate</h4>
+        <ul>
+          <li><a href="index.html#chi-siamo"><span lang="it">Chi siamo</span><span lang="en">About</span></a></li>
+          <li><a href="storia.html"><span lang="it">La nostra storia</span><span lang="en">Our story</span></a></li>
+          <li><a href="eventi.html"><span lang="it">Eventi</span><span lang="en">Events</span></a></li>
+          <li><a href="contenuti.html"><span lang="it">Contenuti</span><span lang="en">Content</span></a></li>
+          <li><a href="supportaci.html"><span lang="it">Supportaci</span><span lang="en">Support us</span></a></li>
+          <li><a href="index.html#partners">Partners</a></li>
+          <li><a href="contatti.html"><span lang="it">Contatti</span><span lang="en">Contact us</span></a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 lang="it">Canali</h4><h4 lang="en">Channels</h4>
+        <ul>
+          <li><a href="https://www.youtube.com/@BOXALMATCH" target="_blank" rel="noopener">YouTube</a></li>
+          <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.twitch.tv/boxalmatch" target="_blank" rel="noopener">Twitch</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 lang="it">Contatti</h4><h4 lang="en">Contact</h4>
+        <ul class="foot-mail">
+          <li>
+            <span class="foot-lbl" lang="it">Per informazioni</span><span class="foot-lbl" lang="en">General enquiries</span>
+            <a href="mailto:info@boxalmatch.com">info@boxalmatch.com</a>
+          </li>
+          <li>
+            <span class="foot-lbl" lang="it">Per collaborazioni</span><span class="foot-lbl" lang="en">Partnerships</span>
+            <a href="mailto:partnerships@boxalmatch.com">partnerships@boxalmatch.com</a>
+          </li>
+          <li>
+            <span class="foot-lbl" lang="it">Per eventi</span><span class="foot-lbl" lang="en">Events</span>
+            <a href="mailto:events@boxalmatch.com">events@boxalmatch.com</a>
+          </li>
+          <li><a href="https://www.instagram.com/boxalmatch/" target="_blank" rel="noopener"><span lang="it">Scrivici su Instagram</span><span lang="en">Message us on Instagram</span></a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bot">
+      <span>&copy; 2026 BOXALMATCH</span>
+      <span lang="it">Un gruppo di amici con la passione per l'intrattenimento collettivo.</span>
+      <span lang="en">A group of friends with a passion for collective entertainment.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

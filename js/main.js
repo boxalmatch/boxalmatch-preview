@@ -99,6 +99,13 @@
     return (IN_MEMBERS ? '' : 'members/') + file;
   }
 
+  /* The mirror of memberPage: a page at the site root, reached from either
+     depth. Only the root and members/ load this script — the event sub-sites
+     each carry their own copy — so one step up is always enough. */
+  function rootPage(file) {
+    return (IN_MEMBERS ? '../' : '') + file;
+  }
+
   function bilingual(it, en) {
     if (it === en) return document.createTextNode(it);
     var frag = document.createDocumentFragment();
@@ -130,13 +137,31 @@
     return String(identity.email).split('@')[0];
   }
 
-  /* One item, and it is a link rather than a button: /members/ is behind
-     Cloudflare Access, so following it *is* the login. */
-  function fillAnonMenu(menu) {
-    var a = document.createElement('a');
-    a.href = memberHref('');
-    a.appendChild(bilingual('Accedi', 'Sign in'));
-    menu.appendChild(a);
+  /* Signed out there is no profile to show, so the person icon is not built
+     at all — an avatar for nobody invites a click that only leads to a login.
+     Two plain links take its place, which also says what the member area is
+     for without anyone having to open a menu to find out. */
+  function buildAuthLinks() {
+    var right = document.querySelector('.nav-right');
+    if (!right || right.querySelector('.authlinks') || right.querySelector('.user')) return;
+
+    var wrap = document.createElement('div');
+    wrap.className = 'authlinks';
+
+    var inLink = document.createElement('a');
+    inLink.className = 'authlink';
+    inLink.href = rootPage('accedi.html');
+    inLink.appendChild(bilingual('Accedi', 'Sign in'));
+
+    var up = document.createElement('a');
+    up.className = 'authlink authlink-cta';
+    up.href = rootPage('registrati.html');
+    up.appendChild(bilingual('Registrati', 'Sign up'));
+
+    wrap.appendChild(inLink);
+    wrap.appendChild(up);
+    /* Before the burger, after the language toggle. */
+    right.insertBefore(wrap, right.querySelector('.burger'));
   }
 
   function fillMemberMenu(menu) {
@@ -169,11 +194,8 @@
     menu.appendChild(out);
   }
 
-  /* name is null for a visitor who is not signed in. The chip is built either
-     way — it is the only route to the member area now that the bar link is
-     gone — and the menu is the one thing that differs: a single Accedi, which
-     is a link to /members/ and therefore to Cloudflare's login, since that is
-     what guards it. */
+  /* Only ever called with a real name: a visitor who is not signed in gets
+     buildAuthLinks() instead, so there is no such thing as an empty chip. */
   function buildDesktopUser(name) {
     var right = document.querySelector('.nav-right');
     if (!right || right.querySelector('.user')) return;
@@ -187,21 +209,15 @@
     btn.setAttribute('aria-haspopup', 'true');
     btn.setAttribute('aria-expanded', 'false');
     btn.appendChild(personIcon());
-    if (name) {
-      var label = document.createElement('span');
-      label.className = 'user-name';
-      label.textContent = name;
-      btn.appendChild(label);
-    } else {
-      /* Icon only, so the button needs the name the label would have given. */
-      btn.setAttribute('aria-label', 'Account');
-      btn.classList.add('user-btn-anon');
-    }
+    var label = document.createElement('span');
+    label.className = 'user-name';
+    label.textContent = name;
+    btn.appendChild(label);
 
     var menu = document.createElement('div');
     menu.className = 'user-menu';
     menu.hidden = true;
-    (name ? fillMemberMenu : fillAnonMenu)(menu);
+    fillMemberMenu(menu);
 
     function close() {
       menu.hidden = true;
@@ -251,10 +267,26 @@
     a.href = memberHref('');
     a.appendChild(personIcon());
     var label = document.createElement('span');
-    if (name) label.textContent = name;
-    else label.appendChild(bilingual('Accedi', 'Sign in'));
+    label.textContent = name;
     a.appendChild(label);
     links.appendChild(a);
+  }
+
+  /* The phone has no room for the chip, so the burger panel carries the same
+     two links as the bar does on a desktop. */
+  function buildMobileAuth() {
+    if (IN_MEMBERS) return;
+    var links = document.getElementById('navlinks');
+    if (!links || links.querySelector('.nav-auth')) return;
+
+    [['accedi.html', 'Accedi', 'Sign in'],
+     ['registrati.html', 'Registrati', 'Sign up']].forEach(function (row) {
+      var a = document.createElement('a');
+      a.className = 'nav-auth';
+      a.href = rootPage(row[0]);
+      a.appendChild(bilingual(row[1], row[2]));
+      links.appendChild(a);
+    });
   }
 
   /* The sign-out link in the member nav is static markup; give it the
@@ -285,9 +317,9 @@
       })
       .then(function (registry) {
         if (!identity) {
-          /* Not signed in — still show the chip, with Accedi behind it. */
-          buildDesktopUser(null);
-          buildMobileUser(null);
+          /* Not signed in: no chip at all, just the two ways in. */
+          buildAuthLinks();
+          buildMobileAuth();
           return;
         }
         var email = String(identity.email).toLowerCase();
