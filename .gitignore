@@ -2,3 +2,8 @@
 # wrangler local development secrets — never committed
 .dev.vars
 .wrangler/
+
+# OG cards are rendered from templates built into a temp dir; only the
+# finished JPEGs belong in the repo.
+img/og/*.html
+img/og/_jobs.json

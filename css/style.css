@@ -1381,3 +1381,32 @@ main > section > .join-box:not(:first-child) > p{
   /* No room beside the language toggle; the burger panel carries them. */
   .authlinks{ display:none; }
 }
+
+/* ══════════ 404 ══════════
+   Four ways back, not one. Someone who followed a stale link out of a group
+   chat was after something specific; a lone "go home" makes them start over. */
+.lost-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:18px;
+}
+.lost{
+  border:1px solid var(--glass-hair);
+  border-radius:var(--r-lg);
+  background:var(--glass);
+  backdrop-filter:var(--glass-blur);
+  -webkit-backdrop-filter:var(--glass-blur);
+  box-shadow:0 1px 0 rgba(255,255,255,0.06) inset, var(--shadow);
+  padding:24px 24px 26px;
+  color:var(--ink);
+  transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s, background .2s;
+}
+.lost:hover{
+  transform:translateY(-4px);
+  background:var(--glass-2);
+  border-color:rgba(255,255,255,0.2);
+  box-shadow:var(--shadow-lg);
+  text-decoration:none;
+}
+.lost h2{ font-size:20px; letter-spacing:-0.022em; }
+.lost p{ margin-top:7px; font-size:14px; color:var(--ink-2); line-height:1.45; }
