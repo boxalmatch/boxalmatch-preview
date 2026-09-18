@@ -276,7 +276,58 @@ header > nav > ul > li {
    of the hero paragraph, where it was easy to miss and gone the moment you
    scrolled. */
 header > nav > ul > li.lang-toggle {
-    margin-left: auto;
+    flex: 1 1 0;
+    display: flex;
+    justify-content: flex-end;
+    /* The pill outline is on .lang-toggle itself, and this <li> IS that
+       element — so growing it to balance the brand stretched the border into
+       a long empty capsule. The outline moves onto the two buttons here, and
+       only here: on a phone js lifts this same node into the bar, where it
+       is not a flex item and keeps its own pill. */
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+}
+
+header > nav > ul > li.lang-toggle > button {
+    border: 1px solid var(--hair-strong);
+}
+
+header > nav > ul > li.lang-toggle > button:first-of-type {
+    border-radius: 980px 0 0 980px;
+    border-right: 0;
+}
+
+header > nav > ul > li.lang-toggle > button:last-of-type {
+    border-radius: 0 980px 980px 0;
+}
+
+/* The brand, as on the home page: the mark a little taller than the wordmark,
+   which is set to its cap height — matching the two exactly leaves the round
+   mark looking smaller than the letters beside it. */
+header > nav > ul > li.nav-brand {
+    flex: 1 1 0;
+    margin-left: 0;
+}
+
+header > nav > ul > li.nav-brand > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 1;
+}
+
+header > nav > ul > li.nav-brand img { width: auto; display: block; }
+header > nav > ul > li.nav-brand .nav-mark { height: 22px; }
+header > nav > ul > li.nav-brand .nav-word { height: 15px; }
+
+/* The way back to the event's own home, on an inner page. It keeps the
+   chevron the brand used to carry: it points up a level, which is exactly
+   what it does, and the logo beside it goes somewhere else entirely. */
+header > nav > ul > li.nav-up > a {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
 }
 
 header > nav > ul > li.nav-home > a {
@@ -744,18 +795,33 @@ header > nav .active > a {
 }
 
 /* ---------- character / feature cards (tile grid, matching the main site's event cards) ---------- */
+/* Flex rather than grid, for one reason: a partial last row. Grid's
+   justify-content centres the whole set of tracks but still seats a lone
+   tile in the first of them, so a page with one tile, or with four across
+   three columns, left the remainder hanging off to the left. Flex wrap
+   centres every row including the last.
+
+   flex-grow stays 0 on the tiles: letting them grow would make a single
+   tile span the container, which is what this is meant to stop. */
 .character-profile {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 26px;
     align-items: stretch;
 }
 
 .character-profile > h1.highlight {
-    grid-column: 1 / -1;
+    flex: 0 0 100%;
 }
 
 .character-profile > .character {
+    /* Grow to fill a full row — three across the 940px container, as the
+       grid gave before — but never past a tile's worth. The cap is what
+       stops a lone tile spanning the container, so a short row stays
+       tile-sized and lands in the middle. */
+    flex: 1 1 270px;
+    max-width: 330px;
     position: relative;
     margin-bottom: 0;
     display: flex;

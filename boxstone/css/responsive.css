@@ -86,9 +86,9 @@
     .mobile-nav {
         display: flex;
         align-items: center;
-        /* Nothing on the left since the wordmark moved to the artwork, so the
-           burger and the IT/EN pill sit against the right edge. */
-        justify-content: flex-end;
+        /* The brand sits on the left, as on the home page — js moves it out of
+           the drop-down panel and into the bar at this width. */
+        justify-content: space-between;
         gap: 14px;
         box-sizing: border-box;
         height: 48px;
@@ -214,6 +214,28 @@
 
     /* the wordmark already sits in the bar */
     header > nav > ul > li.brand { display: none; }
+
+    /* The panel is a column, so the equal-width ends that centre the links on
+       a desktop would just stretch these two down the page. */
+    header > nav > ul > li.nav-brand,
+    header > nav > ul > li.lang-toggle { flex: none; }
+
+    /* Left in the bar by js. If js never ran it stays a row of the panel,
+       which is still a usable way home rather than nothing. */
+    .mobile-nav > .nav-brand {
+        list-style: none;
+        margin: 0;
+    }
+
+    .mobile-nav > .nav-brand > a {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .mobile-nav > .nav-brand img { width: auto; display: block; }
+    .mobile-nav > .nav-brand .nav-mark { height: 22px; }
+    .mobile-nav > .nav-brand .nav-word { height: 15px; }
 
     /* fallback position for the pill if js has not moved it into the bar */
     header > nav > ul > li.lang-toggle {

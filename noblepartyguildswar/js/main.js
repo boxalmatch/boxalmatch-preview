@@ -611,6 +611,7 @@ function setupMobileNavBar() {
 
     const burger = bar.querySelector('.toggle-nav');
     const lang = document.querySelector('#main-header .lang-toggle');
+    const brand = document.querySelector('#main-header .nav-brand');
     if (!burger || !lang) return;
 
     let right = bar.querySelector('.mobile-nav-right');
@@ -626,8 +627,13 @@ function setupMobileNavBar() {
     function place() {
         if (mq.matches) {
             if (lang.parentElement !== right) right.insertBefore(lang, burger);
-        } else if (lang.parentElement !== list) {
-            list.appendChild(lang);
+            /* The brand travels the same way and for the same reason: the
+               panel is a fixed drop-down, so a logo left inside it would only
+               appear once the burger was opened. */
+            if (brand && brand.parentElement !== bar) bar.insertBefore(brand, bar.firstChild);
+        } else {
+            if (lang.parentElement !== list) list.appendChild(lang);
+            if (brand && brand.parentElement !== list) list.insertBefore(brand, list.firstChild);
         }
     }
 
