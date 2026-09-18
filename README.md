@@ -535,6 +535,45 @@ the first screen already has it.
 
 ---
 
+## Link previews, sitemap and analytics
+
+Three things that live in `tools/` and are regenerated rather than
+hand-edited. All three are safe to re-run: each is idempotent, verified
+byte-identical across repeated runs.
+
+**`tools/og_cards.py` + `tools/seo_meta.py` — what a shared link looks like.**
+Run the first to redraw the ten cards in `img/og/`, the second to write the
+`og:`/`twitter:` tags, the canonical URL, and the titles and descriptions into
+every public page. Run `seo_meta.py` after adding a page, or its links will
+preview as a bare URL.
+
+The cards are rendered in Chromium so they use the site's own Inter, which
+ships in `tools/fonts/` — Google Fonts is fetched at build time by nothing, so
+the cards build without a network. Event cards are the key art plus the
+wordmark and no text: the art already carries the name, and every platform
+renders `og:title` beside the picture anyway.
+
+**`tools/sitemap.py` — `sitemap.xml` and `robots.txt`.**
+Lists every public page, skipping the member area, the API, the 404 and
+anything that declares `noindex`. `lastmod` comes from each file's last commit.
+Re-run it after adding or removing a page.
+
+**`js/analytics.js` — Cloudflare Web Analytics, off by default.**
+Paste the token from *Cloudflare dashboard → Analytics & Logs → Web Analytics*
+into `TOKEN` at the top of that file and it starts reporting on the next
+deploy. Leave it empty and the file does nothing.
+
+Cloudflare's beacon rather than a general-purpose analytics product on
+purpose: no cookies, no identifiers, no cross-site tracking, so it needs no
+consent banner — which matters while there is still no privacy policy. It also
+sits out when the browser sends Do Not Track. The token is not a secret; it
+ships in the page and only says which site a hit belongs to.
+
+If the Cloudflare dashboard offers an automatic setup for this domain, prefer
+it and delete `js/analytics.js` along with the `<script>` tag on each page —
+that route needs no code at all. I could not check whether it is available for
+this project from here.
+
 ## Deploying
 
 ### GitHub Pages

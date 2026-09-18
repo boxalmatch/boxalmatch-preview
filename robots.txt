@@ -1,0 +1,12 @@
+# https://www.robotstxt.org/
+User-agent: *
+Allow: /
+
+# Behind Cloudflare Access, so a crawler gets a login screen rather than a
+# page. Listed anyway: asking politely costs nothing and keeps the login out
+# of anyone's index.
+Disallow: /members/
+Disallow: /api/
+Disallow: /cdn-cgi/
+
+Sitemap: https://boxalmatch.com/sitemap.xml
