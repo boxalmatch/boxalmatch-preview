@@ -7,34 +7,34 @@ document.addEventListener("DOMContentLoaded", function () {
 const CSV_ACCESSO = `
 Giocatore,Ad,Aq,B,C,P,S,Vk,Va,Standard,Social,Sketch,Guerre,Cham Win.,Champions,Giocatore
 Apocal,,,4,,,,,,2,1,1,NA,,,Apocal
-Baudo,,12,7,7,,4,,3,11,13,7,OK,,2,Baudo
+Baudo,,16,7,7,,4,,3,12,14,9,OK,,2,Baudo
 Bibobio,,,,,,,,,,,,,,,Bibobio
-Clavuss,,4,,12,,4,2,4,8,11,7,OK,,,Clavuss
-Colt,3,6,4,11,2,3,,,9,11,7,OK,,2,Colt
-Copter,,2,7,3,1,,,4,6,5,5,NA,,1,Copter
+Clavuss,,4,4,12,,4,2,4,9,12,9,OK,,,Clavuss
+Colt,3,6,4,11,2,3,4,,10,12,9,OK,,2,Colt
+Copter,,2,11,3,1,,,4,7,6,7,OK,,1,Copter
 Deadrick,,,,,,,,,,,,,,,Deadrick
-Drius,,,3,3,3,,8,4,7,8,5,OK,,1,Drius
-Gigatzu,,,,4,,4,,,2,3,3,NA,,,Gigatzu
-Glimpse,2,1,4,12,2,,5,6,13,10,8,OK,,1,Glimpse
-Ifrid,1,3,,8,2,4,1,,4,10,5,NA,,,Ifrid
+Drius,,,3,3,3,,12,4,8,9,7,OK,,1,Drius
+Gigatzu,,4,,4,,4,,,3,4,5,NA,,,Gigatzu
+Glimpse,2,5,4,12,2,,5,6,14,11,10,OK,,1,Glimpse
+Ifrid,1,6,,8,2,4,1,,4,11,7,NA,,,Ifrid
 Joemoo,,,,,,,,4,,2,2,NA,,,Joemoo
-Karmic,,5,,6,4,7,1,7,9,13,6,OK,,2,Karmic
+Karmic,,5,,6,4,11,1,7,10,14,8,OK,,2,Karmic
 Khan,,,,,6,,,4,2,4,3,NA,0,1,Khan
 Noble,5,1,,,5,3,1,15,10,11,8,OK,,1,Noble
-Patrifu,4,4,,,,,,4,3,5,3,NA,1,1,Patrifu
+Patrifu,4,4,,,,,4,4,4,6,5,NA,1,1,Patrifu
 Penny,,,,,4,,,4,1,4,3,NA,,,Penny
-Pino,3,4,8,4,7,4,,2,12,12,7,OK,0,1,Pino
+Pino,3,4,8,4,7,4,4,2,13,13,9,OK,0,1,Pino
 Puffo,4,1,3,,12,,1,7,10,10,7,OK,,1,Puffo
 Skate,,,4,11,4,,,4,7,9,6,OK,,1,Skate
 SoCrem,,,,,,,,,,,,,,,SoCrem
-Sootz,6,4,8,4,,,,2,9,7,7,OK,,1,Sootz
-Spartan,,,4,4,,,3,4,4,6,4,NA,0,1,Spartan
+Sootz,6,4,8,4,,4,,2,10,8,9,OK,,1,Sootz
+Spartan,,,4,4,,4,3,4,5,7,6,NA,0,1,Spartan
 Stokes,4,4,,,,4,,8,6,8,5,OK,,1,Stokes
-Svezio,,,,,,4,,,2,1,1,NA,,,Svezio
-Swine,12,1,4,3,2,3,5,,12,9,7,OK,,2,Swine
-Tigrozzo,4,4,,4,6,4,2,4,9,12,6,OK,1,1,Tigrozzo
+Svezio,,,4,,,4,,,3,2,3,NA,,,Svezio
+Swine,12,1,7,3,2,3,5,,12,10,9,OK,,2,Swine
+Tigrozzo,4,4,,4,6,4,5,4,9,13,8,OK,1,1,Tigrozzo
 Trimrex,,,,,,,,,,,,,,,Trimrex
-WC,4,,8,,4,,3,2,8,8,4,OK,,1,WC
+WC,4,,8,,4,4,3,2,9,9,6,OK,,1,WC
 `;
 
 // Dati CSV
