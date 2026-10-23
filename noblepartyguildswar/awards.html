@@ -35,6 +35,36 @@
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link href="css/responsive.css" rel="stylesheet" type="text/css">
 
+
+<style>
+.award-conditions { width:100%; margin:16px 0 24px; border-collapse:separate; border-spacing:0; border:1px solid #b7a88a; border-radius:8px; overflow:hidden; table-layout:fixed; }
+.award-conditions th { width:125px; padding:14px 16px; background:#b7a88a; color:#fff; text-align:left; vertical-align:middle; font-weight:700; }
+.award-conditions td { padding:14px 16px; background:#f7f5ef; color:#222; text-align:left; line-height:1.5; overflow-wrap:anywhere; }
+.award-conditions tr + tr th, .award-conditions tr + tr td { border-top:1px solid #d8cfbd; }
+@media (max-width:480px) { .award-conditions th { width:95px; } .award-conditions th, .award-conditions td { padding:12px 10px; } }
+
+/* Keep condition tables static, including when the pointer is over them. */
+table.award-conditions, table.award-conditions:hover,
+table.award-conditions tbody, table.award-conditions tbody:hover,
+table.award-conditions tr, table.award-conditions tr:hover {
+  background:transparent !important; color:inherit !important;
+  box-shadow:none !important; filter:none !important; transform:none !important;
+  opacity:1 !important; transition:none !important; animation:none !important;
+}
+table.award-conditions th, table.award-conditions:hover th,
+table.award-conditions tr:hover th, table.award-conditions th:hover {
+  background:#b7a88a !important; color:#fff !important;
+}
+table.award-conditions td, table.award-conditions:hover td,
+table.award-conditions tr:hover td, table.award-conditions td:hover {
+  background:#f7f5ef !important; color:#222 !important;
+}
+table.award-conditions th, table.award-conditions td {
+  box-shadow:none !important; filter:none !important; transform:none !important;
+  opacity:1 !important; transition:none !important; animation:none !important;
+}
+</style>
+
 </head>
 <body>
 <header id="main-header" class="container-fluid">
@@ -99,10 +129,18 @@
 				Per i Mercenari si guarda al maggiore numero di vittorie fra i Mercenari.
 				I Leaders Principali contano come Leadrs.
 				</span><span lang="en"> of the Leaders and the Mercenaries. Those who won (as participants) the highest number of Special (Champion) matches only. Gold, Silver and Bronze prizes are awarded. For Leaders we look at the highest number of wins among Leaders. For Mercenaries we look at the highest number of wins among Mercenaries. Main Leaders count as Leaders.
-				</span><br>
-				<u>ACCESSO:</u><span lang="it"> vinci almeno una partita come partecipante con modalità Champions (Fortnite inclusa).
+				</span></p>
+
+<table class="award-conditions">
+<tbody>
+  <tr>
+    <th scope="row"><span lang="it">ACCESSO</span><span lang="en">ELIGIBILITY</span></th>
+    <td><span lang="it"> vinci almeno una partita come partecipante con modalità Champions (Fortnite inclusa).
 			</span><span lang="en"> win at least one match as a participant in Champions mode (Fortnite included).
-			</span></p>
+			</span></td>
+  </tr>
+</tbody>
+</table>
 
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 40%; text-align: center; font-family: Arial, sans-serif; font-weight: bold; color: black;">
 			  <!-- Header -->
@@ -140,10 +178,18 @@
 				Per i Mercenari si guarda la migliore performance fra i Mercenari.
 				I Leaders Principali contano come Leadrs.
 				</span><span lang="en">. Those with the best performance across Standard/Slayer matches only (TS, MTS, FFA). Gold, Silver and Bronze prizes are awarded. For Leaders we look at the best performance among Leaders. For Mercenaries we look at the best performance among Mercenaries. Main Leaders count as Leaders.
-				</span><br>
-				<u>ACCESSO:</u><span lang="it"> gioca almeno 6 partite con modalità Standard.
+				</span></p>
+
+<table class="award-conditions">
+<tbody>
+  <tr>
+    <th scope="row"><span lang="it">ACCESSO</span><span lang="en">ELIGIBILITY</span></th>
+    <td><span lang="it"> gioca almeno 6 partite con modalità Standard.
 			</span><span lang="en"> play at least 6 matches in Standard mode.
-			</span></p>
+			</span></td>
+  </tr>
+</tbody>
+</table>
 
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 40%; text-align: center; font-family: Arial, sans-serif; font-weight: bold; color: black;">
 			  <!-- Header -->
@@ -180,10 +226,18 @@
 				Per i Mercenari si guarda la migliore performance fra i Mercenari.
 				I Leaders Principali contano come Leadrs.
 				</span><span lang="en">. Those with the best performance across Social matches only (TS, MTS, FFA). Gold, Silver and Bronze prizes are awarded. For Leaders we look at the best performance among Leaders. For Mercenaries we look at the best performance among Mercenaries. Main Leaders count as Leaders.
-				</span><br>
-				<u>ACCESSO:</u><span lang="it"> gioca almeno 6 partite con modalità Social.
+				</span></p>
+
+<table class="award-conditions">
+<tbody>
+  <tr>
+    <th scope="row"><span lang="it">ACCESSO</span><span lang="en">ELIGIBILITY</span></th>
+    <td><span lang="it"> gioca almeno 6 partite con modalità Social.
 			</span><span lang="en"> play at least 6 matches in Social mode.
-			</span></p>
+			</span></td>
+  </tr>
+</tbody>
+</table>
 
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 40%; text-align: center; font-family: Arial, sans-serif; font-weight: bold; color: black;">
 			  <!-- Header -->
@@ -220,10 +274,18 @@
 				Per i Mercenari si guarda la migliore performance fra i Mercenari.
 				I Leaders Principali contano come Leadrs.
 				</span><span lang="en">. Those with the best performance across Sketch matches only (TS, MTS, FFA). Gold, Silver and Bronze prizes are awarded. For Leaders we look at the best performance among Leaders. For Mercenaries we look at the best performance among Mercenaries. Main Leaders count as Leaders.
-				</span><br>
-				<u>ACCESSO:</u><span lang="it"> gioca almeno 4 partite con modalità Sketch.
+				</span></p>
+
+<table class="award-conditions">
+<tbody>
+  <tr>
+    <th scope="row"><span lang="it">ACCESSO</span><span lang="en">ELIGIBILITY</span></th>
+    <td><span lang="it"> gioca almeno 4 partite con modalità Sketch.
 			</span><span lang="en"> play at least 4 matches in Sketch mode.
-			</span></p>
+			</span></td>
+  </tr>
+</tbody>
+</table>
 
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 40%; text-align: center; font-family: Arial, sans-serif; font-weight: bold; color: black;">
 			  <!-- Header -->
@@ -259,11 +321,19 @@
 				Per i Mercenari si guarda la migliore performance fra i Mercenari su tutte le partite.
 				I Leaders Principali contano come Leadrs.
 				</span><span lang="en">. Gold, Silver and Bronze prizes are awarded. For Leaders we look at the best performance among Leaders across all matches. For Mercenaries we look at the best performance among Mercenaries across all matches. Main Leaders count as Leaders.
-				</span><br>
-				<u>ACCESSO:</u><span lang="it"> gioca almeno 6 partite con modalità Standard, 6 partite con modalità Social,
-				e 4 partite con modalità Sketch. Inoltre Gioca almeno 4 partite (non Guerre) con ogni Gilda.
+				</span></p>
+
+<table class="award-conditions">
+<tbody>
+  <tr>
+    <th scope="row"><span lang="it">ACCESSO</span><span lang="en">ELIGIBILITY</span></th>
+    <td><span lang="it"> gioca almeno 6 partite con modalità Standard, 6 partite con modalità Social,
+				e 4 partite con modalità Sketch. Inoltre Gioca almeno 4 partite con ogni Gilda.
 			</span><span lang="en"> play at least 6 matches in Standard mode, 6 matches in Social mode, and 4 matches in Sketch mode. Also play at least 4 matches (not Wars) with every Guild.
-			</span></p>
+			</span></td>
+  </tr>
+</tbody>
+</table>
 
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 40%; text-align: center; font-family: Arial, sans-serif; font-weight: bold; color: black;">
 			  <!-- Header -->
@@ -300,15 +370,27 @@
 				Per i Mercenari si guarda la migliore performance fra i Mercenari.
 				I Leaders Principali contano come Leadrs.
 				</span><span lang="en">. Those with the best overall performance across all matches. Gold, Silver and Bronze prizes are awarded. For Leaders we look at the best performance among Leaders. For Mercenaries we look at the best performance among Mercenaries. Main Leaders count as Leaders.
-				</span><br>
-				<u>ACCESSO:</u><span lang="it"> gioca almeno 6 partite con modalità Standard, 6 partite con modalità Social,
+				</span></p>
+
+<table class="award-conditions">
+<tbody>
+  <tr>
+    <th scope="row"><span lang="it">ACCESSO</span><span lang="en">ELIGIBILITY</span></th>
+    <td><span lang="it"> gioca almeno 6 partite con modalità Standard, 6 partite con modalità Social,
 				e 4 partite con modalità Sketch.
 				</span><span lang="en"> play at least 6 matches in Standard mode, 6 matches in Social mode, and 4 matches in Sketch mode.
-				</span><br>
-				<u>ESCLUSIONE:</u><span lang="it"> si assegna prima Award Viaggiatore, poi Award Guerre,
-				escludendo per Guerre chi ha già una medaglia uguale o superiore in Viaggiatore.
-			</span><span lang="en"> the Traveler Award is assigned first, then the Wars Award, excluding from Wars anyone who already has an equal or higher medal in Traveler.
-			</span></p>
+				</span></td>
+  </tr>
+  <tr>
+    <th scope="row"><span lang="it">ESCLUSIONE</span><span lang="en">EXCLUSION</span></th>
+    <td><span lang="it"> si assegna prima Award Viaggiatore, poi Award Guerre.
+				Si esclude per l'Award Guerre chi ha già una medaglia uguale o superiore in Viaggiatore.
+			</span><span lang="en"> the Traveler Award is assigned first, 
+			then the Wars Award, excluding from Wars anyone who already has an equal or higher medal in Traveler.
+			</span></td>
+  </tr>
+</tbody>
+</table>
 
 			<table border="1" cellspacing="0" cellpadding="8" style="border-collapse: collapse; width: 40%; text-align: center; font-family: Arial, sans-serif; font-weight: bold; color: black;">
 			  <!-- Header -->
@@ -397,39 +479,40 @@
 					but is excluded from the Leaders ranking used to award
 					Paladin titles, as they are automatically rewarded.
 				</span>
-				<br><br>
+				</p>
 
-				<u>
-					<span lang="it">ACCESSO Giocatore:</span>
-					<span lang="en">Player ACCESS:</span>
-				</u>
-				<span lang="it">
-					gioca almeno 4 partite, escluse le Guerre, con la Gilda.
+<table class="award-conditions">
+<tbody>
+  <tr>
+    <th scope="row"><span lang="it">ACCESSO Giocatore:</span>
+					<span lang="en">Player ACCESS:</span></th>
+    <td><span lang="it">
+					gioca almeno 4 partite con la Gilda.
 				</span>
 				<span lang="en">
 					play at least 4 matches, excluding Wars, with the Guild.
-				</span>
-				<br>
-
-				<u>
-					<span lang="it">ACCESSO Gilda:</span>
-					<span lang="en">Guild ACCESS:</span>
-				</u>
-				<span lang="it">
+				</span></td>
+  </tr>
+  <tr>
+    <th scope="row"><span lang="it">ACCESSO Gilda:</span>
+					<span lang="en">Guild ACCESS:</span></th>
+    <td><span lang="it">
 					la Gilda deve avere almeno il proprio Leader Principale,
-					almeno 1 altro Leader e almeno 3 Mercenari che rispettino
+					1 altro Leader e 3 Mercenari che rispettino
 					il requisito "ACCESSO Giocatore".
 					Il Leader aggiuntivo può essere il Leader Principale
 					di un'altra Gilda, che in questo caso conta come Leader.
 				</span>
 				<span lang="en">
 					the Guild must have at least its own Main Leader,
-					at least 1 other Leader and at least 3 Mercenaries
+					1 other Leader and 3 Mercenaries
 					meeting the "Player ACCESS" requirement.
 					The additional Leader may be another Guild's Main Leader,
 					who counts as a Leader in this case.
-				</span>
-			</p>
+				</span></td>
+  </tr>
+</tbody>
+</table>
 
 			<table style="border-collapse: collapse; width: 80%; font-weight: bold; text-align: center;">
 
