@@ -169,7 +169,7 @@ const tbody = document.createElement("tbody");
 // Giocatori con classi “speciali” CSS
 const normalPlayers = ["baudo","colt","copter","drius","karmic","noble","puffo","swine"];
 const leaderPlayers = [];
-const specialPlayers = ["socrem","bibobio","trimrex","deadrick"];
+const specialPlayers = ["socrem","bibobio","deadrick"];
 
 // Celle che rappresentano i titoli gilde
 const GUILD_TITLES = ["Ad","Aq","B","C","P","S","Vk","Va"];
