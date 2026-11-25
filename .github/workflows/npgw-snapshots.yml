@@ -5,6 +5,12 @@ on:
     branches: [main]
     paths:
       - 'noblepartyguildswar/scores_engine_npgw/risultati.csv'
+      - 'noblepartyguildswar/scores_engine_npgw/engine/**'
+      - 'noblepartyguildswar/scores_engine_npgw/config/**'
+      - 'noblepartyguildswar/scores_engine_npgw/tools/**'
+      - 'noblepartyguildswar/scores_engine_npgw/test/**'
+      - 'noblepartyguildswar/scores_engine_npgw/package.json'
+      - '.github/workflows/npgw-snapshots.yml'
   workflow_dispatch:
 
 permissions:
