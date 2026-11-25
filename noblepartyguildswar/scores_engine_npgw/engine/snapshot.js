@@ -4,6 +4,7 @@ import { buildAccess } from './access.js';
 import { buildRankings } from './rankings.js';
 import { buildPlayerStats } from './stats.js';
 import { buildRelationships } from './relationships.js';
+import { buildHistory } from './history.js';
 
 /**
  * Una singola fotografia di tutti i risultati NPGW, ricavata solo dal CSV.
@@ -50,5 +51,6 @@ export function buildSnapshot(parsed, { sourceHash = null, generatedAt = null } 
       roadmaps: wars.roadmaps,
     },
     relationships: { together: relationships.together, against: relationships.against },
+    history: buildHistory(parsed),
   };
 }
