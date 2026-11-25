@@ -1,0 +1,9 @@
+{
+  "name": "npgw-engine",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test",
+    "snapshot": "node tools/generate-snapshot.js"
+  }
+}
