@@ -1,0 +1,53 @@
+name: NPGW - aggiorna JSON dai risultati
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'noblepartyguildswar/scores_engine_npgw/risultati.csv'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: npgw-snapshots-main
+  cancel-in-progress: false
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: noblepartyguildswar/scores_engine_npgw
+
+    steps:
+      - name: Recupera il repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+
+      - name: Prepara Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Esegui test NPGW
+        run: npm test
+
+      - name: Genera JSON corrente e storico
+        run: npm run snapshot -- --input risultati.csv
+
+      - name: Pubblica gli snapshot nel repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add noblepartyguildswar/scores_engine_npgw/snapshots/current.json
+          git add noblepartyguildswar/scores_engine_npgw/snapshots/history/
+          if git diff --cached --quiet; then
+            echo "Nessuna modifica agli snapshot da pubblicare."
+          else
+            git commit -m "chore(npgw): aggiorna snapshot risultati"
+            git push
+          fi
+        working-directory: .
