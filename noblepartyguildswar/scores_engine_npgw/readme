@@ -1,1 +1,143 @@
+# NPGW — primi moduli del motore
+
+La configurazione (`config/config.js`), il lettore (`engine/data.js`) e il motore
+Guerre/Roadmap (`engine/wars.js`) sono indipendenti dalle tile HTML.
+
+```js
+import { readResults } from './engine/data.js';
+import { buildWars } from './engine/wars.js';
+
+const parsed = readResults(csvText);
+const wars = buildWars(parsed);
+console.log(parsed.issues, wars.issues);
+console.log(wars.official, wars.sideQuest, wars.roadmaps.Ade);
+```
+
+Statistiche e relazioni sono disponibili con due moduli aggiuntivi:
+
+```js
+import { buildPlayerStats } from './engine/stats.js';
+import { buildRelationships } from './engine/relationships.js';
+
+const stats = buildPlayerStats(parsed);
+const relationships = buildRelationships(parsed);
+console.log(stats.Karmic);
+console.log(relationships.profiles.Karmic);
+```
+
+In TS la coppia di Partecipanti è alleata se appartiene alla stessa Armata;
+in FFA/MTS se appartiene alla stessa Gilda. Le altre coppie sono avversarie.
+Le presenze in Panchina non generano relazioni, ma contano nelle presenze
+e nei piazzamenti generali. Soltanto i primi posti Champions da Partecipante
+valgono come vittorie Champions. Il conteggio della Gilda
+svantaggiata è incrementato soltanto per una riga `No` quando nella stessa
+partita esiste almeno una riga `Yes` in `2L Support Point`.
+
+Il motore BWA è indipendente dalle tile:
+
+```js
+import { buildBwa } from './engine/bwa.js';
+
+const { parameters, players } = buildBwa(parsed);
+console.log(parameters.Mercenario.Guerre); // { X, Y, L, k }
+console.log(players.Spartan.categories.Guerre); // punti, presenze, L, k, accesso, BWA
+console.log(players.Spartan.guilds.Aquila);
+console.log(players.Pino.viaggiatore);
+```
+
+`Guerre` somma punti e presenze di tutte le quattro categorie; `Viaggiatore`
+usa lo stesso BWA ma richiede anche quattro presenze per ciascuna Gilda.
+`Champions` è il nome interno della categoria CSV `Special`. I parametri
+L e k comprendono i giocatori anche se non qualificati; nella mediana k
+si escludono solo le presenze zero, come nel foglio Excel.
+`bwa` è 0 prima dell'accesso, mentre `rawBwa` conserva il valore matematico
+completo senza arrotondamenti. I tre decimali saranno applicati soltanto
+nelle tile. Classifiche e vittorie Champions arriveranno nei moduli successivi.
+
+Il modulo accessi aggiunge le informazioni di avanzamento per le schede:
+
+```js
+import { buildAccess } from './engine/access.js';
+
+const access = buildAccess({ parameters, players }); // oppure buildAccess(parsed)
+console.log(access.players.Apocal.guerre); // categorie mancanti e partite residue
+console.log(access.players.Spartan.viaggiatore); // nomi Gilde mancanti, senza numeri
+console.log(access.players.Pino.viaggiatoreLabel); // 'Accesso a Viaggiatore'
+```
+
+Champions richiede almeno una presenza (anche Panchina). Guerre richiede
+accesso a Sketch, Standard e Social; Viaggiatore richiede Guerre e tutte le
+otto Gilde. La classifica Guerre provvisoria manterrà anche i Viaggiatori,
+segnalati con `viaggiatoreLabel`; l'esclusione finale verrà applicata nel
+modulo delle classifiche.
+
+Le classifiche complete usano lo stesso input:
+
+```js
+import { buildRankings } from './engine/rankings.js';
+
+const rankings = buildRankings(parsed, { bwa: { parameters, players }, access });
+console.log(rankings.categories.Guerre.Leader);
+console.log(rankings.categories.Champions.Mercenario);
+console.log(rankings.categories.Viaggiatore.Mercenario);
+console.log(rankings.paladins.Ade);
+console.log(rankings.guilds.ranking);
+console.log(rankings.finalGuerre.Mercenario);
+```
+
+Ogni classifica ha una riga per punteggio esatto, con i giocatori a parità
+di punteggio nello stesso array `players`. L'ordinamento non arrotonda i BWA.
+Le classifiche sono distinte per Leader/Mercenario. Champions ordina per
+primi posti da Partecipante; i Paladini escludono il Leader Principale.
+`categories.Guerre` include i Viaggiatori con etichetta informativa;
+`finalGuerre` li esclude. La classifica Gilde applica la media ponderata
+dei BWA qualificati e richiede almeno 2 Leader e 3 Mercenari.
+
+Sul sito si può usare `loadResults('/percorso/risultati.csv')` per il caricamento
+asincrono; di default interpreta il CSV Excel come Windows-1252.
+
+`readResults` non modifica mai i punti `points`. Gli errori di dati sono
+segnalati con `{row, code}`. L'elenco completo di Guerre e roadmap è generato
+nuovamente a ogni caricamento; il futuro snapshot statico potrà serializzarlo.
+
+I test funzionano offline con `npm test` (Node.js 20+). Il campione CSV usato
+dai test è nella cartella `test/fixtures`.
+
+Il campione aggiornato distingue già `The Great LAN pt.1` da `pt.2` e non
+contiene duplicati `(match n., Player)`. Il test controlla esplicitamente che
+queste anomalie non ricompaiano. Il motore non modifica silenziosamente i dati.
+
+## Step 12 — Snapshot JSON di verifica
+
+Da dentro la cartella `npgw`, usa **il tuo** CSV esportato dal foglio
+`Risultati` (il file Excel non e' richiesto):
+
+```bash
+npm run snapshot -- --input percorso/risultati.csv
+```
+
+Se il file e' `npgw/risultati.csv`, il comando e':
+
+```bash
+npm run snapshot -- --input risultati.csv
+```
+
+Vengono creati `snapshots/current.json` (sempre aggiornato) e una versione
+in `snapshots/history/` con data e SHA-256 del CSV. Se il CSV non cambia,
+lo storico non viene duplicato. Per scegliere destinazioni diverse:
+
+```bash
+npm run snapshot -- --input risultati.csv --output snapshots/verifica.json --history snapshots/history
+```
+
+L'output contiene `metadata`, `parameters` (L e k), `players` (BWA,
+accessi, statistiche, alleati e avversari), `rankings` (Award, Paladini,
+Gilde, Guerre finale), `wars` (Guerre, partite, risultati e roadmap)
+e le due matrici simmetriche delle relazioni.
+`metadata.sourceSha256` identifica esattamente la versione del CSV.
+
+I BWA sono numeri completi: nessun arrotondamento viene applicato al JSON.
+Se il lettore o il motore Guerre trovano anomalie, il comando termina
+con errore prima di scrivere uno snapshot. La generazione e' per ora
+manuale; l'esecuzione automatica su GitHub verra' aggiunta separatamente.
 
